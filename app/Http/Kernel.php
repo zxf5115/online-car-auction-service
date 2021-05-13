@@ -21,7 +21,6 @@ class Kernel extends HttpKernel
         // \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class, // 传过来的空字符串转化为Null  暂时取消
         \Fruitcake\Cors\HandleCors::class, // VUE 跨域访问
         // \App\Http\Middleware\Vue::class, // VUE 跨域访问
-        \Illuminate\Session\Middleware\StartSession::class,
     ];
 
     /**
@@ -34,7 +33,6 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
-            // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
@@ -86,7 +84,6 @@ class Kernel extends HttpKernel
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         \App\Http\Middleware\Authenticate::class,
         \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        \Illuminate\Session\Middleware\AuthenticateSession::class,
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
         \Illuminate\Auth\Middleware\Authorize::class,
     ];
