@@ -1,33 +1,38 @@
 <?php
-namespace App\Models\Common\Module\Member\Relevance;
+namespace App\Models\Common\Module\Member;
 
 use App\Models\Base;
+use App\Enum\Common\AgeEnum;
+use App\Enum\Common\SexEnum;
 use App\Enum\Common\AreaEnum;
-use App\Enum\Module\Member\Relevance\AddressEnum;
+use App\Enum\Common\NationalEnum;
+use App\Enum\Common\EducationEnum;
+use App\Enum\Module\Member\Relevance\ArchiveEnum;
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
- * @dateTime 2020-14-24
+ * @dateTime 2020-09-24
  *
- * 会员送货地址模型类
+ * 会员档案模型类
  */
-class Address extends Base
+class Archive extends Base
 {
   // 表名
-  public $table = "module_member_address";
+  public $table = "module_member_archive";
 
   // 可以批量修改的字段
   public $fillable = [
     'id',
     'organization_id',
     'member_id',
-    'name',
-    'mobile',
+    'id_card_no',
+    'weixin',
+    'sex',
+    'birthday',
     'province_id',
     'city_id',
     'region_id',
     'address',
-    'is_default',
   ];
 
   // 隐藏的属性
@@ -37,24 +42,54 @@ class Address extends Base
   ];
 
   // 追加到模型数组表单的访问器
-  protected $appends = [];
+  protected $appends = [
+    'age'
+  ];
+
+  /**
+   * 转换属性类型
+   */
+  protected $casts = [
+    'status' => 'array',
+    'birthday' => 'datetime:Y-m-d',
+    'create_time' => 'datetime:Y-m-d H:i:s',
+    'update_time' => 'datetime:Y-m-d H:i:s',
+  ];
+
+
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2020-01-20
+   * ------------------------------------------
+   * 宝宝年龄封装
+   * ------------------------------------------
+   *
+   * 宝宝年龄封装
+   *
+   * @param int $value 状态值
+   * @return 状态信息
+   */
+  public function getAgeAttribute($value)
+  {
+    return AgeEnum::getAge($this->birthday);
+  }
 
 
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
    * @dateTime 2020-10-21
    * ------------------------------------------
-   * 是否为默认地址封装
+   * 性别封装
    * ------------------------------------------
    *
-   * 是否为默认地址封装
+   * 性别封装
    *
    * @param int $value 状态值
    * @return 状态信息
    */
-  public function getIsDefaultAttribute($value)
+  public function getSexAttribute($value)
   {
-    return AddressEnum::getIsDefaultStatus($value);
+    return SexEnum::getSex($value);
   }
 
 
@@ -107,6 +142,24 @@ class Address extends Base
   public function getRegionIdAttribute($value)
   {
     return AreaEnum::getArea($value);
+  }
+
+
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2020-10-21
+   * ------------------------------------------
+   * 技能水平封装
+   * ------------------------------------------
+   *
+   * 技能水平封装
+   *
+   * @param int $value 状态值
+   * @return 状态信息
+   */
+  public function getSkillLevelAttribute($value)
+  {
+    return ArchiveEnum::getSkillLevelStatus($value);
   }
 
 

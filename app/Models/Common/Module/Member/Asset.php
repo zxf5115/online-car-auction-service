@@ -1,25 +1,27 @@
 <?php
-namespace App\Models\Common\Module\Member\Relevance;
+namespace App\Models\Common\Module\Member;
 
 use App\Models\Base;
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
- * @dateTime 2021-02-21
+ * @dateTime 2020-12-19
  *
- * 学员账户模型类
+ * 学员资产模型类
  */
-class Account extends Base
+class Asset extends Base
 {
   // 表名
-  public $table = "module_member_account";
+  public $table = "module_member_asset";
 
   // 可以批量修改的字段
   public $fillable = [
     'id',
+    'organization_id',
     'member_id',
-    'payment_name',
-    'payment_account',
+    'red_envelope',
+    'lollipop',
+    'production',
   ];
 
   // 隐藏的属性

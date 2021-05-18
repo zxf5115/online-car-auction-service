@@ -189,42 +189,24 @@ $api->version('v1', [
       });
 
 
-      // 会员路由
-      $api->group(['namespace' => 'Member', 'prefix'  =>  'member'], function ($api) {
+      // 消费会员路由
+      $api->group(['prefix'  => 'member'], function ($api) {
         $api->any('list', 'MemberController@list');
         $api->get('select', 'MemberController@select');
         $api->get('view/{id}', 'MemberController@view');
         $api->post('handle', 'MemberController@handle');
-        $api->post('freeze', 'MemberController@freeze');
         $api->post('enable', 'MemberController@enable');
         $api->post('delete', 'MemberController@delete');
+      });
 
-        $api->group(['namespace'  =>  'Relevance'], function ($api) {
-
-          // 会员课程路由
-          $api->group(['prefix'  =>  'course'], function ($api) {
-            $api->get('list', 'CourseController@list');
-          });
-
-          // 会员订单路由
-          $api->group(['namespace'  =>  'Order', 'prefix'  =>  'order'], function ($api) {
-
-            // 会员课程订单路由
-            $api->group(['prefix'  =>  'course'], function ($api) {
-              $api->get('select', 'CourseController@select');
-            });
-          });
-        });
-
-        // 会员角色路由
-        $api->group(['prefix'  =>  'role'], function ($api) {
-          $api->any('list', 'RoleController@list');
-          $api->get('select', 'RoleController@select');
-          $api->get('view/{id}', 'RoleController@view');
-          $api->post('handle', 'RoleController@handle');
-          $api->post('delete', 'RoleController@delete');
-          $api->any('permission/{id}', 'RoleController@permission');
-        });
+      // 车商会员路由
+      $api->group(['prefix'  => 'merchant'], function ($api) {
+        $api->any('list', 'MerchantController@list');
+        $api->get('select', 'MerchantController@select');
+        $api->get('view/{id}', 'MerchantController@view');
+        $api->post('handle', 'MerchantController@handle');
+        $api->post('enable', 'MerchantController@enable');
+        $api->post('delete', 'MerchantController@delete');
       });
 
 

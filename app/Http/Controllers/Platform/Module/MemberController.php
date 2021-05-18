@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Platform\Module\Member;
+namespace App\Http\Controllers\Platform\Module;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,66 +18,38 @@ use App\Http\Controllers\Platform\BaseController;
  */
 class MemberController extends BaseController
 {
-  /**
-   * 操作模型
-   */
-  protected $_model = 'App\Models\Platform\Module\Member\Member';
+  // 模型名称
+  protected $_model = 'App\Models\Platform\Module\Member';
 
-  /**
-   * 基本查询条件
-   */
+  // 默认查询条件
   protected $_where = [
-    'relevance' => [
-      'role_id' => 3
-    ]
+    'role_id' => 2
   ];
 
-  /**
-   * 关联查询条件
-   */
-  protected $_with = [];
-
-  /**
-   * 基础查询字段
-   */
+  // 客户端搜索字段
   protected $_params = [
     'username',
     'nickname'
   ];
 
-  /**
-   * 关联查询字段
-   */
+  // 客户端关联查询字段
   protected $_addition = [
-    'archive' => [
-      'weixin',
+    'address' => [
+      'address',
     ]
   ];
 
-  /**
-   * 排序方式
-   */
-  protected $_order = [
-    ['key' => 'create_time', 'value' => 'desc'],
-  ];
 
-  /**
-   * 关联查询对象
-   */
+  // 关联对象
   protected $_relevance = [
     'list' => [
-      'relevance',
       'archive',
-      'asset',
+      'address',
     ],
-    'select' => [
-      'relevance'
-    ],
+    'select' => false,
     'view' => [
-      'role',
-      'relevance',
       'archive',
-      'course',
+      'address',
       'asset',
     ],
   ];
@@ -187,39 +159,6 @@ class MemberController extends BaseController
     }
   }
 
-
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-02-25
-   * ------------------------------------------
-   * 冻结（解冻）学员账户金额
-   * ------------------------------------------
-   *
-   * 冻结（解冻）学员账户金额
-   *
-   * @param Request $request [description]
-   * @return [type]
-   */
-  public function freeze(Request $request)
-  {
-    try
-    {
-      $model = $this->_model::find($request->id);
-
-      $model->is_freeze = $model->is_freeze['value'] == 1 ? 2 : 1;
-
-      $model->save();
-
-      return self::success(Code::message(Code::HANDLE_SUCCESS));
-    }
-    catch(\Exception $e)
-    {
-      // 记录异常信息
-      self::record($e);
-
-      return self::error(Code::HANDLE_FAILURE);
-    }
-  }
 
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]

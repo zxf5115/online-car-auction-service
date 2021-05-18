@@ -1,5 +1,5 @@
 <?php
-namespace App\Models\Common\Module\Member\Relevance;
+namespace App\Models\Common\Module\Member;
 
 use App\Models\Base;
 

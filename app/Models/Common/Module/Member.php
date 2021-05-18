@@ -1,5 +1,5 @@
 <?php
-namespace App\Models\Common\Module\Member;
+namespace App\Models\Common\Module;
 
 use App\Models\Base;
 use App\Http\Constant\Parameter;
@@ -11,7 +11,7 @@ use App\Enum\Module\Teacher\TeacherEnum;
  * @author zhangxiaofei [<1326336909@qq.com>]
  * @dateTime 2020-08-01
  *
- * 学员模型类
+ * 会员模型类
  */
 class Member extends Base
 {
@@ -155,10 +155,10 @@ class Member extends Base
    * @author zhangxiaofei [<1326336909@qq.com>]
    * @dateTime 2021-01-12
    * ------------------------------------------
-   * 计算学员年龄
+   * 计算会员年龄
    * ------------------------------------------
    *
-   * 根据学员出生年月日计算年龄，用于保存数据库
+   * 根据会员出生年月日计算年龄，用于保存数据库
    *
    * @param [type] $birthday [description]
    * @return [type]
@@ -187,10 +187,10 @@ class Member extends Base
    * @author zhangxiaofei [<1326336909@qq.com>]
    * @dateTime 2020-12-20
    * ------------------------------------------
-   * 学员状态封装
+   * 会员状态封装
    * ------------------------------------------
    *
-   * 学员状态封装
+   * 会员状态封装
    *
    * @param [type] $value [description]
    * @return [type]
@@ -223,10 +223,10 @@ class Member extends Base
    * @author zhangxiaofei [<1326336909@qq.com>]
    * @dateTime 2020-12-20
    * ------------------------------------------
-   * 学员冻结状态封装
+   * 会员冻结状态封装
    * ------------------------------------------
    *
-   * 学员冻结状态封装
+   * 会员冻结状态封装
    *
    * @param [type] $value [description]
    * @return [type]
@@ -244,10 +244,10 @@ class Member extends Base
    * @author zhangxiaofei [<1326336909@qq.com>]
    * @dateTime 2020-01-20
    * ------------------------------------------
-   * 学员与机构关联表
+   * 会员与机构关联表
    * ------------------------------------------
    *
-   * 学员与机构关联表
+   * 会员与机构关联表
    *
    * @return [关联对象]
    */
@@ -258,76 +258,36 @@ class Member extends Base
   }
 
 
-
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-01-20
-   * ------------------------------------------
-   * 关联到角色表
-   * ------------------------------------------
-   *
-   * 关联到角色表
-   *
-   * @return [关联对象]
-   */
-  public function role()
-  {
-    return $this->belongsToMany(
-      'App\Models\Common\Module\Member\Role',
-      'module_member_role_relevance',
-      'member_id',
-      'role_id'
-    );
-  }
-
-
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-01-20
-   * ------------------------------------------
-   * 关联用户与角色关联表
-   * ------------------------------------------
-   *
-   * 关联用户与角色关联表，用于删除
-   *
-   * @return [关联对象]
-   */
-  public function relevance()
-  {
-      return $this->hasMany('App\Models\Common\Module\Member\Relevance\Role', 'member_id', 'id');
-  }
-
-
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
    * @dateTime 2020-10-20
    * ------------------------------------------
-   * 学员与学员档案关联表
+   * 会员与会员档案关联表
    * ------------------------------------------
    *
-   * 学员与学员档案关联表
+   * 会员与会员档案关联表
    *
    * @return [关联对象]
    */
   public function archive()
   {
-      return $this->hasOne('App\Models\Common\Module\Member\Relevance\Archive', 'member_id', 'id');
+      return $this->hasOne('App\Models\Common\Module\Member\Archive', 'member_id', 'id');
   }
 
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
    * @dateTime 2020-10-20
    * ------------------------------------------
-   * 学员与学员资产关联表
+   * 会员与会员资产关联表
    * ------------------------------------------
    *
-   * 学员与学员资产关联表
+   * 会员与会员资产关联表
    *
    * @return [关联对象]
    */
   public function asset()
   {
-      return $this->hasOne('App\Models\Common\Module\Member\Relevance\Asset', 'member_id', 'id');
+      return $this->hasOne('App\Models\Common\Module\Member\Asset', 'member_id', 'id');
   }
 
 
@@ -335,111 +295,16 @@ class Member extends Base
    * @author zhangxiaofei [<1326336909@qq.com>]
    * @dateTime 2020-10-20
    * ------------------------------------------
-   * 学员与学员账户关联表
+   * 会员与会员地址关联表
    * ------------------------------------------
    *
-   * 学员与学员账户关联表
+   * 会员与会员地址关联表
    *
    * @return [关联对象]
    */
-  public function account()
+  public function address()
   {
-      return $this->hasOne('App\Models\Common\Module\Member\Relevance\Account', 'member_id', 'id');
-  }
-
-
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-12-30
-   * ------------------------------------------
-   * 学员与学员任务进度关联表
-   * ------------------------------------------
-   *
-   * 学员与学员任务进度关联表
-   *
-   * @return [关联对象]
-   */
-  public function target()
-  {
-      return $this->hasOne('App\Models\Common\Module\Member\Relevance\Target', 'member_id', 'id');
-  }
-
-
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-10-20
-   * ------------------------------------------
-   * 学员与学员学习课程关联表
-   * ------------------------------------------
-   *
-   * 学员与学员学习课程关联表
-   *
-   * @return [关联对象]
-   */
-  public function course()
-  {
-      return $this->hasMany('App\Models\Common\Module\Member\Relevance\Course', 'member_id', 'id');
-  }
-
-
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-10-19
-   * ------------------------------------------
-   * 学员与班级关联函数
-   * ------------------------------------------
-   *
-   * 学员与班级关联函数
-   *
-   * @return [关联对象]
-   */
-  public function squad()
-  {
-    return $this->belongsToMany(
-      'App\Models\Common\Module\Organization\Squad\Squad',
-      'module_squad_member_relevance',
-      'member_id',
-      'squad_id'
-    );
-  }
-
-
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-01-20
-   * ------------------------------------------
-   * 会有与消息关联表
-   * ------------------------------------------
-   *
-   * 会有与消息关联表
-   *
-   * @return [关联对象]
-   */
-  public function message()
-  {
-    return $this->belongsToMany(
-      'App\Models\Common\Module\Message\Message',
-      'module_member_message_relevance',
-      'member_id',
-      'message_id'
-    );
-  }
-
-
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-10-20
-   * ------------------------------------------
-   * 招生老师与分红关联表
-   * ------------------------------------------
-   *
-   * 招生老师与分红关联表
-   *
-   * @return [关联对象]
-   */
-  public function share()
-  {
-      return $this->hasOne('App\Models\Common\Module\Teacher\Recruitment\Relevance\Money', 'member_id', 'id');
+      return $this->hasOne('App\Models\Common\Module\Member\Address', 'member_id', 'id');
   }
 
 
@@ -459,9 +324,7 @@ class Member extends Base
     parent::boot();
 
     static::deleted(function($model) {
-      $model->relevance()->delete();
       $model->archive()->delete();
-      $model->course()->delete();
     });
   }
 }

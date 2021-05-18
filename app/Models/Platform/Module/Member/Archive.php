@@ -1,5 +1,5 @@
 <?php
-namespace App\Models\Platform\Module\Member\Relevance;
+namespace App\Models\Platform\Module\Member;
 
 use App\Models\Common\Module\Member\Archive as Common;
 
