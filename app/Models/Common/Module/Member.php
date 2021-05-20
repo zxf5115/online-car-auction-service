@@ -304,7 +304,32 @@ class Member extends Base
    */
   public function address()
   {
-      return $this->hasOne('App\Models\Common\Module\Member\Address', 'member_id', 'id');
+    return $this->belongsTo(
+      'App\Models\Common\Module\Member\Address',
+      'id',
+      'member_id'
+    );
+  }
+
+
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2020-10-20
+   * ------------------------------------------
+   * 会员与会员认证关联表
+   * ------------------------------------------
+   *
+   * 会员与会员认证关联表
+   *
+   * @return [关联对象]
+   */
+  public function certification()
+  {
+    return $this->belongsTo(
+      'App\Models\Common\Module\Member\Certification',
+      'id',
+      'member_id'
+    );
   }
 
 
@@ -325,6 +350,8 @@ class Member extends Base
 
     static::deleted(function($model) {
       $model->archive()->delete();
+      $model->asset()->delete();
+      $model->address()->delete();
     });
   }
 }

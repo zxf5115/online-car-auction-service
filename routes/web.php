@@ -10,5 +10,5 @@
 |
 */
 
-Route::get('/{any}', 'LogisticsController@index')->where('any', '.*');
+Route::get('/{any}', 'BaseController@index')->where('any', '.*');
 

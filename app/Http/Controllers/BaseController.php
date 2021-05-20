@@ -2,11 +2,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use App\Http\Constant\Code;
 use App\Http\Constant\Status;
-use App\Http\Controllers\Controller;
+use App\Http\Constant\RedisKey;
+use App\Models\Common\System\Config;
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
@@ -16,6 +21,8 @@ use App\Http\Controllers\Controller;
  */
 class BaseController extends Controller
 {
+  use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
   /**
    * 当前用户
    */
@@ -96,6 +103,57 @@ class BaseController extends Controller
   protected $_order = [
     ['key' => 'create_time', 'value' => 'desc'],
   ];
+
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2021-04-16
+   * ------------------------------------------
+   * 系统默认首页
+   * ------------------------------------------
+   *
+   * 系统默认首页
+   *
+   * @return [type]
+   */
+  public function index()
+  {
+    try
+    {
+      // 平台核心数据Reids Key
+      $key = RedisKey::KERNEL;
+
+      if(Redis::exists($key))
+      {
+        $data = Redis::get($key);
+
+        $response = unserialize($data);
+      }
+      else
+      {
+        $condition = self::getSimpleWhereData();
+
+        $condition = array_merge($condition, $this->_where);
+
+        $response = Config::where($condition)->pluck('value', 'title');
+
+        $data = serialize($response);
+
+        Redis::set($key, $data);
+      }
+
+      return view('index', [
+        'response' => $response
+      ]);
+    }
+    catch(\Exception $e)
+    {
+      // 记录异常信息
+      self::record($e);
+    }
+  }
+
+
+
 
 
   /**

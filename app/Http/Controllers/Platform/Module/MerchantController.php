@@ -18,35 +18,32 @@ use App\Http\Controllers\Platform\BaseController;
 class MerchantController extends BaseController
 {
   // 模型名称
-  protected $_model = 'App\Models\Platform\Module\Member';
+  protected $_model = 'App\Models\Platform\Module\Merchant';
 
   // 默认查询条件
   protected $_where = [
-    'role_id' => 2
+    'role_id' => 1
   ];
 
   // 客户端搜索字段
   protected $_params = [
-    'username',
-    'nickname'
+    'username'
   ];
 
   // 客户端关联查询字段
   protected $_addition = [
-    'address' => [
-      'address',
+    'certification' => [
+      'type',
+      'audit_status',
     ]
   ];
 
 
   // 关联对象
   protected $_relevance = [
-    'list' => false,
+    'list' => ['certification'],
     'select' => false,
-    'view' => [
-      'archive',
-      'asset',
-    ],
+    'view' => ['certification'],
   ];
 
 
@@ -64,18 +61,9 @@ class MerchantController extends BaseController
    */
   public function handle(Request $request)
   {
-    $messages = [
-      'username.required' => '请您输入登录账户',
-      'username.regex'    => '登录账户不合法',
-      'username.unique'   => '登录账户重复',
-      'nickname.required' => '请您输入用户昵称',
-    ];
+    $messages = [];
 
-    $rule = [
-      'username' => 'required',
-      'username' => 'unique:module_member,username,' . $request->id,
-      'nickname' => 'required',
-    ];
+    $rule = [];
 
     // 验证用户数据内容是否正确
     $validation = self::validation($request, $messages, $rule);
@@ -94,51 +82,38 @@ class MerchantController extends BaseController
 
         $organization_id = self::getOrganizationId();
 
-        if(empty($request->id))
-        {
-          $model->password    = $this->_model::generate(Parameter::PASSWORD);
-        }
-
-        if(!preg_match('/^1[345789][0-9]{9}$/', $request->username))
-        {
-          return self::error(Code::MEMBER_FORMAT_ERROR);
-        }
-
-        if(empty($request->id))
-        {
-          $model->member_no = ToolTrait::generateOnlyNumber(3);
-        }
-
         $model->organization_id = $organization_id;
-        $model->username        = $request->username;
-        $model->nickname        = $request->nickname;
-        $model->avatar          = $request->avatar ?: '';
-        $model->email           = $request->email ?: '';
-        $model->mobile          = $request->mobile ?: '';
-        $model->status          = intval($request->status);
+        $model->save();
 
-        $data = $this->_model::packRelevanceData($request, 'role_id');
+        $certificate_type = 2;
 
-        if(empty($request->role_id))
+        if(1 == $request->certification_type)
         {
-          return self::error(Code::MEMBER_ROLE_EMPTY);
+          $certificate_type = 1;
         }
 
-        $response = $model->save();
+        $data = [
+          'member_id'                 => $model->id,
+          'type'                      => $request->certification_type ?? '',
+          'realname'                  => $request->realname ?? '',
+          'mobile'                    => $request->mobile ?? '',
+          'certificate_type'          => $certificate_type,
+          'certificate_no'            => $request->certificate_no ?? '',
+          'bank_card_no'              => $request->bank_card_no ?? '',
+          'cerificate_front_picture'  => $request->picture[0] ?? '',
+          'cerificate_behind_picture' => $request->picture[1] ?? '',
+          'audit_status'              => $request->audit_status ?? '',
+          'audit_content'             => $request->audit_content ?? '',
+        ];
 
         if(!empty($data))
         {
-          $model->relevance()->delete();
+          $model->certification()->delete();
 
-          $model->relevance()->createMany($data);
+          $model->certification()->create($data);
         }
 
         DB::commit();
-
-        if(empty($request->id) && $request->sms_notification)
-        {
-          // SmsTrait::sendRegistereSms($model->username);
-        }
 
         return self::success(Code::message(Code::HANDLE_SUCCESS));
       }

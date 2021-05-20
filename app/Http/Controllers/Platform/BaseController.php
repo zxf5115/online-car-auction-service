@@ -44,6 +44,7 @@ class BaseController extends Common
       'realname',
       'order_no',
       'weixin',
+      'address'
     ],
     // 时间查询
     'time' => [

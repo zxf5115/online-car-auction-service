@@ -3,7 +3,6 @@ namespace App\Http\Controllers\Platform\Module;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 
 use App\Http\Constant\Code;
 use App\TraitClass\ToolTrait;
@@ -12,7 +11,7 @@ use App\Http\Controllers\Platform\BaseController;
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
- * @dateTime 2020-12-29
+ * @dateTime 2021-05-19
  *
  * 用户控制器类
  */
@@ -70,15 +69,10 @@ class MemberController extends BaseController
   public function handle(Request $request)
   {
     $messages = [
-      'username.required' => '请您输入登录账户',
-      'username.regex'    => '登录账户不合法',
-      'username.unique'   => '登录账户重复',
       'nickname.required' => '请您输入用户昵称',
     ];
 
     $rule = [
-      'username' => 'required',
-      'username' => 'unique:module_member,username,' . $request->id,
       'nickname' => 'required',
     ];
 
@@ -99,51 +93,30 @@ class MemberController extends BaseController
 
         $organization_id = self::getOrganizationId();
 
-        if(empty($request->id))
-        {
-          $model->password    = $this->_model::generate(Parameter::PASSWORD);
-        }
-
-        if(!preg_match('/^1[345789][0-9]{9}$/', $request->username))
-        {
-          return self::error(Code::MEMBER_FORMAT_ERROR);
-        }
-
-        if(empty($request->id))
-        {
-          $model->member_no = ToolTrait::generateOnlyNumber(3);
-        }
-
         $model->organization_id = $organization_id;
-        $model->username        = $request->username;
         $model->nickname        = $request->nickname;
         $model->avatar          = $request->avatar ?: '';
-        $model->email           = $request->email ?: '';
-        $model->mobile          = $request->mobile ?: '';
-        $model->status          = intval($request->status);
+        $model->save();
 
-        $data = $this->_model::packRelevanceData($request, 'role_id');
-
-        if(empty($request->role_id))
-        {
-          return self::error(Code::MEMBER_ROLE_EMPTY);
-        }
-
-        $response = $model->save();
+        $data = [
+          'member_id'   => $model->id,
+          'name'        => $request->name ?? '',
+          'mobile'      => $request->mobile ?? '',
+          'postcode'    => $request->postcode ?? '',
+          'province_id' => $request->province_id ?? '',
+          'city_id'     => $request->city_id ?? '',
+          'region_id'   => $request->region_id ?? '',
+          'address'     => $request->address ?? '',
+        ];
 
         if(!empty($data))
         {
-          $model->relevance()->delete();
+          $model->address()->delete();
 
-          $model->relevance()->createMany($data);
+          $model->address()->create($data);
         }
 
         DB::commit();
-
-        if(empty($request->id) && $request->sms_notification)
-        {
-          // SmsTrait::sendRegistereSms($model->username);
-        }
 
         return self::success(Code::message(Code::HANDLE_SUCCESS));
       }

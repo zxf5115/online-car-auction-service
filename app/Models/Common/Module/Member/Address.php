@@ -23,6 +23,7 @@ class Address extends Base
     'member_id',
     'name',
     'mobile',
+    'postcode',
     'province_id',
     'city_id',
     'region_id',
