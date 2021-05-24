@@ -211,16 +211,17 @@ $api->version('v1', [
 
 
       // 广告路由
-      $api->group(['namespace' => 'Advertising', 'prefix' => 'advertising'], function ($api) {
+      $api->group(['prefix' => 'advertising'], function ($api) {
         // 广告路由
         $api->any('list', 'AdvertisingController@list');
         $api->get('select', 'AdvertisingController@select');
         $api->get('view/{id}', 'AdvertisingController@view');
         $api->post('handle', 'AdvertisingController@handle');
+        $api->post('enable', 'AdvertisingController@enable');
         $api->post('delete', 'AdvertisingController@delete');
 
         // 广告位路由
-        $api->group(['namespace' => 'Relevance', 'prefix' => 'position'], function ($api) {
+        $api->group(['namespace' => 'Advertising', 'prefix' => 'position'], function ($api) {
           $api->any('list', 'PositionController@list');
           $api->get('select', 'PositionController@select');
           $api->get('view/{id}', 'PositionController@view');

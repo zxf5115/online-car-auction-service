@@ -1,12 +1,11 @@
 <?php
-namespace App\Http\Controllers\Platform\Module\Advertising;
+namespace App\Http\Controllers\Platform\Module;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Constant\Code;
 use App\Http\Controllers\Platform\BaseController;
-use App\Models\Platform\Module\Advertising\Position;
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
@@ -19,7 +18,7 @@ class AdvertisingController extends BaseController
   /**
    * 模型
    */
-  protected $_model = 'App\Models\Platform\Module\Advertising\Advertising';
+  protected $_model = 'App\Models\Platform\Module\Advertising';
 
   protected $_where = [];
 
@@ -38,9 +37,7 @@ class AdvertisingController extends BaseController
     'list' => [
       'position'
     ],
-    'select' => [
-      'position'
-    ],
+    'select' => false,
     'view' => [
       'position'
     ]
@@ -80,50 +77,73 @@ class AdvertisingController extends BaseController
     }
     else
     {
+      DB::beginTransaction();
+
       try
       {
         $model = $this->_model::firstOrNew(['id' => $request->id]);
 
-        if(1 == $request->type)
-        {
-          $request->link = '';
-          $request->goods_id = '';
-        }
-        else if(2 == $request->type)
-        {
-          $request->link = '';
-          $request->course_id = '';
-        }
-        else
-        {
-          $request->course_id = '';
-          $request->goods_id = '';
-        }
-
-
         $model->organization_id = self::getOrganizationId();
         $model->position_id     = $request->position_id;
         $model->title           = $request->title;
-        $model->picture         = $request->picture;
-        $model->url             = $request->url;
-        $model->type            = $request->type;
-        $model->link            = $request->link ?? '';
-        $model->course_id       = $request->course_id ?? '';
-        $model->goods_id        = $request->goods_id ?? '';
+        $model->content         = $request->content;
         $model->sort            = $request->sort;
+        $model->save();
 
-        $response = $model->save();
+        $data = self::packRelevanceData($request, 'picture');
+
+        if(!empty($data))
+        {
+          $model->resource()->delete();
+          $model->resource()->createMany($data);
+        }
+
+        DB::commit();
 
         return self::success(Code::message(Code::HANDLE_SUCCESS));
-
       }
       catch(\Exception $e)
       {
+        DB::rollback();
+
         // 记录异常信息
         self::record($e);
 
         return self::error(Code::HANDLE_FAILURE);
       }
+    }
+  }
+
+    /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2021-05-13
+   * ------------------------------------------
+   * 禁用（解禁）广告信息
+   * ------------------------------------------
+   *
+   * 禁用（解禁）广告信息
+   *
+   * @param Request $request [description]
+   * @return [type]
+   */
+  public function enable(Request $request)
+  {
+    try
+    {
+      $model = $this->_model::find($request->id);
+
+      $model->status = $model->status['value'] == 1 ? 2 : 1;
+
+      $model->save();
+
+      return self::success(Code::message(Code::HANDLE_SUCCESS));
+    }
+    catch(\Exception $e)
+    {
+      // 记录异常信息
+      self::record($e);
+
+      return self::error(Code::HANDLE_FAILURE);
     }
   }
 }

@@ -1,20 +1,19 @@
 <?php
-namespace App\Models\Common\Module\Order\Goods;
+namespace App\Models\Common\Module\Order\Course;
 
 use App\Models\Base;
-use App\Http\Constant\Status;
-use App\Enum\Module\Order\Course\LogisticsEnum;
+use App\Enum\Module\Order\LogisticsEnum;
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
- * @dateTime 2021-01-17
+ * @dateTime 2021-05-24
  *
- * 商品订单物流模型类
+ * 物流物流模型类
  */
 class Logistics extends Base
 {
   // 表名
-  protected $table = "module_goods_order_logistics";
+  protected $table = "module_order_logistics";
 
   // 隐藏的属性
   protected $hidden = [
@@ -26,6 +25,7 @@ class Logistics extends Base
 
   // 批量添加
   protected $fillable = ['id'];
+
 
 
   /**
@@ -45,6 +45,23 @@ class Logistics extends Base
     return LogisticsEnum::getLogisticsStatus($value);
   }
 
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2020-10-31
+   * ------------------------------------------
+   * 课程周期封装
+   * ------------------------------------------
+   *
+   * 课程周期封装
+   *
+   * @param [type] $value [description]
+   * @return [type]
+   */
+  public function getSemesterAttribute($value)
+  {
+    return LogisticsEnum::getSemesterData($value);
+  }
+
 
   // 关联函数 ------------------------------------------------------
 
@@ -61,39 +78,23 @@ class Logistics extends Base
    */
   public function order()
   {
-    return $this->belongsTo('App\Models\Common\Module\Order\Goods', 'order_id', 'id');
+    return $this->belongsTo('App\Models\Common\Module\Order\Course', 'order_id', 'id');
   }
+
 
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
    * @dateTime 2021-01-16
    * ------------------------------------------
-   * 课程订单与学员关联函数
+   * 物流与学员关联函数
    * ------------------------------------------
    *
-   * 课程订单与学员关联函数
+   * 物流与学员关联函数
    *
    * @return [关联对象]
    */
   public function member()
   {
     return $this->belongsTo('App\Models\Common\Module\Member\Member', 'member_id', 'id');
-  }
-
-
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2021-01-16
-   * ------------------------------------------
-   * 课程订单与收货地址关联函数
-   * ------------------------------------------
-   *
-   * 课程订单与收货地址关联函数
-   *
-   * @return [关联对象]
-   */
-  public function address()
-  {
-    return $this->belongsTo('App\Models\Common\Module\Member\Relevance\Address', 'address_id', 'id');
   }
 }

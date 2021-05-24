@@ -1,7 +1,7 @@
 <?php
-namespace App\Models\Api\Module\Advertising\Relevance;
+namespace App\Models\Api\Module\Advertising;
 
-use App\Models\Common\Module\Advertising\Relevance\Position as Common;
+use App\Models\Common\Module\Advertising\Position as Common;
 
 
 /**

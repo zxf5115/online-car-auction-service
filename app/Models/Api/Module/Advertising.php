@@ -1,7 +1,7 @@
 <?php
-namespace App\Models\Api\Module\Advertising;
+namespace App\Models\Api\Module;
 
-use App\Models\Common\Module\Advertising\Advertising as Common;
+use App\Models\Common\Module\Advertising as Common;
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]

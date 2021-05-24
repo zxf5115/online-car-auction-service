@@ -221,12 +221,12 @@ $api->version('v1', [
 
 
       // 广告路由
-      $api->group(['namespace' => 'Advertising', 'prefix' => 'advertising'], function ($api) {
+      $api->group(['prefix' => 'advertising'], function ($api) {
         $api->get('list', 'AdvertisingController@list');
         $api->get('select', 'AdvertisingController@select');
         $api->get('view/{id}', 'AdvertisingController@view');
 
-        $api->group(['namespace' => 'Relevance', 'prefix' => 'position'], function ($api) {
+        $api->group(['namespace' => 'Advertising', 'prefix' => 'position'], function ($api) {
           $api->get('list', 'PositionController@list');
           $api->get('select', 'PositionController@select');
           $api->get('view/{id}', 'PositionController@view');

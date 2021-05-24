@@ -1,13 +1,13 @@
 <?php
-namespace App\Models\Api\Module\Order\Course;
+namespace App\Models\Api\Module\Order;
 
-use App\Models\Common\Module\Order\Course\Logistics as Common;
+use App\Models\Common\Module\Order\Logistics as Common;
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
- * @dateTime 2021-01-17
+ * @dateTime 2021-05-24
  *
- * 课程订单物流模型类
+ * 订单物流模型类
  */
 class Logistics extends Common
 {
@@ -24,7 +24,7 @@ class Logistics extends Common
 
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2021-01-16
+   * @dateTime 2021-05-24
    * ------------------------------------------
    * 物流与订单关联函数
    * ------------------------------------------
@@ -35,13 +35,17 @@ class Logistics extends Common
    */
   public function order()
   {
-    return $this->belongsTo('App\Models\Api\Module\Order\Course', 'order_id', 'id');
+    return $this->belongsTo(
+      'App\Models\Api\Module\Order',
+      'order_id',
+      'id'
+    );
   }
 
 
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2021-01-16
+   * @dateTime 2021-05-24
    * ------------------------------------------
    * 物流与学员关联函数
    * ------------------------------------------
@@ -52,6 +56,10 @@ class Logistics extends Common
    */
   public function member()
   {
-    return $this->belongsTo('App\Models\Api\Module\Member\Member', 'member_id', 'id');
+    return $this->belongsTo(
+      'App\Models\Api\Module\Member',
+      'member_id',
+      'id'
+    );
   }
 }

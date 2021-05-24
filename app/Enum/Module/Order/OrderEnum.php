@@ -3,11 +3,11 @@ namespace App\Enum\Module\Order;
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
- * @dateTime 2021-01-16
+ * @dateTime 2021-05-24
  *
- * 课程订单枚举类
+ * 订单枚举类
  */
-class CourseEnum
+class OrderEnum
 {
   // 支付状态
   const ALI    = 1; // 支付宝

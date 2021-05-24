@@ -1,11 +1,11 @@
 <?php
-namespace App\Enum\Module\Order\Course;
+namespace App\Enum\Module\Order;
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
- * @dateTime 2021-01-16
+ * @dateTime 2021-05-24
  *
- * 课程订单物流枚举类
+ * 订单物流枚举类
  */
 class LogisticsEnum
 {
