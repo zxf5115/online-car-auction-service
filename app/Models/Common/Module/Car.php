@@ -2,7 +2,7 @@
 namespace App\Models\Common\Module;
 
 use App\Models\Base;
-use App\Http\Constant\Parameter;
+use App\Enum\Module\Car\CarEnum;
 
 
 /**
@@ -27,121 +27,193 @@ class Car extends Base
   ];
 
 
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2021-05-23
+   * ------------------------------------------
+   * 审核状态封装
+   * ------------------------------------------
+   *
+   * 审核状态封装
+   *
+   * @param int $value 状态值
+   * @return 状态信息
+   */
+  public function getAuditStatusAttribute($value)
+  {
+    return CarEnum::getAuditStatus($value);
+  }
+
+
+
   // 关联函数 ------------------------------------------------------
 
 
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-01-20
-   * ------------------------------------------
-   * 会员与机构关联表
-   * ------------------------------------------
-   *
-   * 会员与机构关联表
-   *
-   * @return [关联对象]
-   */
-  public function organization()
-  {
-      return $this->belongsTo('App\Models\Common\Module\Organization\Organization', 'organization_id', 'id')
-                  ->where(['status'=>1]);
-  }
-
-
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
    * @dateTime 2020-10-20
    * ------------------------------------------
-   * 会员与会员档案关联表
+   * 汽车与汽车地址关联表
    * ------------------------------------------
    *
-   * 会员与会员档案关联表
+   * 汽车与汽车地址关联表
    *
    * @return [关联对象]
    */
-  public function archive()
-  {
-      return $this->hasOne('App\Models\Common\Module\Member\Archive', 'member_id', 'id');
-  }
-
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-10-20
-   * ------------------------------------------
-   * 会员与会员资产关联表
-   * ------------------------------------------
-   *
-   * 会员与会员资产关联表
-   *
-   * @return [关联对象]
-   */
-  public function asset()
-  {
-      return $this->hasOne('App\Models\Common\Module\Member\Asset', 'member_id', 'id');
-  }
-
-
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-10-20
-   * ------------------------------------------
-   * 会员与会员地址关联表
-   * ------------------------------------------
-   *
-   * 会员与会员地址关联表
-   *
-   * @return [关联对象]
-   */
-  public function address()
+  public function member()
   {
     return $this->belongsTo(
-      'App\Models\Common\Module\Member\Address',
-      'id',
-      'member_id'
+      'App\Models\Common\Module\Member',
+      'member_id',
+      'id'
     );
   }
 
 
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-10-20
+   * @dateTime 2021-05-23
    * ------------------------------------------
-   * 会员与会员认证关联表
+   * 汽车与汽车来源关联表
    * ------------------------------------------
    *
-   * 会员与会员认证关联表
+   * 汽车与汽车来源关联表
    *
    * @return [关联对象]
    */
-  public function certification()
+  public function source()
   {
     return $this->belongsTo(
-      'App\Models\Common\Module\Member\Certification',
-      'id',
-      'member_id'
+      'App\Models\Common\Module\Car\Source',
+      'source_id',
+      'id'
     );
   }
 
 
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-03-07
+   * @dateTime 2021-05-23
    * ------------------------------------------
-   * 注册关联删除
+   * 汽车与汽车品牌关联表
    * ------------------------------------------
    *
-   * 注册关联删除
+   * 汽车与汽车品牌关联表
    *
-   * @return [type]
+   * @return [关联对象]
    */
-  public static function boot()
+  public function brand()
   {
-    parent::boot();
+    return $this->belongsTo(
+      'App\Models\Common\Module\Car\Brand',
+      'brand_id',
+      'id'
+    );
+  }
 
-    static::deleted(function($model) {
-      $model->archive()->delete();
-      $model->asset()->delete();
-      $model->address()->delete();
-    });
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2021-05-23
+   * ------------------------------------------
+   * 汽车与汽车车型关联表
+   * ------------------------------------------
+   *
+   * 汽车与汽车车型关联表
+   *
+   * @return [关联对象]
+   */
+  public function shape()
+  {
+    return $this->belongsTo(
+      'App\Models\Common\Module\Car\Shape',
+      'shape_id',
+      'id'
+    );
+  }
+
+
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2021-05-23
+   * ------------------------------------------
+   * 汽车与汽车资源关联表
+   * ------------------------------------------
+   *
+   * 汽车与汽车资源关联表
+   *
+   * @return [关联对象]
+   */
+  public function resource()
+  {
+    return $this->hasMany(
+      'App\Models\Common\Module\Car\Resource',
+      'car_id',
+      'id'
+    );
+  }
+
+
+
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2021-05-23
+   * ------------------------------------------
+   * 汽车与汽车配置关联表
+   * ------------------------------------------
+   *
+   * 汽车与汽车配置关联表
+   *
+   * @return [关联对象]
+   */
+  public function config()
+  {
+    return $this->hasMany(
+      'App\Models\Common\Module\Car\Config',
+      'car_id',
+      'id'
+    );
+  }
+
+
+
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2021-05-23
+   * ------------------------------------------
+   * 汽车与汽车浏览关联表
+   * ------------------------------------------
+   *
+   * 汽车与汽车浏览关联表
+   *
+   * @return [关联对象]
+   */
+  public function browse()
+  {
+    return $this->hasMany(
+      'App\Models\Common\Module\Car\Browse',
+      'car_id',
+      'id'
+    );
+  }
+
+
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2021-05-23
+   * ------------------------------------------
+   * 汽车与汽车收藏关联表
+   * ------------------------------------------
+   *
+   * 汽车与汽车收藏关联表
+   *
+   * @return [关联对象]
+   */
+  public function collection()
+  {
+    return $this->hasMany(
+      'App\Models\Common\Module\Car\Collection',
+      'car_id',
+      'id'
+    );
   }
 }

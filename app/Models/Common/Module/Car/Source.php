@@ -2,7 +2,6 @@
 namespace App\Models\Common\Module\Car;
 
 use App\Models\Base;
-use App\Http\Constant\Parameter;
 
 
 /**

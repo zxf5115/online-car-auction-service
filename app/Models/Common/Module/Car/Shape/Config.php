@@ -1,19 +1,20 @@
 <?php
-namespace App\Models\Common\Module\Car;
+namespace App\Models\Common\Module\Car\Shape;
 
 use App\Models\Base;
+use App\Http\Constant\Parameter;
 
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
  * @dateTime 2021-05-13
  *
- * 汽车品牌模型类
+ * 汽车型号配置模型类
  */
-class Brand extends Base
+class Config extends Base
 {
   // 表名
-  public $table = "module_car_brand";
+  public $table = "module_car_shape_config";
 
   // 可以批量修改的字段
   public $fillable = [

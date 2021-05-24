@@ -6,14 +6,14 @@ use App\Models\Base;
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
- * @dateTime 2021-05-13
+ * @dateTime 2021-05-23
  *
- * 汽车品牌模型类
+ * 汽车收藏模型类
  */
-class Brand extends Base
+class Collection extends Base
 {
   // 表名
-  public $table = "module_car_brand";
+  public $table = "module_car_collection";
 
   // 可以批量修改的字段
   public $fillable = [

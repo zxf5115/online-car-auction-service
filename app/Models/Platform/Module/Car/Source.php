@@ -1,5 +1,5 @@
 <?php
-namespace App\Models\Platform\Module;
+namespace App\Models\Platform\Module\Car;
 
 use App\Models\Common\Module\Car\Source as Common;
 

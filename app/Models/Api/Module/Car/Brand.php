@@ -1,5 +1,5 @@
 <?php
-namespace App\Models\Api\Module;
+namespace App\Models\Api\Module\Car;
 
 use App\Models\Common\Module\Car\Brand as Common;
 

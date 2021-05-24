@@ -248,6 +248,59 @@ $api->version('v1', [
       });
 
 
+      // 汽车路由
+      $api->group(['prefix' => 'car'], function ($api) {
+        $api->any('list', 'CarController@list');
+        $api->get('select', 'CarController@select');
+        $api->get('view/{id}', 'CarController@view');
+        $api->post('handle', 'CarController@handle');
+        $api->post('enable', 'CarController@enable');
+        $api->post('delete', 'CarController@delete');
+
+
+        $api->group(['namespace' => 'Car'], function ($api) {
+
+          // 汽车来源路由
+          $api->group(['prefix'  => 'source'], function ($api) {
+            $api->any('list', 'SourceController@list');
+            $api->get('select', 'SourceController@select');
+            $api->get('view/{id}', 'SourceController@view');
+            $api->post('handle', 'SourceController@handle');
+            $api->post('enable', 'SourceController@enable');
+            $api->post('delete', 'SourceController@delete');
+          });
+
+          // 汽车品牌路由
+          $api->group(['prefix'  => 'brand'], function ($api) {
+            $api->any('list', 'BrandController@list');
+            $api->get('select', 'BrandController@select');
+            $api->get('view/{id}', 'BrandController@view');
+            $api->post('handle', 'BrandController@handle');
+            $api->post('enable', 'BrandController@enable');
+            $api->post('delete', 'BrandController@delete');
+          });
+
+          // 汽车型号路由
+          $api->group(['prefix'  => 'shape'], function ($api) {
+            $api->any('list', 'ShapeController@list');
+            $api->get('select', 'ShapeController@select');
+            $api->get('view/{id}', 'ShapeController@view');
+            $api->post('handle', 'ShapeController@handle');
+            $api->post('enable', 'ShapeController@enable');
+            $api->post('delete', 'ShapeController@delete');
+
+            // 汽车型号配置路由
+            $api->group(['namespace' => 'Shape', 'prefix'  => 'config'], function ($api) {
+              $api->get('data', 'ConfigController@data');
+              $api->post('handle', 'ConfigController@handle');
+            });
+          });
+        });
+      });
+
+
+
+
 
 
       // 订单路由

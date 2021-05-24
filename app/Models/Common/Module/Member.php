@@ -151,36 +151,6 @@ class Member extends Base
   }
 
 
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2021-01-12
-   * ------------------------------------------
-   * 计算会员年龄
-   * ------------------------------------------
-   *
-   * 根据会员出生年月日计算年龄，用于保存数据库
-   *
-   * @param [type] $birthday [description]
-   * @return [type]
-   */
-  public static function computeAge($birthday)
-  {
-    try
-    {
-      $model = new \Carbon\Carbon($birthday);
-
-      return $model->diffInYears();
-    }
-    catch(\Exception $e)
-    {
-      // 记录异常
-      self::record($e);
-
-      return false;
-    }
-  }
-
-
 
 
   /**
@@ -198,42 +168,6 @@ class Member extends Base
   public function getStatusAttribute($value)
   {
     return MemberEnum::getStatus($value);
-  }
-
-
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-12-20
-   * ------------------------------------------
-   * 条件状态封装
-   * ------------------------------------------
-   *
-   * 条件状态封装
-   *
-   * @param [type] $value [description]
-   * @return [type]
-   */
-  public function getConditionAttribute($value)
-  {
-    return TeacherEnum::getConditionStatus($value);
-  }
-
-
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-12-20
-   * ------------------------------------------
-   * 会员冻结状态封装
-   * ------------------------------------------
-   *
-   * 会员冻结状态封装
-   *
-   * @param [type] $value [description]
-   * @return [type]
-   */
-  public function getIsFreezeAttribute($value)
-  {
-    return MemberEnum::getFreezeStatus($value);
   }
 
 
