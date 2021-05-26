@@ -36,7 +36,7 @@ class WechatController extends BaseController
   /**
    * @api {post} /api/common/wechat/notify 07. 微信支付回调
    * @apiDescription 获取微信支付回调
-   * @apiGroup 02. 公共模块
+   * @apiGroup 01. 公共模块
    *
    * @apiSampleRequest /api/common/wechat/notify
    * @apiVersion 1.0.0

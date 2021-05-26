@@ -34,7 +34,7 @@ class SystemController extends BaseController
   /**
    * @api {get} /api/system/kernel 01. 获取系统信息
    * @apiDescription 获取系统配置内容信息
-   * @apiGroup 02. 公共模块
+   * @apiGroup 01. 公共模块
    *
    * @apiSuccess (Fields Explain) {String} web_chinese_name 网站中文名称
    * @apiSuccess (Fields Explain) {String} web_english_name 网站英文名字
@@ -60,7 +60,9 @@ class SystemController extends BaseController
         'status' => 1
       ];
 
-      $response = $this->_model::getList($where);
+      $field = ['value', 'title'];
+
+      $response = $this->_model::getPluck($field, $where);
 
       return self::success($response);
     }

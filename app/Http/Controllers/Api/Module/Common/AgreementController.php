@@ -30,9 +30,9 @@ class AgreementController extends BaseController
 
 
   /**
-   * @api {get} /api/common/agreement/user 05. 用户协议
+   * @api {get} /api/common/agreement/user 03. 用户协议
    * @apiDescription 获取系统的用户协议
-   * @apiGroup 02. 公共模块
+   * @apiGroup 01. 公共模块
    *
    * @apiSuccess (basic params) {String} name 协议名称
    * @apiSuccess (basic params) {String} content 协议内容
@@ -58,9 +58,9 @@ class AgreementController extends BaseController
   }
 
   /**
-   * @api {get} /api/common/agreement/about 06. 关于我们
+   * @api {get} /api/common/agreement/about 04. 关于我们
    * @apiDescription 获取系统的关于我们
-   * @apiGroup 02. 公共模块
+   * @apiGroup 01. 公共模块
    *
    * @apiSuccess (basic params) {String} name 协议名称
    * @apiSuccess (basic params) {String} content 协议内容

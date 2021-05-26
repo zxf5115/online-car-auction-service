@@ -39,7 +39,7 @@ class AreaController extends BaseController
   /**
    * @api {get} /api/common/area/list 02. 获取地区列表
    * @apiDescription 获取地区列表
-   * @apiGroup 02. 公共模块
+   * @apiGroup 01. 公共模块
    *
    * @apiParam {string} parent_id 上级地区编号（为空：获取省，省编号: 获取市，市编号: 获取县）
    * @apiSampleRequest /api/common/area/list
@@ -47,9 +47,8 @@ class AreaController extends BaseController
    */
   public function list(Request $request)
   {
-    $condition = [
-      ['status', '>', Status::DELETE]
-    ];
+    $condition = self::getSimpleWhereData();
+
     // 对用户请求进行过滤
     $filter = $this->filter($request->all());
 

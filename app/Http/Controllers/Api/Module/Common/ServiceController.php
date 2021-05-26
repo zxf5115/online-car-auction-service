@@ -34,9 +34,9 @@ class ServiceController extends BaseController
 
 
   /**
-   * @api {post} /api/common/service/data 11. 客服联系方式
+   * @api {post} /api/common/service/data 05. 客服联系方式
    * @apiDescription 获取客服联系方式
-   * @apiGroup 02. 公共模块
+   * @apiGroup 01. 公共模块
    *
    * @apiSuccess (basic params) {Number} id 自增编号
    * @apiSuccess (basic params) {Number} service_mobile 客服电话
