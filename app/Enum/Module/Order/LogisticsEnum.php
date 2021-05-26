@@ -9,10 +9,10 @@ namespace App\Enum\Module\Order;
  */
 class LogisticsEnum
 {
-  const WAIT_SEND = 0; // 待发货
-  const WAIT_SIGN = 1; // 待签收
-  const FINISH_SIGN = 2; // 已签收
-
+  const WAIT_SEND   = 0; // 待发货
+  const FINISH_SEND = 1; // 已发出
+  const WAIT_SIGN   = 2; // 待收货
+  const FINISH_SIGN = 3; // 已签收
 
   // 物流状态类型
   public static $logistics = [
@@ -21,9 +21,14 @@ class LogisticsEnum
       'text' => '待发货'
     ],
 
+    self::FINISH_SEND       => [
+      'value' => self::FINISH_SEND,
+      'text' => '已发出'
+    ],
+
     self::WAIT_SIGN => [
       'value' => self::WAIT_SIGN,
-      'text' => '待签收'
+      'text' => '待收货'
     ],
 
     self::FINISH_SIGN => [

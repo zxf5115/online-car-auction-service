@@ -17,7 +17,6 @@ class Car extends Common
   protected $appends = [
     'browse_total',
     'collection_total',
-    'video',
     'image',
   ];
 
@@ -96,41 +95,6 @@ class Car extends Common
     return $response;
   }
 
-
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2021-01-19
-   * ------------------------------------------
-   * 汽车视频封装
-   * ------------------------------------------
-   *
-   * 汽车视频封装
-   *
-   * @param [type] $value [description]
-   * @return [type]
-   */
-  public function getVideoAttribute($value)
-  {
-    $response = '';
-
-    $resource = $this->resource;
-
-    if(!empty($resource))
-    {
-      foreach($resource as $item)
-      {
-        if(2 == $item->type['value'])
-        {
-          $response = $item->url;
-        }
-      }
-    }
-
-    unset($this->resource);
-
-    return $response;
-  }
-
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
    * @dateTime 2021-01-19
@@ -153,10 +117,7 @@ class Car extends Common
     {
       foreach($resource as $item)
       {
-        if(1 == $item->type['value'])
-        {
-          $response[] = $item->url;
-        }
+        $response[] = $item->url;
       }
     }
 

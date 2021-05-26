@@ -37,13 +37,12 @@ $api->version('v1', [
         $api->get('kernel', 'SystemController@kernel'); // 系统信息路由
       });
 
-      // 文件上传路由（必须先进行身份认证，默认人不可以上传）
-      $api->group(['prefix' => 'file'], function ($api) {
-        $api->post('avatar', 'FileController@avatar'); // 上传头像
-        $api->post('picture', 'FileController@picture')->middleware(['auth:api', 'refresh.token', 'failure']); // 上传图片
-        $api->post('file', 'FileController@file')->middleware(['auth:api', 'refresh.token', 'failure']); // 上传文件
-        $api->post('audio', 'FileController@audio')->middleware(['auth:api', 'refresh.token', 'failure']); // 上传音频
-        $api->post('movie', 'FileController@movie')->middleware(['auth:api', 'refresh.token', 'failure']); // 上传视频
+      // 上传路由
+      $api->group(['prefix' => 'file', 'middleware' => ['auth:api', 'refresh.token']], function ($api) {
+        // 上传文件
+        $api->post('file', 'FileController@file');
+        // 上传图片
+        $api->post('picture', 'FileController@picture');
       });
     });
 
@@ -197,7 +196,7 @@ $api->version('v1', [
           });
 
           // 会员订单路由
-          $api->group(['namespace' => 'Order', 'prefix'  => 'order'], function ($api) {
+          $api->group(['prefix'  => 'order'], function ($api) {
 
             $api->get('list', 'OrderController@list');
             $api->get('select', 'OrderController@select');
@@ -209,7 +208,7 @@ $api->version('v1', [
             $api->post('cancel', 'OrderController@cancel');
 
             // 会员订单物流路由
-            $api->group(['prefix' => 'logistics'], function ($api) {
+            $api->group(['namespace' => 'Order', 'prefix' => 'logistics'], function ($api) {
               $api->get('list', 'LogisticsController@list');
               $api->get('select', 'LogisticsController@select');
               $api->get('view/{id}', 'LogisticsController@view');

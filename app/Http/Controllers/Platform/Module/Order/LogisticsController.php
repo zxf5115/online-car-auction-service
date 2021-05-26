@@ -1,24 +1,22 @@
 <?php
-namespace App\Http\Controllers\Platform\Module\Order\Goods;
+namespace App\Http\Controllers\Platform\Module\Order;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 
 use App\Http\Constant\Code;
 use App\Http\Controllers\Platform\BaseController;
-use App\Models\Common\Module\Common\Express\Company;
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
  * @dateTime 2021-01-16
  *
- * 商品订单物流控制器类
+ * 课程订单物流控制器类
  */
 class LogisticsController extends BaseController
 {
   // 模型
-  protected $_model = 'App\Models\Platform\Module\Order\Goods\Logistics';
+  protected $_model = 'App\Models\Platform\Module\Order\Logistics';
 
   // 默认查询条件
   protected $_where = [];
@@ -37,7 +35,9 @@ class LogisticsController extends BaseController
   ];
 
   // 关联信息
-  protected $_relevance = [];
+  protected $_relevance = [
+    'category'
+  ];
 
 
 
@@ -56,13 +56,19 @@ class LogisticsController extends BaseController
   public function handle(Request $request)
   {
     $messages = [
-      'company_name.required' => '请您输入物流公司',
-      'logistics_no.required' => '请您输入物流单号',
+      'order_id.required'         => '请您输入订单编号',
+      'type.required'             => '请您选择物流类型',
+      'logistics_status.required' => '请您选择物流状态',
+      'logistics_name.required'   => '请您输入物流名称',
+      'logistics_no.required'     => '请您输入物流编号',
     ];
 
     $rule = [
-      'company_name' => 'required',
-      'logistics_no' => 'required',
+      'order_id'         => 'required',
+      'type'             => 'required',
+      'logistics_status' => 'required',
+      'logistics_name'   => 'required',
+      'logistics_no'     => 'required',
     ];
 
     // 验证用户数据内容是否正确
@@ -78,25 +84,19 @@ class LogisticsController extends BaseController
 
       try
       {
-        $company = Company::getRow(['value' => $request->company_name]);
-
         $model = $this->_model::firstOrNew(['id' => $request->id]);
 
         $model->organization_id  = self::getOrganizationId();
-        $model->member_id        = $request->member_id;
         $model->order_id         = $request->order_id;
-        $model->company_name     = $company->title;
-        $model->company_code     = $request->company_name;
+        $model->type             = $request->type;
+        $model->logistics_status = $request->logistics_status;
+        $model->logistics_name   = $request->logistics_name;
         $model->logistics_no     = $request->logistics_no;
-        $model->logistics_status = 1;
+        $model->logistics_time   = strtotime($request->logistics_time);
+        $model->address          = $request->address;
+        $model->content          = $request->content;
 
-        $response = $model->save();
-
-        // 更新订单状态
-        $order = $model->order;
-
-        $order->order_status = 1;
-        $order->save();
+        $model->save();
 
         DB::commit();
 

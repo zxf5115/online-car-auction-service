@@ -61,17 +61,17 @@ class OrderEnum
   public static $order = [
     self::WAIT_SEND       => [
       'value' => self::WAIT_SEND,
-      'text' => '待发货'
+      'text' => '待付款'
     ],
 
     self::WAIT_SIGN => [
       'value' => self::WAIT_SIGN,
-      'text' => '待签收'
+      'text' => '待提货'
     ],
 
     self::FINISH_SIGN => [
       'value' => self::FINISH_SIGN,
-      'text' => '已签收'
+      'text' => '已完成'
     ],
 
     self::CANCEL => [

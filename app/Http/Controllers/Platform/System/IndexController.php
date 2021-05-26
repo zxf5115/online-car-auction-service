@@ -4,14 +4,11 @@ namespace App\Http\Controllers\Platform\System;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-use App\Enum\Common\MoneyEnum;
-use App\Models\Common\Module\Member\Member;
-use App\Models\Common\Module\Complain\Complain;
+use App\Models\Common\Module\Car;
+use App\Models\Common\Module\Order;
+use App\Models\Common\Module\Member;
+use App\TraitClass\StatisticalTrait;
 use App\Http\Controllers\Platform\BaseController;
-use App\Models\Common\Module\Member\Relevance\Money;
-use App\Models\Common\Module\Education\Course\Course;
-use App\Models\Common\Module\Order\Goods as GoodsOrder;
-use App\Models\Common\Module\Order\Course as CourseOrder;
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
@@ -21,87 +18,421 @@ use App\Models\Common\Module\Order\Course as CourseOrder;
  */
 class IndexController extends BaseController
 {
+  use StatisticalTrait;
+
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
    * @dateTime 2021-02-19
    * ------------------------------------------
-   * 首页统计数据
+   * 用户统计数据
    * ------------------------------------------
    *
-   * 首页统计数据
+   * 用户统计数据
    *
    * @return [type]
    */
-  public function data()
+  public function user(Request $request)
   {
     try
     {
       $today_member_total = 0;
-      $member_total = 0;
+      $member_total       = 0;
+      $merchant_total     = 0;
 
-      $today_course_total = 0;
-      $course_total = 0;
+      // 统计时间区间
+      $where = self::getWhereCondition($request->type);
 
-      $today_goods_total = 0;
-      $goods_total = 0;
+      $condition = array_merge($where, ['role_id' => 2]);
 
-      $today_money_total = 0;
-      $money_total = 0;
+      // 今日会员
+      $today_member_total = Member::getCount($condition);
 
-      $wait_money_total = 0;
-      $complain_total = 0;
-      $wait_order_total = 0;
+      // 全部会员
+      $member_total = Member::getCount(['role_id' => 2]);
 
-      // 今天0点
-      $today = strtotime(date("Y-m-d"),time());
+      $condition = array_merge($where, ['role_id' => 1]);
 
-      // 今天
-      $where = [['create_time', '>', $today]];
-
-      $today_member_total = Member::getCount($where);
-      $member_total = Member::getCount([]);
-
-      $today_course_total = Course::getCount($where);
-      $course_total = Course::getCount([]);
-
-      $today_goods_total = GoodsOrder::getCount($where);
-      $goods_total = GoodsOrder::getCount([]);
-
-      $today_goods_money_total = GoodsOrder::getPluck('pay_money', $where, false, false, true);
-      $goods_money_total = GoodsOrder::getPluck('pay_money', [], false, false, true);
-
-      $today_course_money_total = CourseOrder::getPluck('pay_money', $where, false, false, true);
-      $course_money_total = CourseOrder::getPluck('pay_money', [], false, false, true);
-
-      $today_money_total = array_merge($today_course_money_total, $today_goods_money_total);
-
-      $today_money_total = MoneyEnum::getTotalMoney($today_money_total);
-
-      $money_total = array_merge($course_money_total, $goods_money_total);
-      $money_total = MoneyEnum::getTotalMoney($money_total);
-
-      $wait_money_total = Money::getCount(['type' => 2, 'withdrawal_status' => 0]);
-
-      $complain_total = Complain::getCount([]);
-
-      $where = ['pay_status' => 1, 'order_status' => 0];
-      $wait_order_total = GoodsOrder::getCount($where);
+      // 今日车商
+      $merchant_total = Member::getCount($condition);
 
       $response['today_member_total'] = $today_member_total;
       $response['member_total']       = $member_total;
+      $response['merchant_total']     = $merchant_total;
 
-      $response['today_course_total'] = $today_course_total;
-      $response['course_total']       = $course_total;
+      return self::success($response);
+    }
+    catch(\Exception $e)
+    {
+      // 记录异常信息
+      self::record($e);
 
-      $response['today_goods_total']  = $today_goods_total;
-      $response['goods_total']        = $goods_total;
+      return self::error(Code::ERROR);
+    }
+  }
 
-      $response['today_money_total']  = $today_money_total;
-      $response['money_total']        = $money_total;
 
-      $response['wait_money_total']   = $wait_money_total;
-      $response['complain_total']     = $complain_total;
-      $response['wait_order_total']   = $wait_order_total;
+
+
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2021-02-19
+   * ------------------------------------------
+   * 汽车统计数据
+   * ------------------------------------------
+   *
+   * 汽车统计数据
+   *
+   * @return [type]
+   */
+  public function car(Request $request)
+  {
+    try
+    {
+      $car_out_total = 0;
+      $car_in_total  = 0;
+      $car_old_total = 0;
+      $carData       = [];
+
+      // 统计时间区间
+      $where = self::getWhereCondition($request->type);
+
+      $condition = array_merge($where, ['source_id' => 52]);
+
+      // 海外车源
+      $car_out_total = Car::getCount($condition);
+
+      $condition = array_merge($where, ['source_id' => 51]);
+
+      // 国内车源
+      $car_in_total = Car::getCount($condition);
+
+      $condition = array_merge($where, ['source_id' => 53]);
+
+      // 今日车商
+      $car_old_total = Car::getCount($condition);
+
+      $response['car_out_total'] = $car_out_total;
+      $response['car_in_total']  = $car_in_total;
+      $response['car_old_total'] = $car_old_total;
+
+      $car = Car::getList($where);
+
+      $carDate = [];
+
+      foreach($car as $item)
+      {
+        $carDate[] = date('Y-m-d', strtotime($item->create_time));
+      }
+
+      $carDate = array_count_values($carDate);
+
+      foreach($carDate as $key => $item)
+      {
+        $carData[] = [
+          'title' => $key,
+          '汽车数' => $item,
+        ];
+      }
+
+      $sort = array_column($carData, 'title');
+
+      array_multisort($carData, SORT_ASC, $sort);
+
+
+      $response['data'] = $carData;
+
+      return self::success($response);
+    }
+    catch(\Exception $e)
+    {
+      // 记录异常信息
+      self::record($e);
+
+      return self::error(Code::ERROR);
+    }
+  }
+
+
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2021-02-19
+   * ------------------------------------------
+   * 订单统计数据
+   * ------------------------------------------
+   *
+   * 订单统计数据
+   *
+   * @return [type]
+   */
+  public function order(Request $request)
+  {
+    try
+    {
+      $wait_order_total = 0;
+      $finish_order_total  = 0;
+      $wait_take_order_total = 0;
+      $orderData       = [];
+
+      // 统计时间区间
+      $where = self::getWhereCondition($request->type);
+
+      $condition = array_merge($where, ['order_status' => 0]);
+
+      // 待支付
+      $wait_order_total = Order::getCount($condition);
+
+      $order = Order::getList($condition);
+
+      $waitDate = [];
+
+      foreach($order as $item)
+      {
+        $waitDate[] = date('Y-m-d', strtotime($item->create_time));
+      }
+
+      $waitDate = array_count_values($waitDate);
+
+      foreach($waitDate as $key => $item)
+      {
+        $orderData[] = [
+          'title' => $key,
+          '新增待支付订单' => $item,
+        ];
+      }
+
+      $date = array_keys($waitDate);
+
+
+      $condition = array_merge($where, ['order_status' => 2]);
+
+      // 已完成
+      $finish_order_total = Order::getCount($condition);
+
+      $order = Order::getList($condition);
+
+      $finishDate = [];
+
+      foreach($order as $item)
+      {
+        $finishDate[] = date('Y-m-d', strtotime($item->create_time));
+      }
+
+      $finishDate = array_count_values($finishDate);
+
+      foreach($finishDate as $k => $v)
+      {
+        foreach($orderData as $key => $item)
+        {
+          if($k == $item['title'])
+          {
+            $orderData[$key] = array_merge($orderData[$key], ['title' => $k , '新增完成订单' => $v]);
+          }
+          else if(!in_array($k, $date))
+          {
+            $orderData[] = ['title' => $k, '新增完成订单' => $v];
+
+            break;
+          }
+        }
+      }
+
+      $condition = array_merge($where, ['order_status' => 1]);
+
+      // 待提货
+      $wait_take_order_total = Order::getCount($condition);
+
+      $order = Order::getList($condition);
+
+      $takeDate = [];
+
+      foreach($order as $item)
+      {
+        $takeDate[] = date('Y-m-d', strtotime($item->create_time));
+      }
+
+      $takeDate = array_count_values($takeDate);
+
+      foreach($takeDate as $k => $v)
+      {
+        foreach($orderData as $key => $item)
+        {
+          if($k == $item['title'])
+          {
+            $orderData[$key] = array_merge($orderData[$key], ['title' => $k , '新增待提货订单' => $v]);
+          }
+          else if(!in_array($k, $date))
+          {
+            $orderData[] = ['title' => $k, '新增待提货订单' => $v];
+
+            break;
+          }
+        }
+      }
+
+      $response['wait_order_total'] = $wait_order_total;
+      $response['finish_order_total']  = $finish_order_total;
+      $response['wait_take_order_total'] = $wait_take_order_total;
+
+      $sort = array_column($orderData, 'title');
+
+      array_multisort($orderData, SORT_ASC, $sort);
+
+      $response['data'] = $orderData;
+
+      return self::success($response);
+    }
+    catch(\Exception $e)
+    {
+      // 记录异常信息
+      self::record($e);
+
+      return self::error(Code::ERROR);
+    }
+  }
+
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2021-02-19
+   * ------------------------------------------
+   * 成交量统计数据
+   * ------------------------------------------
+   *
+   * 成交量统计数据
+   *
+   * @return [type]
+   */
+  public function money(Request $request)
+  {
+    try
+    {
+      $money_out_total = 0;
+      $money_in_total  = 0;
+      $money_old_total = 0;
+      $moneyData       = [];
+
+      // 统计时间区间
+      $where = self::getWhereCondition($request->type);
+
+      $condition = array_merge($where, ['source_id' => 52]);
+
+      // 国外车源
+      $order = Order::getList($condition);
+
+      $outDate = [];
+
+      foreach($order as $item)
+      {
+        $money_out_total = bcadd($money_out_total, $item->pay_money, 2);
+
+        $field = date('Y-m-d', strtotime($item->create_time));
+
+        if(empty($outDate[$field]))
+        {
+          $outDate[$field] = $item->pay_money;
+        }
+        else
+        {
+          $outDate[$field] = bcadd($outDate[$field], $item->pay_money, 2);
+        }
+      }
+
+      foreach($outDate as $key => $item)
+      {
+        $moneyData[] = [
+          'title' => $key,
+          '国外车源' => $item,
+        ];
+      }
+
+      $date = array_keys($outDate);
+
+      $condition = array_merge($where, ['source_id' => 51]);
+
+      // 国内车源
+      $order = Order::getList($condition);
+
+      $inDate = [];
+
+      foreach($order as $item)
+      {
+        $money_in_total = bcadd($money_in_total, $item->pay_money, 2);
+
+        $field = date('Y-m-d', strtotime($item->create_time));
+
+        if(empty($inDate[$field]))
+        {
+          $inDate[$field] = $item->pay_money;
+        }
+        else
+        {
+          $inDate[$field] = bcadd($inDate[$field], $item->pay_money, 2);
+        }
+      }
+
+      foreach($inDate as $k => $v)
+      {
+        foreach($moneyData as $key => $item)
+        {
+          if($k == $item['title'])
+          {
+            $moneyData[$key] = array_merge($moneyData[$key], ['title' => $k , '国内车源' => $v]);
+          }
+          else if(!in_array($k, $date))
+          {
+            $moneyData[] = ['title' => $k, '国内车源' => $v];
+
+            break;
+          }
+        }
+      }
+
+      $condition = array_merge($where, ['source_id' => 53]);
+
+      // 二手车源
+      $order = Order::getList($condition);
+
+      $oldDate = [];
+
+      foreach($order as $item)
+      {
+        $money_old_total = bcadd($money_old_total, $item->pay_money, 2);
+
+        if(empty($oldDate[$field]))
+        {
+          $oldDate[$field] = $item->pay_money;
+        }
+        else
+        {
+          $oldDate[$field] = bcadd($oldDate[$field], $item->pay_money, 2);
+        }
+      }
+
+      foreach($oldDate as $k => $v)
+      {
+        foreach($moneyData as $key => $item)
+        {
+          if($k == $item['title'])
+          {
+            $moneyData[$key] = array_merge($moneyData[$key], ['title' => $k , '二手车源' => $v]);
+          }
+          else if(!in_array($k, $date))
+          {
+            $moneyData[] = ['title' => $k, '二手车源' => $v];
+
+            break;
+          }
+        }
+      }
+
+      $response['money_out_total'] = $money_out_total;
+      $response['money_in_total']  = $money_in_total;
+      $response['money_old_total'] = $money_old_total;
+
+      $sort = array_column($moneyData, 'title');
+
+      array_multisort($moneyData, SORT_ASC, $sort);
+
+      $response['data'] = $moneyData;
 
       return self::success($response);
     }

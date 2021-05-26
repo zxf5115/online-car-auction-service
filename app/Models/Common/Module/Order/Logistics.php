@@ -1,5 +1,5 @@
 <?php
-namespace App\Models\Common\Module\Order\Course;
+namespace App\Models\Common\Module\Order;
 
 use App\Models\Base;
 use App\Enum\Module\Order\LogisticsEnum;
@@ -27,6 +27,16 @@ class Logistics extends Base
   protected $fillable = ['id'];
 
 
+  /**
+   * 转换属性类型
+   */
+  protected $casts = [
+    'status' => 'array',
+    'logistics_time' => 'datetime:Y-m-d H:i:s',
+    'create_time' => 'datetime:Y-m-d H:i:s',
+    'update_time' => 'datetime:Y-m-d H:i:s',
+  ];
+
 
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
@@ -45,23 +55,6 @@ class Logistics extends Base
     return LogisticsEnum::getLogisticsStatus($value);
   }
 
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-10-31
-   * ------------------------------------------
-   * 课程周期封装
-   * ------------------------------------------
-   *
-   * 课程周期封装
-   *
-   * @param [type] $value [description]
-   * @return [type]
-   */
-  public function getSemesterAttribute($value)
-  {
-    return LogisticsEnum::getSemesterData($value);
-  }
-
 
   // 关联函数 ------------------------------------------------------
 
@@ -78,7 +71,11 @@ class Logistics extends Base
    */
   public function order()
   {
-    return $this->belongsTo('App\Models\Common\Module\Order\Course', 'order_id', 'id');
+    return $this->belongsTo(
+      'App\Models\Common\Module\Order',
+      'order_id',
+      'id'
+    );
   }
 
 
@@ -95,6 +92,31 @@ class Logistics extends Base
    */
   public function member()
   {
-    return $this->belongsTo('App\Models\Common\Module\Member\Member', 'member_id', 'id');
+    return $this->belongsTo(
+      'App\Models\Common\Module\Member',
+      'member_id',
+      'id'
+    );
+  }
+
+
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2021-01-16
+   * ------------------------------------------
+   * 物流与物流类型关联函数
+   * ------------------------------------------
+   *
+   * 物流与物流类型关联函数
+   *
+   * @return [关联对象]
+   */
+  public function category()
+  {
+    return $this->belongsTo(
+      'App\Models\Common\Module\Common\Logistics',
+      'type',
+      'id'
+    );
   }
 }

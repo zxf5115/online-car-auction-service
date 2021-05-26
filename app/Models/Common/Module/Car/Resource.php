@@ -2,7 +2,6 @@
 namespace App\Models\Common\Module\Car;
 
 use App\Models\Base;
-use App\Enum\Module\Car\ResourceEnum;
 
 
 /**
@@ -25,22 +24,4 @@ class Resource extends Base
   public $hidden = [
     'update_time'
   ];
-
-
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2021-05-23
-   * ------------------------------------------
-   * 资源类型封装
-   * ------------------------------------------
-   *
-   * 资源类型封装
-   *
-   * @param [type] $value [description]
-   * @return [type]
-   */
-  public function getTypeAttribute($value)
-  {
-    return ResourceEnum::getTypeStatus($value);
-  }
 }

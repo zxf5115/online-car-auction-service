@@ -28,18 +28,18 @@ $api->version('v1', [
 
       // 首页路由
       $api->group(['prefix' => 'index'], function ($api) {
-        $api->get('data', 'IndexController@data');
+        $api->get('user', 'IndexController@user');
+        $api->get('car', 'IndexController@car');
+        $api->get('order', 'IndexController@order');
+        $api->get('money', 'IndexController@money');
       });
 
       // 文件上传路由
       $api->group(['prefix' => 'file'], function ($api) {
-        $api->post('avatar', 'FileController@avatar');
-        $api->post('picture', 'FileController@picture');
         $api->post('file', 'FileController@file');
-        $api->post('data', 'FileController@data');
-        $api->post('advertising', 'FileController@advertising');
-        $api->post('course', 'FileController@course');
-        $api->post('batchRichText', 'FileController@batchRichText');
+        $api->post('picture', 'FileController@picture');
+        $api->post('editor_file', 'FileController@editor_file');
+        $api->post('editor_picture', 'FileController@editor_picture');
       });
 
 
@@ -146,16 +146,6 @@ $api->version('v1', [
 
       // 公共路由
       $api->group(['namespace' => 'Common', 'prefix'  =>  'common'], function ($api) {
-        $api->get('education/degree', 'EducationController@degree'); // 教育程度路由
-        $api->get('national/list', 'NationalController@list'); // 民族路由
-        $api->get('area/list', 'AreaController@list'); // 民族路由
-
-        // 快递路由
-        $api->group(['namespace' => 'Express', 'prefix' => 'express'], function ($api) {
-          $api->group(['prefix' => 'company'], function ($api) {
-            $api->get('list', 'CompanyController@list'); // 快递公司路由
-          });
-        });
 
         // 常见问题路由
         $api->group(['prefix' => 'problem'], function ($api) {
@@ -164,6 +154,15 @@ $api->version('v1', [
           $api->get('view/{id}', 'ProblemController@view');
           $api->post('handle', 'ProblemController@handle');
           $api->post('delete', 'ProblemController@delete');
+        });
+
+        // 物流路由
+        $api->group(['prefix' => 'logistics'], function ($api) {
+          $api->any('list', 'LogisticsController@list');
+          $api->get('select', 'LogisticsController@select');
+          $api->get('view/{id}', 'LogisticsController@view');
+          $api->post('handle', 'LogisticsController@handle');
+          $api->post('delete', 'LogisticsController@delete');
         });
       });
 
@@ -305,22 +304,20 @@ $api->version('v1', [
 
 
       // 订单路由
-      $api->group(['namespace' => 'Order', 'prefix' => 'order'], function ($api) {
-        $api->any('list', 'CourseController@list');
-        $api->get('select', 'CourseController@select');
-        $api->get('view/{id}', 'CourseController@view');
-        $api->post('send', 'CourseController@send');
-        $api->get('money', 'CourseController@money');
+      $api->group(['prefix' => 'order'], function ($api) {
+        $api->any('list', 'OrderController@list');
+        $api->get('select', 'OrderController@select');
+        $api->get('view/{id}', 'OrderController@view');
+        $api->post('status', 'OrderController@status');
+        $api->post('cancel', 'OrderController@cancel');
 
-        $api->group(['namespace' => 'Course'], function ($api) {
-
-          // 课程订单物流路由
-          $api->group(['prefix'  => 'logistics'], function ($api) {
-            $api->any('list', 'LogisticsController@list');
-            $api->get('select', 'LogisticsController@select');
-            $api->get('view/{id}', 'LogisticsController@view');
-            $api->post('handle', 'LogisticsController@handle');
-          });
+        // 课程订单物流路由
+        $api->group(['namespace' => 'Order', 'prefix'  => 'logistics'], function ($api) {
+          $api->any('list', 'LogisticsController@list');
+          $api->get('select', 'LogisticsController@select');
+          $api->get('view/{id}', 'LogisticsController@view');
+          $api->post('handle', 'LogisticsController@handle');
+          $api->post('delete/{id?}', 'LogisticsController@delete');
         });
       });
 
