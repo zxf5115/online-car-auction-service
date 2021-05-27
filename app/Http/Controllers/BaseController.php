@@ -10,7 +10,6 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use App\Http\Constant\Code;
 use App\Http\Constant\Status;
-use App\Http\Constant\RedisKey;
 use App\Models\Common\System\Config;
 
 /**
@@ -119,31 +118,7 @@ class BaseController extends Controller
   {
     try
     {
-      // 平台核心数据Reids Key
-      $key = RedisKey::KERNEL;
-
-      if(Redis::exists($key))
-      {
-        $data = Redis::get($key);
-
-        $response = unserialize($data);
-      }
-      else
-      {
-        $condition = self::getSimpleWhereData();
-
-        $condition = array_merge($condition, $this->_where);
-
-        $response = Config::where($condition)->pluck('value', 'title');
-
-        $data = serialize($response);
-
-        Redis::set($key, $data);
-      }
-
-      return view('index', [
-        'response' => $response
-      ]);
+      return self::success();
     }
     catch(\Exception $e)
     {

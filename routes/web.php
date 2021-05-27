@@ -10,5 +10,19 @@
 |
 */
 
-Route::get('/{any}', 'BaseController@index')->where('any', '.*');
+$api = app('Dingo\Api\Routing\Router');
 
+$api->version('v1', [
+  'namespace'  =>  'App\\Http\\Controllers',
+  'middleware'  =>  'serializer:array'
+], function ($api)
+{
+  $api->group([
+    'middleware'  =>  'api.throttle', // 启用节流限制
+    'limit'  =>  1000, // 允许次数
+    'expires'  =>  1, // 分钟
+  ], function ($api)
+  {
+    $api->get('/', 'BaseController@index');
+  });
+});
