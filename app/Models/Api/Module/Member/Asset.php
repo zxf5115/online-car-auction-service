@@ -11,5 +11,13 @@ use App\Models\Common\Module\Member\Asset as Common;
  */
 class Asset extends Common
 {
-
+  // 隐藏的属性
+  public $hidden = [
+    'id',
+    'organization_id',
+    'member_id',
+    'status',
+    'create_time',
+    'update_time'
+  ];
 }

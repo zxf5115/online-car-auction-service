@@ -50,29 +50,31 @@ $api->version('v1', [
           $api->get('about', 'AgreementController@about');
         });
 
-        // 客户信息路由
+        // 客服信息路由
         $api->group(['prefix' => 'service'], function ($api) {
           $api->post('data', 'ServiceController@data');
+        });
+
+        // 常见问题路由
+        $api->group(['prefix'  => 'problem'], function ($api) {
+          $api->get('list', 'ProblemController@list');
+          $api->get('select', 'ProblemController@select');
+          $api->get('view/{id}', 'ProblemController@view');
         });
       });
 
 
 
       // 会员路由
-      $api->group(['namespace' => 'Member', 'prefix'  => 'member', 'middleware' => ['auth:api', 'refresh.token', 'failure']], function ($api) {
+      $api->group(['prefix'  => 'member', 'middleware' => ['auth:api', 'refresh.token', 'failure']], function ($api) {
         $api->get('archive', 'MemberController@archive');
-        $api->get('view/{id}', 'MemberController@view');
+        $api->get('data/{id}', 'MemberController@data');
         $api->post('handle', 'MemberController@handle');
         $api->post('teacher', 'MemberController@teacher');
         $api->get('status', 'MemberController@status');
 
-        // 会员角色路由
-        $api->group(['prefix'  => 'role'], function ($api) {
-          $api->get('info', 'RoleController@info');
-        });
-
         // 会员关联内容路由
-        $api->group(['namespace' => 'Relevance'], function ($api) {
+        $api->group(['namespace' => 'Member'], function ($api) {
 
           // 会员资产路由
           $api->group(['prefix'  => 'asset'], function ($api) {
@@ -80,31 +82,6 @@ $api->version('v1', [
             $api->get('lollipop', 'AssetController@lollipop');
             $api->get('money', 'AssetController@money');
             $api->get('production', 'AssetController@production');
-          });
-
-          // 会员棒棒糖路由
-          $api->group(['prefix'  => 'lollipop'], function ($api) {
-            $api->get('list', 'LollipopController@list');
-            $api->get('select', 'LollipopController@select');
-            $api->post('status', 'LollipopController@status');
-            $api->post('receive', 'LollipopController@receive');
-          });
-
-          // 会员红包路由
-          $api->group(['prefix'  => 'money'], function ($api) {
-            $api->get('list', 'MoneyController@list');
-            $api->get('select', 'MoneyController@select');
-            $api->post('handle', 'MoneyController@handle');
-          });
-
-          // 会员作品路由
-          $api->group(['prefix'  => 'production'], function ($api) {
-            $api->get('list', 'ProductionController@list');
-            $api->get('select', 'ProductionController@select');
-            $api->get('view/{id}', 'ProductionController@view');
-            $api->post('handle', 'ProductionController@handle');
-            $api->post('share', 'ProductionController@share');
-            $api->post('status', 'ProductionController@status');
           });
 
           // 会员送货地址路由
@@ -117,45 +94,27 @@ $api->version('v1', [
             $api->post('delete', 'AddressController@delete');
           });
 
+          // 会员关注路由
+          $api->group(['prefix'  => 'attention'], function ($api) {
+            $api->get('list', 'AttentionController@list');
+            $api->get('select', 'AttentionController@select');
+            $api->post('status', 'AttentionController@status');
+            $api->post('handle', 'AttentionController@handle');
+          });
+
+
+          // 会员粉丝路由
+          $api->group(['prefix'  => 'fans'], function ($api) {
+            $api->get('list', 'FansController@list');
+            $api->get('select', 'FansController@select');
+          });
+
           // 会员点赞路由
           $api->group(['prefix'  => 'approval'], function ($api) {
             $api->get('list', 'ApprovalController@list');
             $api->get('select', 'ApprovalController@select');
             $api->post('status', 'ApprovalController@status');
             $api->post('handle', 'ApprovalController@handle');
-          });
-
-          // 会员课程路由
-          $api->group(['prefix'  =>  'course'], function ($api) {
-            $api->get('list', 'CourseController@list');
-            $api->get('select', 'CourseController@select');
-            $api->get('center', 'CourseController@center');
-            $api->get('view/{id}', 'CourseController@view');
-            $api->get('status/{id}', 'CourseController@status');
-            $api->get('addition/{id}', 'CourseController@addition');
-            $api->post('apply', 'CourseController@apply');
-            $api->post('finish', 'CourseController@finish');
-
-            // 会员课程单元路由
-            $api->group(['namespace' => 'Relevance', 'prefix'  =>  'unit'], function ($api) {
-              $api->get('list', 'UnitController@list');
-              $api->get('select', 'UnitController@select');
-              $api->get('view/{id}', 'UnitController@view');
-
-              // 会员课程单元知识点路由
-              $api->group(['namespace' => 'Relevance', 'prefix'  =>  'point'], function ($api) {
-                $api->get('list', 'PointController@list');
-                $api->get('select', 'PointController@select');
-                $api->get('view/{id}', 'PointController@view');
-                $api->get('status/{id}', 'PointController@status');
-                $api->post('finish', 'PointController@finish');
-              });
-            });
-          });
-
-          // 会员任务指标路由
-          $api->group(['prefix'  =>  'target'], function ($api) {
-            $api->get('progress', 'TargetController@progress');
           });
 
           // 会员评论路由
@@ -165,20 +124,20 @@ $api->version('v1', [
             $api->post('handle', 'CommentController@handle');
           });
 
-          // 会员关注路由
-          $api->group(['prefix'  => 'attention'], function ($api) {
-            $api->get('list', 'AttentionController@list');
-            $api->get('select', 'AttentionController@select');
-            $api->post('status', 'AttentionController@status');
-            $api->post('handle', 'AttentionController@handle');
-          });
-
           // 会员邀请路由
           $api->group(['prefix'  => 'invitation'], function ($api) {
             $api->get('list', 'InvitationController@list');
             $api->get('select', 'InvitationController@select');
             $api->post('status', 'InvitationController@status');
             $api->post('handle', 'InvitationController@handle');
+          });
+
+          // 会员投诉路由
+          $api->group(['prefix'  => 'complain'], function ($api) {
+            $api->get('list', 'ComplainController@list');
+            $api->get('select', 'ComplainController@select');
+            $api->get('view/{id}', 'ComplainController@view');
+            $api->post('handle', 'ComplainController@handle');
           });
 
           // 会员订单路由
@@ -220,16 +179,44 @@ $api->version('v1', [
 
 
       // 投诉路由
-      $api->group(['namespace' => 'Complain', 'prefix' => 'complain'], function ($api) {
+      $api->group(['prefix' => 'complain'], function ($api) {
         $api->get('list', 'ComplainController@list');
         $api->get('select', 'ComplainController@select');
         $api->get('view/{id}', 'ComplainController@view');
         $api->post('handle', 'ComplainController@handle');
 
         // 投诉分类路由
-        $api->group(['namespace' => 'Relevance'], function ($api) {
-          $api->group(['prefix' => 'category'], function ($api) {
-            $api->get('select', 'CategoryController@select');
+        $api->group(['namespace' => 'Complain', 'prefix' => 'category'], function ($api) {
+          $api->get('select', 'CategoryController@select');
+        });
+      });
+
+
+      // 汽车路由
+      $api->group(['prefix' => 'car'], function ($api) {
+        $api->get('list', 'CarController@list');
+        $api->get('select', 'CarController@select');
+        $api->get('view/{id}', 'CarController@view');
+        $api->post('handle', 'CarController@handle');
+
+        $api->group(['namespace' => 'Car'], function ($api) {
+
+          // 汽车来源路由
+          $api->group(['prefix' => 'source'], function ($api) {
+            $api->get('select', 'SourceController@select');
+          });
+
+          // 汽车品牌路由
+          $api->group(['prefix' => 'brand'], function ($api) {
+            $api->get('list', 'BrandController@list');
+            $api->get('select', 'BrandController@select');
+          });
+
+          // 汽车车型路由
+          $api->group(['prefix' => 'shape'], function ($api) {
+            $api->get('list', 'ShapeController@list');
+            $api->get('select', 'ShapeController@select');
+            $api->get('view/{id}', 'ShapeController@view');
           });
         });
       });

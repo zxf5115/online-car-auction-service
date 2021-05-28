@@ -15,6 +15,7 @@ class Member extends Common
   // 隐藏的属性
   public $hidden = [
     'organization_id',
+    'open_id',
     'password',
     'password_salt',
     'remember_token',

@@ -25,14 +25,7 @@ class Archive extends Base
     'id',
     'organization_id',
     'member_id',
-    'id_card_no',
-    'weixin',
     'sex',
-    'birthday',
-    'province_id',
-    'city_id',
-    'region_id',
-    'address',
   ];
 
   // 隐藏的属性
@@ -42,37 +35,7 @@ class Archive extends Base
   ];
 
   // 追加到模型数组表单的访问器
-  protected $appends = [
-    'age'
-  ];
-
-  /**
-   * 转换属性类型
-   */
-  protected $casts = [
-    'status' => 'array',
-    'birthday' => 'datetime:Y-m-d',
-    'create_time' => 'datetime:Y-m-d H:i:s',
-    'update_time' => 'datetime:Y-m-d H:i:s',
-  ];
-
-
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-01-20
-   * ------------------------------------------
-   * 宝宝年龄封装
-   * ------------------------------------------
-   *
-   * 宝宝年龄封装
-   *
-   * @param int $value 状态值
-   * @return 状态信息
-   */
-  public function getAgeAttribute($value)
-  {
-    return AgeEnum::getAge($this->birthday);
-  }
+  protected $appends = [];
 
 
   /**
@@ -178,7 +141,7 @@ class Archive extends Base
    */
   public function member()
   {
-      return $this->belongsTo('App\Models\Common\Module\Member\Member', 'member_id', 'id')
+      return $this->belongsTo('App\Models\Common\Module\Member', 'member_id', 'id')
                   ->where(['status'=>1]);
   }
 }

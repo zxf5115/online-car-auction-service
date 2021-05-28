@@ -1,21 +1,22 @@
 <?php
-namespace App\Models\Api\Module\Advertising;
+namespace App\Models\Api\Module\Complain;
 
-use App\Models\Common\Module\Advertising\Position as Common;
+use App\Models\Common\Module\Complain\Category as Common;
 
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
  * @dateTime 2020-10-06
  *
- * 广告位模型类
+ * 投诉分类模型类
  */
-class Position extends Common
+class Category extends Common
 {
   // 隐藏的属性
   public $hidden = [
     'organization_id',
     'status',
+    'create_time',
     'update_time'
   ];
 
@@ -23,20 +24,20 @@ class Position extends Common
 
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2021-05-28
+   * @dateTime 2020-12-28
    * ------------------------------------------
-   * 广告位置与广告关联函数
+   * 投诉分类置与广告关联函数
    * ------------------------------------------
    *
-   * 广告位置与广告关联函数
+   * 投诉分类置与广告关联函数
    *
    * @return [关联对象]
    */
-  public function advertising()
+  public function complain()
   {
     return $this->hasMany(
-      'App\Models\Api\Module\Advertising',
-      'position_id',
+      'App\Models\Api\Module\Complain',
+      'category_id',
       'id'
     );
   }

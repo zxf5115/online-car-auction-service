@@ -139,13 +139,10 @@ class LoginController extends BaseController
    *
    * @apiParam {int} open_id 微信app编号
    * @apiParam {int} role_id 会员角色 1 车商 2 消费者
-   * @apiParam {int} username 登录手机号码（不可为空）
+   * @apiParam {string} username 登录手机号码（不可为空）
    * @apiParam {string} avatar 会员头像（不可为空）
    * @apiParam {string} nickname 会员姓名（不可为空）
    * @apiParam {string} sex 会员性别（不可为空）
-   * @apiParam {string} province_id 省（可以为空）
-   * @apiParam {string} city_id 市（可以为空）
-   * @apiParam {string} region_id 县（可以为空）
    *
    * @apiSampleRequest /api/register
    * @apiVersion 1.0.0
@@ -199,22 +196,26 @@ class LoginController extends BaseController
 
         $model->save();
 
-        $member_id = $model->id;
+        $data = [
+          'sex' => $request->sex
+        ];
 
-        $archive = Archive::firstOrCreate(['member_id' => $member_id]);
+        if(!empty($data))
+        {
+          $model->archive()->delete();
+          $model->archive()->create($data);
+        }
 
-        $archive->member_id   = $member_id;
-        $archive->sex         = $request->sex ?? '1';
-        $archive->province_id = $request->province_id ?? '';
-        $archive->city_id     = $request->city_id ?? '';
-        $archive->region_id   = $request->region_id ?? '';
+        $data = [
+          'cash_money' => 0.00,
+          'credit_money' => 0.00,
+        ];
 
-        $archive->save();
-
-        $data = ['red_envelope' => 0.00, 'lollipop' => 0, 'production' => 0];
-
-        $model->asset()->delete();
-        $model->asset()->create($data);
+        if(!empty($data))
+        {
+          $model->asset()->delete();
+          $model->asset()->create($data);
+        }
 
         DB::commit();
 

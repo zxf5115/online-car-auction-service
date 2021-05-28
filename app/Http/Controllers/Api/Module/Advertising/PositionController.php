@@ -1,48 +1,58 @@
 <?php
-namespace App\Http\Controllers\Api\Module\Common;
+namespace App\Http\Controllers\Api\Module\Advertising;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 use App\Http\Constant\Code;
-use App\Http\Constant\Parameter;
 use App\Http\Controllers\Api\BaseController;
-
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
- * @dateTime 2021-02-22
+ * @dateTime 2021-05-28
  *
- * 常见问题控制器类
+ * 广告位控制器类
  */
-class ProblemController extends BaseController
+class PositionController extends BaseController
 {
-  protected $_model = 'App\Models\Common\Module\Common\Problem';
+  /**
+   * 模型
+   */
+  protected $_model = 'App\Models\Api\Module\Advertising\Position';
 
   protected $_where = [];
 
   protected $_params = [];
 
+  protected $_addition = [];
+
+  /**
+   * 排序条件
+   */
   protected $_order = [
     ['key' => 'create_time', 'value' => 'desc'],
   ];
 
-  protected $_relevance = [];
+  protected $_relevance = [
+    'list' => false,
+    'select' => false,
+    'view' => [
+      'advertising.resource'
+    ]
+  ];
 
 
   /**
-   * @api {get} /api/common/problem/list?page={page} 01. 常见问题列表
-   * @apiDescription 获取常见问题分页列表
-   * @apiGroup 08. 常见问题模块
+   * @api {get} /api/advertising/position/list?page={page} 01. 广告位列表
+   * @apiDescription 获取广告位分页列表
+   * @apiGroup 04. 广告位模块
    *
    * @apiParam {int} page 当前页数
    *
-   * @apiSuccess (basic params) {Number} id 常见问题编号
-   * @apiSuccess (basic params) {String} title 常见问题标题
-   * @apiSuccess (basic params) {Number} position_id 常见问题位编号
+   * @apiSuccess (basic params) {Number} id 广告位编号
+   * @apiSuccess (basic params) {Number} title 广告位名称
    * @apiSuccess (basic params) {Number} create_time 添加时间
    *
-   * @apiSampleRequest /api/common/problem/list
+   * @apiSampleRequest /api/advertising/position/list
    * @apiVersion 1.0.0
    */
   public function list(Request $request)
@@ -74,16 +84,15 @@ class ProblemController extends BaseController
 
 
   /**
-   * @api {get} /api/common/problem/select 02. 常见问题数据
-   * @apiDescription 获取常见问题不分页列表数据
-   * @apiGroup 08. 常见问题模块
+   * @api {get} /api/advertising/position/select 02. 广告位数据
+   * @apiDescription 获取广告位数据
+   * @apiGroup 04. 广告位模块
    *
-   * @apiSuccess (basic params) {Number} id 常见问题编号
-   * @apiSuccess (basic params) {String} title 常见问题标题
-   * @apiSuccess (basic params) {String} content 常见问题答案
+   * @apiSuccess (basic params) {Number} id 广告位编号
+   * @apiSuccess (basic params) {Number} title 广告位名称
    * @apiSuccess (basic params) {Number} create_time 添加时间
    *
-   * @apiSampleRequest /api/common/problem/select
+   * @apiSampleRequest /api/advertising/position/select
    * @apiVersion 1.0.0
    */
   public function select(Request $request)
@@ -115,16 +124,21 @@ class ProblemController extends BaseController
 
 
   /**
-   * @api {get} /api/common/problem/view/{id} 03. 常见问题详情
-   * @apiDescription 获取常见问题详情
-   * @apiGroup 08. 常见问题模块
+   * @api {get} /api/advertising/position/view/{id} 03. 广告位详情
+   * @apiDescription 获取广告位详情
+   * @apiGroup 04. 广告位模块
    *
-   * @apiSuccess (basic params) {Number} id 常见问题编号
-   * @apiSuccess (basic params) {String} title 常见问题标题
-   * @apiSuccess (basic params) {String} content 常见问题答案
+   * @apiSuccess (basic params) {Number} id 广告位编号
+   * @apiSuccess (basic params) {Number} title 广告位名称
    * @apiSuccess (basic params) {Number} create_time 添加时间
+   * @apiSuccess (advertising params) {Number} id 广告编号
+   * @apiSuccess (advertising params) {Number} position_id 广告位编号
+   * @apiSuccess (advertising params) {Number} title 广告名称
+   * @apiSuccess (advertising params) {Number} content 广告内容
+   * @apiSuccess (advertising params) {Number} create_time 添加时间
+   * @apiSuccess (resource params) {Number} picture 广告资源地址
    *
-   * @apiSampleRequest /api/common/problem/view/{id}
+   * @apiSampleRequest /api/advertising/position/view/{id}
    * @apiVersion 1.0.0
    */
   public function view(Request $request, $id)

@@ -231,14 +231,14 @@ $api->version('v1', [
 
 
       // 投诉路由
-      $api->group(['namespace' => 'Complain', 'prefix' => 'complain'], function ($api) {
+      $api->group(['prefix' => 'complain'], function ($api) {
         // 投诉路由
         $api->any('list', 'ComplainController@list');
         $api->post('read', 'ComplainController@read');
         $api->post('delete', 'ComplainController@delete');
 
         // 投诉分类路由
-        $api->group(['namespace' => 'Relevance', 'prefix' => 'category'], function ($api) {
+        $api->group(['namespace' => 'Complain', 'prefix' => 'category'], function ($api) {
           $api->any('list', 'CategoryController@list');
           $api->get('select', 'CategoryController@select');
           $api->post('status', 'CategoryController@status');

@@ -331,7 +331,7 @@ define({ "api": [
           },
           {
             "group": "Parameter",
-            "type": "int",
+            "type": "string",
             "optional": false,
             "field": "username",
             "description": "<p>登录手机号码（不可为空）</p>"
@@ -356,27 +356,6 @@ define({ "api": [
             "optional": false,
             "field": "sex",
             "description": "<p>会员性别（不可为空）</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "province_id",
-            "description": "<p>省（可以为空）</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "city_id",
-            "description": "<p>市（可以为空）</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "region_id",
-            "description": "<p>县（可以为空）</p>"
           }
         ]
       }
@@ -664,1272 +643,10 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/api/member/archive",
-    "title": "01. 获取当前会员档案",
-    "description": "<p>获取当前会员的档案信息</p>",
-    "group": "04._会员模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "open_id",
-            "description": "<p>第三方登录编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_no",
-            "description": "<p>会员号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "avatar",
-            "description": "<p>会员头像</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "username",
-            "description": "<p>登录账户</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "nickname",
-            "description": "<p>会员姓名</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_freeze",
-            "description": "<p>是否冻结 1 冻结 2 不冻结</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>注册时间</p>"
-          }
-        ],
-        "archive params": [
-          {
-            "group": "archive params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "archive params",
-            "type": "Number",
-            "optional": false,
-            "field": "skill_level",
-            "description": "<p>绘画基础</p>"
-          },
-          {
-            "group": "archive params",
-            "type": "String",
-            "optional": false,
-            "field": "id_card_no",
-            "description": "<p>身份证号</p>"
-          },
-          {
-            "group": "archive params",
-            "type": "String",
-            "optional": false,
-            "field": "weixin",
-            "description": "<p>微信号</p>"
-          },
-          {
-            "group": "archive params",
-            "type": "String",
-            "optional": false,
-            "field": "sex",
-            "description": "<p>性别</p>"
-          },
-          {
-            "group": "archive params",
-            "type": "String",
-            "optional": false,
-            "field": "birthday",
-            "description": "<p>生日</p>"
-          },
-          {
-            "group": "archive params",
-            "type": "String",
-            "optional": false,
-            "field": "age",
-            "description": "<p>年龄</p>"
-          },
-          {
-            "group": "archive params",
-            "type": "String",
-            "optional": false,
-            "field": "province_id",
-            "description": "<p>省</p>"
-          },
-          {
-            "group": "archive params",
-            "type": "String",
-            "optional": false,
-            "field": "city_id",
-            "description": "<p>市</p>"
-          },
-          {
-            "group": "archive params",
-            "type": "String",
-            "optional": false,
-            "field": "region_id",
-            "description": "<p>县</p>"
-          },
-          {
-            "group": "archive params",
-            "type": "String",
-            "optional": false,
-            "field": "address",
-            "description": "<p>详细地址</p>"
-          }
-        ],
-        "asset params": [
-          {
-            "group": "asset params",
-            "type": "String",
-            "optional": false,
-            "field": "red_envelope",
-            "description": "<p>红包金额</p>"
-          },
-          {
-            "group": "asset params",
-            "type": "String",
-            "optional": false,
-            "field": "lollipop",
-            "description": "<p>棒棒糖数</p>"
-          },
-          {
-            "group": "asset params",
-            "type": "String",
-            "optional": false,
-            "field": "production",
-            "description": "<p>作品数</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/archive"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/MemberController.php",
-    "groupTitle": "04._会员模块",
-    "name": "GetApiMemberArchive"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/status",
-    "title": "05. 当前会员是否填写资料",
-    "description": "<p>获取当前会员是否填写资料信息</p>",
-    "group": "04._会员模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "data",
-            "description": "<p>true|false</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/status"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/MemberController.php",
-    "groupTitle": "04._会员模块",
-    "name": "GetApiMemberStatus"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/view/{id}",
-    "title": "04. 获取会员详情",
-    "description": "<p>获取会员详情</p>",
-    "group": "04._会员模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "open_id",
-            "description": "<p>第三方登录编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_no",
-            "description": "<p>会员号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "avatar",
-            "description": "<p>会员头像</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "username",
-            "description": "<p>登录账户</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "nickname",
-            "description": "<p>会员姓名</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_freeze",
-            "description": "<p>是否冻结 1 冻结 2 不冻结</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>注册时间</p>"
-          }
-        ],
-        "archive params": [
-          {
-            "group": "archive params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "archive params",
-            "type": "Number",
-            "optional": false,
-            "field": "skill_level",
-            "description": "<p>绘画基础</p>"
-          },
-          {
-            "group": "archive params",
-            "type": "String",
-            "optional": false,
-            "field": "id_card_no",
-            "description": "<p>身份证号</p>"
-          },
-          {
-            "group": "archive params",
-            "type": "String",
-            "optional": false,
-            "field": "weixin",
-            "description": "<p>微信号</p>"
-          },
-          {
-            "group": "archive params",
-            "type": "String",
-            "optional": false,
-            "field": "sex",
-            "description": "<p>性别</p>"
-          },
-          {
-            "group": "archive params",
-            "type": "String",
-            "optional": false,
-            "field": "birthday",
-            "description": "<p>生日</p>"
-          },
-          {
-            "group": "archive params",
-            "type": "String",
-            "optional": false,
-            "field": "age",
-            "description": "<p>年龄</p>"
-          },
-          {
-            "group": "archive params",
-            "type": "String",
-            "optional": false,
-            "field": "province_id",
-            "description": "<p>省</p>"
-          },
-          {
-            "group": "archive params",
-            "type": "String",
-            "optional": false,
-            "field": "city_id",
-            "description": "<p>市</p>"
-          },
-          {
-            "group": "archive params",
-            "type": "String",
-            "optional": false,
-            "field": "region_id",
-            "description": "<p>县</p>"
-          },
-          {
-            "group": "archive params",
-            "type": "String",
-            "optional": false,
-            "field": "address",
-            "description": "<p>详细地址</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/view/{id}"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/MemberController.php",
-    "groupTitle": "04._会员模块",
-    "name": "GetApiMemberViewId"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/handle",
-    "title": "02. 编辑会员信息",
-    "description": "<p>编辑会员信息</p>",
-    "group": "04._会员模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "avatar",
-            "description": "<p>会员头像（不可为空）</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "nickname",
-            "description": "<p>会员姓名（不可为空）</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "sex",
-            "description": "<p>会员性别（不可为空）</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "birthday",
-            "description": "<p>会员生日（不可为空）</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "skill_level",
-            "description": "<p>绘画基础 0 无基础 1 1年以下 2 1年以上（不可为空）</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "province_id",
-            "description": "<p>省（可以为空）</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "city_id",
-            "description": "<p>市（可以为空）</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "region_id",
-            "description": "<p>县（可以为空）</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/handle"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/MemberController.php",
-    "groupTitle": "04._会员模块",
-    "name": "PostApiMemberHandle"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/teacher",
-    "title": "03. 成为招聘老师",
-    "description": "<p>将满足条件的当前会员的身份变成招聘老师</p>",
-    "group": "04._会员模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/teacher"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/MemberController.php",
-    "groupTitle": "04._会员模块",
-    "name": "PostApiMemberTeacher"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/lollipop/list?page={page}",
-    "title": "01. 会员帮帮糖列表(分页)",
-    "description": "<p>获取当前会员的帮帮糖列表(分页)</p>",
-    "group": "05._会员棒棒糖模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "page",
-            "description": "<p>当前页数</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "type",
-            "description": "<p>棒棒糖类型 1:获取 2:消费</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>棒棒糖编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "type",
-            "description": "<p>棒棒糖类型 1: 获取 2: 消费</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "content",
-            "description": "<p>棒棒糖描述</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "number",
-            "description": "<p>棒棒糖数量</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>获取时间|消费时间</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/lollipop/list"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/LollipopController.php",
-    "groupTitle": "05._会员棒棒糖模块",
-    "name": "GetApiMemberLollipopListPagePage"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/lollipop/select",
-    "title": "02. 会员帮帮糖列表(不分页)",
-    "description": "<p>获取当前会员的帮帮糖列表(不分页)</p>",
-    "group": "05._会员棒棒糖模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "type",
-            "description": "<p>棒棒糖类型 1:获取 2:消费</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>棒棒糖编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "type",
-            "description": "<p>棒棒糖类型 1: 获取 2: 消费</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "content",
-            "description": "<p>棒棒糖描述</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "number",
-            "description": "<p>棒棒糖数量</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>获取时间|消费时间</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/lollipop/select"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/LollipopController.php",
-    "groupTitle": "05._会员棒棒糖模块",
-    "name": "GetApiMemberLollipopSelect"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/lollipop/receive",
-    "title": "04. 领取棒棒糖",
-    "description": "<p>当前会员领取棒棒糖</p>",
-    "group": "05._会员棒棒糖模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "unit_id",
-            "description": "<p>课件单元编号</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "data",
-            "description": "<p>true|false</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/lollipop/receive"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/LollipopController.php",
-    "groupTitle": "05._会员棒棒糖模块",
-    "name": "PostApiMemberLollipopReceive"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/lollipop/status",
-    "title": "03. 是否领取了棒棒糖",
-    "description": "<p>获取当前会员是否领取了棒棒糖</p>",
-    "group": "05._会员棒棒糖模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "unit_id",
-            "description": "<p>课件单元编号</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "data",
-            "description": "<p>true|false</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/lollipop/status"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/LollipopController.php",
-    "groupTitle": "05._会员棒棒糖模块",
-    "name": "PostApiMemberLollipopStatus"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/money/list?page={page}",
-    "title": "01. 会员红包列表(分页)",
-    "description": "<p>获取当前会员的红包列表(分页)</p>",
-    "group": "06._会员红包模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "page",
-            "description": "<p>当前页数</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "type",
-            "description": "<p>红包类型 1:收入 2: 提现</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>红包编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "type",
-            "description": "<p>红包类型 1: 收入 2: 提现</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "content",
-            "description": "<p>红包描述</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "money",
-            "description": "<p>红包金额</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>收入时间|提现时间</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/money/list"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/MoneyController.php",
-    "groupTitle": "06._会员红包模块",
-    "name": "GetApiMemberMoneyListPagePage"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/money/select",
-    "title": "02. 会员红包列表(不分页)",
-    "description": "<p>获取当前会员的红包列表(不分页)</p>",
-    "group": "06._会员红包模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "type",
-            "description": "<p>红包类型 1: 收入 2: 提现</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>红包编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "type",
-            "description": "<p>红包类型 1: 收入 2: 提现</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "content",
-            "description": "<p>红包描述</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "money",
-            "description": "<p>红包金额</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>收入时间|提现时间</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/money/select"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/MoneyController.php",
-    "groupTitle": "06._会员红包模块",
-    "name": "GetApiMemberMoneySelect"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/money/handle",
-    "title": "03. 会员红包提现",
-    "description": "<p>提现当前会员的红包金额</p>",
-    "group": "06._会员红包模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "double",
-            "optional": false,
-            "field": "money",
-            "description": "<p>提现金额</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "alipay_account",
-            "description": "<p>支付宝账户</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "alipay_name",
-            "description": "<p>支付宝姓名</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/money/handle"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/MoneyController.php",
-    "groupTitle": "06._会员红包模块",
-    "name": "PostApiMemberMoneyHandle"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/production/list?page={page}",
-    "title": "01. 会员作品列表(分页)",
-    "description": "<p>获取当前会员作品的列表(分页)</p>",
-    "group": "07._会员作品模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
+    "url": "/api/advertising/position/list?page={page}",
+    "title": "01. 广告位列表",
+    "description": "<p>获取广告位分页列表</p>",
+    "group": "04._广告位模块",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -1951,153 +668,647 @@ define({ "api": [
             "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>作品编号</p>"
+            "description": "<p>广告位编号</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
             "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
+            "field": "title",
+            "description": "<p>广告位名称</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
             "optional": false,
-            "field": "courseware_id",
-            "description": "<p>课件编号</p>"
+            "field": "create_time",
+            "description": "<p>添加时间</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/advertising/position/list"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Advertising/PositionController.php",
+    "groupTitle": "04._广告位模块",
+    "name": "GetApiAdvertisingPositionListPagePage"
+  },
+  {
+    "type": "get",
+    "url": "/api/advertising/position/select",
+    "title": "02. 广告位数据",
+    "description": "<p>获取广告位数据</p>",
+    "group": "04._广告位模块",
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>广告位编号</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
             "optional": false,
-            "field": "level_id",
-            "description": "<p>课件级别编号</p>"
+            "field": "title",
+            "description": "<p>广告位名称</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
             "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
+            "field": "create_time",
+            "description": "<p>添加时间</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/advertising/position/select"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Advertising/PositionController.php",
+    "groupTitle": "04._广告位模块",
+    "name": "GetApiAdvertisingPositionSelect"
+  },
+  {
+    "type": "get",
+    "url": "/api/advertising/position/view/{id}",
+    "title": "03. 广告位详情",
+    "description": "<p>获取广告位详情</p>",
+    "group": "04._广告位模块",
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>广告位编号</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
             "optional": false,
-            "field": "archive_id",
-            "description": "<p>学员档案编号</p>"
+            "field": "title",
+            "description": "<p>广告位名称</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "create_time",
+            "description": "<p>添加时间</p>"
+          }
+        ],
+        "advertising params": [
+          {
+            "group": "advertising params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>广告编号</p>"
+          },
+          {
+            "group": "advertising params",
+            "type": "Number",
+            "optional": false,
+            "field": "position_id",
+            "description": "<p>广告位编号</p>"
+          },
+          {
+            "group": "advertising params",
+            "type": "Number",
+            "optional": false,
+            "field": "title",
+            "description": "<p>广告名称</p>"
+          },
+          {
+            "group": "advertising params",
+            "type": "Number",
+            "optional": false,
+            "field": "content",
+            "description": "<p>广告内容</p>"
+          },
+          {
+            "group": "advertising params",
+            "type": "Number",
+            "optional": false,
+            "field": "create_time",
+            "description": "<p>添加时间</p>"
+          }
+        ],
+        "resource params": [
+          {
+            "group": "resource params",
+            "type": "Number",
+            "optional": false,
+            "field": "picture",
+            "description": "<p>广告资源地址</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/advertising/position/view/{id}"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Advertising/PositionController.php",
+    "groupTitle": "04._广告位模块",
+    "name": "GetApiAdvertisingPositionViewId"
+  },
+  {
+    "type": "get",
+    "url": "/api/advertising/list?page={page}",
+    "title": "01. 广告列表",
+    "description": "<p>获取广告分页列表</p>",
+    "group": "05._广告模块",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "page",
+            "description": "<p>当前页数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "position_id",
+            "description": "<p>广告位编号</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>广告编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "position_id",
+            "description": "<p>广告位编号</p>"
           },
           {
             "group": "basic params",
             "type": "String",
             "optional": false,
             "field": "title",
-            "description": "<p>作品名称</p>"
+            "description": "<p>广告标题</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "content",
+            "description": "<p>广告内容</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "create_time",
+            "description": "<p>添加时间</p>"
+          }
+        ],
+        "resource params": [
+          {
+            "group": "resource params",
+            "type": "String",
+            "optional": false,
+            "field": "picture",
+            "description": "<p>广告图片资源</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/advertising/list"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/AdvertisingController.php",
+    "groupTitle": "05._广告模块",
+    "name": "GetApiAdvertisingListPagePage"
+  },
+  {
+    "type": "get",
+    "url": "/api/advertising/select",
+    "title": "02. 广告数据",
+    "description": "<p>获取广告数据</p>",
+    "group": "05._广告模块",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "position_id",
+            "description": "<p>广告位编号</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>广告编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "position_id",
+            "description": "<p>广告位编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>广告标题</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "content",
+            "description": "<p>广告内容</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "create_time",
+            "description": "<p>添加时间</p>"
+          }
+        ],
+        "resource params": [
+          {
+            "group": "resource params",
+            "type": "String",
+            "optional": false,
+            "field": "picture",
+            "description": "<p>广告图片资源</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/advertising/select"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/AdvertisingController.php",
+    "groupTitle": "05._广告模块",
+    "name": "GetApiAdvertisingSelect"
+  },
+  {
+    "type": "get",
+    "url": "/api/advertising/view/{id}",
+    "title": "03. 广告详情",
+    "description": "<p>获取广告详情</p>",
+    "group": "05._广告模块",
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>广告编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "position_id",
+            "description": "<p>广告位编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>广告标题</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "content",
+            "description": "<p>广告内容</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "create_time",
+            "description": "<p>添加时间</p>"
+          }
+        ],
+        "resource params": [
+          {
+            "group": "resource params",
+            "type": "String",
+            "optional": false,
+            "field": "picture",
+            "description": "<p>广告图片资源</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/advertising/view/{id}"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/AdvertisingController.php",
+    "groupTitle": "05._广告模块",
+    "name": "GetApiAdvertisingViewId"
+  },
+  {
+    "type": "get",
+    "url": "/api/complain/category/select",
+    "title": "01. 投诉分类数据",
+    "description": "<p>获取投诉分类不分页列表数据</p>",
+    "group": "06._投诉分类模块",
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>投诉分类编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>投诉分类标题</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/complain/category/select"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Complain/CategoryController.php",
+    "groupTitle": "06._投诉分类模块",
+    "name": "GetApiComplainCategorySelect"
+  },
+  {
+    "type": "get",
+    "url": "/api/complain/list?page={page}",
+    "title": "01. 投诉列表",
+    "description": "<p>获取投诉分页列表</p>",
+    "group": "07._投诉模块",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "page",
+            "description": "<p>当前页数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "category_id",
+            "description": "<p>投诉分类编号</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>投诉编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "category_id",
+            "description": "<p>投诉分类编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "content",
+            "description": "<p>投诉内容</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "read_status",
+            "description": "<p>是否查阅</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "create_time",
+            "description": "<p>投诉时间</p>"
+          }
+        ],
+        "category params": [
+          {
+            "group": "category params",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>投诉分类标题</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/complain/list"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/ComplainController.php",
+    "groupTitle": "07._投诉模块",
+    "name": "GetApiComplainListPagePage"
+  },
+  {
+    "type": "get",
+    "url": "/api/complain/select",
+    "title": "02. 投诉数据",
+    "description": "<p>获取投诉不分页列表数据</p>",
+    "group": "07._投诉模块",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "category_id",
+            "description": "<p>投诉分类编号</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>投诉编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "category_id",
+            "description": "<p>投诉分类编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "content",
+            "description": "<p>投诉内容</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "read_status",
+            "description": "<p>是否查阅</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "create_time",
+            "description": "<p>投诉时间</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/complain/select"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/ComplainController.php",
+    "groupTitle": "07._投诉模块",
+    "name": "GetApiComplainSelect"
+  },
+  {
+    "type": "get",
+    "url": "/api/complain/view/{id}",
+    "title": "03. 投诉详情",
+    "description": "<p>获取投诉详情</p>",
+    "group": "07._投诉模块",
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>投诉编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "category_id",
+            "description": "<p>投诉分类编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>投诉标题</p>"
           },
           {
             "group": "basic params",
             "type": "String",
             "optional": false,
             "field": "picture",
-            "description": "<p>作品图片</p>"
+            "description": "<p>投诉图片资源</p>"
           },
           {
             "group": "basic params",
             "type": "String",
             "optional": false,
-            "field": "description",
-            "description": "<p>作品描述</p>"
+            "field": "url",
+            "description": "<p>投诉其他资源</p>"
           },
           {
             "group": "basic params",
             "type": "String",
             "optional": false,
-            "field": "duration",
-            "description": "<p>内容时长</p>"
+            "field": "link",
+            "description": "<p>投诉链接</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
-            "optional": false,
-            "field": "approval_total",
-            "description": "<p>点赞数</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "comment_total",
-            "description": "<p>评论数</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
             "optional": false,
             "field": "create_time",
-            "description": "<p>发布时间</p>"
-          }
-        ],
-        "course params": [
-          {
-            "group": "course params",
-            "type": "String",
-            "optional": false,
-            "field": "title",
-            "description": "<p>课程名称</p>"
-          },
-          {
-            "group": "course params",
-            "type": "String",
-            "optional": false,
-            "field": "semester",
-            "description": "<p>课程周期</p>"
-          }
-        ],
-        "courseware params": [
-          {
-            "group": "courseware params",
-            "type": "String",
-            "optional": false,
-            "field": "title",
-            "description": "<p>课件名称</p>"
-          },
-          {
-            "group": "courseware params",
-            "type": "String",
-            "optional": false,
-            "field": "description",
-            "description": "<p>课件描述</p>"
-          },
-          {
-            "group": "courseware params",
-            "type": "String",
-            "optional": false,
-            "field": "is_permanent",
-            "description": "<p>课件类型</p>"
-          }
-        ],
-        "level params": [
-          {
-            "group": "level params",
-            "type": "String",
-            "optional": false,
-            "field": "level",
-            "description": "<p>课件级别</p>"
-          },
-          {
-            "group": "level params",
-            "type": "String",
-            "optional": false,
-            "field": "minimum_age",
-            "description": "<p>最小年龄</p>"
-          },
-          {
-            "group": "level params",
-            "type": "String",
-            "optional": false,
-            "field": "largest_age",
-            "description": "<p>最大年龄</p>"
+            "description": "<p>添加时间</p>"
           }
         ],
         "member params": [
@@ -2105,8 +1316,8 @@ define({ "api": [
             "group": "member params",
             "type": "String",
             "optional": false,
-            "field": "nickname",
-            "description": "<p>会员昵称</p>"
+            "field": "avatar",
+            "description": "<p>会员头像</p>"
           },
           {
             "group": "member params",
@@ -2114,899 +1325,42 @@ define({ "api": [
             "optional": false,
             "field": "username",
             "description": "<p>会员账户</p>"
-          }
-        ],
-        "archive params": [
-          {
-            "group": "archive params",
-            "type": "String",
-            "optional": false,
-            "field": "age",
-            "description": "<p>会员年龄</p>"
           },
-          {
-            "group": "archive params",
-            "type": "String",
-            "optional": false,
-            "field": "city_id",
-            "description": "<p>会员所在地</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/production/list"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/ProductionController.php",
-    "groupTitle": "07._会员作品模块",
-    "name": "GetApiMemberProductionListPagePage"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/production/select",
-    "title": "02. 会员作品列表(不分页)",
-    "description": "<p>获取当前会员作品的列表(不分页)</p>",
-    "group": "07._会员作品模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>作品编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "courseware_id",
-            "description": "<p>课件编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "level_id",
-            "description": "<p>课件级别编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "archive_id",
-            "description": "<p>学员档案编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "title",
-            "description": "<p>作品名称</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "picture",
-            "description": "<p>作品图片</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "description",
-            "description": "<p>作品描述</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "duration",
-            "description": "<p>内容时长</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "approval_total",
-            "description": "<p>点赞数</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "comment_total",
-            "description": "<p>评论数</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>发布时间</p>"
-          }
-        ],
-        "course params": [
-          {
-            "group": "course params",
-            "type": "String",
-            "optional": false,
-            "field": "title",
-            "description": "<p>课程名称</p>"
-          },
-          {
-            "group": "course params",
-            "type": "String",
-            "optional": false,
-            "field": "semester",
-            "description": "<p>课程周期</p>"
-          }
-        ],
-        "courseware params": [
-          {
-            "group": "courseware params",
-            "type": "String",
-            "optional": false,
-            "field": "title",
-            "description": "<p>课件名称</p>"
-          },
-          {
-            "group": "courseware params",
-            "type": "String",
-            "optional": false,
-            "field": "description",
-            "description": "<p>课件描述</p>"
-          },
-          {
-            "group": "courseware params",
-            "type": "String",
-            "optional": false,
-            "field": "is_permanent",
-            "description": "<p>课件类型</p>"
-          }
-        ],
-        "level params": [
-          {
-            "group": "level params",
-            "type": "String",
-            "optional": false,
-            "field": "level",
-            "description": "<p>课件级别</p>"
-          },
-          {
-            "group": "level params",
-            "type": "String",
-            "optional": false,
-            "field": "minimum_age",
-            "description": "<p>最小年龄</p>"
-          },
-          {
-            "group": "level params",
-            "type": "String",
-            "optional": false,
-            "field": "largest_age",
-            "description": "<p>最大年龄</p>"
-          }
-        ],
-        "member params": [
           {
             "group": "member params",
             "type": "String",
             "optional": false,
             "field": "nickname",
             "description": "<p>会员昵称</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "username",
-            "description": "<p>会员账户</p>"
           }
         ],
-        "archive params": [
+        "category params": [
           {
-            "group": "archive params",
-            "type": "String",
-            "optional": false,
-            "field": "age",
-            "description": "<p>会员年龄</p>"
-          },
-          {
-            "group": "archive params",
-            "type": "String",
-            "optional": false,
-            "field": "city_id",
-            "description": "<p>会员所在地</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/production/select"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/ProductionController.php",
-    "groupTitle": "07._会员作品模块",
-    "name": "GetApiMemberProductionSelect"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/production/view/{id}",
-    "title": "03. 会员作品详情",
-    "description": "<p>获取当前会员作品的详情</p>",
-    "group": "07._会员作品模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "id",
-            "description": "<p>作品编号</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>作品编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "courseware_id",
-            "description": "<p>课件编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "level_id",
-            "description": "<p>课件级别编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "archive_id",
-            "description": "<p>学员档案编号</p>"
-          },
-          {
-            "group": "basic params",
+            "group": "category params",
             "type": "String",
             "optional": false,
             "field": "title",
-            "description": "<p>作品名称</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "picture",
-            "description": "<p>作品图片</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "description",
-            "description": "<p>作品描述</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "duration",
-            "description": "<p>内容时长</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "approval_total",
-            "description": "<p>点赞数</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "comment_total",
-            "description": "<p>评论数</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>发布时间</p>"
-          }
-        ],
-        "course params": [
-          {
-            "group": "course params",
-            "type": "String",
-            "optional": false,
-            "field": "title",
-            "description": "<p>课程名称</p>"
-          },
-          {
-            "group": "course params",
-            "type": "String",
-            "optional": false,
-            "field": "semester",
-            "description": "<p>课程周期</p>"
-          }
-        ],
-        "courseware params": [
-          {
-            "group": "courseware params",
-            "type": "String",
-            "optional": false,
-            "field": "title",
-            "description": "<p>课件名称</p>"
-          },
-          {
-            "group": "courseware params",
-            "type": "String",
-            "optional": false,
-            "field": "description",
-            "description": "<p>课件描述</p>"
-          },
-          {
-            "group": "courseware params",
-            "type": "String",
-            "optional": false,
-            "field": "is_permanent",
-            "description": "<p>课件类型</p>"
-          }
-        ],
-        "level params": [
-          {
-            "group": "level params",
-            "type": "String",
-            "optional": false,
-            "field": "level",
-            "description": "<p>课件级别</p>"
-          },
-          {
-            "group": "level params",
-            "type": "String",
-            "optional": false,
-            "field": "minimum_age",
-            "description": "<p>最小年龄</p>"
-          },
-          {
-            "group": "level params",
-            "type": "String",
-            "optional": false,
-            "field": "largest_age",
-            "description": "<p>最大年龄</p>"
-          }
-        ],
-        "member params": [
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "nickname",
-            "description": "<p>会员昵称</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "username",
-            "description": "<p>会员账户</p>"
-          }
-        ],
-        "archive params": [
-          {
-            "group": "archive params",
-            "type": "String",
-            "optional": false,
-            "field": "age",
-            "description": "<p>会员年龄</p>"
-          },
-          {
-            "group": "archive params",
-            "type": "String",
-            "optional": false,
-            "field": "city_id",
-            "description": "<p>会员所在地</p>"
+            "description": "<p>投诉分类标题</p>"
           }
         ]
       }
     },
     "sampleRequest": [
       {
-        "url": "/api/member/production/view/{id}"
+        "url": "/api/complain/view/{id}"
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/ProductionController.php",
-    "groupTitle": "07._会员作品模块",
-    "name": "GetApiMemberProductionViewId"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/production/handle",
-    "title": "04. 上传作品",
-    "description": "<p>当前会员上传他的作品</p>",
-    "group": "07._会员作品模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "courseware_id",
-            "description": "<p>课件编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "level_id",
-            "description": "<p>课件级别编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "unit_id",
-            "description": "<p>课件单元编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "picture",
-            "description": "<p>作品图片</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "description",
-            "description": "<p>作品描述</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "duration",
-            "description": "<p>内容时长</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/production/handle"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/ProductionController.php",
-    "groupTitle": "07._会员作品模块",
-    "name": "PostApiMemberProductionHandle"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/production/share",
-    "title": "05. 分享作品",
-    "description": "<p>当前会员分享他的作品</p>",
-    "group": "07._会员作品模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "id",
-            "description": "<p>作品编号</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/production/share"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/ProductionController.php",
-    "groupTitle": "07._会员作品模块",
-    "name": "PostApiMemberProductionShare"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/production/status",
-    "title": "06. 会员作品是否上传",
-    "description": "<p>获取当前会员作品的详情</p>",
-    "group": "07._会员作品模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "courseware_id",
-            "description": "<p>课件编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "level_id",
-            "description": "<p>课件级别编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "unit_id",
-            "description": "<p>课件单元编号</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "data",
-            "description": "<p>true|false</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/production/status"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/ProductionController.php",
-    "groupTitle": "07._会员作品模块",
-    "name": "PostApiMemberProductionStatus"
+    "filename": "app/Http/Controllers/Api/Module/ComplainController.php",
+    "groupTitle": "07._投诉模块",
+    "name": "GetApiComplainViewId"
   },
   {
     "type": "get",
-    "url": "/api/member/address/default",
-    "title": "06. 当前用户默认地址",
-    "description": "<p>获取当前用户默认地址详情</p>",
-    "group": "08._会员地址模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>会员地址编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "name",
-            "description": "<p>收货人姓名</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "mobile",
-            "description": "<p>收货人电话</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "province_id",
-            "description": "<p>省</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "city_id",
-            "description": "<p>市</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "region_id",
-            "description": "<p>县</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "address",
-            "description": "<p>详细地址</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_default",
-            "description": "<p>是否为默认地址</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>注册时间</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/address/default"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/AddressController.php",
-    "groupTitle": "08._会员地址模块",
-    "name": "GetApiMemberAddressDefault"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/address/list?page={page}",
-    "title": "01. 会员地址列表(分页)",
-    "description": "<p>获取当前会员送货地址列表(分页)</p>",
-    "group": "08._会员地址模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
+    "url": "/api/common/problem/list?page={page}",
+    "title": "01. 常见问题列表",
+    "description": "<p>获取常见问题分页列表</p>",
+    "group": "08._常见问题模块",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -3028,1039 +1382,21 @@ define({ "api": [
             "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>会员地址编号</p>"
+            "description": "<p>常见问题编号</p>"
           },
           {
             "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "name",
-            "description": "<p>收货人姓名</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "mobile",
-            "description": "<p>收货人电话</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "province_id",
-            "description": "<p>省</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "city_id",
-            "description": "<p>市</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "region_id",
-            "description": "<p>县</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "address",
-            "description": "<p>详细地址</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_default",
-            "description": "<p>是否为默认地址</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>注册时间</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/address/list"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/AddressController.php",
-    "groupTitle": "08._会员地址模块",
-    "name": "GetApiMemberAddressListPagePage"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/address/select",
-    "title": "02. 会员地址列表(不分页)",
-    "description": "<p>获取当前会员送货地址列表(不分页)</p>",
-    "group": "08._会员地址模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>会员地址编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "name",
-            "description": "<p>收货人姓名</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "mobile",
-            "description": "<p>收货人电话</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "province_id",
-            "description": "<p>省</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "city_id",
-            "description": "<p>市</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "region_id",
-            "description": "<p>县</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "address",
-            "description": "<p>详细地址</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_default",
-            "description": "<p>是否为默认地址</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>注册时间</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/address/select"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/AddressController.php",
-    "groupTitle": "08._会员地址模块",
-    "name": "GetApiMemberAddressSelect"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/address/view/{id}",
-    "title": "03. 当前用户地址详情",
-    "description": "<p>获取当前用户地址详情</p>",
-    "group": "08._会员地址模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>会员地址编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "name",
-            "description": "<p>收货人姓名</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "mobile",
-            "description": "<p>收货人电话</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "province_id",
-            "description": "<p>省</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "city_id",
-            "description": "<p>市</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "region_id",
-            "description": "<p>县</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "address",
-            "description": "<p>详细地址</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_default",
-            "description": "<p>是否为默认地址</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>注册时间</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/address/view/{id}"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/AddressController.php",
-    "groupTitle": "08._会员地址模块",
-    "name": "GetApiMemberAddressViewId"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/address/delete",
-    "title": "05. 删除会员地址",
-    "description": "<p>删除当前会员的送货地址信息</p>",
-    "group": "08._会员地址模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "id",
-            "description": "<p>会员地址编号</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/address/delete"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/AddressController.php",
-    "groupTitle": "08._会员地址模块",
-    "name": "PostApiMemberAddressDelete"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/address/handle",
-    "title": "04. 新建(编辑)会员地址",
-    "description": "<p>新建或者编辑当前会员的送货地址信息</p>",
-    "group": "08._会员地址模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "id",
-            "description": "<p>会员地址编号（不存在：新增，存在：编辑）</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "name",
-            "description": "<p>收货人姓名</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "mobile",
-            "description": "<p>收货人电话</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "province_id",
-            "description": "<p>省</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "city_id",
-            "description": "<p>市</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "region_id",
-            "description": "<p>县</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "address",
-            "description": "<p>详细地址</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "is_default",
-            "description": "<p>是否为默认地址 0 不是 1 是</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/address/handle"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/AddressController.php",
-    "groupTitle": "08._会员地址模块",
-    "name": "PostApiMemberAddressHandle"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/approval/list?page={page}",
-    "title": "01. 会员点赞列表(分页)",
-    "description": "<p>获取当前会员点赞列表(分页)</p>",
-    "group": "09._会员点赞模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "page",
-            "description": "<p>当前页数</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>会员点赞编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "production_id",
-            "description": "<p>作品编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>点赞时间</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/approval/list"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/ApprovalController.php",
-    "groupTitle": "09._会员点赞模块",
-    "name": "GetApiMemberApprovalListPagePage"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/approval/select",
-    "title": "02. 会员点赞列表(不分页)",
-    "description": "<p>获取当前会员点赞列表(不分页)</p>",
-    "group": "09._会员点赞模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>会员点赞编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "production_id",
-            "description": "<p>作品编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>点赞时间</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/approval/select"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/ApprovalController.php",
-    "groupTitle": "09._会员点赞模块",
-    "name": "GetApiMemberApprovalSelect"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/approval/handle",
-    "title": "04. 点赞操作",
-    "description": "<p>当前会员执行点赞操作, 已经点赞过，再次点击取消点赞</p>",
-    "group": "09._会员点赞模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "production_id",
-            "description": "<p>作品编号</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/approval/handle"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/ApprovalController.php",
-    "groupTitle": "09._会员点赞模块",
-    "name": "PostApiMemberApprovalHandle"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/approval/status",
-    "title": "03. 作品是否点赞",
-    "description": "<p>获取当前会员点赞的详情</p>",
-    "group": "09._会员点赞模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "production_id",
-            "description": "<p>作品编号</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/approval/status"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/ApprovalController.php",
-    "groupTitle": "09._会员点赞模块",
-    "name": "PostApiMemberApprovalStatus"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/course/addition/{id}",
-    "title": "05. 当前课程是否添加老师",
-    "description": "<p>获取当前课程是否被当前会员订阅</p>",
-    "group": "10._会员课程模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "id",
-            "description": "<p>课程编号</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Boolean",
-            "optional": false,
-            "field": "true",
-            "description": "<p>|false 是否添加</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/course/addition/{id}"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/CourseController.php",
-    "groupTitle": "10._会员课程模块",
-    "name": "GetApiMemberCourseAdditionId"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/course/center",
-    "title": "08. 当前会员课程中心",
-    "description": "<p>获取当前会员课程详情</p>",
-    "group": "10._会员课程模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "course params": [
-          {
-            "group": "course params",
             "type": "String",
             "optional": false,
             "field": "title",
-            "description": "<p>课件名称</p>"
-          },
-          {
-            "group": "course params",
-            "type": "String",
-            "optional": false,
-            "field": "level",
-            "description": "<p>课件级别名称</p>"
-          },
-          {
-            "group": "course params",
-            "type": "Number",
-            "optional": false,
-            "field": "unit_total",
-            "description": "<p>课程章节总数</p>"
-          },
-          {
-            "group": "course params",
-            "type": "String",
-            "optional": false,
-            "field": "unlock_unit_total",
-            "description": "<p>已解锁课程章节数</p>"
-          },
-          {
-            "group": "course params",
-            "type": "String",
-            "optional": false,
-            "field": "register_day_number",
-            "description": "<p>注册天数</p>"
-          },
-          {
-            "group": "course params",
-            "type": "String",
-            "optional": false,
-            "field": "study_day_number",
-            "description": "<p>正在学习</p>"
-          },
-          {
-            "group": "course params",
-            "type": "String",
-            "optional": false,
-            "field": "production_number",
-            "description": "<p>累计作品</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/course/center"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/CourseController.php",
-    "groupTitle": "10._会员课程模块",
-    "name": "GetApiMemberCourseCenter"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/course/list?page={page}",
-    "title": "01. 会员课程列表(分页)",
-    "description": "<p>获取当前会员订阅的课程列表(分页)</p>",
-    "group": "10._会员课程模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "page",
-            "description": "<p>当前页数</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>自增编号</p>"
+            "description": "<p>常见问题标题</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
             "optional": false,
-            "field": "member_id",
-            "description": "<p>学员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "teacher_id",
-            "description": "<p>管理老师编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_add",
-            "description": "<p>家长微信是否被添加 1 是 2 否</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "apply_time",
-            "description": "<p>报名时间</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "apply_status",
-            "description": "<p>报名状态 0 待确认 1 已确认</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "confirm_time",
-            "description": "<p>报名确认时间</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_finish",
-            "description": "<p>是否完成学习 0 未完成 1 已完成</p>"
+            "field": "position_id",
+            "description": "<p>常见问题位编号</p>"
           },
           {
             "group": "basic params",
@@ -4069,175 +1405,51 @@ define({ "api": [
             "field": "create_time",
             "description": "<p>添加时间</p>"
           }
-        ],
-        "teacher params": [
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/common/problem/list"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Common/ProblemController.php",
+    "groupTitle": "08._常见问题模块",
+    "name": "GetApiCommonProblemListPagePage"
+  },
+  {
+    "type": "get",
+    "url": "/api/common/problem/select",
+    "title": "02. 常见问题数据",
+    "description": "<p>获取常见问题不分页列表数据</p>",
+    "group": "08._常见问题模块",
+    "success": {
+      "fields": {
+        "basic params": [
           {
-            "group": "teacher params",
+            "group": "basic params",
             "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>老师编号</p>"
+            "description": "<p>常见问题编号</p>"
           },
           {
-            "group": "teacher params",
-            "type": "Number",
-            "optional": false,
-            "field": "organization_id",
-            "description": "<p>老师所属机构编号（暂时用不上）</p>"
-          },
-          {
-            "group": "teacher params",
+            "group": "basic params",
             "type": "String",
-            "optional": false,
-            "field": "open_id",
-            "description": "<p>第三方登录编号</p>"
-          },
-          {
-            "group": "teacher params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_no",
-            "description": "<p>会员号</p>"
-          },
-          {
-            "group": "teacher params",
-            "type": "String",
-            "optional": false,
-            "field": "avatar",
-            "description": "<p>老师头像</p>"
-          },
-          {
-            "group": "teacher params",
-            "type": "String",
-            "optional": false,
-            "field": "qr_code",
-            "description": "<p>老师二维码</p>"
-          },
-          {
-            "group": "teacher params",
-            "type": "String",
-            "optional": false,
-            "field": "username",
-            "description": "<p>登录账户</p>"
-          },
-          {
-            "group": "teacher params",
-            "type": "String",
-            "optional": false,
-            "field": "nickname",
-            "description": "<p>老师姓名</p>"
-          },
-          {
-            "group": "teacher params",
-            "type": "Number",
-            "optional": false,
-            "field": "condition",
-            "description": "<p>成为条件 1 系统添加 2 完成任务</p>"
-          },
-          {
-            "group": "teacher params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>注册时间</p>"
-          }
-        ],
-        "member params": [
-          {
-            "group": "member params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "open_id",
-            "description": "<p>第三方登录编号</p>"
-          },
-          {
-            "group": "member params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_no",
-            "description": "<p>会员号</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "avatar",
-            "description": "<p>会员头像</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "username",
-            "description": "<p>登录账户</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "nickname",
-            "description": "<p>会员姓名</p>"
-          },
-          {
-            "group": "member params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_freeze",
-            "description": "<p>是否冻结 1 冻结 2 不冻结</p>"
-          },
-          {
-            "group": "member params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>注册时间</p>"
-          }
-        ],
-        "course params": [
-          {
-            "group": "course params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "course params",
-            "type": "Number",
-            "optional": false,
-            "field": "semester",
-            "description": "<p>课程学期</p>"
-          },
-          {
-            "group": "course params",
-            "type": "Number",
             "optional": false,
             "field": "title",
-            "description": "<p>课程名称</p>"
+            "description": "<p>常见问题标题</p>"
           },
           {
-            "group": "course params",
-            "type": "Number",
-            "optional": false,
-            "field": "description",
-            "description": "<p>课程描述</p>"
-          },
-          {
-            "group": "course params",
+            "group": "basic params",
             "type": "String",
             "optional": false,
-            "field": "picture",
-            "description": "<p>课程封面</p>"
+            "field": "content",
+            "description": "<p>常见问题答案</p>"
           },
           {
-            "group": "course params",
+            "group": "basic params",
             "type": "Number",
             "optional": false,
             "field": "create_time",
@@ -4248,45 +1460,20 @@ define({ "api": [
     },
     "sampleRequest": [
       {
-        "url": "/api/member/course/list"
+        "url": "/api/common/problem/select"
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/CourseController.php",
-    "groupTitle": "10._会员课程模块",
-    "name": "GetApiMemberCourseListPagePage"
+    "filename": "app/Http/Controllers/Api/Module/Common/ProblemController.php",
+    "groupTitle": "08._常见问题模块",
+    "name": "GetApiCommonProblemSelect"
   },
   {
     "type": "get",
-    "url": "/api/member/course/select",
-    "title": "02. 会员课程列表(不分页)",
-    "description": "<p>获取当前会员订阅的课程列表(不分页)</p>",
-    "group": "10._会员课程模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
+    "url": "/api/common/problem/view/{id}",
+    "title": "03. 常见问题详情",
+    "description": "<p>获取常见问题详情</p>",
+    "group": "08._常见问题模块",
     "success": {
       "fields": {
         "basic params": [
@@ -4295,434 +1482,21 @@ define({ "api": [
             "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>自增编号</p>"
+            "description": "<p>常见问题编号</p>"
           },
           {
             "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>学员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "teacher_id",
-            "description": "<p>管理老师编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_add",
-            "description": "<p>家长微信是否被添加 1 是 2 否</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "apply_time",
-            "description": "<p>报名时间</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "apply_status",
-            "description": "<p>报名状态 0 待确认 1 已确认</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "confirm_time",
-            "description": "<p>报名确认时间</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_finish",
-            "description": "<p>是否完成学习 0 未完成 1 已完成</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>添加时间</p>"
-          }
-        ],
-        "teacher params": [
-          {
-            "group": "teacher params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>老师编号</p>"
-          },
-          {
-            "group": "teacher params",
-            "type": "Number",
-            "optional": false,
-            "field": "organization_id",
-            "description": "<p>老师所属机构编号（暂时用不上）</p>"
-          },
-          {
-            "group": "teacher params",
             "type": "String",
-            "optional": false,
-            "field": "open_id",
-            "description": "<p>第三方登录编号</p>"
-          },
-          {
-            "group": "teacher params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_no",
-            "description": "<p>会员号</p>"
-          },
-          {
-            "group": "teacher params",
-            "type": "String",
-            "optional": false,
-            "field": "avatar",
-            "description": "<p>老师头像</p>"
-          },
-          {
-            "group": "teacher params",
-            "type": "String",
-            "optional": false,
-            "field": "qr_code",
-            "description": "<p>老师二维码</p>"
-          },
-          {
-            "group": "teacher params",
-            "type": "String",
-            "optional": false,
-            "field": "username",
-            "description": "<p>登录账户</p>"
-          },
-          {
-            "group": "teacher params",
-            "type": "String",
-            "optional": false,
-            "field": "nickname",
-            "description": "<p>老师姓名</p>"
-          },
-          {
-            "group": "teacher params",
-            "type": "Number",
-            "optional": false,
-            "field": "condition",
-            "description": "<p>成为条件 1 系统添加 2 完成任务</p>"
-          },
-          {
-            "group": "teacher params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>注册时间</p>"
-          }
-        ],
-        "member params": [
-          {
-            "group": "member params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "open_id",
-            "description": "<p>第三方登录编号</p>"
-          },
-          {
-            "group": "member params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_no",
-            "description": "<p>会员号</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "avatar",
-            "description": "<p>会员头像</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "username",
-            "description": "<p>登录账户</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "nickname",
-            "description": "<p>会员姓名</p>"
-          },
-          {
-            "group": "member params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_freeze",
-            "description": "<p>是否冻结 1 冻结 2 不冻结</p>"
-          },
-          {
-            "group": "member params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>注册时间</p>"
-          }
-        ],
-        "course params": [
-          {
-            "group": "course params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "course params",
-            "type": "Number",
-            "optional": false,
-            "field": "semester",
-            "description": "<p>课程学期</p>"
-          },
-          {
-            "group": "course params",
-            "type": "Number",
             "optional": false,
             "field": "title",
-            "description": "<p>课程名称</p>"
+            "description": "<p>常见问题标题</p>"
           },
           {
-            "group": "course params",
-            "type": "Number",
-            "optional": false,
-            "field": "description",
-            "description": "<p>课程描述</p>"
-          },
-          {
-            "group": "course params",
+            "group": "basic params",
             "type": "String",
             "optional": false,
-            "field": "picture",
-            "description": "<p>课程封面</p>"
-          },
-          {
-            "group": "course params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>添加时间</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/course/select"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/CourseController.php",
-    "groupTitle": "10._会员课程模块",
-    "name": "GetApiMemberCourseSelect"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/course/status/{id}",
-    "title": "04. 当前课程是否被订阅",
-    "description": "<p>获取当前课程是否被当前会员订阅</p>",
-    "group": "10._会员课程模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "id",
-            "description": "<p>课程编号</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Boolean",
-            "optional": false,
-            "field": "true",
-            "description": "<p>|false 是否订阅</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/course/status/{id}"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/CourseController.php",
-    "groupTitle": "10._会员课程模块",
-    "name": "GetApiMemberCourseStatusId"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/course/view/{id}",
-    "title": "03. 当前会员课程详情",
-    "description": "<p>获取当前会员课程详情</p>",
-    "group": "10._会员课程模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "id",
-            "description": "<p>课程编号</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>自增编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>学员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "teacher_id",
-            "description": "<p>管理老师编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_add",
-            "description": "<p>家长微信是否被添加 1 是 2 否</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "apply_time",
-            "description": "<p>报名时间</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "apply_status",
-            "description": "<p>报名状态 0 待确认 1 已确认</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "confirm_time",
-            "description": "<p>报名确认时间</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_finish",
-            "description": "<p>是否完成学习 0 未完成 1 已完成</p>"
+            "field": "content",
+            "description": "<p>常见问题答案</p>"
           },
           {
             "group": "basic params",
@@ -4731,389 +1505,18 @@ define({ "api": [
             "field": "create_time",
             "description": "<p>添加时间</p>"
           }
-        ],
-        "teacher params": [
-          {
-            "group": "teacher params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>老师编号</p>"
-          },
-          {
-            "group": "teacher params",
-            "type": "Number",
-            "optional": false,
-            "field": "organization_id",
-            "description": "<p>老师所属机构编号（暂时用不上）</p>"
-          },
-          {
-            "group": "teacher params",
-            "type": "String",
-            "optional": false,
-            "field": "open_id",
-            "description": "<p>第三方登录编号</p>"
-          },
-          {
-            "group": "teacher params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_no",
-            "description": "<p>会员号</p>"
-          },
-          {
-            "group": "teacher params",
-            "type": "String",
-            "optional": false,
-            "field": "avatar",
-            "description": "<p>老师头像</p>"
-          },
-          {
-            "group": "teacher params",
-            "type": "String",
-            "optional": false,
-            "field": "qr_code",
-            "description": "<p>老师二维码</p>"
-          },
-          {
-            "group": "teacher params",
-            "type": "String",
-            "optional": false,
-            "field": "username",
-            "description": "<p>登录账户</p>"
-          },
-          {
-            "group": "teacher params",
-            "type": "String",
-            "optional": false,
-            "field": "nickname",
-            "description": "<p>老师姓名</p>"
-          },
-          {
-            "group": "teacher params",
-            "type": "Number",
-            "optional": false,
-            "field": "condition",
-            "description": "<p>成为条件 1 系统添加 2 完成任务</p>"
-          },
-          {
-            "group": "teacher params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>注册时间</p>"
-          }
-        ],
-        "member params": [
-          {
-            "group": "member params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "open_id",
-            "description": "<p>第三方登录编号</p>"
-          },
-          {
-            "group": "member params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_no",
-            "description": "<p>会员号</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "avatar",
-            "description": "<p>会员头像</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "username",
-            "description": "<p>登录账户</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "nickname",
-            "description": "<p>会员姓名</p>"
-          },
-          {
-            "group": "member params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_freeze",
-            "description": "<p>是否冻结 1 冻结 2 不冻结</p>"
-          },
-          {
-            "group": "member params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>注册时间</p>"
-          }
-        ],
-        "course params": [
-          {
-            "group": "course params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "course params",
-            "type": "Number",
-            "optional": false,
-            "field": "semester",
-            "description": "<p>课程学期</p>"
-          },
-          {
-            "group": "course params",
-            "type": "Number",
-            "optional": false,
-            "field": "title",
-            "description": "<p>课程名称</p>"
-          },
-          {
-            "group": "course params",
-            "type": "Number",
-            "optional": false,
-            "field": "description",
-            "description": "<p>课程描述</p>"
-          },
-          {
-            "group": "course params",
-            "type": "String",
-            "optional": false,
-            "field": "picture",
-            "description": "<p>课程封面</p>"
-          },
-          {
-            "group": "course params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>添加时间</p>"
-          }
         ]
       }
     },
     "sampleRequest": [
       {
-        "url": "/api/member/course/view/{id}"
+        "url": "/api/common/problem/view/{id}"
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/CourseController.php",
-    "groupTitle": "10._会员课程模块",
-    "name": "GetApiMemberCourseViewId"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/course/apply",
-    "title": "06. 课程报名",
-    "description": "<p>当前会员进行课程报名</p>",
-    "group": "10._会员课程模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/course/apply"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/CourseController.php",
-    "groupTitle": "10._会员课程模块",
-    "name": "PostApiMemberCourseApply"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/course/finish",
-    "title": "07. 完成课程",
-    "description": "<p>当前会员学习完成了课程</p>",
-    "group": "10._会员课程模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/course/finish"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/CourseController.php",
-    "groupTitle": "10._会员课程模块",
-    "name": "PostApiMemberCourseFinish"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/target/progress",
-    "title": "01. 会员任务指标进度",
-    "description": "<p>获取当前会员成为招生老师的任务指标进度</p>",
-    "group": "11._会员任务指标模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>自增编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "course_total",
-            "description": "<p>购买课程总数</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "invitation_total",
-            "description": "<p>邀请他人购买体验课程总数</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "upload_total",
-            "description": "<p>上传作品总数</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>创建时间</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/target/progress"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/TargetController.php",
-    "groupTitle": "11._会员任务指标模块",
-    "name": "GetApiMemberTargetProgress"
+    "filename": "app/Http/Controllers/Api/Module/Common/ProblemController.php",
+    "groupTitle": "08._常见问题模块",
+    "name": "GetApiCommonProblemViewId"
   },
   {
     "type": "get",
@@ -5322,7 +1725,7 @@ define({ "api": [
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Order/CourseController.php",
+    "filename": "app/Http/Controllers/Api/Module/Member/OrderController.php",
     "groupTitle": "12._课程订单模块",
     "name": "GetApiMemberOrderCourseListPagePage"
   },
@@ -5520,7 +1923,7 @@ define({ "api": [
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Order/CourseController.php",
+    "filename": "app/Http/Controllers/Api/Module/Member/OrderController.php",
     "groupTitle": "12._课程订单模块",
     "name": "GetApiMemberOrderCourseSelect"
   },
@@ -5789,7 +2192,7 @@ define({ "api": [
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Order/CourseController.php",
+    "filename": "app/Http/Controllers/Api/Module/Member/OrderController.php",
     "groupTitle": "12._课程订单模块",
     "name": "GetApiMemberOrderCourseViewId"
   },
@@ -5843,7 +2246,7 @@ define({ "api": [
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Order/CourseController.php",
+    "filename": "app/Http/Controllers/Api/Module/Member/OrderController.php",
     "groupTitle": "12._课程订单模块",
     "name": "PostApiMemberOrderCourseCancel"
   },
@@ -5911,7 +2314,7 @@ define({ "api": [
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Order/CourseController.php",
+    "filename": "app/Http/Controllers/Api/Module/Member/OrderController.php",
     "groupTitle": "12._课程订单模块",
     "name": "PostApiMemberOrderCourseChange"
   },
@@ -5965,7 +2368,7 @@ define({ "api": [
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Order/CourseController.php",
+    "filename": "app/Http/Controllers/Api/Module/Member/OrderController.php",
     "groupTitle": "12._课程订单模块",
     "name": "PostApiMemberOrderCourseFinish"
   },
@@ -6054,7 +2457,7 @@ define({ "api": [
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Order/CourseController.php",
+    "filename": "app/Http/Controllers/Api/Module/Member/OrderController.php",
     "groupTitle": "12._课程订单模块",
     "name": "PostApiMemberOrderCourseHandle"
   },
@@ -6115,7 +2518,7 @@ define({ "api": [
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Order/CourseController.php",
+    "filename": "app/Http/Controllers/Api/Module/Member/OrderController.php",
     "groupTitle": "12._课程订单模块",
     "name": "PostApiMemberOrderCoursePay"
   },
@@ -6422,10 +2825,10 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/api/member/attention/list?page={page}",
-    "title": "01. 会员关注列表(分页)",
-    "description": "<p>获取当前会员关注列表(分页)</p>",
-    "group": "19._会员关注模块",
+    "url": "/api/member/archive",
+    "title": "01. 当前会员档案",
+    "description": "<p>获取当前会员的档案信息</p>",
+    "group": "20._会员模块",
     "permission": [
       {
         "name": "jwt"
@@ -6446,7 +2849,1030 @@ define({ "api": [
       "examples": [
         {
           "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>会员编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "role_id",
+            "description": "<p>角色编号 1 车商 2 消费者</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "open_id",
+            "description": "<p>第三方登录编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "member_no",
+            "description": "<p>会员号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "avatar",
+            "description": "<p>会员头像</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>登录账户</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "nickname",
+            "description": "<p>会员姓名</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "create_time",
+            "description": "<p>注册时间</p>"
+          }
+        ],
+        "archive params": [
+          {
+            "group": "archive params",
+            "type": "String",
+            "optional": false,
+            "field": "sex",
+            "description": "<p>性别</p>"
+          }
+        ],
+        "asset params": [
+          {
+            "group": "asset params",
+            "type": "String",
+            "optional": false,
+            "field": "cash_money",
+            "description": "<p>现金金额</p>"
+          },
+          {
+            "group": "asset params",
+            "type": "String",
+            "optional": false,
+            "field": "credit_money",
+            "description": "<p>信用余额</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/archive"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/MemberController.php",
+    "groupTitle": "20._会员模块",
+    "name": "GetApiMemberArchive"
+  },
+  {
+    "type": "get",
+    "url": "/api/member/data/{id}",
+    "title": "02. 会员数据",
+    "description": "<p>获取会员详情</p>",
+    "group": "20._会员模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>会员编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "role_id",
+            "description": "<p>角色编号 1 车商 2 消费者</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "open_id",
+            "description": "<p>第三方登录编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "member_no",
+            "description": "<p>会员号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "avatar",
+            "description": "<p>会员头像</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>登录账户</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "nickname",
+            "description": "<p>会员姓名</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "create_time",
+            "description": "<p>注册时间</p>"
+          }
+        ],
+        "archive params": [
+          {
+            "group": "archive params",
+            "type": "String",
+            "optional": false,
+            "field": "sex",
+            "description": "<p>性别</p>"
+          }
+        ],
+        "asset params": [
+          {
+            "group": "asset params",
+            "type": "String",
+            "optional": false,
+            "field": "cash_money",
+            "description": "<p>现金金额</p>"
+          },
+          {
+            "group": "asset params",
+            "type": "String",
+            "optional": false,
+            "field": "credit_money",
+            "description": "<p>信用余额</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/data/{id}"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/MemberController.php",
+    "groupTitle": "20._会员模块",
+    "name": "GetApiMemberDataId"
+  },
+  {
+    "type": "post",
+    "url": "/api/member/handle",
+    "title": "03. 编辑会员信息",
+    "description": "<p>编辑会员信息</p>",
+    "group": "20._会员模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "avatar",
+            "description": "<p>会员头像（不可为空）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "nickname",
+            "description": "<p>会员姓名（不可为空）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "sex",
+            "description": "<p>会员性别（0未知 1男 2女 3保密）（不可为空）</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/handle"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/MemberController.php",
+    "groupTitle": "20._会员模块",
+    "name": "PostApiMemberHandle"
+  },
+  {
+    "type": "post",
+    "url": "/api/member/asset/center",
+    "title": "01. 会员资金中心",
+    "description": "<p>获取当前会员资金信息</p>",
+    "group": "21._会员资金模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "cash_money",
+            "description": "<p>现金金额</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "credit_money",
+            "description": "<p>信用余额</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/asset/center"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/AssetController.php",
+    "groupTitle": "21._会员资金模块",
+    "name": "PostApiMemberAssetCenter"
+  },
+  {
+    "type": "get",
+    "url": "/api/member/address/default",
+    "title": "04. 获取当前会员默认地址",
+    "description": "<p>获取当前会员默认地址详情</p>",
+    "group": "22._会员地址模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>会员地址编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "member_id",
+            "description": "<p>会员编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>收货人姓名</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>收货人电话</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "province_id",
+            "description": "<p>省</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "city_id",
+            "description": "<p>市</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "region_id",
+            "description": "<p>县</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "address",
+            "description": "<p>详细地址</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "is_default",
+            "description": "<p>是否为默认地址</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "create_time",
+            "description": "<p>注册时间</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/address/default"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/AddressController.php",
+    "groupTitle": "22._会员地址模块",
+    "name": "GetApiMemberAddressDefault"
+  },
+  {
+    "type": "get",
+    "url": "/api/member/address/list?page={page}",
+    "title": "01. 当前会员地址列表",
+    "description": "<p>获取当前会员地址分页列表</p>",
+    "group": "22._会员地址模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "page",
+            "description": "<p>当前页数</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>会员地址编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "member_id",
+            "description": "<p>会员编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>收货人姓名</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>收货人电话</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "province_id",
+            "description": "<p>省</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "city_id",
+            "description": "<p>市</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "region_id",
+            "description": "<p>县</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "address",
+            "description": "<p>详细地址</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "is_default",
+            "description": "<p>是否为默认地址</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "create_time",
+            "description": "<p>注册时间</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/address/list"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/AddressController.php",
+    "groupTitle": "22._会员地址模块",
+    "name": "GetApiMemberAddressListPagePage"
+  },
+  {
+    "type": "get",
+    "url": "/api/member/address/select",
+    "title": "02. 当前会员地址数据",
+    "description": "<p>获取当前会员地址不分页列表数据</p>",
+    "group": "22._会员地址模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>会员地址编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "member_id",
+            "description": "<p>会员编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>收货人姓名</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>收货人电话</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "province_id",
+            "description": "<p>省</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "city_id",
+            "description": "<p>市</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "region_id",
+            "description": "<p>县</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "address",
+            "description": "<p>详细地址</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "is_default",
+            "description": "<p>是否为默认地址</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "create_time",
+            "description": "<p>注册时间</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/address/select"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/AddressController.php",
+    "groupTitle": "22._会员地址模块",
+    "name": "GetApiMemberAddressSelect"
+  },
+  {
+    "type": "get",
+    "url": "/api/member/address/view/{id}",
+    "title": "03. 当前会员地址详情",
+    "description": "<p>获取当前会员地址详情</p>",
+    "group": "22._会员地址模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>会员地址编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "member_id",
+            "description": "<p>会员编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>收货人姓名</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>收货人电话</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "province_id",
+            "description": "<p>省</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "city_id",
+            "description": "<p>市</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "region_id",
+            "description": "<p>县</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "address",
+            "description": "<p>详细地址</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "is_default",
+            "description": "<p>是否为默认地址</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "create_time",
+            "description": "<p>注册时间</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/address/view/{id}"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/AddressController.php",
+    "groupTitle": "22._会员地址模块",
+    "name": "GetApiMemberAddressViewId"
+  },
+  {
+    "type": "post",
+    "url": "/api/member/address/delete",
+    "title": "06. 当前会员地址删除",
+    "description": "<p>删除当前会员的地址信息</p>",
+    "group": "22._会员地址模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>会员地址编号</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/address/delete"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/AddressController.php",
+    "groupTitle": "22._会员地址模块",
+    "name": "PostApiMemberAddressDelete"
+  },
+  {
+    "type": "post",
+    "url": "/api/member/address/handle",
+    "title": "05. 编辑会员地址",
+    "description": "<p>编辑当前会员地址信息</p>",
+    "group": "22._会员地址模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>会员地址编号（不存在：新增，存在：编辑）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "name",
+            "description": "<p>收货人姓名</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>收货人电话</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "province_id",
+            "description": "<p>省</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "city_id",
+            "description": "<p>市</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "region_id",
+            "description": "<p>县</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "address",
+            "description": "<p>详细地址</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "is_default",
+            "description": "<p>是否为默认地址 0 不是 1 是</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/address/handle"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/AddressController.php",
+    "groupTitle": "22._会员地址模块",
+    "name": "PostApiMemberAddressHandle"
+  },
+  {
+    "type": "get",
+    "url": "/api/member/attention/list?page={page}",
+    "title": "01. 当前会员关注列表",
+    "description": "<p>获取当前会员关注分页列表</p>",
+    "group": "23._会员关注模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
           "type": "json"
         }
       ]
@@ -6479,7 +3905,7 @@ define({ "api": [
             "type": "Number",
             "optional": false,
             "field": "member_id",
-            "description": "<p>会员编号</p>"
+            "description": "<p>当前会员编号</p>"
           },
           {
             "group": "basic params",
@@ -6495,6 +3921,24 @@ define({ "api": [
             "field": "create_time",
             "description": "<p>关注时间</p>"
           }
+        ],
+        "member params": [
+          {
+            "group": "member params",
+            "type": "Number",
+            "optional": false,
+            "field": "nickname",
+            "description": "<p>当前会员昵称</p>"
+          }
+        ],
+        "attention params": [
+          {
+            "group": "attention params",
+            "type": "Number",
+            "optional": false,
+            "field": "nickname",
+            "description": "<p>关注会员昵称</p>"
+          }
         ]
       }
     },
@@ -6504,16 +3948,16 @@ define({ "api": [
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/AttentionController.php",
-    "groupTitle": "19._会员关注模块",
+    "filename": "app/Http/Controllers/Api/Module/Member/AttentionController.php",
+    "groupTitle": "23._会员关注模块",
     "name": "GetApiMemberAttentionListPagePage"
   },
   {
     "type": "get",
     "url": "/api/member/attention/select",
-    "title": "02. 会员关注列表(不分页)",
-    "description": "<p>获取当前会员关注列表(不分页)</p>",
-    "group": "19._会员关注模块",
+    "title": "02. 当前会员关注数据",
+    "description": "<p>获取当前会员关注不分页列表数据</p>",
+    "group": "23._会员关注模块",
     "permission": [
       {
         "name": "jwt"
@@ -6534,7 +3978,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
           "type": "json"
         }
       ]
@@ -6554,7 +3998,7 @@ define({ "api": [
             "type": "Number",
             "optional": false,
             "field": "member_id",
-            "description": "<p>会员编号</p>"
+            "description": "<p>当前会员编号</p>"
           },
           {
             "group": "basic params",
@@ -6570,6 +4014,24 @@ define({ "api": [
             "field": "create_time",
             "description": "<p>关注时间</p>"
           }
+        ],
+        "member params": [
+          {
+            "group": "member params",
+            "type": "Number",
+            "optional": false,
+            "field": "nickname",
+            "description": "<p>当前会员昵称</p>"
+          }
+        ],
+        "attention params": [
+          {
+            "group": "attention params",
+            "type": "Number",
+            "optional": false,
+            "field": "nickname",
+            "description": "<p>关注会员昵称</p>"
+          }
         ]
       }
     },
@@ -6579,16 +4041,16 @@ define({ "api": [
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/AttentionController.php",
-    "groupTitle": "19._会员关注模块",
+    "filename": "app/Http/Controllers/Api/Module/Member/AttentionController.php",
+    "groupTitle": "23._会员关注模块",
     "name": "GetApiMemberAttentionSelect"
   },
   {
     "type": "post",
     "url": "/api/member/attention/handle",
     "title": "04. 关注操作",
-    "description": "<p>当前会员执行关注操作, 已经关注过，再次点击取消关注</p>",
-    "group": "19._会员关注模块",
+    "description": "<p>当前会员执行关注操作, 已经关注过执行取消关注</p>",
+    "group": "23._会员关注模块",
     "permission": [
       {
         "name": "jwt"
@@ -6609,7 +4071,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
           "type": "json"
         }
       ]
@@ -6622,7 +4084,7 @@ define({ "api": [
             "type": "string",
             "optional": false,
             "field": "attention_member_id",
-            "description": "<p>作品编号</p>"
+            "description": "<p>关注会员编号</p>"
           }
         ]
       }
@@ -6633,16 +4095,16 @@ define({ "api": [
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/AttentionController.php",
-    "groupTitle": "19._会员关注模块",
+    "filename": "app/Http/Controllers/Api/Module/Member/AttentionController.php",
+    "groupTitle": "23._会员关注模块",
     "name": "PostApiMemberAttentionHandle"
   },
   {
     "type": "post",
     "url": "/api/member/attention/status",
     "title": "03. 是否关注会员",
-    "description": "<p>获取当前会员关注的详情</p>",
-    "group": "19._会员关注模块",
+    "description": "<p>获取当前会员是否关注某会员</p>",
+    "group": "23._会员关注模块",
     "permission": [
       {
         "name": "jwt"
@@ -6663,7 +4125,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
           "type": "json"
         }
       ]
@@ -6700,16 +4162,41 @@ define({ "api": [
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/AttentionController.php",
-    "groupTitle": "19._会员关注模块",
+    "filename": "app/Http/Controllers/Api/Module/Member/AttentionController.php",
+    "groupTitle": "23._会员关注模块",
     "name": "PostApiMemberAttentionStatus"
   },
   {
     "type": "get",
-    "url": "/api/advertising/position/list?page={page}",
-    "title": "1. 获取广告位列表(分页)",
-    "description": "<p>获取广告位列表(分页)</p>",
-    "group": "20._广告位模块",
+    "url": "/api/member/fans/list?page={page}",
+    "title": "01. 当前会员粉丝列表",
+    "description": "<p>获取当前会员粉丝分页列表</p>",
+    "group": "24._会员粉丝模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
     "parameter": {
       "fields": {
         "Parameter": [
@@ -6731,62 +4218,91 @@ define({ "api": [
             "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>广告位编号</p>"
+            "description": "<p>会员关注编号</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
             "optional": false,
-            "field": "title",
-            "description": "<p>广告位名称</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "is_open",
-            "description": "<p>是否开启 1 开启 2 未开启</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "width",
-            "description": "<p>广告位宽度</p>"
+            "field": "member_id",
+            "description": "<p>粉丝编号</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
             "optional": false,
-            "field": "height",
-            "description": "<p>广告位高度</p>"
+            "field": "attention_member_id",
+            "description": "<p>当前会员编号</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
             "optional": false,
             "field": "create_time",
-            "description": "<p>添加时间</p>"
+            "description": "<p>关注时间</p>"
+          }
+        ],
+        "member params": [
+          {
+            "group": "member params",
+            "type": "Number",
+            "optional": false,
+            "field": "nickname",
+            "description": "<p>粉丝会员昵称</p>"
+          }
+        ],
+        "attention params": [
+          {
+            "group": "attention params",
+            "type": "Number",
+            "optional": false,
+            "field": "nickname",
+            "description": "<p>当前会员昵称</p>"
           }
         ]
       }
     },
     "sampleRequest": [
       {
-        "url": "/api/advertising/position/list"
+        "url": "/api/member/fans/list"
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Advertising/Relevance/PositionController.php",
-    "groupTitle": "20._广告位模块",
-    "name": "GetApiAdvertisingPositionListPagePage"
+    "filename": "app/Http/Controllers/Api/Module/Member/FansController.php",
+    "groupTitle": "24._会员粉丝模块",
+    "name": "GetApiMemberFansListPagePage"
   },
   {
     "type": "get",
-    "url": "/api/advertising/position/select",
-    "title": "2. 获取广告位列表(不分页)",
-    "description": "<p>获取广告位列表(不分页)</p>",
-    "group": "20._广告位模块",
+    "url": "/api/member/fans/select",
+    "title": "02. 当前会员关注数据",
+    "description": "<p>获取当前会员关注不分页列表数据</p>",
+    "group": "24._会员粉丝模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
     "success": {
       "fields": {
         "basic params": [
@@ -6795,62 +4311,104 @@ define({ "api": [
             "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>广告位编号</p>"
+            "description": "<p>会员关注编号</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
             "optional": false,
-            "field": "title",
-            "description": "<p>广告位名称</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "is_open",
-            "description": "<p>是否开启 1 开启 2 未开启</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "width",
-            "description": "<p>广告位宽度</p>"
+            "field": "member_id",
+            "description": "<p>粉丝编号</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
             "optional": false,
-            "field": "height",
-            "description": "<p>广告位高度</p>"
+            "field": "attention_member_id",
+            "description": "<p>当前会员编号</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
             "optional": false,
             "field": "create_time",
-            "description": "<p>添加时间</p>"
+            "description": "<p>关注时间</p>"
+          }
+        ],
+        "member params": [
+          {
+            "group": "member params",
+            "type": "Number",
+            "optional": false,
+            "field": "nickname",
+            "description": "<p>粉丝会员昵称</p>"
+          }
+        ],
+        "attention params": [
+          {
+            "group": "attention params",
+            "type": "Number",
+            "optional": false,
+            "field": "nickname",
+            "description": "<p>当前会员昵称</p>"
           }
         ]
       }
     },
     "sampleRequest": [
       {
-        "url": "/api/advertising/position/select"
+        "url": "/api/member/fans/select"
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Advertising/Relevance/PositionController.php",
-    "groupTitle": "20._广告位模块",
-    "name": "GetApiAdvertisingPositionSelect"
+    "filename": "app/Http/Controllers/Api/Module/Member/FansController.php",
+    "groupTitle": "24._会员粉丝模块",
+    "name": "GetApiMemberFansSelect"
   },
   {
     "type": "get",
-    "url": "/api/advertising/position/view/{id}",
-    "title": "3. 获取广告位详情",
-    "description": "<p>获取广告位详情</p>",
-    "group": "20._广告位模块",
+    "url": "/api/member/approval/list?page={page}",
+    "title": "01. 当前会员点赞列表",
+    "description": "<p>获取当前会员点赞分页列表</p>",
+    "group": "25._会员点赞模块(Todo)",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "page",
+            "description": "<p>当前页数</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "basic params": [
@@ -6859,62 +4417,277 @@ define({ "api": [
             "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>广告位编号</p>"
+            "description": "<p>会员点赞编号</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
             "optional": false,
-            "field": "title",
-            "description": "<p>广告位名称</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "is_open",
-            "description": "<p>是否开启 1 开启 2 未开启</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "width",
-            "description": "<p>广告位宽度</p>"
+            "field": "member_id",
+            "description": "<p>会员编号</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
             "optional": false,
-            "field": "height",
-            "description": "<p>广告位高度</p>"
+            "field": "course_id",
+            "description": "<p>课程编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "production_id",
+            "description": "<p>作品编号</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
             "optional": false,
             "field": "create_time",
-            "description": "<p>添加时间</p>"
+            "description": "<p>点赞时间</p>"
           }
         ]
       }
     },
     "sampleRequest": [
       {
-        "url": "/api/advertising/position/view/{id}"
+        "url": "/api/member/approval/list"
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Advertising/Relevance/PositionController.php",
-    "groupTitle": "20._广告位模块",
-    "name": "GetApiAdvertisingPositionViewId"
+    "filename": "app/Http/Controllers/Api/Module/Member/ApprovalController.php",
+    "groupTitle": "25._会员点赞模块(Todo)",
+    "name": "GetApiMemberApprovalListPagePage"
   },
   {
     "type": "get",
-    "url": "/api/advertising/list?page={page}",
-    "title": "1. 获取广告列表(分页)",
-    "description": "<p>获取广告列表(分页)</p>",
-    "group": "21._广告模块",
+    "url": "/api/member/approval/select",
+    "title": "02. 会员点赞列表(不分页)",
+    "description": "<p>获取当前会员点赞列表(不分页)</p>",
+    "group": "25._会员点赞模块(Todo)",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>会员点赞编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "member_id",
+            "description": "<p>会员编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "course_id",
+            "description": "<p>课程编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "production_id",
+            "description": "<p>作品编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "create_time",
+            "description": "<p>点赞时间</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/approval/select"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/ApprovalController.php",
+    "groupTitle": "25._会员点赞模块(Todo)",
+    "name": "GetApiMemberApprovalSelect"
+  },
+  {
+    "type": "post",
+    "url": "/api/member/approval/handle",
+    "title": "04. 点赞操作",
+    "description": "<p>当前会员执行点赞操作, 已经点赞过，再次点击取消点赞</p>",
+    "group": "25._会员点赞模块(Todo)",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "course_id",
+            "description": "<p>课程编号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "production_id",
+            "description": "<p>作品编号</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/approval/handle"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/ApprovalController.php",
+    "groupTitle": "25._会员点赞模块(Todo)",
+    "name": "PostApiMemberApprovalHandle"
+  },
+  {
+    "type": "post",
+    "url": "/api/member/approval/status",
+    "title": "03. 作品是否点赞",
+    "description": "<p>获取当前会员点赞的详情</p>",
+    "group": "25._会员点赞模块(Todo)",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "production_id",
+            "description": "<p>作品编号</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/approval/status"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/ApprovalController.php",
+    "groupTitle": "25._会员点赞模块(Todo)",
+    "name": "PostApiMemberApprovalStatus"
+  },
+  {
+    "type": "get",
+    "url": "/api/member/complain/list?page={page}",
+    "title": "01. 当前会员投诉列表",
+    "description": "<p>获取当前会员投诉分页列表</p>",
+    "group": "29._会员投诉模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
     "parameter": {
       "fields": {
         "Parameter": [
@@ -6929,8 +4702,8 @@ define({ "api": [
             "group": "Parameter",
             "type": "int",
             "optional": false,
-            "field": "position_id",
-            "description": "<p>广告位编号</p>"
+            "field": "category_id",
+            "description": "<p>投诉分类编号</p>"
           }
         ]
       }
@@ -6943,76 +4716,89 @@ define({ "api": [
             "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>广告编号</p>"
+            "description": "<p>投诉编号</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
             "optional": false,
-            "field": "position_id",
-            "description": "<p>广告位编号</p>"
+            "field": "category_id",
+            "description": "<p>投诉分类编号</p>"
           },
           {
             "group": "basic params",
             "type": "String",
             "optional": false,
-            "field": "title",
-            "description": "<p>广告标题</p>"
+            "field": "content",
+            "description": "<p>投诉内容</p>"
           },
           {
             "group": "basic params",
             "type": "String",
             "optional": false,
-            "field": "picture",
-            "description": "<p>广告图片资源</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "url",
-            "description": "<p>广告其他资源</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "type",
-            "description": "<p>链接类型</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "link",
-            "description": "<p>广告链接</p>"
+            "field": "read_status",
+            "description": "<p>是否查阅</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
             "optional": false,
             "field": "create_time",
-            "description": "<p>添加时间</p>"
+            "description": "<p>投诉时间</p>"
+          }
+        ],
+        "category params": [
+          {
+            "group": "category params",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>投诉分类标题</p>"
           }
         ]
       }
     },
     "sampleRequest": [
       {
-        "url": "/api/advertising/list"
+        "url": "/api/member/complain/list"
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Advertising/AdvertisingController.php",
-    "groupTitle": "21._广告模块",
-    "name": "GetApiAdvertisingListPagePage"
+    "filename": "app/Http/Controllers/Api/Module/Member/ComplainController.php",
+    "groupTitle": "29._会员投诉模块",
+    "name": "GetApiMemberComplainListPagePage"
   },
   {
     "type": "get",
-    "url": "/api/advertising/select",
-    "title": "2. 获取广告列表(不分页)",
-    "description": "<p>获取广告列表(不分页)</p>",
-    "group": "21._广告模块",
+    "url": "/api/member/complain/select",
+    "title": "02. 当前会员投诉数据",
+    "description": "<p>获取当前会员投诉不分页列表数据</p>",
+    "group": "29._会员投诉模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
     "parameter": {
       "fields": {
         "Parameter": [
@@ -7020,8 +4806,8 @@ define({ "api": [
             "group": "Parameter",
             "type": "int",
             "optional": false,
-            "field": "position_id",
-            "description": "<p>广告位编号</p>"
+            "field": "category_id",
+            "description": "<p>投诉分类编号</p>"
           }
         ]
       }
@@ -7034,76 +4820,89 @@ define({ "api": [
             "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>广告编号</p>"
+            "description": "<p>投诉编号</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
             "optional": false,
-            "field": "position_id",
-            "description": "<p>广告位编号</p>"
+            "field": "category_id",
+            "description": "<p>投诉分类编号</p>"
           },
           {
             "group": "basic params",
             "type": "String",
             "optional": false,
-            "field": "title",
-            "description": "<p>广告标题</p>"
+            "field": "content",
+            "description": "<p>投诉内容</p>"
           },
           {
             "group": "basic params",
             "type": "String",
             "optional": false,
-            "field": "picture",
-            "description": "<p>广告图片资源</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "url",
-            "description": "<p>广告其他资源</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "type",
-            "description": "<p>链接类型</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "link",
-            "description": "<p>广告链接</p>"
+            "field": "read_status",
+            "description": "<p>是否查阅</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
             "optional": false,
             "field": "create_time",
-            "description": "<p>添加时间</p>"
+            "description": "<p>投诉时间</p>"
+          }
+        ],
+        "category params": [
+          {
+            "group": "category params",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>投诉分类标题</p>"
           }
         ]
       }
     },
     "sampleRequest": [
       {
-        "url": "/api/advertising/select"
+        "url": "/api/member/complain/select"
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Advertising/AdvertisingController.php",
-    "groupTitle": "21._广告模块",
-    "name": "GetApiAdvertisingSelect"
+    "filename": "app/Http/Controllers/Api/Module/Member/ComplainController.php",
+    "groupTitle": "29._会员投诉模块",
+    "name": "GetApiMemberComplainSelect"
   },
   {
     "type": "get",
-    "url": "/api/advertising/view/{id}",
-    "title": "3. 获取广告详情",
-    "description": "<p>获取广告详情</p>",
-    "group": "21._广告模块",
+    "url": "/api/member/complain/view/{id}",
+    "title": "03. 当前会员投诉详情",
+    "description": "<p>获取当前会员投诉详情</p>",
+    "group": "29._会员投诉模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
     "success": {
       "fields": {
         "basic params": [
@@ -7112,69 +4911,118 @@ define({ "api": [
             "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>广告编号</p>"
+            "description": "<p>投诉编号</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
             "optional": false,
-            "field": "position_id",
-            "description": "<p>广告位编号</p>"
+            "field": "category_id",
+            "description": "<p>投诉分类编号</p>"
           },
           {
             "group": "basic params",
             "type": "String",
             "optional": false,
-            "field": "title",
-            "description": "<p>广告标题</p>"
+            "field": "content",
+            "description": "<p>投诉内容</p>"
           },
           {
             "group": "basic params",
             "type": "String",
             "optional": false,
-            "field": "picture",
-            "description": "<p>广告图片资源</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "url",
-            "description": "<p>广告其他资源</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "type",
-            "description": "<p>链接类型</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "link",
-            "description": "<p>广告链接</p>"
+            "field": "read_status",
+            "description": "<p>是否查阅</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
             "optional": false,
             "field": "create_time",
-            "description": "<p>添加时间</p>"
+            "description": "<p>投诉时间</p>"
+          }
+        ],
+        "category params": [
+          {
+            "group": "category params",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>投诉分类标题</p>"
           }
         ]
       }
     },
     "sampleRequest": [
       {
-        "url": "/api/advertising/view/{id}"
+        "url": "/api/member/complain/view/{id}"
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Advertising/AdvertisingController.php",
-    "groupTitle": "21._广告模块",
-    "name": "GetApiAdvertisingViewId"
+    "filename": "app/Http/Controllers/Api/Module/Member/ComplainController.php",
+    "groupTitle": "29._会员投诉模块",
+    "name": "GetApiMemberComplainViewId"
+  },
+  {
+    "type": "post",
+    "url": "/api/member/complain/handle",
+    "title": "04. 编辑投诉信息",
+    "description": "<p>编辑投诉信息</p>",
+    "group": "29._会员投诉模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "category_id",
+            "description": "<p>投诉分类编号（不可为空）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "content",
+            "description": "<p>投诉内容（不可为空）</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/complain/handle"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/ComplainController.php",
+    "groupTitle": "29._会员投诉模块",
+    "name": "PostApiMemberComplainHandle"
   },
   {
     "type": "get",
@@ -7461,246 +5309,11 @@ define({ "api": [
     "name": "PostApiMemberInvitationStatus"
   },
   {
-    "type": "post",
-    "url": "/api/member/asset/center",
-    "title": "01. 资产中心",
-    "description": "<p>获取当前会员资产详情</p>",
-    "group": "32._会员资产模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "red_envelope",
-            "description": "<p>红包金额</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "lollipop",
-            "description": "<p>棒棒糖数</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "production",
-            "description": "<p>作品数</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/asset/center"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/AssetController.php",
-    "groupTitle": "32._会员资产模块",
-    "name": "PostApiMemberAssetCenter"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/asset/lollipop",
-    "title": "02. 我的棒棒糖",
-    "description": "<p>获取当前会员棒棒糖</p>",
-    "group": "32._会员资产模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "data",
-            "description": "<p>棒棒糖数</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/asset/lollipop"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/AssetController.php",
-    "groupTitle": "32._会员资产模块",
-    "name": "PostApiMemberAssetLollipop"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/asset/money",
-    "title": "02. 我的红包",
-    "description": "<p>获取当前会员棒棒糖</p>",
-    "group": "32._会员资产模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "data",
-            "description": "<p>红包金额</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/asset/money"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/AssetController.php",
-    "groupTitle": "32._会员资产模块",
-    "name": "PostApiMemberAssetMoney"
-  },
-  {
     "type": "get",
-    "url": "/api/member/course/unit/list?page={page}",
-    "title": "01. 会员课程单元列表(分页)",
-    "description": "<p>获取当前会员订阅的课程单元列表(分页)</p>",
-    "group": "34._会员课程单元模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "page",
-            "description": "<p>当前页数</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "courseware_id",
-            "description": "<p>课件编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "level_id",
-            "description": "<p>课件级别编号</p>"
-          }
-        ]
-      }
-    },
+    "url": "/api/car/source/select",
+    "title": "01. 汽车来源数据",
+    "description": "<p>获取汽车来源不分页列表数据</p>",
+    "group": "40._汽车来源模块",
     "success": {
       "fields": {
         "basic params": [
@@ -7709,1612 +5322,27 @@ define({ "api": [
             "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>学员课程单元编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>学员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "courseware_id",
-            "description": "<p>课件编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "level_id",
-            "description": "<p>课件级别编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "unit_id",
-            "description": "<p>课件单元编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_finish",
-            "description": "<p>是否完成学习 0 未完成 1 已完成</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>添加时间</p>"
-          }
-        ],
-        "unit params": [
-          {
-            "group": "unit params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "unit params",
-            "type": "Number",
-            "optional": false,
-            "field": "courseware_id",
-            "description": "<p>课件编号</p>"
-          },
-          {
-            "group": "unit params",
-            "type": "Number",
-            "optional": false,
-            "field": "level_id",
-            "description": "<p>课件级别编号</p>"
-          },
-          {
-            "group": "unit params",
-            "type": "Number",
-            "optional": false,
-            "field": "title",
-            "description": "<p>课件单元名称</p>"
-          },
-          {
-            "group": "unit params",
-            "type": "Number",
-            "optional": false,
-            "field": "description",
-            "description": "<p>课程单元描述</p>"
-          },
-          {
-            "group": "unit params",
-            "type": "String",
-            "optional": false,
-            "field": "sort",
-            "description": "<p>排序</p>"
-          },
-          {
-            "group": "unit params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>添加时间</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/course/unit/list"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Relevance/UnitController.php",
-    "groupTitle": "34._会员课程单元模块",
-    "name": "GetApiMemberCourseUnitListPagePage"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/course/unit/select",
-    "title": "02. 会员课程单元列表(不分页)",
-    "description": "<p>获取当前会员订阅的课程单元列表(不分页)</p>",
-    "group": "34._会员课程单元模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "courseware_id",
-            "description": "<p>课件编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "level_id",
-            "description": "<p>课件级别编号</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>学员课程单元编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>学员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "courseware_id",
-            "description": "<p>课件编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "level_id",
-            "description": "<p>课件级别编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "unit_id",
-            "description": "<p>课件单元编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_finish",
-            "description": "<p>是否完成学习 0 未完成 1 已完成</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>添加时间</p>"
-          }
-        ],
-        "unit params": [
-          {
-            "group": "unit params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "unit params",
-            "type": "Number",
-            "optional": false,
-            "field": "courseware_id",
-            "description": "<p>课件编号</p>"
-          },
-          {
-            "group": "unit params",
-            "type": "Number",
-            "optional": false,
-            "field": "level_id",
-            "description": "<p>课件级别编号</p>"
-          },
-          {
-            "group": "unit params",
-            "type": "Number",
-            "optional": false,
-            "field": "title",
-            "description": "<p>课件单元名称</p>"
-          },
-          {
-            "group": "unit params",
-            "type": "Number",
-            "optional": false,
-            "field": "description",
-            "description": "<p>课程单元描述</p>"
-          },
-          {
-            "group": "unit params",
-            "type": "String",
-            "optional": false,
-            "field": "sort",
-            "description": "<p>排序</p>"
-          },
-          {
-            "group": "unit params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>添加时间</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/course/unit/select"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Relevance/UnitController.php",
-    "groupTitle": "34._会员课程单元模块",
-    "name": "GetApiMemberCourseUnitSelect"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/course/view/unit/{id}",
-    "title": "03. 当前会员课程单元详情",
-    "description": "<p>获取当前会员课程单元详情</p>",
-    "group": "34._会员课程单元模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "id",
-            "description": "<p>课程编号</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>学员课程单元编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>学员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "courseware_id",
-            "description": "<p>课件编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "level_id",
-            "description": "<p>课件级别编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "unit_id",
-            "description": "<p>课件单元编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_finish",
-            "description": "<p>是否完成学习 0 未完成 1 已完成</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>添加时间</p>"
-          }
-        ],
-        "unit params": [
-          {
-            "group": "unit params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "unit params",
-            "type": "Number",
-            "optional": false,
-            "field": "courseware_id",
-            "description": "<p>课件编号</p>"
-          },
-          {
-            "group": "unit params",
-            "type": "Number",
-            "optional": false,
-            "field": "level_id",
-            "description": "<p>课件级别编号</p>"
-          },
-          {
-            "group": "unit params",
-            "type": "Number",
-            "optional": false,
-            "field": "title",
-            "description": "<p>课件单元名称</p>"
-          },
-          {
-            "group": "unit params",
-            "type": "Number",
-            "optional": false,
-            "field": "description",
-            "description": "<p>课程单元描述</p>"
-          },
-          {
-            "group": "unit params",
-            "type": "String",
-            "optional": false,
-            "field": "sort",
-            "description": "<p>排序</p>"
-          },
-          {
-            "group": "unit params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>添加时间</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/course/unit/view/{id}"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Relevance/UnitController.php",
-    "groupTitle": "34._会员课程单元模块",
-    "name": "GetApiMemberCourseViewUnitId"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/course/unit/point/list?page={page}",
-    "title": "01. 会员课程知识点列表(分页)",
-    "description": "<p>获取当前会员订阅的课程列表(分页)</p>",
-    "group": "36._会员课程知识点模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "page",
-            "description": "<p>当前页数</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "courseware_id",
-            "description": "<p>课件编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "level_id",
-            "description": "<p>课件级别编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "unit_id",
-            "description": "<p>课程单元编号</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>学员课程单元知识点编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>学员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "courseware_id",
-            "description": "<p>课件编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "level_id",
-            "description": "<p>课件级别编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "unit_id",
-            "description": "<p>课件单元编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "point_id",
-            "description": "<p>课件单元知识点编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_unlock",
-            "description": "<p>是否解锁 0 未解锁 1 已解锁</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "unlock_time",
-            "description": "<p>解锁时间</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_finish",
-            "description": "<p>是否完成学习 0 未完成 1 已完成</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>添加时间</p>"
-          }
-        ],
-        "point params": [
-          {
-            "group": "point params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>课程单元知识点编号</p>"
-          },
-          {
-            "group": "point params",
-            "type": "Number",
-            "optional": false,
-            "field": "courseware_id",
-            "description": "<p>课件编号</p>"
-          },
-          {
-            "group": "point params",
-            "type": "Number",
-            "optional": false,
-            "field": "level_id",
-            "description": "<p>课件级别编号</p>"
-          },
-          {
-            "group": "point params",
-            "type": "Number",
-            "optional": false,
-            "field": "unit_id",
-            "description": "<p>课件级别单元编号</p>"
-          },
-          {
-            "group": "point params",
-            "type": "Number",
-            "optional": false,
-            "field": "title",
-            "description": "<p>课件单元知识点名称</p>"
-          },
-          {
-            "group": "point params",
-            "type": "Number",
-            "optional": false,
-            "field": "picture",
-            "description": "<p>课程单元知识点图片</p>"
-          },
-          {
-            "group": "point params",
-            "type": "Number",
-            "optional": false,
-            "field": "url",
-            "description": "<p>课程单元知识点资源地址</p>"
-          },
-          {
-            "group": "point params",
-            "type": "String",
-            "optional": false,
-            "field": "sort",
-            "description": "<p>排序</p>"
-          },
-          {
-            "group": "point params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>添加时间</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/course/unit/point/list"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Relevance/Relevance/PointController.php",
-    "groupTitle": "36._会员课程知识点模块",
-    "name": "GetApiMemberCourseUnitPointListPagePage"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/course/unit/point/select",
-    "title": "02. 会员课程知识点列表(不分页)",
-    "description": "<p>获取当前会员订阅的课程知识点列表(不分页)</p>",
-    "group": "36._会员课程知识点模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "courseware_id",
-            "description": "<p>课件编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "level_id",
-            "description": "<p>课件级别编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "unit_id",
-            "description": "<p>课程单元编号</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>学员课程单元知识点编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>学员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "courseware_id",
-            "description": "<p>课件编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "level_id",
-            "description": "<p>课件级别编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "unit_id",
-            "description": "<p>课件单元编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "point_id",
-            "description": "<p>课件单元知识点编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_unlock",
-            "description": "<p>是否解锁 0 未解锁 1 已解锁</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "unlock_time",
-            "description": "<p>解锁时间</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_finish",
-            "description": "<p>是否完成学习 0 未完成 1 已完成</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>添加时间</p>"
-          }
-        ],
-        "point params": [
-          {
-            "group": "point params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>课程单元知识点编号</p>"
-          },
-          {
-            "group": "point params",
-            "type": "Number",
-            "optional": false,
-            "field": "courseware_id",
-            "description": "<p>课件编号</p>"
-          },
-          {
-            "group": "point params",
-            "type": "Number",
-            "optional": false,
-            "field": "level_id",
-            "description": "<p>课件级别编号</p>"
-          },
-          {
-            "group": "point params",
-            "type": "Number",
-            "optional": false,
-            "field": "unit_id",
-            "description": "<p>课件级别单元编号</p>"
-          },
-          {
-            "group": "point params",
-            "type": "Number",
-            "optional": false,
-            "field": "title",
-            "description": "<p>课件单元知识点名称</p>"
-          },
-          {
-            "group": "point params",
-            "type": "Number",
-            "optional": false,
-            "field": "picture",
-            "description": "<p>课程单元知识点图片</p>"
-          },
-          {
-            "group": "point params",
-            "type": "Number",
-            "optional": false,
-            "field": "url",
-            "description": "<p>课程单元知识点资源地址</p>"
-          },
-          {
-            "group": "point params",
-            "type": "String",
-            "optional": false,
-            "field": "sort",
-            "description": "<p>排序</p>"
-          },
-          {
-            "group": "point params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>添加时间</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/course/unit/point/select"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Relevance/Relevance/PointController.php",
-    "groupTitle": "36._会员课程知识点模块",
-    "name": "GetApiMemberCourseUnitPointSelect"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/course/unit/point/status/{id}",
-    "title": "04. 当前课程知识点是否完成",
-    "description": "<p>获取当前课程知识点是否完成</p>",
-    "group": "36._会员课程知识点模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "id",
-            "description": "<p>学员课程单元知识点编号</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Boolean",
-            "optional": false,
-            "field": "true",
-            "description": "<p>|false 是否完成</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/course/unit/point/status/{id}"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Relevance/Relevance/PointController.php",
-    "groupTitle": "36._会员课程知识点模块",
-    "name": "GetApiMemberCourseUnitPointStatusId"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/course/unit/point/view/{id}",
-    "title": "03. 当前会员课程知识点详情",
-    "description": "<p>获取当前会员课程知识点详情</p>",
-    "group": "36._会员课程知识点模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "id",
-            "description": "<p>学员课程单元知识点编号</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>学员课程单元知识点编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>学员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "courseware_id",
-            "description": "<p>课件编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "level_id",
-            "description": "<p>课件级别编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "unit_id",
-            "description": "<p>课件单元编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "point_id",
-            "description": "<p>课件单元知识点编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_unlock",
-            "description": "<p>是否解锁 0 未解锁 1 已解锁</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "unlock_time",
-            "description": "<p>解锁时间</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_finish",
-            "description": "<p>是否完成学习 0 未完成 1 已完成</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>添加时间</p>"
-          }
-        ],
-        "point params": [
-          {
-            "group": "point params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>课程单元知识点编号</p>"
-          },
-          {
-            "group": "point params",
-            "type": "Number",
-            "optional": false,
-            "field": "courseware_id",
-            "description": "<p>课件编号</p>"
-          },
-          {
-            "group": "point params",
-            "type": "Number",
-            "optional": false,
-            "field": "level_id",
-            "description": "<p>课件级别编号</p>"
-          },
-          {
-            "group": "point params",
-            "type": "Number",
-            "optional": false,
-            "field": "unit_id",
-            "description": "<p>课件级别单元编号</p>"
-          },
-          {
-            "group": "point params",
-            "type": "Number",
-            "optional": false,
-            "field": "title",
-            "description": "<p>课件单元知识点名称</p>"
-          },
-          {
-            "group": "point params",
-            "type": "Number",
-            "optional": false,
-            "field": "picture",
-            "description": "<p>课程单元知识点图片</p>"
-          },
-          {
-            "group": "point params",
-            "type": "Number",
-            "optional": false,
-            "field": "url",
-            "description": "<p>课程单元知识点资源地址</p>"
-          },
-          {
-            "group": "point params",
-            "type": "String",
-            "optional": false,
-            "field": "sort",
-            "description": "<p>排序</p>"
-          },
-          {
-            "group": "point params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>添加时间</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/course/unit/point/view/{id}"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Relevance/Relevance/PointController.php",
-    "groupTitle": "36._会员课程知识点模块",
-    "name": "GetApiMemberCourseUnitPointViewId"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/course/unit/point/finish",
-    "title": "05. 完成课程知识点",
-    "description": "<p>当前会员学习完成了课程知识点</p>",
-    "group": "36._会员课程知识点模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "id",
-            "description": "<p>学员课程单元知识点编号</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/course/unit/point/finish"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Relevance/Relevance/PointController.php",
-    "groupTitle": "36._会员课程知识点模块",
-    "name": "PostApiMemberCourseUnitPointFinish"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/role/info",
-    "title": "01. 获取会员角色信息",
-    "description": "<p>获取会员角色信息</p>",
-    "group": "38._会员角色模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>角色编号</p>"
+            "description": "<p>汽车来源编号</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
             "optional": false,
             "field": "title",
-            "description": "<p>角色名称</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "content",
-            "description": "<p>角色描述</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>创建时间</p>"
+            "description": "<p>汽车来源名称</p>"
           }
         ]
       }
     },
     "sampleRequest": [
       {
-        "url": "/api/member/role/info"
+        "url": "/api/car/source/select"
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/RoleController.php",
-    "groupTitle": "38._会员角色模块",
-    "name": "GetApiMemberRoleInfo"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/order/goods/logistics/list?page={page}",
-    "title": "01. 商品订单物流列表(分页)",
-    "description": "<p>获取当前会员商品订单物流列表(分页)</p>",
-    "group": "40._商品订单物流模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "page",
-            "description": "<p>当前页数</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>订单编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "order_id",
-            "description": "<p>订单编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "company_name",
-            "description": "<p>物流公司</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "logistics_no",
-            "description": "<p>物流单号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "logistics_status",
-            "description": "<p>物流状态</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/order/goods/logistics/list"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Order/Goods/LogisticsController.php",
-    "groupTitle": "40._商品订单物流模块",
-    "name": "GetApiMemberOrderGoodsLogisticsListPagePage"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/order/goods/logistics/select",
-    "title": "02. 商品订单物流列表(不分页)",
-    "description": "<p>获取当前会员商品订单物流列表(不分页)</p>",
-    "group": "40._商品订单物流模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>订单编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "order_id",
-            "description": "<p>订单编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "company_name",
-            "description": "<p>物流公司</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "logistics_no",
-            "description": "<p>物流单号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "logistics_status",
-            "description": "<p>物流状态</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/order/goods/logistics/select"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Order/Goods/LogisticsController.php",
-    "groupTitle": "40._商品订单物流模块",
-    "name": "GetApiMemberOrderGoodsLogisticsSelect"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/order/goods/logistics/view/{id}",
-    "title": "03. 商品订单物流详情",
-    "description": "<p>获取当前会员商品订单物流的详情</p>",
-    "group": "40._商品订单物流模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "id",
-            "description": "<p>订单编号</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>订单编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "order_id",
-            "description": "<p>订单编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "company_name",
-            "description": "<p>物流公司</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "logistics_no",
-            "description": "<p>物流单号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "logistics_status",
-            "description": "<p>物流状态</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/order/goods/logistics/view/{id}"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Order/Goods/LogisticsController.php",
-    "groupTitle": "40._商品订单物流模块",
-    "name": "GetApiMemberOrderGoodsLogisticsViewId"
+    "filename": "app/Http/Controllers/Api/Module/Car/SourceController.php",
+    "groupTitle": "40._汽车来源模块",
+    "name": "GetApiCarSourceSelect"
   },
   {
     "type": "get",
@@ -9428,7 +5456,7 @@ define({ "api": [
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Order/Course/LogisticsController.php",
+    "filename": "app/Http/Controllers/Api/Module/Member/Order/LogisticsController.php",
     "groupTitle": "40._课程订单物流模块",
     "name": "GetApiMemberOrderCourseLogisticsListPagePage"
   },
@@ -9531,7 +5559,7 @@ define({ "api": [
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Order/Course/LogisticsController.php",
+    "filename": "app/Http/Controllers/Api/Module/Member/Order/LogisticsController.php",
     "groupTitle": "40._课程订单物流模块",
     "name": "GetApiMemberOrderCourseLogisticsSelect"
   },
@@ -9647,41 +5675,16 @@ define({ "api": [
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Order/Course/LogisticsController.php",
+    "filename": "app/Http/Controllers/Api/Module/Member/Order/LogisticsController.php",
     "groupTitle": "40._课程订单物流模块",
     "name": "GetApiMemberOrderCourseLogisticsViewId"
   },
   {
     "type": "get",
-    "url": "/api/member/order/goods/list?page={page}",
-    "title": "01. 商品订单列表(分页)",
-    "description": "<p>获取当前会员商品订单列表(分页)</p>",
-    "group": "42._商品订单模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
+    "url": "/api/car/brand/list?page={page}",
+    "title": "01. 汽车品牌列表",
+    "description": "<p>获取汽车品牌分页列表</p>",
+    "group": "41._汽车品牌模块",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -9703,224 +5706,41 @@ define({ "api": [
             "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>订单编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "order_no",
-            "description": "<p>订单号</p>"
+            "description": "<p>汽车品牌编号</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "goods_id",
-            "description": "<p>商品编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "exchange_type",
-            "description": "<p>兑换方式 1 棒棒糖 2 现金</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "lollipop_total",
-            "description": "<p>棒棒糖数量</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "pay_money",
-            "description": "<p>支付金额</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "pay_type",
-            "description": "<p>支付类型 1 支付宝 2 微信 4 苹果</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "order_status",
-            "description": "<p>订单状态 0 待发货 1 待签收 2 已签收</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>支付时间</p>"
-          }
-        ],
-        "goods params": [
-          {
-            "group": "goods params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>商品编号</p>"
-          },
-          {
-            "group": "goods params",
-            "type": "String",
             "optional": false,
             "field": "title",
-            "description": "<p>商品名称</p>"
+            "description": "<p>汽车品牌名称</p>"
           },
           {
-            "group": "goods params",
-            "type": "String",
-            "optional": false,
-            "field": "cover",
-            "description": "<p>商品封面</p>"
-          },
-          {
-            "group": "goods params",
-            "type": "String",
-            "optional": false,
-            "field": "description",
-            "description": "<p>商品描述</p>"
-          },
-          {
-            "group": "goods params",
+            "group": "basic params",
             "type": "Number",
             "optional": false,
-            "field": "lollipop_total",
-            "description": "<p>兑换需要棒棒糖数量</p>"
-          },
-          {
-            "group": "goods params",
-            "type": "Number",
-            "optional": false,
-            "field": "cash_money",
-            "description": "<p>兑换需要现金</p>"
-          },
-          {
-            "group": "goods params",
-            "type": "Number",
-            "optional": false,
-            "field": "exchange_total",
-            "description": "<p>已兑换数量</p>"
-          }
-        ],
-        "member params": [
-          {
-            "group": "member params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "open_id",
-            "description": "<p>第三方登录编号</p>"
-          },
-          {
-            "group": "member params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_no",
-            "description": "<p>会员号</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "avatar",
-            "description": "<p>会员头像</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "username",
-            "description": "<p>登录账户</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "nickname",
-            "description": "<p>会员姓名</p>"
-          },
-          {
-            "group": "member params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_freeze",
-            "description": "<p>是否冻结 1 冻结 2 不冻结</p>"
-          },
-          {
-            "group": "member params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>注册时间</p>"
+            "field": "picture",
+            "description": "<p>汽车品牌图片</p>"
           }
         ]
       }
     },
     "sampleRequest": [
       {
-        "url": "/api/member/order/goods/list"
+        "url": "/api/car/brand/list"
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Order/GoodsController.php",
-    "groupTitle": "42._商品订单模块",
-    "name": "GetApiMemberOrderGoodsListPagePage"
+    "filename": "app/Http/Controllers/Api/Module/Car/BrandController.php",
+    "groupTitle": "41._汽车品牌模块",
+    "name": "GetApiCarBrandListPagePage"
   },
   {
     "type": "get",
-    "url": "/api/member/order/goods/select",
-    "title": "02. 商品订单列表(不分页)",
-    "description": "<p>获取当前会员商品订单列表(不分页)</p>",
-    "group": "42._商品订单模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
+    "url": "/api/car/brand/select",
+    "title": "02. 汽车品牌数据",
+    "description": "<p>获取汽车品牌不分页列表数据</p>",
+    "group": "41._汽车品牌模块",
     "success": {
       "fields": {
         "basic params": [
@@ -9929,837 +5749,41 @@ define({ "api": [
             "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>订单编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "order_no",
-            "description": "<p>订单号</p>"
+            "description": "<p>汽车品牌编号</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "goods_id",
-            "description": "<p>商品编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "exchange_type",
-            "description": "<p>兑换方式 1 棒棒糖 2 现金</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "lollipop_total",
-            "description": "<p>棒棒糖数量</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "pay_money",
-            "description": "<p>支付金额</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "pay_type",
-            "description": "<p>支付类型 1 支付宝 2 微信 4 苹果</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "order_status",
-            "description": "<p>订单状态 0 待发货 1 待签收 2 已签收</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>支付时间</p>"
-          }
-        ],
-        "goods params": [
-          {
-            "group": "goods params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>商品编号</p>"
-          },
-          {
-            "group": "goods params",
-            "type": "String",
             "optional": false,
             "field": "title",
-            "description": "<p>商品名称</p>"
+            "description": "<p>汽车品牌名称</p>"
           },
           {
-            "group": "goods params",
-            "type": "String",
-            "optional": false,
-            "field": "cover",
-            "description": "<p>商品封面</p>"
-          },
-          {
-            "group": "goods params",
-            "type": "String",
-            "optional": false,
-            "field": "description",
-            "description": "<p>商品描述</p>"
-          },
-          {
-            "group": "goods params",
+            "group": "basic params",
             "type": "Number",
             "optional": false,
-            "field": "lollipop_total",
-            "description": "<p>兑换需要棒棒糖数量</p>"
-          },
-          {
-            "group": "goods params",
-            "type": "Number",
-            "optional": false,
-            "field": "cash_money",
-            "description": "<p>兑换需要现金</p>"
-          },
-          {
-            "group": "goods params",
-            "type": "Number",
-            "optional": false,
-            "field": "exchange_total",
-            "description": "<p>已兑换数量</p>"
-          }
-        ],
-        "member params": [
-          {
-            "group": "member params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "open_id",
-            "description": "<p>第三方登录编号</p>"
-          },
-          {
-            "group": "member params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_no",
-            "description": "<p>会员号</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "avatar",
-            "description": "<p>会员头像</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "username",
-            "description": "<p>登录账户</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "nickname",
-            "description": "<p>会员姓名</p>"
-          },
-          {
-            "group": "member params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_freeze",
-            "description": "<p>是否冻结 1 冻结 2 不冻结</p>"
-          },
-          {
-            "group": "member params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>注册时间</p>"
+            "field": "picture",
+            "description": "<p>汽车品牌图片</p>"
           }
         ]
       }
     },
     "sampleRequest": [
       {
-        "url": "/api/member/order/goods/select"
+        "url": "/api/car/brand/select"
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Order/GoodsController.php",
-    "groupTitle": "42._商品订单模块",
-    "name": "GetApiMemberOrderGoodsSelect"
+    "filename": "app/Http/Controllers/Api/Module/Car/BrandController.php",
+    "groupTitle": "41._汽车品牌模块",
+    "name": "GetApiCarBrandSelect"
   },
   {
     "type": "get",
-    "url": "/api/member/order/goods/view/{id}",
-    "title": "03. 商品订单详情",
-    "description": "<p>获取当前会员商品订单的详情</p>",
-    "group": "42._商品订单模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "id",
-            "description": "<p>订单编号</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>订单编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "order_no",
-            "description": "<p>订单号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "goods_id",
-            "description": "<p>商品编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "exchange_type",
-            "description": "<p>兑换方式 1 棒棒糖 2 现金</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "lollipop_total",
-            "description": "<p>棒棒糖数量</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "pay_money",
-            "description": "<p>支付金额</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "pay_type",
-            "description": "<p>支付类型 1 支付宝 2 微信 4 苹果</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "order_status",
-            "description": "<p>订单状态 0 待发货 1 待签收 2 已签收</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>支付时间</p>"
-          }
-        ],
-        "goods params": [
-          {
-            "group": "goods params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>商品编号</p>"
-          },
-          {
-            "group": "goods params",
-            "type": "String",
-            "optional": false,
-            "field": "title",
-            "description": "<p>商品名称</p>"
-          },
-          {
-            "group": "goods params",
-            "type": "String",
-            "optional": false,
-            "field": "cover",
-            "description": "<p>商品封面</p>"
-          },
-          {
-            "group": "goods params",
-            "type": "String",
-            "optional": false,
-            "field": "description",
-            "description": "<p>商品描述</p>"
-          },
-          {
-            "group": "goods params",
-            "type": "Number",
-            "optional": false,
-            "field": "lollipop_total",
-            "description": "<p>兑换需要棒棒糖数量</p>"
-          },
-          {
-            "group": "goods params",
-            "type": "Number",
-            "optional": false,
-            "field": "cash_money",
-            "description": "<p>兑换需要现金</p>"
-          },
-          {
-            "group": "goods params",
-            "type": "Number",
-            "optional": false,
-            "field": "exchange_total",
-            "description": "<p>已兑换数量</p>"
-          }
-        ],
-        "member params": [
-          {
-            "group": "member params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "open_id",
-            "description": "<p>第三方登录编号</p>"
-          },
-          {
-            "group": "member params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_no",
-            "description": "<p>会员号</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "avatar",
-            "description": "<p>会员头像</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "username",
-            "description": "<p>登录账户</p>"
-          },
-          {
-            "group": "member params",
-            "type": "String",
-            "optional": false,
-            "field": "nickname",
-            "description": "<p>会员姓名</p>"
-          },
-          {
-            "group": "member params",
-            "type": "Number",
-            "optional": false,
-            "field": "is_freeze",
-            "description": "<p>是否冻结 1 冻结 2 不冻结</p>"
-          },
-          {
-            "group": "member params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>注册时间</p>"
-          }
-        ],
-        "logistics params": [
-          {
-            "group": "logistics params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>订单物流编号</p>"
-          },
-          {
-            "group": "logistics params",
-            "type": "Number",
-            "optional": false,
-            "field": "order_id",
-            "description": "<p>订单编号</p>"
-          },
-          {
-            "group": "logistics params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "logistics params",
-            "type": "String",
-            "optional": false,
-            "field": "company_name",
-            "description": "<p>物流公司名称</p>"
-          },
-          {
-            "group": "logistics params",
-            "type": "String",
-            "optional": false,
-            "field": "logistics_no",
-            "description": "<p>物流单号</p>"
-          },
-          {
-            "group": "logistics params",
-            "type": "Number",
-            "optional": false,
-            "field": "logistics_status",
-            "description": "<p>物流状态 0 待发货 1 待签收 2 已签收</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/order/goods/view/{id}"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Order/GoodsController.php",
-    "groupTitle": "42._商品订单模块",
-    "name": "GetApiMemberOrderGoodsViewId"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/order/course/cancel",
-    "title": "07. 商品订单取消",
-    "description": "<p>当前会员取消商品订单</p>",
-    "group": "42._商品订单模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "order_id",
-            "description": "<p>订单编号</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/order/course/cancel"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Order/GoodsController.php",
-    "groupTitle": "42._商品订单模块",
-    "name": "PostApiMemberOrderCourseCancel"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/order/goods/change",
-    "title": "09. 修改商品订单",
-    "description": "<p>当前会员修改修改商品订单</p>",
-    "group": "42._商品订单模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "order_id",
-            "description": "<p>订单编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "address_id",
-            "description": "<p>收货地址编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "pay_type",
-            "description": "<p>支付类型 1 支付包 2 微信 4 苹果</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/order/goods/change"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Order/GoodsController.php",
-    "groupTitle": "42._商品订单模块",
-    "name": "PostApiMemberOrderGoodsChange"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/order/goods/finish",
-    "title": "08. 商品订单完成",
-    "description": "<p>当前会员收到货物后，点击完成商品订单</p>",
-    "group": "42._商品订单模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "order_id",
-            "description": "<p>订单编号</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/order/goods/finish"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Order/GoodsController.php",
-    "groupTitle": "42._商品订单模块",
-    "name": "PostApiMemberOrderGoodsFinish"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/order/goods/handle",
-    "title": "04. 创建商品订单",
-    "description": "<p>当前会员购买商品后，创建商品订单</p>",
-    "group": "42._商品订单模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "goods_id",
-            "description": "<p>商品编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "address_id",
-            "description": "<p>收货地址编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "exchange_type",
-            "description": "<p>兑换方式 1 棒棒糖 2 现金</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "lollipop_total",
-            "description": "<p>棒棒糖数量（与支付金额只填写一个默认使用棒棒糖）</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "pay_money",
-            "description": "<p>支付金额（与棒棒糖数量只填写一个默认使用棒棒糖）</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "pay_type",
-            "description": "<p>支付类型 1 支付包 2 微信 3 棒棒糖 4 苹果</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/order/goods/handle"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Order/GoodsController.php",
-    "groupTitle": "42._商品订单模块",
-    "name": "PostApiMemberOrderGoodsHandle"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/order/goods/pay",
-    "title": "05. 订单支付确认",
-    "description": "<p>当前会员支付完成后，调用接口更改订单支付状态</p>",
-    "group": "42._商品订单模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "order_id",
-            "description": "<p>订单编号</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/order/goods/pay"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Relevance/Order/GoodsController.php",
-    "groupTitle": "42._商品订单模块",
-    "name": "PostApiMemberOrderGoodsPay"
-  },
-  {
-    "type": "get",
-    "url": "/api/complain/category/select",
-    "title": "01. 获取投诉分类列表(不分页)",
-    "description": "<p>获取投诉分类列表(不分页)</p>",
-    "group": "43._投诉分类模块",
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>投诉分类编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "title",
-            "description": "<p>投诉分类标题</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/complain/category/select"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Complain/Relevance/CategoryController.php",
-    "groupTitle": "43._投诉分类模块",
-    "name": "GetApiComplainCategorySelect"
-  },
-  {
-    "type": "get",
-    "url": "/api/complain/list?page={page}",
-    "title": "01. 获取我的投诉列表(分页)",
-    "description": "<p>获取我的投诉列表(分页)</p>",
-    "group": "44._投诉模块",
+    "url": "/api/car/shape/list?page={page}",
+    "title": "01. 汽车车型列表",
+    "description": "<p>获取汽车车型分页列表</p>",
+    "group": "42._汽车车型模块",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -10774,8 +5798,8 @@ define({ "api": [
             "group": "Parameter",
             "type": "int",
             "optional": false,
-            "field": "position_id",
-            "description": "<p>投诉位编号</p>"
+            "field": "brand_id",
+            "description": "<p>汽车品牌编号</p>"
           }
         ]
       }
@@ -10788,440 +5812,142 @@ define({ "api": [
             "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>投诉编号</p>"
+            "description": "<p>汽车车型编号</p>"
           },
           {
             "group": "basic params",
             "type": "Number",
             "optional": false,
-            "field": "position_id",
-            "description": "<p>投诉位编号</p>"
+            "field": "brand_id",
+            "description": "<p>汽车品牌编号</p>"
           },
           {
             "group": "basic params",
-            "type": "String",
+            "type": "Number",
             "optional": false,
             "field": "title",
-            "description": "<p>投诉标题</p>"
+            "description": "<p>汽车车型名称</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/car/shape/list"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Car/ShapeController.php",
+    "groupTitle": "42._汽车车型模块",
+    "name": "GetApiCarShapeListPagePage"
+  },
+  {
+    "type": "get",
+    "url": "/api/car/shape/select",
+    "title": "02. 汽车车型数据",
+    "description": "<p>获取汽车车型不分页列表数据</p>",
+    "group": "42._汽车车型模块",
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>汽车车型编号</p>"
           },
           {
             "group": "basic params",
-            "type": "String",
+            "type": "Number",
+            "optional": false,
+            "field": "brand_id",
+            "description": "<p>汽车品牌编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车车型名称</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/car/shape/select"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Car/ShapeController.php",
+    "groupTitle": "42._汽车车型模块",
+    "name": "GetApiCarShapeSelect"
+  },
+  {
+    "type": "get",
+    "url": "/api/car/shape/view/{id}",
+    "title": "03. 汽车车型详情",
+    "description": "<p>获取汽车车型详情</p>",
+    "group": "42._汽车车型模块",
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>汽车车型编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "brand_id",
+            "description": "<p>汽车品牌编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车车型名称</p>"
+          }
+        ],
+        "brand params": [
+          {
+            "group": "brand params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>汽车品牌编号</p>"
+          },
+          {
+            "group": "brand params",
+            "type": "Number",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车品牌名称</p>"
+          },
+          {
+            "group": "brand params",
+            "type": "Number",
             "optional": false,
             "field": "picture",
-            "description": "<p>投诉图片资源</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "url",
-            "description": "<p>投诉其他资源</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "link",
-            "description": "<p>投诉链接</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>添加时间</p>"
+            "description": "<p>汽车品牌图片</p>"
           }
         ]
       }
     },
     "sampleRequest": [
       {
-        "url": "/api/complain/list"
+        "url": "/api/car/shape/view/{id}"
       }
     ],
     "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Complain/ComplainController.php",
-    "groupTitle": "44._投诉模块",
-    "name": "GetApiComplainListPagePage"
-  },
-  {
-    "type": "get",
-    "url": "/api/complain/select",
-    "title": "02. 获取我的投诉列表(不分页)",
-    "description": "<p>获取我的投诉列表(不分页)</p>",
-    "group": "44._投诉模块",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "position_id",
-            "description": "<p>投诉位编号</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>投诉编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "position_id",
-            "description": "<p>投诉位编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "title",
-            "description": "<p>投诉标题</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "picture",
-            "description": "<p>投诉图片资源</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "url",
-            "description": "<p>投诉其他资源</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "link",
-            "description": "<p>投诉链接</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>添加时间</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/complain/select"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Complain/ComplainController.php",
-    "groupTitle": "44._投诉模块",
-    "name": "GetApiComplainSelect"
-  },
-  {
-    "type": "get",
-    "url": "/api/complain/view/{id}",
-    "title": "03. 获取我的投诉详情",
-    "description": "<p>获取我的投诉详情</p>",
-    "group": "44._投诉模块",
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>投诉编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "position_id",
-            "description": "<p>投诉位编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "title",
-            "description": "<p>投诉标题</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "picture",
-            "description": "<p>投诉图片资源</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "url",
-            "description": "<p>投诉其他资源</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "link",
-            "description": "<p>投诉链接</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>添加时间</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/complain/view/{id}"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Complain/ComplainController.php",
-    "groupTitle": "44._投诉模块",
-    "name": "GetApiComplainViewId"
-  },
-  {
-    "type": "post",
-    "url": "/api/complain/handle",
-    "title": "04. 编辑投诉信息",
-    "description": "<p>编辑招聘老师的信息</p>",
-    "group": "44._投诉模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "category_id",
-            "description": "<p>投诉类型（不可为空）</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "content",
-            "description": "<p>投诉内容（不可为空）</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/complain/handle"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Complain/ComplainController.php",
-    "groupTitle": "44._投诉模块",
-    "name": "PostApiComplainHandle"
-  },
-  {
-    "type": "get",
-    "url": "/api/common/problem/list?page={page}",
-    "title": "1. 获取常见问题列表(分页)",
-    "description": "<p>获取常见问题列表(分页)</p>",
-    "group": "46._常见问题模块",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "page",
-            "description": "<p>当前页数</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>常见问题编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "title",
-            "description": "<p>常见问题标题</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "position_id",
-            "description": "<p>常见问题位编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>添加时间</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/common/problem/list"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Common/ProblemController.php",
-    "groupTitle": "46._常见问题模块",
-    "name": "GetApiCommonProblemListPagePage"
-  },
-  {
-    "type": "get",
-    "url": "/api/common/problem/select",
-    "title": "2. 获取常见问题列表(不分页)",
-    "description": "<p>获取常见问题列表(不分页)</p>",
-    "group": "46._常见问题模块",
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>常见问题编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "title",
-            "description": "<p>常见问题标题</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "content",
-            "description": "<p>常见问题答案</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>添加时间</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/common/problem/select"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Common/ProblemController.php",
-    "groupTitle": "46._常见问题模块",
-    "name": "GetApiCommonProblemSelect"
-  },
-  {
-    "type": "get",
-    "url": "/api/common/problem/view/{id}",
-    "title": "3. 获取常见问题详情",
-    "description": "<p>获取常见问题详情</p>",
-    "group": "46._常见问题模块",
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>常见问题编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "title",
-            "description": "<p>常见问题标题</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "content",
-            "description": "<p>常见问题答案</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "create_time",
-            "description": "<p>添加时间</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/common/problem/view/{id}"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Common/ProblemController.php",
-    "groupTitle": "46._常见问题模块",
-    "name": "GetApiCommonProblemViewId"
+    "filename": "app/Http/Controllers/Api/Module/Car/ShapeController.php",
+    "groupTitle": "42._汽车车型模块",
+    "name": "GetApiCarShapeViewId"
   }
 ] });

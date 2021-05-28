@@ -1,48 +1,57 @@
 <?php
-namespace App\Http\Controllers\Api\Module\Common;
+namespace App\Http\Controllers\Api\Module;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 use App\Http\Constant\Code;
-use App\Http\Constant\Parameter;
 use App\Http\Controllers\Api\BaseController;
-
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
- * @dateTime 2021-02-22
+ * @dateTime 2021-05-28
  *
- * 常见问题控制器类
+ * 广告控制器类
  */
-class ProblemController extends BaseController
+class AdvertisingController extends BaseController
 {
-  protected $_model = 'App\Models\Common\Module\Common\Problem';
+  protected $_model = 'App\Models\Api\Module\Advertising';
 
   protected $_where = [];
 
-  protected $_params = [];
-
-  protected $_order = [
-    ['key' => 'create_time', 'value' => 'desc'],
+  protected $_params = [
+    'position_id',
   ];
 
-  protected $_relevance = [];
+  protected $_addition = [];
+
+  /**
+   * 排序条件
+   */
+  protected $_order = [
+    ['key' => 'sort', 'value' => 'desc'],
+  ];
+
+  protected $_relevance = [
+    'resource'
+  ];
 
 
   /**
-   * @api {get} /api/common/problem/list?page={page} 01. 常见问题列表
-   * @apiDescription 获取常见问题分页列表
-   * @apiGroup 08. 常见问题模块
+   * @api {get} /api/advertising/list?page={page} 01. 广告列表
+   * @apiDescription 获取广告分页列表
+   * @apiGroup 05. 广告模块
    *
    * @apiParam {int} page 当前页数
+   * @apiParam {int} position_id 广告位编号
    *
-   * @apiSuccess (basic params) {Number} id 常见问题编号
-   * @apiSuccess (basic params) {String} title 常见问题标题
-   * @apiSuccess (basic params) {Number} position_id 常见问题位编号
+   * @apiSuccess (basic params) {Number} id 广告编号
+   * @apiSuccess (basic params) {Number} position_id 广告位编号
+   * @apiSuccess (basic params) {String} title 广告标题
+   * @apiSuccess (basic params) {String} content 广告内容
    * @apiSuccess (basic params) {Number} create_time 添加时间
+   * @apiSuccess (resource params) {String} picture 广告图片资源
    *
-   * @apiSampleRequest /api/common/problem/list
+   * @apiSampleRequest /api/advertising/list
    * @apiVersion 1.0.0
    */
   public function list(Request $request)
@@ -74,16 +83,20 @@ class ProblemController extends BaseController
 
 
   /**
-   * @api {get} /api/common/problem/select 02. 常见问题数据
-   * @apiDescription 获取常见问题不分页列表数据
-   * @apiGroup 08. 常见问题模块
+   * @api {get} /api/advertising/select 02. 广告数据
+   * @apiDescription 获取广告数据
+   * @apiGroup 05. 广告模块
    *
-   * @apiSuccess (basic params) {Number} id 常见问题编号
-   * @apiSuccess (basic params) {String} title 常见问题标题
-   * @apiSuccess (basic params) {String} content 常见问题答案
+   * @apiParam {int} position_id 广告位编号
+   *
+   * @apiSuccess (basic params) {Number} id 广告编号
+   * @apiSuccess (basic params) {Number} position_id 广告位编号
+   * @apiSuccess (basic params) {String} title 广告标题
+   * @apiSuccess (basic params) {String} content 广告内容
    * @apiSuccess (basic params) {Number} create_time 添加时间
+   * @apiSuccess (resource params) {String} picture 广告图片资源
    *
-   * @apiSampleRequest /api/common/problem/select
+   * @apiSampleRequest /api/advertising/select
    * @apiVersion 1.0.0
    */
   public function select(Request $request)
@@ -100,7 +113,7 @@ class ProblemController extends BaseController
       // 获取关联对象
       $relevance = self::getRelevanceData($this->_relevance, 'select');
 
-      $response = $this->_model::getList($condition, $relevance, $this->_order);
+      $response = $this->_model::getList($condition, $relevance, $this->_order, false, false, 5);
 
       return self::success($response);
     }
@@ -115,16 +128,18 @@ class ProblemController extends BaseController
 
 
   /**
-   * @api {get} /api/common/problem/view/{id} 03. 常见问题详情
-   * @apiDescription 获取常见问题详情
-   * @apiGroup 08. 常见问题模块
+   * @api {get} /api/advertising/view/{id} 03. 广告详情
+   * @apiDescription 获取广告详情
+   * @apiGroup 05. 广告模块
    *
-   * @apiSuccess (basic params) {Number} id 常见问题编号
-   * @apiSuccess (basic params) {String} title 常见问题标题
-   * @apiSuccess (basic params) {String} content 常见问题答案
+   * @apiSuccess (basic params) {Number} id 广告编号
+   * @apiSuccess (basic params) {Number} position_id 广告位编号
+   * @apiSuccess (basic params) {String} title 广告标题
+   * @apiSuccess (basic params) {String} content 广告内容
    * @apiSuccess (basic params) {Number} create_time 添加时间
+   * @apiSuccess (resource params) {String} picture 广告图片资源
    *
-   * @apiSampleRequest /api/common/problem/view/{id}
+   * @apiSampleRequest /api/advertising/view/{id}
    * @apiVersion 1.0.0
    */
   public function view(Request $request, $id)

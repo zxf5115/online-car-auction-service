@@ -5,21 +5,21 @@ use App\Models\Base;
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
- * @dateTime 2021-01-16
+ * @dateTime 2021-05-28
  *
- * 学员邀请模型类
+ * 会员关注模型类
  */
-class Invitation extends Base
+class Attention extends Base
 {
   // 表名
-  public $table = "module_member_invitation";
+  public $table = "module_member_attention";
 
   // 可以批量修改的字段
   public $fillable = [
     'id',
     'organization_id',
     'member_id',
-    'invitation_member_id',
+    'attention_member_id',
   ];
 
   // 隐藏的属性
@@ -38,31 +38,39 @@ class Invitation extends Base
    * @author zhangxiaofei [<1326336909@qq.com>]
    * @dateTime 2020-10-20
    * ------------------------------------------
-   * 学员与学员关联表
+   * 会员与会员关联表
    * ------------------------------------------
    *
-   * 学员与学员关联表
+   * 会员与会员关联表
    *
    * @return [关联对象]
    */
   public function member()
   {
-    return $this->belongsTo('App\Models\Common\Module\Member', 'member_id', 'id');
+    return $this->belongsTo(
+      'App\Models\Common\Module\Member',
+      'member_id',
+      'id'
+    );
   }
 
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
    * @dateTime 2020-10-20
    * ------------------------------------------
-   * 学员与邀请学员关联表
+   * 会员与关注会员关联表
    * ------------------------------------------
    *
-   * 学员与邀请学员关联表
+   * 会员与关注会员关联表
    *
    * @return [关联对象]
    */
-  public function invitationMember()
+  public function attention()
   {
-    return $this->belongsTo('App\Models\Common\Module\Member', 'invitation_member_id', 'id');
+    return $this->belongsTo(
+      'App\Models\Common\Module\Member',
+      'attention_member_id',
+      'id'
+    );
   }
 }

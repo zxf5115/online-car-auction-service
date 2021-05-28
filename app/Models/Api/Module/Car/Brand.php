@@ -12,5 +12,12 @@ use App\Models\Common\Module\Car\Brand as Common;
  */
 class Brand extends Common
 {
-
+  // 隐藏的属性
+  public $hidden = [
+    'organization_id',
+    'sort',
+    'status',
+    'create_time',
+    'update_time'
+  ];
 }

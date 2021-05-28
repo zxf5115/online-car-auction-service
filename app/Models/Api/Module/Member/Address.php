@@ -11,5 +11,10 @@ use App\Models\Common\Module\Member\Address as Common;
  */
 class Address extends Common
 {
-
+  // 隐藏的属性
+  public $hidden = [
+    'organization_id',
+    'status',
+    'update_time'
+  ];
 }

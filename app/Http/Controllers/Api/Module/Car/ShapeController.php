@@ -1,48 +1,59 @@
 <?php
-namespace App\Http\Controllers\Api\Module\Common;
+namespace App\Http\Controllers\Api\Module\Car;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 use App\Http\Constant\Code;
-use App\Http\Constant\Parameter;
 use App\Http\Controllers\Api\BaseController;
-
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
- * @dateTime 2021-02-22
+ * @dateTime 2021-05-28
  *
- * 常见问题控制器类
+ * 汽车车型控制器类
  */
-class ProblemController extends BaseController
+class ShapeController extends BaseController
 {
-  protected $_model = 'App\Models\Common\Module\Common\Problem';
+  /**
+   * 模型
+   */
+  protected $_model = 'App\Models\Api\Module\Car\Shape';
 
   protected $_where = [];
 
   protected $_params = [];
 
+  protected $_addition = [];
+
+  /**
+   * 排序条件
+   */
   protected $_order = [
-    ['key' => 'create_time', 'value' => 'desc'],
+    ['key' => 'sort', 'value' => 'desc'],
   ];
 
-  protected $_relevance = [];
+  protected $_relevance = [
+    'list' => false,
+    'select' => false,
+    'view' => [
+      'brand'
+    ]
+  ];
 
 
   /**
-   * @api {get} /api/common/problem/list?page={page} 01. 常见问题列表
-   * @apiDescription 获取常见问题分页列表
-   * @apiGroup 08. 常见问题模块
+   * @api {get} /api/car/shape/list?page={page} 01. 汽车车型列表
+   * @apiDescription 获取汽车车型分页列表
+   * @apiGroup 42. 汽车车型模块
    *
    * @apiParam {int} page 当前页数
+   * @apiParam {int} brand_id 汽车品牌编号
    *
-   * @apiSuccess (basic params) {Number} id 常见问题编号
-   * @apiSuccess (basic params) {String} title 常见问题标题
-   * @apiSuccess (basic params) {Number} position_id 常见问题位编号
-   * @apiSuccess (basic params) {Number} create_time 添加时间
+   * @apiSuccess (basic params) {Number} id 汽车车型编号
+   * @apiSuccess (basic params) {Number} brand_id 汽车品牌编号
+   * @apiSuccess (basic params) {Number} title 汽车车型名称
    *
-   * @apiSampleRequest /api/common/problem/list
+   * @apiSampleRequest /api/car/shape/list
    * @apiVersion 1.0.0
    */
   public function list(Request $request)
@@ -74,16 +85,15 @@ class ProblemController extends BaseController
 
 
   /**
-   * @api {get} /api/common/problem/select 02. 常见问题数据
-   * @apiDescription 获取常见问题不分页列表数据
-   * @apiGroup 08. 常见问题模块
+   * @api {get} /api/car/shape/select 02. 汽车车型数据
+   * @apiDescription 获取汽车车型不分页列表数据
+   * @apiGroup 42. 汽车车型模块
    *
-   * @apiSuccess (basic params) {Number} id 常见问题编号
-   * @apiSuccess (basic params) {String} title 常见问题标题
-   * @apiSuccess (basic params) {String} content 常见问题答案
-   * @apiSuccess (basic params) {Number} create_time 添加时间
+   * @apiSuccess (basic params) {Number} id 汽车车型编号
+   * @apiSuccess (basic params) {Number} brand_id 汽车品牌编号
+   * @apiSuccess (basic params) {Number} title 汽车车型名称
    *
-   * @apiSampleRequest /api/common/problem/select
+   * @apiSampleRequest /api/car/shape/select
    * @apiVersion 1.0.0
    */
   public function select(Request $request)
@@ -115,16 +125,18 @@ class ProblemController extends BaseController
 
 
   /**
-   * @api {get} /api/common/problem/view/{id} 03. 常见问题详情
-   * @apiDescription 获取常见问题详情
-   * @apiGroup 08. 常见问题模块
+   * @api {get} /api/car/shape/view/{id} 03. 汽车车型详情
+   * @apiDescription 获取汽车车型详情
+   * @apiGroup 42. 汽车车型模块
    *
-   * @apiSuccess (basic params) {Number} id 常见问题编号
-   * @apiSuccess (basic params) {String} title 常见问题标题
-   * @apiSuccess (basic params) {String} content 常见问题答案
-   * @apiSuccess (basic params) {Number} create_time 添加时间
+   * @apiSuccess (basic params) {Number} id 汽车车型编号
+   * @apiSuccess (basic params) {Number} brand_id 汽车品牌编号
+   * @apiSuccess (basic params) {Number} title 汽车车型名称
+   * @apiSuccess (brand params) {Number} id 汽车品牌编号
+   * @apiSuccess (brand params) {Number} title 汽车品牌名称
+   * @apiSuccess (brand params) {Number} picture 汽车品牌图片
    *
-   * @apiSampleRequest /api/common/problem/view/{id}
+   * @apiSampleRequest /api/car/shape/view/{id}
    * @apiVersion 1.0.0
    */
   public function view(Request $request, $id)

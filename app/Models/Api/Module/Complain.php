@@ -1,68 +1,63 @@
 <?php
-namespace App\Models\Api\Module\Car;
+namespace App\Models\Api\Module;
 
-use App\Models\Common\Module\Car\Shape as Common;
-
+use App\Models\Common\Module\Complain as Common;
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
- * @dateTime 2021-05-20
+ * @dateTime 2020-10-06
  *
- * 汽车车型模型类
+ * 投诉模型类
  */
-class Shape extends Common
+class Complain extends Common
 {
   // 隐藏的属性
   public $hidden = [
     'organization_id',
-    'sort',
     'status',
-    'create_time',
     'update_time'
   ];
-
 
 
   // 关联函数 ------------------------------------------------------
 
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2021-05-21
+   * @dateTime 2020-01-20
    * ------------------------------------------
-   * 车型与品牌关联函数
+   * 投诉与会员关联函数
    * ------------------------------------------
    *
-   * 车型与品牌关联函数
+   * 投诉与会员关联函数
    *
    * @return [关联对象]
    */
-  public function brand()
+  public function member()
   {
-    return $this->hasOne(
-      'App\Models\Api\Module\Car\Brand',
-      'id',
-      'brand_id',
+    return $this->belongsTo(
+      'App\Models\Api\Module\Member',
+      'member_id',
+      'id'
     );
   }
 
-
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2021-05-21
+   * @dateTime 2020-01-20
    * ------------------------------------------
-   * 车型与车型配置关联函数
+   * 投诉与投诉分类关联函数
    * ------------------------------------------
    *
-   * 车型与车型配置关联函数
+   * 投诉与投诉分类关联函数
    *
    * @return [关联对象]
    */
-  public function config()
+  public function category()
   {
-    return $this->hasMany(
-      'App\Models\Api\Module\Car\Shape\Config',
-      'shape_id',
-      'id',
-    );
+    return $this->belongsTo(
+      'App\Models\Api\Module\Complain\Category',
+      'category_id',
+      'id'
+    )->where(['status'=>1]);
   }
 }
