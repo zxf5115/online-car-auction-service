@@ -41,11 +41,6 @@ class LoginController extends BaseController
    * @apiSuccess (user_info params) {String} nickname 会员昵称
    * @apiSuccess (user_info params) {String} create_time 注册时间
    * @apiSuccess (certification params) {String} type 认证类型 1 个人认证 2 银行卡认证 3 企业认证
-   * @apiSuccess (certification params) {String} realname 姓名|法人姓名|银行卡户主
-   * @apiSuccess (certification params) {String} mobile 银行卡预留手机号|手机号
-   * @apiSuccess (certification params) {String} certificate_type 证件类型 1 身份证 2 营业执照
-   * @apiSuccess (certification params) {String} certificate_no 注册号|身份证号|证件号
-   * @apiSuccess (certification params) {String} bank_card_no 银行卡号
    * @apiSuccess (certification params) {String} audit_status 审核状态 0 待审核 1 审核通过 2 审核失败
    *
    * @apiSampleRequest /api/weixin_login

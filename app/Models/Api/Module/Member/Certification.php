@@ -11,5 +11,23 @@ use App\Models\Common\Module\Member\Certification as Common;
  */
 class Certification extends Common
 {
+  // 隐藏的属性
+  public $hidden = [
+    'id',
+    'organization_id',
+    'member_id',
+    'realname',
+    'mobile',
+    'certificate_type',
+    'certificate_no',
+    'certificate_no',
+    'bank_card_no',
+    'cerificate_front_picture',
+    'cerificate_behind_picture',
+    'audit_content',
+    'status',
+    'create_time',
+    'update_time'
+  ];
 
 }
