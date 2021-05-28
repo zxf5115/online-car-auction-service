@@ -60,4 +60,25 @@ class Complain extends Common
       'id'
     )->where(['status'=>1]);
   }
+
+
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2020-10-20
+   * ------------------------------------------
+   * 投诉与投诉资源关联表
+   * ------------------------------------------
+   *
+   * 投诉与投诉资源关联表
+   *
+   * @return [关联对象]
+   */
+  public function resource()
+  {
+    return $this->hasMany(
+      'App\Models\Api\Module\Complain\Resource',
+      'complain_id',
+      'id',
+    );
+  }
 }

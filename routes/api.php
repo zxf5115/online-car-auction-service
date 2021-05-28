@@ -76,6 +76,16 @@ $api->version('v1', [
         // 会员关联内容路由
         $api->group(['namespace' => 'Member'], function ($api) {
 
+          // 会员认证路由
+          $api->group(['prefix'  => 'certification'], function ($api) {
+            $api->post('status', 'CertificationController@status');
+            $api->post('personal', 'CertificationController@personal');
+            $api->post('company', 'CertificationController@company');
+            $api->post('bankcard', 'CertificationController@bankcard');
+            $api->post('sms_code', 'CertificationController@sms_code');
+          });
+
+
           // 会员资产路由
           $api->group(['prefix'  => 'asset'], function ($api) {
             $api->get('center', 'AssetController@center');
@@ -210,6 +220,7 @@ $api->version('v1', [
           $api->group(['prefix' => 'brand'], function ($api) {
             $api->get('list', 'BrandController@list');
             $api->get('select', 'BrandController@select');
+            $api->get('view/{id}', 'BrandController@view');
           });
 
           // 汽车车型路由

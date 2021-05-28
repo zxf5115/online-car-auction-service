@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Api\Module\Member;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Constant\Code;
 use App\Http\Controllers\Api\BaseController;
@@ -202,8 +203,9 @@ class ComplainController extends BaseController
    *   "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO"
    * }
    *
-   * @apiParam {string} category_id 投诉分类编号（不可为空）
-   * @apiParam {string} content 投诉内容（不可为空）
+   * @apiParam {string} category_id 投诉分类编号
+   * @apiParam {string} content 投诉内容
+   * @apiParam {string} [picture] 投诉图片
    *
    * @apiSampleRequest /api/member/complain/handle
    * @apiVersion 1.0.0
@@ -229,6 +231,8 @@ class ComplainController extends BaseController
     }
     else
     {
+      DB::beginTransaction();
+
       try
       {
         $model = $this->_model::firstOrNew(['id' => $request->id]);
@@ -238,10 +242,22 @@ class ComplainController extends BaseController
         $model->content     = $request->content;
         $model->save();
 
+        $data = self::packRelevanceData($request, 'picture');
+
+        if(!empty($data))
+        {
+          $model->resource()->delete();
+          $model->resource()->createMany($data);
+        }
+
+        DB::commit();
+
         return self::success(Code::message(Code::HANDLE_SUCCESS));
       }
       catch(\Exception $e)
       {
+        DB::rollback();
+
         // 记录异常信息
         self::record($e);
 

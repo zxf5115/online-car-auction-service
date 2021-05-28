@@ -458,27 +458,55 @@ define({ "api": [
             "description": "<p>注册时间</p>"
           }
         ],
-        "role params": [
+        "certification params": [
           {
-            "group": "role params",
+            "group": "certification params",
             "type": "String",
             "optional": false,
-            "field": "id",
-            "description": "<p>角色编号</p>"
+            "field": "type",
+            "description": "<p>认证类型 1 个人认证 2 银行卡认证 3 企业认证</p>"
           },
           {
-            "group": "role params",
+            "group": "certification params",
             "type": "String",
             "optional": false,
-            "field": "title",
-            "description": "<p>角色名称</p>"
+            "field": "realname",
+            "description": "<p>姓名|法人姓名|银行卡户主</p>"
           },
           {
-            "group": "role params",
+            "group": "certification params",
             "type": "String",
             "optional": false,
-            "field": "content",
-            "description": "<p>角色描述</p>"
+            "field": "mobile",
+            "description": "<p>银行卡预留手机号|手机号</p>"
+          },
+          {
+            "group": "certification params",
+            "type": "String",
+            "optional": false,
+            "field": "certificate_type",
+            "description": "<p>证件类型 1 身份证 2 营业执照</p>"
+          },
+          {
+            "group": "certification params",
+            "type": "String",
+            "optional": false,
+            "field": "certificate_no",
+            "description": "<p>注册号|身份证号|证件号</p>"
+          },
+          {
+            "group": "certification params",
+            "type": "String",
+            "optional": false,
+            "field": "bank_card_no",
+            "description": "<p>银行卡号</p>"
+          },
+          {
+            "group": "certification params",
+            "type": "String",
+            "optional": false,
+            "field": "audit_status",
+            "description": "<p>审核状态 0 待审核 1 审核通过 2 审核失败</p>"
           }
         ]
       }
@@ -3274,6 +3302,13 @@ define({ "api": [
             "group": "basic params",
             "type": "Number",
             "optional": false,
+            "field": "postcode",
+            "description": "<p>邮政编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
             "field": "province_id",
             "description": "<p>省</p>"
           },
@@ -3404,6 +3439,13 @@ define({ "api": [
             "group": "basic params",
             "type": "Number",
             "optional": false,
+            "field": "postcode",
+            "description": "<p>邮政编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
             "field": "province_id",
             "description": "<p>省</p>"
           },
@@ -3521,6 +3563,13 @@ define({ "api": [
             "group": "basic params",
             "type": "Number",
             "optional": false,
+            "field": "postcode",
+            "description": "<p>邮政编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
             "field": "province_id",
             "description": "<p>省</p>"
           },
@@ -3633,6 +3682,13 @@ define({ "api": [
             "optional": false,
             "field": "mobile",
             "description": "<p>收货人电话</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "postcode",
+            "description": "<p>邮政编号</p>"
           },
           {
             "group": "basic params",
@@ -3797,6 +3853,13 @@ define({ "api": [
             "optional": false,
             "field": "mobile",
             "description": "<p>收货人电话</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": true,
+            "field": "postcode",
+            "description": "<p>邮政编号</p>"
           },
           {
             "group": "Parameter",
@@ -4658,6 +4721,308 @@ define({ "api": [
     "name": "PostApiMemberApprovalStatus"
   },
   {
+    "type": "post",
+    "url": "/api/member/certification/bankcard",
+    "title": "04. 银行卡认证",
+    "description": "<p>当前会员银行卡认证</p>",
+    "group": "28._会员认证模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "realname",
+            "description": "<p>银行卡户名</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "certificate_no",
+            "description": "<p>身份证号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "bank_card_no",
+            "description": "<p>银行卡号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>银行卡预留手机号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "sms_code",
+            "description": "<p>验证码</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/certification/bankcard"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/CertificationController.php",
+    "groupTitle": "28._会员认证模块",
+    "name": "PostApiMemberCertificationBankcard"
+  },
+  {
+    "type": "post",
+    "url": "/api/member/certification/company",
+    "title": "03. 企业认证",
+    "description": "<p>当前会员企业认证</p>",
+    "group": "28._会员认证模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "realname",
+            "description": "<p>法人姓名</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>手机号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "certificate_no",
+            "description": "<p>注册号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "cerificate_front_picture",
+            "description": "<p>证件正面图片</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "cerificate_behind_picture",
+            "description": "<p>证件反面图片</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/certification/company"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/CertificationController.php",
+    "groupTitle": "28._会员认证模块",
+    "name": "PostApiMemberCertificationCompany"
+  },
+  {
+    "type": "post",
+    "url": "/api/member/certification/personal",
+    "title": "02. 个人认证",
+    "description": "<p>当前会员个人认证</p>",
+    "group": "28._会员认证模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "realname",
+            "description": "<p>姓名</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>手机号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "certificate_no",
+            "description": "<p>证件号</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/certification/personal"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/CertificationController.php",
+    "groupTitle": "28._会员认证模块",
+    "name": "PostApiMemberCertificationPersonal"
+  },
+  {
+    "type": "post",
+    "url": "/api/member/certification/sms_code",
+    "title": "05. 手机验证码",
+    "description": "<p>获取短信登录验证码</p>",
+    "group": "28._会员认证模块",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>手机号（18201018926）</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/certification/sms_code"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/CertificationController.php",
+    "groupTitle": "28._会员认证模块",
+    "name": "PostApiMemberCertificationSms_code"
+  },
+  {
+    "type": "post",
+    "url": "/api/member/certification/status",
+    "title": "01. 会员是否认证",
+    "description": "<p>当前会员是否认证</p>",
+    "group": "28._会员认证模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/certification/status"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/CertificationController.php",
+    "groupTitle": "28._会员认证模块",
+    "name": "PostApiMemberCertificationStatus"
+  },
+  {
     "type": "get",
     "url": "/api/member/complain/list?page={page}",
     "title": "01. 当前会员投诉列表",
@@ -5002,14 +5367,21 @@ define({ "api": [
             "type": "string",
             "optional": false,
             "field": "category_id",
-            "description": "<p>投诉分类编号（不可为空）</p>"
+            "description": "<p>投诉分类编号</p>"
           },
           {
             "group": "Parameter",
             "type": "string",
             "optional": false,
             "field": "content",
-            "description": "<p>投诉内容（不可为空）</p>"
+            "description": "<p>投诉内容</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": true,
+            "field": "picture",
+            "description": "<p>投诉图片</p>"
           }
         ]
       }
@@ -5722,6 +6094,22 @@ define({ "api": [
             "field": "picture",
             "description": "<p>汽车品牌图片</p>"
           }
+        ],
+        "shape params": [
+          {
+            "group": "shape params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>汽车车型编号</p>"
+          },
+          {
+            "group": "shape params",
+            "type": "Number",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车车型名称</p>"
+          }
         ]
       }
     },
@@ -5765,6 +6153,22 @@ define({ "api": [
             "field": "picture",
             "description": "<p>汽车品牌图片</p>"
           }
+        ],
+        "shape params": [
+          {
+            "group": "shape params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>汽车车型编号</p>"
+          },
+          {
+            "group": "shape params",
+            "type": "Number",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车车型名称</p>"
+          }
         ]
       }
     },
@@ -5777,6 +6181,65 @@ define({ "api": [
     "filename": "app/Http/Controllers/Api/Module/Car/BrandController.php",
     "groupTitle": "41._汽车品牌模块",
     "name": "GetApiCarBrandSelect"
+  },
+  {
+    "type": "get",
+    "url": "/api/car/brand/view/{id}",
+    "title": "03. 汽车品牌详情",
+    "description": "<p>获取汽车品牌详情</p>",
+    "group": "41._汽车品牌模块",
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>汽车品牌编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车品牌名称</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "picture",
+            "description": "<p>汽车品牌图片</p>"
+          }
+        ],
+        "shape params": [
+          {
+            "group": "shape params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>汽车车型编号</p>"
+          },
+          {
+            "group": "shape params",
+            "type": "Number",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车车型名称</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/car/brand/view/{id}"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Car/BrandController.php",
+    "groupTitle": "41._汽车品牌模块",
+    "name": "GetApiCarBrandViewId"
   },
   {
     "type": "get",

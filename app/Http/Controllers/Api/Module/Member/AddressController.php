@@ -46,6 +46,7 @@ class AddressController extends BaseController
    * @apiSuccess (basic params) {Number} member_id 会员编号
    * @apiSuccess (basic params) {String} name 收货人姓名
    * @apiSuccess (basic params) {String} mobile 收货人电话
+   * @apiSuccess (basic params) {Number} postcode 邮政编号
    * @apiSuccess (basic params) {Number} province_id 省
    * @apiSuccess (basic params) {Number} city_id 市
    * @apiSuccess (basic params) {Number} region_id 县
@@ -99,6 +100,7 @@ class AddressController extends BaseController
    * @apiSuccess (basic params) {Number} member_id 会员编号
    * @apiSuccess (basic params) {String} name 收货人姓名
    * @apiSuccess (basic params) {String} mobile 收货人电话
+   * @apiSuccess (basic params) {Number} postcode 邮政编号
    * @apiSuccess (basic params) {Number} province_id 省
    * @apiSuccess (basic params) {Number} city_id 市
    * @apiSuccess (basic params) {Number} region_id 县
@@ -152,6 +154,7 @@ class AddressController extends BaseController
    * @apiSuccess (basic params) {Number} member_id 会员编号
    * @apiSuccess (basic params) {String} name 收货人姓名
    * @apiSuccess (basic params) {String} mobile 收货人电话
+   * @apiSuccess (basic params) {Number} postcode 邮政编号
    * @apiSuccess (basic params) {Number} province_id 省
    * @apiSuccess (basic params) {Number} city_id 市
    * @apiSuccess (basic params) {Number} region_id 县
@@ -204,6 +207,7 @@ class AddressController extends BaseController
    * @apiSuccess (basic params) {Number} member_id 会员编号
    * @apiSuccess (basic params) {String} name 收货人姓名
    * @apiSuccess (basic params) {String} mobile 收货人电话
+   * @apiSuccess (basic params) {Number} postcode 邮政编号
    * @apiSuccess (basic params) {Number} province_id 省
    * @apiSuccess (basic params) {Number} city_id 市
    * @apiSuccess (basic params) {Number} region_id 县
@@ -255,6 +259,7 @@ class AddressController extends BaseController
    * @apiParam {string} id 会员地址编号（不存在：新增，存在：编辑）
    * @apiParam {string} name 收货人姓名
    * @apiParam {string} mobile 收货人电话
+   * @apiParam {string} [postcode] 邮政编号
    * @apiParam {string} province_id 省
    * @apiParam {string} city_id 市
    * @apiParam {string} region_id 县
@@ -323,6 +328,7 @@ class AddressController extends BaseController
         $model->member_id       = self::getCurrentId();
         $model->name            = $request->name;
         $model->mobile          = $request->mobile;
+        $model->postcode        = $request->postcode ?? '';
         $model->province_id     = $request->province_id;
         $model->city_id         = $request->city_id;
         $model->region_id       = $request->region_id;

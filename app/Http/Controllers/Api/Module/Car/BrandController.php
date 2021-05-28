@@ -32,10 +32,9 @@ class BrandController extends BaseController
     ['key' => 'sort', 'value' => 'desc'],
   ];
 
-  protected $_relevance = [];
-
-
-
+  protected $_relevance = [
+    'shape'
+  ];
 
 
   /**
@@ -48,6 +47,8 @@ class BrandController extends BaseController
    * @apiSuccess (basic params) {Number} id 汽车品牌编号
    * @apiSuccess (basic params) {Number} title 汽车品牌名称
    * @apiSuccess (basic params) {Number} picture 汽车品牌图片
+   * @apiSuccess (shape params) {Number} id 汽车车型编号
+   * @apiSuccess (shape params) {Number} title 汽车车型名称
    *
    * @apiSampleRequest /api/car/brand/list
    * @apiVersion 1.0.0
@@ -88,6 +89,8 @@ class BrandController extends BaseController
    * @apiSuccess (basic params) {Number} id 汽车品牌编号
    * @apiSuccess (basic params) {Number} title 汽车品牌名称
    * @apiSuccess (basic params) {Number} picture 汽车品牌图片
+   * @apiSuccess (shape params) {Number} id 汽车车型编号
+   * @apiSuccess (shape params) {Number} title 汽车车型名称
    *
    * @apiSampleRequest /api/car/brand/select
    * @apiVersion 1.0.0
@@ -107,6 +110,43 @@ class BrandController extends BaseController
       $relevance = self::getRelevanceData($this->_relevance, 'select');
 
       $response = $this->_model::getList($condition, $relevance, $this->_order);
+
+      return self::success($response);
+    }
+    catch(\Exception $e)
+    {
+      // 记录异常信息
+      self::record($e);
+
+      return self::error(Code::ERROR);
+    }
+  }
+
+
+  /**
+   * @api {get} /api/car/brand/view/{id} 03. 汽车品牌详情
+   * @apiDescription 获取汽车品牌详情
+   * @apiGroup 41. 汽车品牌模块
+   *
+   * @apiSuccess (basic params) {Number} id 汽车品牌编号
+   * @apiSuccess (basic params) {Number} title 汽车品牌名称
+   * @apiSuccess (basic params) {Number} picture 汽车品牌图片
+   * @apiSuccess (shape params) {Number} id 汽车车型编号
+   * @apiSuccess (shape params) {Number} title 汽车车型名称
+   *
+   * @apiSampleRequest /api/car/brand/view/{id}
+   * @apiVersion 1.0.0
+   */
+  public function view(Request $request, $id)
+  {
+    try
+    {
+      $condition = self::getSimpleWhereData($id);
+
+      // 获取关联对象
+      $relevance = self::getRelevanceData($this->_relevance, 'view');
+
+      $response = $this->_model::getRow($condition, $relevance);
 
       return self::success($response);
     }

@@ -20,4 +20,26 @@ class Brand extends Common
     'create_time',
     'update_time'
   ];
+
+  // 关联函数 ------------------------------------------------------
+
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2021-05-21
+   * ------------------------------------------
+   * 品牌与车型关联函数
+   * ------------------------------------------
+   *
+   * 品牌与车型关联函数
+   *
+   * @return [关联对象]
+   */
+  public function shape()
+  {
+    return $this->hasMany(
+      'App\Models\Api\Module\Car\Shape',
+      'brand_id',
+      'id',
+    );
+  }
 }
