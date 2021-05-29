@@ -154,6 +154,15 @@ $api->version('v1', [
           $api->get('view/{id}', 'ProblemController@view');
           $api->post('handle', 'ProblemController@handle');
           $api->post('delete', 'ProblemController@delete');
+
+          // 常见问题分类路由
+          $api->group(['namespace' => 'Problem', 'prefix' => 'category'], function ($api) {
+            $api->any('list', 'CategoryController@list');
+            $api->get('select', 'CategoryController@select');
+            $api->get('view/{id}', 'CategoryController@view');
+            $api->post('handle', 'CategoryController@handle');
+            $api->post('delete/{id?}', 'CategoryController@delete');
+          });
         });
 
         // 物流路由
@@ -276,6 +285,7 @@ $api->version('v1', [
             $api->get('select', 'BrandController@select');
             $api->get('view/{id}', 'BrandController@view');
             $api->post('handle', 'BrandController@handle');
+            $api->post('hot', 'BrandController@hot');
             $api->post('enable', 'BrandController@enable');
             $api->post('delete', 'BrandController@delete');
           });

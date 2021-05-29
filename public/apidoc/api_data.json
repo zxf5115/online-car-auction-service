@@ -201,6 +201,56 @@
   },
   {
     "type": "post",
+    "url": "/api/common/money/data",
+    "title": "07. 汽车价格区间",
+    "description": "<p>获取汽车价格区间</p>",
+    "group": "01._公共模块",
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>自增编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "service_mobile",
+            "description": "<p>客服电话</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "service_wechat",
+            "description": "<p>客服微信号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "service_qrcode",
+            "description": "<p>客服微信二维码</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/common/money/data"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Common/MoneyController.php",
+    "groupTitle": "01._公共模块",
+    "name": "PostApiCommonMoneyData"
+  },
+  {
+    "type": "post",
     "url": "/api/common/service/data",
     "title": "05. 客服联系方式",
     "description": "<p>获取客服联系方式</p>",
@@ -248,22 +298,6 @@
     "filename": "app/Http/Controllers/Api/Module/Common/ServiceController.php",
     "groupTitle": "01._公共模块",
     "name": "PostApiCommonServiceData"
-  },
-  {
-    "type": "post",
-    "url": "/api/common/wechat/notify",
-    "title": "07. 微信支付回调",
-    "description": "<p>获取微信支付回调</p>",
-    "group": "01._公共模块",
-    "sampleRequest": [
-      {
-        "url": "/api/common/wechat/notify"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Common/WechatController.php",
-    "groupTitle": "01._公共模块",
-    "name": "PostApiCommonWechatNotify"
   },
   {
     "type": "get",
@@ -465,41 +499,6 @@
             "optional": false,
             "field": "type",
             "description": "<p>认证类型 1 个人认证 2 银行卡认证 3 企业认证</p>"
-          },
-          {
-            "group": "certification params",
-            "type": "String",
-            "optional": false,
-            "field": "realname",
-            "description": "<p>姓名|法人姓名|银行卡户主</p>"
-          },
-          {
-            "group": "certification params",
-            "type": "String",
-            "optional": false,
-            "field": "mobile",
-            "description": "<p>银行卡预留手机号|手机号</p>"
-          },
-          {
-            "group": "certification params",
-            "type": "String",
-            "optional": false,
-            "field": "certificate_type",
-            "description": "<p>证件类型 1 身份证 2 营业执照</p>"
-          },
-          {
-            "group": "certification params",
-            "type": "String",
-            "optional": false,
-            "field": "certificate_no",
-            "description": "<p>注册号|身份证号|证件号</p>"
-          },
-          {
-            "group": "certification params",
-            "type": "String",
-            "optional": false,
-            "field": "bank_card_no",
-            "description": "<p>银行卡号</p>"
           },
           {
             "group": "certification params",
@@ -1385,10 +1384,62 @@
   },
   {
     "type": "get",
+    "url": "/api/common/problem/category/select",
+    "title": "01. 购车指南分类数据",
+    "description": "<p>获取购车指南分类不分页列表数据</p>",
+    "group": "08._购车指南分类模块",
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>购车指南分类编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>购车指南分类标题</p>"
+          }
+        ],
+        "problem params": [
+          {
+            "group": "problem params",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>购车指南标题</p>"
+          },
+          {
+            "group": "problem params",
+            "type": "String",
+            "optional": false,
+            "field": "content",
+            "description": "<p>购车指南内容</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/common/problem/category/select"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Common/Problem/CategoryController.php",
+    "groupTitle": "08._购车指南分类模块",
+    "name": "GetApiCommonProblemCategorySelect"
+  },
+  {
+    "type": "get",
     "url": "/api/common/problem/list?page={page}",
-    "title": "01. 常见问题列表",
-    "description": "<p>获取常见问题分页列表</p>",
-    "group": "08._常见问题模块",
+    "title": "01. 购车指南列表",
+    "description": "<p>获取购车指南分页列表</p>",
+    "group": "09._购车指南模块",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -1410,28 +1461,30 @@
             "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>常见问题编号</p>"
+            "description": "<p>购车指南编号</p>"
           },
           {
             "group": "basic params",
             "type": "String",
             "optional": false,
             "field": "title",
-            "description": "<p>常见问题标题</p>"
+            "description": "<p>购车指南标题</p>"
           },
           {
             "group": "basic params",
-            "type": "Number",
+            "type": "String",
             "optional": false,
-            "field": "position_id",
-            "description": "<p>常见问题位编号</p>"
-          },
+            "field": "content",
+            "description": "<p>购车指南内容</p>"
+          }
+        ],
+        "category params": [
           {
-            "group": "basic params",
-            "type": "Number",
+            "group": "category params",
+            "type": "String",
             "optional": false,
-            "field": "create_time",
-            "description": "<p>添加时间</p>"
+            "field": "title",
+            "description": "<p>购车指南分类标题</p>"
           }
         ]
       }
@@ -1443,15 +1496,15 @@
     ],
     "version": "1.0.0",
     "filename": "app/Http/Controllers/Api/Module/Common/ProblemController.php",
-    "groupTitle": "08._常见问题模块",
+    "groupTitle": "09._购车指南模块",
     "name": "GetApiCommonProblemListPagePage"
   },
   {
     "type": "get",
     "url": "/api/common/problem/select",
-    "title": "02. 常见问题数据",
-    "description": "<p>获取常见问题不分页列表数据</p>",
-    "group": "08._常见问题模块",
+    "title": "02. 购车指南数据",
+    "description": "<p>获取购车指南不分页列表数据</p>",
+    "group": "09._购车指南模块",
     "success": {
       "fields": {
         "basic params": [
@@ -1460,28 +1513,30 @@
             "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>常见问题编号</p>"
+            "description": "<p>购车指南编号</p>"
           },
           {
             "group": "basic params",
             "type": "String",
             "optional": false,
             "field": "title",
-            "description": "<p>常见问题标题</p>"
+            "description": "<p>购车指南标题</p>"
           },
           {
             "group": "basic params",
             "type": "String",
             "optional": false,
             "field": "content",
-            "description": "<p>常见问题答案</p>"
-          },
+            "description": "<p>购车指南内容</p>"
+          }
+        ],
+        "category params": [
           {
-            "group": "basic params",
-            "type": "Number",
+            "group": "category params",
+            "type": "String",
             "optional": false,
-            "field": "create_time",
-            "description": "<p>添加时间</p>"
+            "field": "title",
+            "description": "<p>购车指南分类标题</p>"
           }
         ]
       }
@@ -1493,15 +1548,15 @@
     ],
     "version": "1.0.0",
     "filename": "app/Http/Controllers/Api/Module/Common/ProblemController.php",
-    "groupTitle": "08._常见问题模块",
+    "groupTitle": "09._购车指南模块",
     "name": "GetApiCommonProblemSelect"
   },
   {
     "type": "get",
     "url": "/api/common/problem/view/{id}",
-    "title": "03. 常见问题详情",
-    "description": "<p>获取常见问题详情</p>",
-    "group": "08._常见问题模块",
+    "title": "03. 购车指南详情",
+    "description": "<p>获取购车指南详情</p>",
+    "group": "09._购车指南模块",
     "success": {
       "fields": {
         "basic params": [
@@ -1510,28 +1565,30 @@
             "type": "Number",
             "optional": false,
             "field": "id",
-            "description": "<p>常见问题编号</p>"
+            "description": "<p>购车指南编号</p>"
           },
           {
             "group": "basic params",
             "type": "String",
             "optional": false,
             "field": "title",
-            "description": "<p>常见问题标题</p>"
+            "description": "<p>购车指南标题</p>"
           },
           {
             "group": "basic params",
             "type": "String",
             "optional": false,
             "field": "content",
-            "description": "<p>常见问题答案</p>"
-          },
+            "description": "<p>购车指南内容</p>"
+          }
+        ],
+        "category params": [
           {
-            "group": "basic params",
-            "type": "Number",
+            "group": "category params",
+            "type": "String",
             "optional": false,
-            "field": "create_time",
-            "description": "<p>添加时间</p>"
+            "field": "title",
+            "description": "<p>购车指南分类标题</p>"
           }
         ]
       }
@@ -1543,7 +1600,7 @@
     ],
     "version": "1.0.0",
     "filename": "app/Http/Controllers/Api/Module/Common/ProblemController.php",
-    "groupTitle": "08._常见问题模块",
+    "groupTitle": "09._购车指南模块",
     "name": "GetApiCommonProblemViewId"
   },
   {
@@ -6053,6 +6110,65 @@
   },
   {
     "type": "get",
+    "url": "/api/car/brand/hot",
+    "title": "04. 汽车热门品牌数据",
+    "description": "<p>获取汽车热门品牌不分页列表数据</p>",
+    "group": "41._汽车品牌模块",
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>汽车品牌编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车品牌名称</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "picture",
+            "description": "<p>汽车品牌图片</p>"
+          }
+        ],
+        "shape params": [
+          {
+            "group": "shape params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>汽车车型编号</p>"
+          },
+          {
+            "group": "shape params",
+            "type": "Number",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车车型名称</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/car/brand/hot"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Car/BrandController.php",
+    "groupTitle": "41._汽车品牌模块",
+    "name": "GetApiCarBrandHot"
+  },
+  {
+    "type": "get",
     "url": "/api/car/brand/list?page={page}",
     "title": "01. 汽车品牌列表",
     "description": "<p>获取汽车品牌分页列表</p>",
@@ -6412,5 +6528,423 @@
     "filename": "app/Http/Controllers/Api/Module/Car/ShapeController.php",
     "groupTitle": "42._汽车车型模块",
     "name": "GetApiCarShapeViewId"
+  },
+  {
+    "type": "get",
+    "url": "/api/car/list?page={page}",
+    "title": "01. 汽车列表",
+    "description": "<p>获取汽车分页列表</p>",
+    "group": "45._汽车模块",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "page",
+            "description": "<p>当前页数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "shape_id",
+            "description": "<p>汽车品牌编号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "pay_money",
+            "description": "<p>1 5以前 2 5-8 3 8-12 4 12-20 5 20-30 6 30以上</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>汽车编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "member_id",
+            "description": "<p>车商编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "source_id",
+            "description": "<p>汽车来源编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "brand_id",
+            "description": "<p>汽车品牌编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "shape_id",
+            "description": "<p>汽车车型编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "vedio_url",
+            "description": "<p>汽车视频地址</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "string",
+            "optional": false,
+            "field": "sell_money",
+            "description": "<p>销售价格</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "string",
+            "optional": false,
+            "field": "other_money",
+            "description": "<p>其他费用</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "string",
+            "optional": false,
+            "field": "sell_status",
+            "description": "<p>售卖状态 0 待出售 1 已出售</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "string",
+            "optional": false,
+            "field": "create_time",
+            "description": "<p>发布时间</p>"
+          }
+        ],
+        "source params": [
+          {
+            "group": "source params",
+            "type": "string",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车来源名称</p>"
+          }
+        ],
+        "brand params": [
+          {
+            "group": "brand params",
+            "type": "string",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车品牌名称</p>"
+          },
+          {
+            "group": "brand params",
+            "type": "string",
+            "optional": false,
+            "field": "picture",
+            "description": "<p>汽车品牌图片</p>"
+          }
+        ],
+        "shape params": [
+          {
+            "group": "shape params",
+            "type": "string",
+            "optional": false,
+            "field": "picture",
+            "description": "<p>汽车车型名称</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/car/list"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/CarController.php",
+    "groupTitle": "45._汽车模块",
+    "name": "GetApiCarListPagePage"
+  },
+  {
+    "type": "get",
+    "url": "/api/car/select",
+    "title": "02. 汽车数据",
+    "description": "<p>获取汽车不分页列表数据</p>",
+    "group": "45._汽车模块",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "shape_id",
+            "description": "<p>汽车品牌编号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "pay_money",
+            "description": "<p>1 5以前 2 5-8 3 8-12 4 12-20 5 20-30 6 30以上</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>汽车编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "member_id",
+            "description": "<p>车商编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "source_id",
+            "description": "<p>汽车来源编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "brand_id",
+            "description": "<p>汽车品牌编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "shape_id",
+            "description": "<p>汽车车型编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "vedio_url",
+            "description": "<p>汽车视频地址</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "string",
+            "optional": false,
+            "field": "sell_money",
+            "description": "<p>销售价格</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "string",
+            "optional": false,
+            "field": "other_money",
+            "description": "<p>其他费用</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "string",
+            "optional": false,
+            "field": "sell_status",
+            "description": "<p>售卖状态 0 待出售 1 已出售</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "string",
+            "optional": false,
+            "field": "create_time",
+            "description": "<p>发布时间</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/car/select"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/CarController.php",
+    "groupTitle": "45._汽车模块",
+    "name": "GetApiCarSelect"
+  },
+  {
+    "type": "get",
+    "url": "/api/car/view/{id}",
+    "title": "03. 汽车详情",
+    "description": "<p>获取汽车详情</p>",
+    "group": "45._汽车模块",
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>汽车编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "member_id",
+            "description": "<p>车商编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "source_id",
+            "description": "<p>汽车来源编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "brand_id",
+            "description": "<p>汽车品牌编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "shape_id",
+            "description": "<p>汽车车型编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "vedio_url",
+            "description": "<p>汽车视频地址</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "string",
+            "optional": false,
+            "field": "sell_money",
+            "description": "<p>销售价格</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "string",
+            "optional": false,
+            "field": "other_money",
+            "description": "<p>其他费用</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "string",
+            "optional": false,
+            "field": "sell_status",
+            "description": "<p>售卖状态 0 待出售 1 已出售</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "string",
+            "optional": false,
+            "field": "create_time",
+            "description": "<p>发布时间</p>"
+          }
+        ],
+        "source params": [
+          {
+            "group": "source params",
+            "type": "string",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车来源名称</p>"
+          }
+        ],
+        "brand params": [
+          {
+            "group": "brand params",
+            "type": "string",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车品牌名称</p>"
+          }
+        ],
+        "shape params": [
+          {
+            "group": "shape params",
+            "type": "string",
+            "optional": false,
+            "field": "picture",
+            "description": "<p>汽车车型名称</p>"
+          }
+        ],
+        "config params": [
+          {
+            "group": "config params",
+            "type": "string",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车配置名称</p>"
+          },
+          {
+            "group": "config params",
+            "type": "string",
+            "optional": false,
+            "field": "value",
+            "description": "<p>汽车配置值</p>"
+          }
+        ],
+        "resource params": [
+          {
+            "group": "resource params",
+            "type": "string",
+            "optional": false,
+            "field": "picture",
+            "description": "<p>汽车图片资源地址</p>"
+          }
+        ],
+        "member params": [
+          {
+            "group": "member params",
+            "type": "string",
+            "optional": false,
+            "field": "nickname",
+            "description": "<p>车商昵称</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/car/view/{id}"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/CarController.php",
+    "groupTitle": "45._汽车模块",
+    "name": "GetApiCarViewId"
   }
 ]

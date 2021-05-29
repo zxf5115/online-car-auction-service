@@ -55,11 +55,21 @@ $api->version('v1', [
           $api->post('data', 'ServiceController@data');
         });
 
+        // 价格信息路由
+        $api->group(['prefix' => 'money'], function ($api) {
+          $api->post('data', 'MoneyController@data');
+        });
+
         // 常见问题路由
         $api->group(['prefix'  => 'problem'], function ($api) {
           $api->get('list', 'ProblemController@list');
           $api->get('select', 'ProblemController@select');
           $api->get('view/{id}', 'ProblemController@view');
+
+          // 常见问题分类路由
+          $api->group(['namespace' => 'Problem', 'prefix'  => 'category'], function ($api) {
+            $api->get('select', 'CategoryController@select');
+          });
         });
       });
 
@@ -220,6 +230,7 @@ $api->version('v1', [
           $api->group(['prefix' => 'brand'], function ($api) {
             $api->get('list', 'BrandController@list');
             $api->get('select', 'BrandController@select');
+            $api->get('hot', 'BrandController@hot');
             $api->get('view/{id}', 'BrandController@view');
           });
 

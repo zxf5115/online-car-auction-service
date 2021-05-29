@@ -12,5 +12,14 @@ use App\Models\Common\Module\Car\Resource as Common;
  */
 class Resource extends Common
 {
+  // 隐藏的属性
+  public $hidden = [
+    'id',
+    'organization_id',
+    'car_id',
+    'status',
+    'create_time',
+    'update_time'
+  ];
 
 }

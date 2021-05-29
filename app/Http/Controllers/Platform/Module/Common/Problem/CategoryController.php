@@ -1,44 +1,35 @@
 <?php
-namespace App\Http\Controllers\Platform\Module\Car;
+namespace App\Http\Controllers\Platform\Module\Common\Problem;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 use App\Http\Constant\Code;
 use App\Http\Controllers\Platform\BaseController;
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
- * @dateTime 2021-01-11
+ * @dateTime 2021-05-29
  *
- * 汽车品牌控制器类
+ * 购车指南分类控制器类
  */
-class BrandController extends BaseController
+class CategoryController extends BaseController
 {
   /**
    * 模型
    */
-  protected $_model = 'App\Models\Platform\Module\Car\Brand';
-
-  protected $_where = [];
-
-  protected $_params = [
-    'title'
-  ];
+  protected $_model = 'App\Models\Platform\Module\Common\Problem\Category';
 
   /**
    * 排序条件
    */
   protected $_order = [
-    ['key' => 'sort', 'value' => 'desc'],
+    ['key' => 'id', 'value' => 'asc'],
   ];
-
-  protected $_relevance = [];
 
 
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-12-12
+   * @dateTime 2020-02-12
    * ------------------------------------------
    * 操作信息
    * ------------------------------------------
@@ -51,13 +42,11 @@ class BrandController extends BaseController
   public function handle(Request $request)
   {
     $messages = [
-      'title.required'   => '请您输入品牌标题',
-      'picture.required' => '请您输入品牌位标题',
+      'title.required'  => '请您输入购车指南分类标题',
     ];
 
     $rule = [
-      'title'   => 'required',
-      'picture' => 'required',
+      'title' => 'required',
     ];
 
     // 验证用户数据内容是否正确
@@ -75,11 +64,17 @@ class BrandController extends BaseController
 
         $model->organization_id = self::getOrganizationId();
         $model->title           = $request->title;
-        $model->picture         = $request->picture;
-        $model->sort            = $request->sort;
-        $model->save();
 
-        return self::success(Code::message(Code::HANDLE_SUCCESS));
+        $response = $model->save();
+
+        if($response)
+        {
+          return self::success(Code::message(Code::HANDLE_SUCCESS));
+        }
+        else
+        {
+          return self::error(Code::HANDLE_FAILURE);
+        }
       }
       catch(\Exception $e)
       {
@@ -91,54 +86,20 @@ class BrandController extends BaseController
     }
   }
 
+
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-02-25
+   * @dateTime 2021-01-05
    * ------------------------------------------
-   * 禁用（解禁）汽车品牌
+   * 启用（停用）课程类型
    * ------------------------------------------
    *
-   * 禁用（解禁）汽车品牌
+   * 启用（停用）课程类型
    *
    * @param Request $request [description]
    * @return [type]
    */
-  public function hot(Request $request)
-  {
-    try
-    {
-      $model = $this->_model::find($request->id);
-
-      $model->is_hot = $model->is_hot['value'] == 1 ? 2 : 1;
-
-      $model->save();
-
-      return self::success(Code::message(Code::HANDLE_SUCCESS));
-    }
-    catch(\Exception $e)
-    {
-      // 记录异常信息
-      self::record($e);
-
-      return self::error(Code::HANDLE_FAILURE);
-    }
-  }
-
-
-
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-02-25
-   * ------------------------------------------
-   * 禁用（解禁）汽车品牌
-   * ------------------------------------------
-   *
-   * 禁用（解禁）汽车品牌
-   *
-   * @param Request $request [description]
-   * @return [type]
-   */
-  public function enable(Request $request)
+  public function status(Request $request)
   {
     try
     {

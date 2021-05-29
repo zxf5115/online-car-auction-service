@@ -13,11 +13,11 @@ use App\Http\Controllers\Api\BaseController;
  * @author zhangxiaofei [<1326336909@qq.com>]
  * @dateTime 2021-02-22
  *
- * 常见问题控制器类
+ * 购车指南控制器类
  */
 class ProblemController extends BaseController
 {
-  protected $_model = 'App\Models\Common\Module\Common\Problem';
+  protected $_model = 'App\Models\Api\Module\Common\Problem';
 
   protected $_where = [];
 
@@ -27,20 +27,22 @@ class ProblemController extends BaseController
     ['key' => 'create_time', 'value' => 'desc'],
   ];
 
-  protected $_relevance = [];
+  protected $_relevance = [
+    'category'
+  ];
 
 
   /**
-   * @api {get} /api/common/problem/list?page={page} 01. 常见问题列表
-   * @apiDescription 获取常见问题分页列表
-   * @apiGroup 08. 常见问题模块
+   * @api {get} /api/common/problem/list?page={page} 01. 购车指南列表
+   * @apiDescription 获取购车指南分页列表
+   * @apiGroup 09. 购车指南模块
    *
    * @apiParam {int} page 当前页数
    *
-   * @apiSuccess (basic params) {Number} id 常见问题编号
-   * @apiSuccess (basic params) {String} title 常见问题标题
-   * @apiSuccess (basic params) {Number} position_id 常见问题位编号
-   * @apiSuccess (basic params) {Number} create_time 添加时间
+   * @apiSuccess (basic params) {Number} id 购车指南编号
+   * @apiSuccess (basic params) {String} title 购车指南标题
+   * @apiSuccess (basic params) {String} content 购车指南内容
+   * @apiSuccess (category params) {String} title 购车指南分类标题
    *
    * @apiSampleRequest /api/common/problem/list
    * @apiVersion 1.0.0
@@ -74,14 +76,14 @@ class ProblemController extends BaseController
 
 
   /**
-   * @api {get} /api/common/problem/select 02. 常见问题数据
-   * @apiDescription 获取常见问题不分页列表数据
-   * @apiGroup 08. 常见问题模块
+   * @api {get} /api/common/problem/select 02. 购车指南数据
+   * @apiDescription 获取购车指南不分页列表数据
+   * @apiGroup 09. 购车指南模块
    *
-   * @apiSuccess (basic params) {Number} id 常见问题编号
-   * @apiSuccess (basic params) {String} title 常见问题标题
-   * @apiSuccess (basic params) {String} content 常见问题答案
-   * @apiSuccess (basic params) {Number} create_time 添加时间
+   * @apiSuccess (basic params) {Number} id 购车指南编号
+   * @apiSuccess (basic params) {String} title 购车指南标题
+   * @apiSuccess (basic params) {String} content 购车指南内容
+   * @apiSuccess (category params) {String} title 购车指南分类标题
    *
    * @apiSampleRequest /api/common/problem/select
    * @apiVersion 1.0.0
@@ -115,14 +117,14 @@ class ProblemController extends BaseController
 
 
   /**
-   * @api {get} /api/common/problem/view/{id} 03. 常见问题详情
-   * @apiDescription 获取常见问题详情
-   * @apiGroup 08. 常见问题模块
+   * @api {get} /api/common/problem/view/{id} 03. 购车指南详情
+   * @apiDescription 获取购车指南详情
+   * @apiGroup 09. 购车指南模块
    *
-   * @apiSuccess (basic params) {Number} id 常见问题编号
-   * @apiSuccess (basic params) {String} title 常见问题标题
-   * @apiSuccess (basic params) {String} content 常见问题答案
-   * @apiSuccess (basic params) {Number} create_time 添加时间
+   * @apiSuccess (basic params) {Number} id 购车指南编号
+   * @apiSuccess (basic params) {String} title 购车指南标题
+   * @apiSuccess (basic params) {String} content 购车指南内容
+   * @apiSuccess (category params) {String} title 购车指南分类标题
    *
    * @apiSampleRequest /api/common/problem/view/{id}
    * @apiVersion 1.0.0

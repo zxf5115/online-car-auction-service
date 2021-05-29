@@ -12,5 +12,13 @@ use App\Models\Common\Module\Car\Config as Common;
  */
 class Config extends Common
 {
-
+  // 隐藏的属性
+  public $hidden = [
+    'id',
+    'organization_id',
+    'car_id',
+    'status',
+    'create_time',
+    'update_time'
+  ];
 }

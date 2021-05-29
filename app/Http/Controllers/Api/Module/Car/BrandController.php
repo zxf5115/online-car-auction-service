@@ -33,7 +33,10 @@ class BrandController extends BaseController
   ];
 
   protected $_relevance = [
-    'shape'
+    'list' => false,
+    'select' => false,
+    'view' => ['shape'],
+    'hot' => false,
   ];
 
 
@@ -147,6 +150,52 @@ class BrandController extends BaseController
       $relevance = self::getRelevanceData($this->_relevance, 'view');
 
       $response = $this->_model::getRow($condition, $relevance);
+
+      return self::success($response);
+    }
+    catch(\Exception $e)
+    {
+      // 记录异常信息
+      self::record($e);
+
+      return self::error(Code::ERROR);
+    }
+  }
+
+
+  /**
+   * @api {get} /api/car/brand/hot 04. 汽车热门品牌数据
+   * @apiDescription 获取汽车热门品牌不分页列表数据
+   * @apiGroup 41. 汽车品牌模块
+   *
+   * @apiSuccess (basic params) {Number} id 汽车品牌编号
+   * @apiSuccess (basic params) {Number} title 汽车品牌名称
+   * @apiSuccess (basic params) {Number} picture 汽车品牌图片
+   * @apiSuccess (shape params) {Number} id 汽车车型编号
+   * @apiSuccess (shape params) {Number} title 汽车车型名称
+   *
+   * @apiSampleRequest /api/car/brand/hot
+   * @apiVersion 1.0.0
+   */
+  public function hot(Request $request)
+  {
+    try
+    {
+      $where = [
+        'is_hot' => 1
+      ];
+
+      $condition = self::getSimpleWhereData();
+
+      // 对用户请求进行过滤
+      $filter = $this->filter($request->all());
+
+      $condition = array_merge($condition, $this->_where, $filter, $where);
+
+      // 获取关联对象
+      $relevance = self::getRelevanceData($this->_relevance, 'hot');
+
+      $response = $this->_model::getList($condition, $relevance, $this->_order);
 
       return self::success($response);
     }

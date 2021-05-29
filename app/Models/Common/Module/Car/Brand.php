@@ -2,6 +2,7 @@
 namespace App\Models\Common\Module\Car;
 
 use App\Models\Base;
+use App\Enum\Module\Car\BrandEnum;
 
 
 /**
@@ -24,6 +25,24 @@ class Brand extends Base
   public $hidden = [
     'update_time'
   ];
+
+
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2021-05-29
+   * ------------------------------------------
+   * 热门类型封装
+   * ------------------------------------------
+   *
+   * 热门类型封装
+   *
+   * @param int $value 状态值
+   * @return 状态信息
+   */
+  public function getIsHotAttribute($value)
+  {
+    return BrandEnum::getIsHotStatus($value);
+  }
 
 
   // 关联函数 ------------------------------------------------------

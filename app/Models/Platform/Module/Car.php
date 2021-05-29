@@ -1,7 +1,6 @@
 <?php
 namespace App\Models\Platform\Module;
 
-use App\Enum\Module\Car\CarEnum;
 use App\Models\Common\Module\Car as Common;
 
 
@@ -19,24 +18,6 @@ class Car extends Common
     'collection_total',
     'image',
   ];
-
-
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2021-01-19
-   * ------------------------------------------
-   * 售卖状态封装
-   * ------------------------------------------
-   *
-   * 售卖状态封装
-   *
-   * @param [type] $value [description]
-   * @return [type]
-   */
-  public function getSellStatusAttribute($value)
-  {
-    return CarEnum::getSellStatus($value);
-  }
 
 
   /**

@@ -33,7 +33,13 @@ class ProblemController extends BaseController
     ['key' => 'create_time', 'value' => 'desc'],
   ];
 
-  protected $_relevance = [];
+  protected $_relevance = [
+    'list' => [
+      'category'
+    ],
+    'select' => false,
+    'view' => false,
+  ];
 
 
   /**
@@ -51,13 +57,15 @@ class ProblemController extends BaseController
   public function handle(Request $request)
   {
     $messages = [
-      'title.required'   => '请您输入问题标题',
-      'content.required' => '请您输入问题答案',
+      'category_id.required' => '请您选择分类标题',
+      'title.required'       => '请您输入问题标题',
+      'content.required'     => '请您输入问题答案',
     ];
 
     $rule = [
-      'title' => 'required',
-      'content' => 'required',
+      'category_id' => 'required',
+      'title'       => 'required',
+      'content'     => 'required',
     ];
 
     // 验证用户数据内容是否正确
@@ -71,9 +79,10 @@ class ProblemController extends BaseController
     {
       $model = $this->_model::firstOrNew(['id' => $request->id]);
 
-      $model->organization_id  = self::getOrganizationId();
-      $model->title            = $request->title;
-      $model->content          = $request->content;
+      $model->organization_id = self::getOrganizationId();
+      $model->category_id     = $request->category_id;
+      $model->title           = $request->title;
+      $model->content         = $request->content;
 
       $response = $model->save();
 

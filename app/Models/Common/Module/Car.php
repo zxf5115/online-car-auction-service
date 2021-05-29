@@ -45,6 +45,24 @@ class Car extends Base
   }
 
 
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2021-01-19
+   * ------------------------------------------
+   * 售卖状态封装
+   * ------------------------------------------
+   *
+   * 售卖状态封装
+   *
+   * @param [type] $value [description]
+   * @return [type]
+   */
+  public function getSellStatusAttribute($value)
+  {
+    return CarEnum::getSellStatus($value);
+  }
+
+
 
   // 关联函数 ------------------------------------------------------
 
