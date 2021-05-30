@@ -60,6 +60,11 @@ $api->version('v1', [
           $api->post('data', 'MoneyController@data');
         });
 
+        // 物流类型信息路由
+        $api->group(['prefix' => 'logistics'], function ($api) {
+          $api->post('data', 'LogisticsController@data');
+        });
+
         // 常见问题路由
         $api->group(['prefix'  => 'problem'], function ($api) {
           $api->get('list', 'ProblemController@list');
@@ -159,6 +164,16 @@ $api->version('v1', [
             $api->get('view/{id}', 'ComplainController@view');
             $api->post('handle', 'ComplainController@handle');
           });
+
+
+          // 会员汽车路由
+          $api->group(['prefix'  => 'car'], function ($api) {
+            $api->get('list', 'CarController@list');
+            $api->get('select', 'CarController@select');
+            $api->get('view/{id}', 'CarController@view');
+            $api->post('handle', 'CarController@handle');
+          });
+
 
           // 会员订单路由
           $api->group(['prefix'  => 'order'], function ($api) {

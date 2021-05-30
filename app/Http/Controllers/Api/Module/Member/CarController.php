@@ -1,14 +1,15 @@
 <?php
-namespace App\Http\Controllers\Api\Module;
+namespace App\Http\Controllers\Api\Module\Member;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Constant\Code;
 use App\Http\Controllers\Api\BaseController;
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
- * @dateTime 2021-05-29
+ * @dateTime 2021-05-30
  *
  * 汽车控制器类
  */
@@ -57,18 +58,24 @@ class CarController extends BaseController
 
 
   /**
-   * @api {get} /api/car/list?page={page} 01. 汽车列表
-   * @apiDescription 获取汽车分页列表
-   * @apiGroup 45. 汽车模块
+   * @api {get} /api/member/car/list?page={page} 01. 当前会员汽车列表
+   * @apiDescription 获取当前会员汽车分页列表
+   * @apiGroup 30. 会员汽车模块
+   * @apiPermission jwt
+   * @apiHeader {String} Authorization 身份令牌
+   * @apiHeaderExample {json} Header-Example:
+   * {
+   *   "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO"
+   * }
    *
-   * @apiParam {int} page 当前页数
+   * @apiParam {int} source_id 汽车来源编号
+   * @apiParam {int} brand_id 汽车品牌编号
    * @apiParam {int} shape_id 汽车车型编号
-   * @apiParam {int} pay_money 1 5以前 2 5-8 3 8-12 4 12-20 5 20-30 6 30以上
    *
    * @apiSuccess (basic params) {Number} id 汽车编号
    * @apiSuccess (basic params) {Number} member_id 车商编号
    * @apiSuccess (basic params) {Number} source_id 汽车来源编号
-   * @apiSuccess (basic params) {Number} brand_id 汽车车型编号
+   * @apiSuccess (basic params) {Number} brand_id 汽车品牌编号
    * @apiSuccess (basic params) {Number} shape_id 汽车车型编号
    * @apiSuccess (basic params) {Number} vedio_url 汽车视频地址
    * @apiSuccess (basic params) {string} sell_money 销售价格
@@ -80,7 +87,7 @@ class CarController extends BaseController
    * @apiSuccess (brand params) {string} picture 汽车品牌图片
    * @apiSuccess (shape params) {string} picture 汽车车型名称
    *
-   * @apiSampleRequest /api/car/list
+   * @apiSampleRequest /api/member/car/list
    * @apiVersion 1.0.0
    */
   public function list(Request $request)
@@ -89,7 +96,7 @@ class CarController extends BaseController
     {
       $pay_where = $this->_model::getPayMoneyWhere($request->pay_money);
 
-      $condition = self::getSimpleWhereData();
+      $condition = self::getCurrentWhereData();
 
       // 对用户请求进行过滤
       $filter = $this->filter($request->all());
@@ -114,17 +121,24 @@ class CarController extends BaseController
 
 
   /**
-   * @api {get} /api/car/select 02. 汽车数据
-   * @apiDescription 获取汽车不分页列表数据
-   * @apiGroup 45. 汽车模块
+   * @api {get} /api/member/car/select 02. 当前会员汽车数据
+   * @apiDescription 获取当前会员汽车不分页列表数据
+   * @apiGroup 30. 会员汽车模块
+   * @apiPermission jwt
+   * @apiHeader {String} Authorization 身份令牌
+   * @apiHeaderExample {json} Header-Example:
+   * {
+   *   "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO"
+   * }
    *
+   * @apiParam {int} source_id 汽车来源编号
+   * @apiParam {int} brand_id 汽车品牌编号
    * @apiParam {int} shape_id 汽车车型编号
-   * @apiParam {int} pay_money 1 5以前 2 5-8 3 8-12 4 12-20 5 20-30 6 30以上
    *
    * @apiSuccess (basic params) {Number} id 汽车编号
    * @apiSuccess (basic params) {Number} member_id 车商编号
    * @apiSuccess (basic params) {Number} source_id 汽车来源编号
-   * @apiSuccess (basic params) {Number} brand_id 汽车车型编号
+   * @apiSuccess (basic params) {Number} brand_id 汽车品牌编号
    * @apiSuccess (basic params) {Number} shape_id 汽车车型编号
    * @apiSuccess (basic params) {Number} vedio_url 汽车视频地址
    * @apiSuccess (basic params) {string} sell_money 销售价格
@@ -132,14 +146,14 @@ class CarController extends BaseController
    * @apiSuccess (basic params) {string} sell_status 售卖状态 0 待出售 1 已出售
    * @apiSuccess (basic params) {string} create_time 发布时间
    *
-   * @apiSampleRequest /api/car/select
+   * @apiSampleRequest /api/member/car/select
    * @apiVersion 1.0.0
    */
   public function select(Request $request)
   {
     try
     {
-      $condition = self::getSimpleWhereData();
+      $condition = self::getCurrentWhereData();
 
       // 对用户请求进行过滤
       $filter = $this->filter($request->all());
@@ -164,14 +178,20 @@ class CarController extends BaseController
 
 
   /**
-   * @api {get} /api/car/view/{id} 03. 汽车详情
-   * @apiDescription 获取汽车详情
-   * @apiGroup 45. 汽车模块
+   * @api {get} /api/member/car/view/{id} 03. 当前会员汽车详情
+   * @apiDescription 获取当前会员汽车详情
+   * @apiGroup 30. 会员汽车模块
+   * @apiPermission jwt
+   * @apiHeader {String} Authorization 身份令牌
+   * @apiHeaderExample {json} Header-Example:
+   * {
+   *   "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO"
+   * }
    *
    * @apiSuccess (basic params) {Number} id 汽车编号
    * @apiSuccess (basic params) {Number} member_id 车商编号
    * @apiSuccess (basic params) {Number} source_id 汽车来源编号
-   * @apiSuccess (basic params) {Number} brand_id 汽车车型编号
+   * @apiSuccess (basic params) {Number} brand_id 汽车品牌编号
    * @apiSuccess (basic params) {Number} shape_id 汽车车型编号
    * @apiSuccess (basic params) {Number} vedio_url 汽车视频地址
    * @apiSuccess (basic params) {string} sell_money 销售价格
@@ -187,14 +207,14 @@ class CarController extends BaseController
    * @apiSuccess (resource params) {string} picture 汽车图片资源地址
    * @apiSuccess (member params) {string} nickname 车商昵称
    *
-   * @apiSampleRequest /api/car/view/{id}
+   * @apiSampleRequest /api/member/car/view/{id}
    * @apiVersion 1.0.0
    */
   public function view(Request $request, $id)
   {
     try
     {
-      $condition = self::getSimpleWhereData($id);
+      $condition = self::getCurrentWhereData($id);
 
       // 获取关联对象
       $relevance = self::getRelevanceData($this->_relevance, 'view');
@@ -209,6 +229,107 @@ class CarController extends BaseController
       self::record($e);
 
       return self::error(Code::ERROR);
+    }
+  }
+
+
+  /**
+   * @api {get} /api/member/car/handle 04. 编辑汽车信息
+   * @apiDescription 当前会员新增或者编辑汽车信息
+   * @apiGroup 30. 会员汽车模块
+   * @apiPermission jwt
+   * @apiHeader {String} Authorization 身份令牌
+   * @apiHeaderExample {json} Header-Example:
+   * {
+   *   "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO"
+   * }
+   *
+   * @apiParam {string} id 存在为编辑，否则新增
+   * @apiParam {string} source_id 汽车来源编号
+   * @apiParam {string} brand_id 汽车品牌编号
+   * @apiParam {string} shape_id 汽车车型编号
+   * @apiParam {string} sell_money 销售价格
+   * @apiParam {string} other_money 其他费用
+   * @apiParam {string} [vedio_url] 汽车视频地址
+   * @apiParam {array} [url] 汽车图片地址
+   * @apiParam {array} [config] 汽车配置
+   * @apiParamExample {json} 请求示例
+   * {
+        "source_id":"51","brand_id":"51","shape_id":"1","sell_money":"88","other_money":"2","vedio_url":"http:www.baidu.com","url":["http://www.baidu.com","http://www.baidu.com","http://www.baidu.com"],"config":[{"title":"车辆颜色","value":"白色"},{"title":"车辆场地","value":"德国"},{"title":"具体型号","value":"X360"},{"title":"公里数","value":"18万"}]
+   * }
+   *
+   * @apiSampleRequest /api/member/car/handle
+   * @apiVersion 1.0.0
+   */
+  public function handle(Request $request)
+  {
+    $messages = [
+      'source_id.required'   => '请您输入汽车来源编号',
+      'brand_id.required'    => '请您输入汽车品牌编号',
+      'shape_id.required'    => '请您输入汽车车型编号',
+      'sell_money.required'  => '请您输入销售价格',
+    ];
+
+    $rule = [
+      'source_id'  => 'required',
+      'brand_id'   => 'required',
+      'shape_id'   => 'required',
+      'sell_money' => 'required',
+    ];
+
+    // 验证用户数据内容是否正确
+    $validation = self::validation($request, $messages, $rule);
+
+    if(!$validation['status'])
+    {
+      return $validation['message'];
+    }
+    else
+    {
+      DB::beginTransaction();
+
+      try
+      {
+        $model = $this->_model::firstOrNew(['id' => $request->id]);
+
+        $model->member_id   = self::getCurrentId();
+        $model->source_id   = $request->source_id;
+        $model->brand_id    = $request->brand_id;
+        $model->shape_id    = $request->shape_id;
+        $model->sell_money  = $request->sell_money;
+        $model->other_money = $request->other_money ?? '';
+        $model->vedio_url   = $request->vedio_url ?? '';
+        $model->save();
+
+        $data = self::packRelevanceData($request, 'url');
+
+        if(!empty($data))
+        {
+          $model->resource()->delete();
+          $model->resource()->createMany($data);
+        }
+
+        $config = $request->config;
+
+        if(!empty($config))
+        {
+          $model->config()->delete();
+          $model->config()->createMany($config);
+        }
+
+        DB::commit();
+
+        return self::success(Code::message(Code::HANDLE_SUCCESS));
+      }
+      catch(\Exception $e)
+      {
+        DB::rollback();
+
+        // 记录异常信息
+        self::record($e);
+
+        return self::error(Code::HANDLE_FAILURE);
+      }
     }
   }
 }

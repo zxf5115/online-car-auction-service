@@ -17,7 +17,9 @@ class Resource extends Base
 
   // 可以批量修改的字段
   public $fillable = [
-    'id'
+    'id',
+    'car_id',
+    'url',
   ];
 
   // 隐藏的属性

@@ -41,6 +41,66 @@ class Order extends Common
     );
   }
 
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2021-05-24
+   * ------------------------------------------
+   * 订单与汽车来源关联函数
+   * ------------------------------------------
+   *
+   * 订单与汽车来源关联函数
+   *
+   * @return [关联对象]
+   */
+  public function source()
+  {
+    return $this->belongsTo(
+      'App\Models\Api\Module\Car\Source',
+      'source_id',
+      'id'
+    );
+  }
+
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2021-05-24
+   * ------------------------------------------
+   * 订单与汽车品牌关联函数
+   * ------------------------------------------
+   *
+   * 订单与汽车品牌关联函数
+   *
+   * @return [关联对象]
+   */
+  public function brand()
+  {
+    return $this->belongsTo(
+      'App\Models\Api\Module\Car\Brand',
+      'brand_id',
+      'id',
+    );
+  }
+
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2021-05-24
+   * ------------------------------------------
+   * 订单与汽车车型关联函数
+   * ------------------------------------------
+   *
+   * 订单与汽车车型关联函数
+   *
+   * @return [关联对象]
+   */
+  public function shape()
+  {
+    return $this->belongsTo(
+      'App\Models\Api\Module\Car\Shape',
+      'shape_id',
+      'id'
+    );
+  }
+
 
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]

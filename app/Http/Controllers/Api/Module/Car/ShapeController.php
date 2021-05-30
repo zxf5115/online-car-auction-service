@@ -36,7 +36,8 @@ class ShapeController extends BaseController
     'list' => false,
     'select' => false,
     'view' => [
-      'brand'
+      'brand',
+      'config'
     ]
   ];
 
@@ -135,6 +136,10 @@ class ShapeController extends BaseController
    * @apiSuccess (brand params) {Number} id 汽车品牌编号
    * @apiSuccess (brand params) {Number} title 汽车品牌名称
    * @apiSuccess (brand params) {Number} picture 汽车品牌图片
+   * @apiSuccess (config params) {Number} type 汽车配置类型
+   * @apiSuccess (config params) {String} title 汽车配置名字
+   * @apiSuccess (config params) {String} params 汽车配置参数
+   * @apiSuccess (config params) {String} is_must 是否必须
    *
    * @apiSampleRequest /api/car/shape/view/{id}
    * @apiVersion 1.0.0

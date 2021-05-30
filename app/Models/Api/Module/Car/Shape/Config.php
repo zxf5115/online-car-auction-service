@@ -13,6 +13,16 @@ use App\Models\Common\Module\Car\Shape\Config as Common;
  */
 class Config extends Common
 {
+  // 隐藏的属性
+  public $hidden = [
+    'organization_id',
+    'sort',
+    'status',
+    'create_time',
+    'update_time'
+  ];
+
+
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
    * @dateTime 2020-07-23
@@ -25,7 +35,7 @@ class Config extends Common
    * @param [type] $value [description]
    * @return [type]
    */
-  public function getTyeAttribute($value)
+  public function getTypeAttribute($value)
   {
     return ConfigEnum::getTypeStatus($value);
   }
