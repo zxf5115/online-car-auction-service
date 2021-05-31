@@ -5624,182 +5624,6 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/api/member/order/cancel",
-    "title": "07. 课程订单取消",
-    "description": "<p>当前会员取消课程订单</p>",
-    "group": "31._会员订单模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "order_id",
-            "description": "<p>订单编号</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/order/cancel"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/OrderController.php",
-    "groupTitle": "31._会员订单模块",
-    "name": "PostApiMemberOrderCancel"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/order/change",
-    "title": "08. 修改课程订单",
-    "description": "<p>当前会员修改课程订单</p>",
-    "group": "31._会员订单模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "order_id",
-            "description": "<p>订单编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "address_id",
-            "description": "<p>收货地址编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "pay_type",
-            "description": "<p>支付类型 1 支付宝 2 微信 4 苹果</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/order/change"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/OrderController.php",
-    "groupTitle": "31._会员订单模块",
-    "name": "PostApiMemberOrderChange"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/order/finish",
-    "title": "06. 课程订单完成",
-    "description": "<p>当前会员收到货物后，点击完成课程订单</p>",
-    "group": "31._会员订单模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "order_id",
-            "description": "<p>订单编号</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/order/finish"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/OrderController.php",
-    "groupTitle": "31._会员订单模块",
-    "name": "PostApiMemberOrderFinish"
-  },
-  {
-    "type": "post",
     "url": "/api/member/order/handle",
     "title": "04. 创建订单",
     "description": "<p>当前会员创建订单</p>",
@@ -5836,29 +5660,29 @@ define({ "api": [
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "course_id",
-            "description": "<p>课程编号</p>"
+            "field": "car_id",
+            "description": "<p>汽车编号</p>"
           },
           {
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "courseware_id",
-            "description": "<p>课件编号</p>"
+            "field": "source_id",
+            "description": "<p>汽车来源编号</p>"
           },
           {
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "level_id",
-            "description": "<p>课件级别编号</p>"
+            "field": "brand_id",
+            "description": "<p>汽车品牌编号</p>"
           },
           {
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "address_id",
-            "description": "<p>收货地址编号</p>"
+            "field": "shape_id",
+            "description": "<p>汽车型号编号</p>"
           },
           {
             "group": "Parameter",
@@ -5866,13 +5690,6 @@ define({ "api": [
             "optional": false,
             "field": "pay_money",
             "description": "<p>支付金额</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "pay_type",
-            "description": "<p>支付类型 1 支付宝 2 微信 4 苹果</p>"
           }
         ]
       }
@@ -5886,67 +5703,6 @@ define({ "api": [
     "filename": "app/Http/Controllers/Api/Module/Member/OrderController.php",
     "groupTitle": "31._会员订单模块",
     "name": "PostApiMemberOrderHandle"
-  },
-  {
-    "type": "post",
-    "url": "/api/member/order/pay",
-    "title": "05. 订单支付确认",
-    "description": "<p>当前会员支付完成后，调用接口更改订单支付状态</p>",
-    "group": "31._会员订单模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "order_id",
-            "description": "<p>订单编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "is_h5",
-            "description": "<p>是否是h5订单 true false</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/order/pay"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/OrderController.php",
-    "groupTitle": "31._会员订单模块",
-    "name": "PostApiMemberOrderPay"
   },
   {
     "type": "get",
