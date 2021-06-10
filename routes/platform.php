@@ -38,6 +38,7 @@ $api->version('v1', [
       $api->group(['prefix' => 'file'], function ($api) {
         $api->post('file', 'FileController@file');
         $api->post('picture', 'FileController@picture');
+        $api->post('data', 'FileController@data');
         $api->post('editor_file', 'FileController@editor_file');
         $api->post('editor_picture', 'FileController@editor_picture');
       });
