@@ -172,4 +172,48 @@ class FileController extends BaseController
       return self::error(FileCode::FILE_UPLOAD_ERROR);
     }
   }
+
+
+
+
+
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2020-02-24
+   * ------------------------------------------
+   * 上传配置数据
+   * ------------------------------------------
+   *
+   * 上传配置数据
+   *
+   * @param Request $request 请求参数
+   * @return [type]
+   */
+  public function data(Request $request)
+  {
+    try
+    {
+      $data = File::picture('file', 'config');
+
+      // 如果返回错误代码
+      if(false === strpos($data, 'http'))
+      {
+        return self::message($data);
+      }
+
+      $response = [
+        'title' => $request->title,
+        'url'   => $data
+      ];
+
+      return self::success($response);
+    }
+    catch(\Exception $e)
+    {
+      // 记录异常信息
+      self::record($e);
+
+      return self::error(Code::ERROR);
+    }
+  }
 }
