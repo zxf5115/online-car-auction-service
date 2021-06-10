@@ -33,8 +33,8 @@ class BrandController extends BaseController
   ];
 
   protected $_relevance = [
-    'list' => false,
-    'select' => false,
+    'list' => ['shape'],
+    'select' => ['shape'],
     'view' => ['shape'],
     'hot' => false,
   ];

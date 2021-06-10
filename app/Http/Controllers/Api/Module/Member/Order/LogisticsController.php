@@ -39,9 +39,9 @@ class LogisticsController extends BaseController
 
 
   /**
-   * @api {get} /api/member/order/course/logistics/list?page={page} 01. 课程订单物流列表(分页)
-   * @apiDescription 获取当前会员课程订单物流列表(分页)
-   * @apiGroup 40. 课程订单物流模块
+   * @api {get} /api/member/order/course/logistics/list?page={page} 01. 会员订单物流列表(分页)
+   * @apiDescription 获取当前会员会员订单物流列表(分页)
+   * @apiGroup 40. 会员订单物流模块
    * @apiPermission jwt
    * @apiHeader {String} Authorization 身份令牌
    * @apiHeaderExample {json} Header-Example:
@@ -92,9 +92,9 @@ class LogisticsController extends BaseController
 
 
   /**
-   * @api {get} /api/member/order/course/logistics/select 02. 课程订单物流列表(不分页)
-   * @apiDescription 获取当前会员课程订单物流列表(不分页)
-   * @apiGroup 40. 课程订单物流模块
+   * @api {get} /api/member/order/course/logistics/select 02. 会员订单物流列表(不分页)
+   * @apiDescription 获取当前会员会员订单物流列表(不分页)
+   * @apiGroup 40. 会员订单物流模块
    * @apiPermission jwt
    * @apiHeader {String} Authorization 身份令牌
    * @apiHeaderExample {json} Header-Example:
@@ -143,9 +143,9 @@ class LogisticsController extends BaseController
 
 
   /**
-   * @api {get} /api/member/order/course/logistics/view/{id} 03. 课程订单物流详情
-   * @apiDescription 获取当前会员课程订单物流的详情
-   * @apiGroup 40. 课程订单物流模块
+   * @api {get} /api/member/order/course/logistics/view/{id} 03. 会员订单物流详情
+   * @apiDescription 获取当前会员会员订单物流的详情
+   * @apiGroup 40. 会员订单物流模块
    * @apiPermission jwt
    * @apiHeader {String} Authorization 身份令牌
    * @apiHeaderExample {json} Header-Example:

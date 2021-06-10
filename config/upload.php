@@ -6,7 +6,7 @@ return [
   'type' => 1,
 
   // 系统访问地址
-  'base_url' => 'http://localhost:8080',
+  'base_url' => 'https://hpcapi.lecoding.cn',
 
   // 本地
   'local' => [],
