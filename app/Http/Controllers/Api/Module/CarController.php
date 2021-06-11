@@ -62,6 +62,7 @@ class CarController extends BaseController
    * @apiGroup 45. 汽车模块
    *
    * @apiParam {int} page 当前页数
+   * @apiParam {int} limit 每页数量
    * @apiParam {int} shape_id 汽车车型编号
    * @apiParam {int} pay_money 1 5以前 2 5-8 3 8-12 4 12-20 5 20-30 6 30以上
    *
@@ -91,6 +92,8 @@ class CarController extends BaseController
 
       $condition = self::getSimpleWhereData();
 
+      $page = $request->limit ?? 10;
+
       // 对用户请求进行过滤
       $filter = $this->filter($request->all());
 
@@ -99,7 +102,7 @@ class CarController extends BaseController
       // 获取关联对象
       $relevance = self::getRelevanceData($this->_relevance, 'list');
 
-      $response = $this->_model::getPaging($condition, $relevance, $this->_order);
+      $response = $this->_model::getPaging($condition, $relevance, $this->_order, false, $page);
 
       return self::success($response);
     }

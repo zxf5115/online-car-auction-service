@@ -41,6 +41,7 @@ class AddressController extends BaseController
    * }
    *
    * @apiParam {int} page 当前页数
+   * @apiParam {int} limit 每页数量
    *
    * @apiSuccess (basic params) {Number} id 会员地址编号
    * @apiSuccess (basic params) {Number} member_id 会员编号
@@ -63,6 +64,8 @@ class AddressController extends BaseController
     {
       $condition = self::getCurrentWhereData();
 
+      $page = $request->limit ?? 10;
+
       // 对用户请求进行过滤
       $filter = $this->filter($request->all());
 
@@ -71,7 +74,7 @@ class AddressController extends BaseController
       // 获取关联对象
       $relevance = self::getRelevanceData($this->_relevance, 'list');
 
-      $response = $this->_model::getPaging($condition, $relevance, $this->_order);
+      $response = $this->_model::getPaging($condition, $relevance, $this->_order, false, $page);
 
       return self::success($response);
     }

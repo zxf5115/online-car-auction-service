@@ -48,6 +48,7 @@ class ShapeController extends BaseController
    * @apiGroup 42. 汽车车型模块
    *
    * @apiParam {int} page 当前页数
+   * @apiParam {int} limit 每页数量
    * @apiParam {int} brand_id 汽车品牌编号
    *
    * @apiSuccess (basic params) {Number} id 汽车车型编号
@@ -63,6 +64,8 @@ class ShapeController extends BaseController
     {
       $condition = self::getSimpleWhereData();
 
+      $page = $request->limit ?? 10;
+
       // 对用户请求进行过滤
       $filter = $this->filter($request->all());
 
@@ -71,7 +74,7 @@ class ShapeController extends BaseController
       // 获取关联对象
       $relevance = self::getRelevanceData($this->_relevance, 'list');
 
-      $response = $this->_model::getPaging($condition, $relevance, $this->_order);
+      $response = $this->_model::getPaging($condition, $relevance, $this->_order, false, $page);
 
       return self::success($response);
     }

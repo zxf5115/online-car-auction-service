@@ -57,6 +57,7 @@ class ComplainController extends BaseController
    * }
    *
    * @apiParam {int} page 当前页数
+   * @apiParam {int} limit 每页数量
    * @apiParam {int} category_id 投诉分类编号
    *
    * @apiSuccess (basic params) {Number} id 投诉编号
@@ -75,6 +76,8 @@ class ComplainController extends BaseController
     {
       $condition = self::getCurrentWhereData('member_id');
 
+      $page = $request->limit ?? 10;
+
       // 对用户请求进行过滤
       $filter = $this->filter($request->all());
 
@@ -83,7 +86,7 @@ class ComplainController extends BaseController
       // 获取关联对象
       $relevance = self::getRelevanceData($this->_relevance, 'list');
 
-      $response = $this->_model::getPaging($condition, $relevance, $this->_order);
+      $response = $this->_model::getPaging($condition, $relevance, $this->_order, false, $page);
 
       return self::success($response);
     }

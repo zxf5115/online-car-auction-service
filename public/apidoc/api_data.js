@@ -719,6 +719,13 @@ define({ "api": [
             "optional": false,
             "field": "page",
             "description": "<p>当前页数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>每页数量</p>"
           }
         ]
       }
@@ -907,6 +914,13 @@ define({ "api": [
             "optional": false,
             "field": "page",
             "description": "<p>当前页数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>每页数量</p>"
           },
           {
             "group": "Parameter",
@@ -1174,6 +1188,13 @@ define({ "api": [
             "optional": false,
             "field": "page",
             "description": "<p>当前页数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>每页数量</p>"
           },
           {
             "group": "Parameter",
@@ -1485,6 +1506,13 @@ define({ "api": [
             "optional": false,
             "field": "page",
             "description": "<p>当前页数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>每页数量</p>"
           }
         ]
       }
@@ -2188,6 +2216,13 @@ define({ "api": [
             "optional": false,
             "field": "page",
             "description": "<p>当前页数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>每页数量</p>"
           }
         ]
       }
@@ -2737,6 +2772,13 @@ define({ "api": [
             "optional": false,
             "field": "page",
             "description": "<p>当前页数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>每页数量</p>"
           }
         ]
       }
@@ -3057,6 +3099,13 @@ define({ "api": [
             "optional": false,
             "field": "page",
             "description": "<p>当前页数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>每页数量</p>"
           }
         ]
       }
@@ -3256,6 +3305,13 @@ define({ "api": [
             "optional": false,
             "field": "page",
             "description": "<p>当前页数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>每页数量</p>"
           }
         ]
       }
@@ -3855,6 +3911,13 @@ define({ "api": [
             "group": "Parameter",
             "type": "int",
             "optional": false,
+            "field": "limit",
+            "description": "<p>每页数量</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
             "field": "category_id",
             "description": "<p>投诉分类编号</p>"
           }
@@ -4335,6 +4398,20 @@ define({ "api": [
     "parameter": {
       "fields": {
         "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "page",
+            "description": "<p>当前页数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>每页数量</p>"
+          },
           {
             "group": "Parameter",
             "type": "int",
@@ -4841,6 +4918,13 @@ define({ "api": [
             "optional": false,
             "field": "page",
             "description": "<p>当前页数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>每页数量</p>"
           }
         ]
       }
@@ -5742,341 +5826,6 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/api/member/order/course/logistics/list?page={page}",
-    "title": "01. 课程订单物流列表(分页)",
-    "description": "<p>获取当前会员课程订单物流列表(分页)</p>",
-    "group": "40._课程订单物流模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "page",
-            "description": "<p>当前页数</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>订单编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "order_id",
-            "description": "<p>订单编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "present_name",
-            "description": "<p>礼包名称</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "semester",
-            "description": "<p>礼包周期</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "company_name",
-            "description": "<p>物流公司</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "logistics_no",
-            "description": "<p>物流单号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "logistics_status",
-            "description": "<p>物流状态</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/order/course/logistics/list"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Order/LogisticsController.php",
-    "groupTitle": "40._课程订单物流模块",
-    "name": "GetApiMemberOrderCourseLogisticsListPagePage"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/order/course/logistics/select",
-    "title": "02. 课程订单物流列表(不分页)",
-    "description": "<p>获取当前会员课程订单物流列表(不分页)</p>",
-    "group": "40._课程订单物流模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>订单编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "order_id",
-            "description": "<p>订单编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "present_name",
-            "description": "<p>礼包名称</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "semester",
-            "description": "<p>礼包周期</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "company_name",
-            "description": "<p>物流公司</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "logistics_no",
-            "description": "<p>物流单号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "logistics_status",
-            "description": "<p>物流状态</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/order/course/logistics/select"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Order/LogisticsController.php",
-    "groupTitle": "40._课程订单物流模块",
-    "name": "GetApiMemberOrderCourseLogisticsSelect"
-  },
-  {
-    "type": "get",
-    "url": "/api/member/order/course/logistics/view/{id}",
-    "title": "03. 课程订单物流详情",
-    "description": "<p>获取当前会员课程订单物流的详情</p>",
-    "group": "40._课程订单物流模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOjM2NzgsImF1ZGllbmN\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "int",
-            "optional": false,
-            "field": "id",
-            "description": "<p>订单编号</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "basic params": [
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>订单编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "order_id",
-            "description": "<p>订单编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "member_id",
-            "description": "<p>会员编号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "present_name",
-            "description": "<p>礼包名称</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "semester",
-            "description": "<p>礼包周期</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "company_name",
-            "description": "<p>物流公司</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "String",
-            "optional": false,
-            "field": "logistics_no",
-            "description": "<p>物流单号</p>"
-          },
-          {
-            "group": "basic params",
-            "type": "Number",
-            "optional": false,
-            "field": "logistics_status",
-            "description": "<p>物流状态</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/order/course/logistics/view/{id}"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/Order/LogisticsController.php",
-    "groupTitle": "40._课程订单物流模块",
-    "name": "GetApiMemberOrderCourseLogisticsViewId"
-  },
-  {
-    "type": "get",
     "url": "/api/car/brand/hot",
     "title": "04. 汽车热门品牌数据",
     "description": "<p>获取汽车热门品牌不分页列表数据</p>",
@@ -6149,6 +5898,13 @@ define({ "api": [
             "optional": false,
             "field": "page",
             "description": "<p>当前页数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>每页数量</p>"
           }
         ]
       }
@@ -6339,6 +6095,13 @@ define({ "api": [
             "optional": false,
             "field": "page",
             "description": "<p>当前页数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>每页数量</p>"
           },
           {
             "group": "Parameter",
@@ -6541,6 +6304,13 @@ define({ "api": [
             "optional": false,
             "field": "page",
             "description": "<p>当前页数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>每页数量</p>"
           },
           {
             "group": "Parameter",

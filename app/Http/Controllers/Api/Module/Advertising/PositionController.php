@@ -47,6 +47,7 @@ class PositionController extends BaseController
    * @apiGroup 04. 广告位模块
    *
    * @apiParam {int} page 当前页数
+   * @apiParam {int} limit 每页数量
    *
    * @apiSuccess (basic params) {Number} id 广告位编号
    * @apiSuccess (basic params) {Number} title 广告位名称
@@ -61,6 +62,8 @@ class PositionController extends BaseController
     {
       $condition = self::getSimpleWhereData();
 
+      $page = $request->limit ?? 10;
+
       // 对用户请求进行过滤
       $filter = $this->filter($request->all());
 
@@ -69,7 +72,7 @@ class PositionController extends BaseController
       // 获取关联对象
       $relevance = self::getRelevanceData($this->_relevance, 'list');
 
-      $response = $this->_model::getPaging($condition, $relevance, $this->_order);
+      $response = $this->_model::getPaging($condition, $relevance, $this->_order, false, $page);
 
       return self::success($response);
     }

@@ -42,6 +42,7 @@ class AdvertisingController extends BaseController
    * @apiGroup 05. 广告模块
    *
    * @apiParam {int} page 当前页数
+   * @apiParam {int} limit 每页数量
    * @apiParam {int} position_id 广告位编号
    *
    * @apiSuccess (basic params) {Number} id 广告编号
@@ -60,6 +61,8 @@ class AdvertisingController extends BaseController
     {
       $condition = self::getSimpleWhereData();
 
+      $page = $request->limit ?? 10;
+
       // 对用户请求进行过滤
       $filter = $this->filter($request->all());
 
@@ -68,7 +71,7 @@ class AdvertisingController extends BaseController
       // 获取关联对象
       $relevance = self::getRelevanceData($this->_relevance, 'list');
 
-      $response = $this->_model::getPaging($condition, $relevance, $this->_order);
+      $response = $this->_model::getPaging($condition, $relevance, $this->_order, false, $page);
 
       return self::success($response);
     }
