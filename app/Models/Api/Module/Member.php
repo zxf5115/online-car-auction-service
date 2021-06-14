@@ -71,7 +71,7 @@ class Member extends Common
    * @param string $code [description]
    * @return [type]
    */
-  public  function  getUserOpenId($code)
+  public static function  getUserOpenId($code)
   {
     $param = [];
 

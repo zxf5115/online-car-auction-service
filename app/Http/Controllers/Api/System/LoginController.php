@@ -29,7 +29,7 @@ class LoginController extends BaseController
    * @api {post} /api/weixin_login 01. 微信登录
    * @apiDescription 通过微信进行登录
    * @apiGroup 02. 登录模块
-   * @apiParam {string} open_id 微信OpenID
+   * @apiParam {string} code 微信code
    *
    * @apiSuccess (basic params) {String} token 身份令牌
    * @apiSuccess (user_info params) {Number} id 会员编号
@@ -49,11 +49,11 @@ class LoginController extends BaseController
   public function weixin_login(Request $request)
   {
     $messages = [
-      'open_id.required' => '请输入微信密钥',
+      'code.required' => '请您输入微信Code',
     ];
 
     $rule = [
-      'open_id' => 'required',
+      'code' => 'required',
     ];
 
     // 验证用户数据内容是否正确
@@ -67,9 +67,16 @@ class LoginController extends BaseController
     {
       try
       {
+        $data = Member::getUserOpenId($request->code);
+
+        if(empty($data) || empty($data['openid']))
+        {
+          return self::error(Code::WX_REQUIRE_ERROR);
+        }
+
         $condition = self::getSimpleWhereData();
 
-        $where = ['open_id' => $request->open_id];
+        $where = ['open_id' => $data['openid']];
 
         $where = array_merge($condition, $where);
 
@@ -136,7 +143,7 @@ class LoginController extends BaseController
    * @apiDescription 注册用户信息
    * @apiGroup 02. 登录模块
    *
-   * @apiParam {int} open_id 微信app编号
+   * @apiParam {int} code 微信code
    * @apiParam {int} role_id 会员角色 1 车商 2 消费者
    * @apiParam {string} username 登录手机号码（不可为空）
    * @apiParam {string} avatar 会员头像（不可为空）
@@ -149,19 +156,21 @@ class LoginController extends BaseController
   public function register(Request $request)
   {
     $messages = [
-      'role_id.required'     => '请您选择会员角色',
-      'username.required'    => '请您输入登录手机号码',
-      'nickname.required'    => '请您输入会员姓名',
-      'avatar.required'      => '请您上传会员头像',
-      'sex.required'         => '请您选择会员性别',
+      'code.required'     => '请您输入微信Code',
+      'role_id.required'  => '请您选择会员角色',
+      'username.required' => '请您输入登录手机号码',
+      'nickname.required' => '请您输入会员姓名',
+      'avatar.required'   => '请您上传会员头像',
+      'sex.required'      => '请您选择会员性别',
     ];
 
     $rule = [
-      'role_id'     => 'required',
-      'username'    => 'required',
-      'nickname'    => 'required',
-      'avatar'      => 'required',
-      'sex'         => 'required',
+      'code'     => 'required',
+      'role_id'  => 'required',
+      'username' => 'required',
+      'nickname' => 'required',
+      'avatar'   => 'required',
+      'sex'      => 'required',
     ];
 
     // 验证用户数据内容是否正确
@@ -177,8 +186,15 @@ class LoginController extends BaseController
 
       try
       {
+        $data = Member::getUserOpenId($request->code);
+
+        if(empty($data) || empty($data['openid']))
+        {
+          return self::error(Code::WX_REQUIRE_ERROR);
+        }
+
         $model = Member::firstOrNew([
-          'open_id' => $request->open_id,
+          'open_id' => $data['openid'],
           'status' => 1
         ]);
 

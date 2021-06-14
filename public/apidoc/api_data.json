@@ -389,8 +389,8 @@
             "group": "Parameter",
             "type": "int",
             "optional": false,
-            "field": "open_id",
-            "description": "<p>微信app编号</p>"
+            "field": "code",
+            "description": "<p>微信code</p>"
           },
           {
             "group": "Parameter",
@@ -453,8 +453,8 @@
             "group": "Parameter",
             "type": "string",
             "optional": false,
-            "field": "open_id",
-            "description": "<p>微信OpenID</p>"
+            "field": "code",
+            "description": "<p>微信code</p>"
           }
         ]
       }
