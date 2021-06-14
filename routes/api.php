@@ -254,6 +254,11 @@ $api->version('v1', [
             $api->get('list', 'ShapeController@list');
             $api->get('select', 'ShapeController@select');
             $api->get('view/{id}', 'ShapeController@view');
+
+            // 汽车车型路由
+            $api->group(['namespace' => 'Shape', 'prefix' => 'config'], function ($api) {
+              $api->get('data', 'ConfigController@data');
+            });
           });
         });
       });

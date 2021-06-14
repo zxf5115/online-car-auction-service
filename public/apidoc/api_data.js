@@ -6082,6 +6082,69 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/api/car/shape/config/data",
+    "title": "04. 汽车车型配置",
+    "description": "<p>汽车车型配置</p>",
+    "group": "42._汽车车型模块",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "shape_id",
+            "description": "<p>汽车车型编号</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "type",
+            "description": "<p>汽车配置类型</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车配置名字</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "params",
+            "description": "<p>汽车配置参数</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "is_must",
+            "description": "<p>是否必须</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/car/shape/config/data"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Car/Shape/ConfigController.php",
+    "groupTitle": "42._汽车车型模块",
+    "name": "GetApiCarShapeConfigData"
+  },
+  {
+    "type": "get",
     "url": "/api/car/shape/list?page={page}",
     "title": "01. 汽车车型列表",
     "description": "<p>获取汽车车型分页列表</p>",
