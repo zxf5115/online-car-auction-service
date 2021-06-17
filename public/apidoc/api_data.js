@@ -4313,6 +4313,13 @@ define({ "api": [
             "group": "Parameter",
             "type": "string",
             "optional": false,
+            "field": "title",
+            "description": "<p>汽车标题</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
             "field": "sell_money",
             "description": "<p>销售价格</p>"
           },
@@ -4343,14 +4350,6 @@ define({ "api": [
             "optional": true,
             "field": "config",
             "description": "<p>汽车配置</p>"
-          }
-        ],
-        "string": [
-          {
-            "group": "string",
-            "optional": false,
-            "field": "title",
-            "description": "<p>汽车标题</p>"
           }
         ]
       },
