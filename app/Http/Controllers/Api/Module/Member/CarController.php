@@ -79,6 +79,7 @@ class CarController extends BaseController
    * @apiSuccess (basic params) {Number} source_id 汽车来源编号
    * @apiSuccess (basic params) {Number} brand_id 汽车品牌编号
    * @apiSuccess (basic params) {Number} shape_id 汽车车型编号
+   * @apiSuccess (basic params) {Number} title 汽车标题
    * @apiSuccess (basic params) {Number} vedio_url 汽车视频地址
    * @apiSuccess (basic params) {string} sell_money 销售价格
    * @apiSuccess (basic params) {string} other_money 其他费用
@@ -144,6 +145,7 @@ class CarController extends BaseController
    * @apiSuccess (basic params) {Number} source_id 汽车来源编号
    * @apiSuccess (basic params) {Number} brand_id 汽车品牌编号
    * @apiSuccess (basic params) {Number} shape_id 汽车车型编号
+   * @apiSuccess (basic params) {Number} title 汽车标题
    * @apiSuccess (basic params) {Number} vedio_url 汽车视频地址
    * @apiSuccess (basic params) {string} sell_money 销售价格
    * @apiSuccess (basic params) {string} other_money 其他费用
@@ -197,6 +199,7 @@ class CarController extends BaseController
    * @apiSuccess (basic params) {Number} source_id 汽车来源编号
    * @apiSuccess (basic params) {Number} brand_id 汽车品牌编号
    * @apiSuccess (basic params) {Number} shape_id 汽车车型编号
+   * @apiSuccess (basic params) {Number} title 汽车标题
    * @apiSuccess (basic params) {Number} vedio_url 汽车视频地址
    * @apiSuccess (basic params) {string} sell_money 销售价格
    * @apiSuccess (basic params) {string} other_money 其他费用
@@ -252,14 +255,15 @@ class CarController extends BaseController
    * @apiParam {string} source_id 汽车来源编号
    * @apiParam {string} brand_id 汽车品牌编号
    * @apiParam {string} shape_id 汽车车型编号
+   * @apiParam (string) title 汽车标题
    * @apiParam {string} sell_money 销售价格
-   * @apiParam {string} other_money 其他费用
+   * @apiParam {string} [other_money] 其他费用
    * @apiParam {string} [vedio_url] 汽车视频地址
    * @apiParam {array} [url] 汽车图片地址
    * @apiParam {array} [config] 汽车配置
    * @apiParamExample {json} 请求示例
    * {
-        "source_id":"51","brand_id":"51","shape_id":"1","sell_money":"88","other_money":"2","vedio_url":"http:www.baidu.com","url":["http://www.baidu.com","http://www.baidu.com","http://www.baidu.com"],"config":[{"title":"车辆颜色","value":"白色"},{"title":"车辆场地","value":"德国"},{"title":"具体型号","value":"X360"},{"title":"公里数","value":"18万"}]
+        "source_id":"51","brand_id":"51","shape_id":"1","title":"踩踩踩","sell_money":"88","other_money":"2","vedio_url":"http:www.baidu.com","url":["http://www.baidu.com","http://www.baidu.com","http://www.baidu.com"],"config":[{"title":"车辆颜色","value":"白色"},{"title":"车辆场地","value":"德国"},{"title":"具体型号","value":"X360"},{"title":"公里数","value":"18万"}]
    * }
    *
    * @apiSampleRequest /api/member/car/handle
@@ -268,16 +272,18 @@ class CarController extends BaseController
   public function handle(Request $request)
   {
     $messages = [
-      'source_id.required'   => '请您输入汽车来源编号',
-      'brand_id.required'    => '请您输入汽车品牌编号',
-      'shape_id.required'    => '请您输入汽车车型编号',
-      'sell_money.required'  => '请您输入销售价格',
+      'source_id.required'  => '请您输入汽车来源编号',
+      'brand_id.required'   => '请您输入汽车品牌编号',
+      'shape_id.required'   => '请您输入汽车车型编号',
+      'title.required'      => '请您输入汽车标题',
+      'sell_money.required' => '请您输入销售价格',
     ];
 
     $rule = [
       'source_id'  => 'required',
       'brand_id'   => 'required',
       'shape_id'   => 'required',
+      'title'      => 'required',
       'sell_money' => 'required',
     ];
 
@@ -300,6 +306,7 @@ class CarController extends BaseController
         $model->source_id   = $request->source_id;
         $model->brand_id    = $request->brand_id;
         $model->shape_id    = $request->shape_id;
+        $model->title       = $request->title;
         $model->sell_money  = $request->sell_money;
         $model->other_money = $request->other_money ?? '';
         $model->vedio_url   = $request->vedio_url ?? '';

@@ -4319,7 +4319,7 @@ define({ "api": [
           {
             "group": "Parameter",
             "type": "string",
-            "optional": false,
+            "optional": true,
             "field": "other_money",
             "description": "<p>其他费用</p>"
           },
@@ -4344,12 +4344,20 @@ define({ "api": [
             "field": "config",
             "description": "<p>汽车配置</p>"
           }
+        ],
+        "string": [
+          {
+            "group": "string",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车标题</p>"
+          }
         ]
       },
       "examples": [
         {
           "title": "请求示例",
-          "content": "{\n        \"source_id\":\"51\",\"brand_id\":\"51\",\"shape_id\":\"1\",\"sell_money\":\"88\",\"other_money\":\"2\",\"vedio_url\":\"http:www.baidu.com\",\"url\":[\"http://www.baidu.com\",\"http://www.baidu.com\",\"http://www.baidu.com\"],\"config\":[{\"title\":\"车辆颜色\",\"value\":\"白色\"},{\"title\":\"车辆场地\",\"value\":\"德国\"},{\"title\":\"具体型号\",\"value\":\"X360\"},{\"title\":\"公里数\",\"value\":\"18万\"}]\n}",
+          "content": "{\n        \"source_id\":\"51\",\"brand_id\":\"51\",\"shape_id\":\"1\",\"title\":\"踩踩踩\",\"sell_money\":\"88\",\"other_money\":\"2\",\"vedio_url\":\"http:www.baidu.com\",\"url\":[\"http://www.baidu.com\",\"http://www.baidu.com\",\"http://www.baidu.com\"],\"config\":[{\"title\":\"车辆颜色\",\"value\":\"白色\"},{\"title\":\"车辆场地\",\"value\":\"德国\"},{\"title\":\"具体型号\",\"value\":\"X360\"},{\"title\":\"公里数\",\"value\":\"18万\"}]\n}",
           "type": "json"
         }
       ]
@@ -4473,6 +4481,13 @@ define({ "api": [
             "optional": false,
             "field": "shape_id",
             "description": "<p>汽车车型编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车标题</p>"
           },
           {
             "group": "basic params",
@@ -4656,6 +4671,13 @@ define({ "api": [
             "group": "basic params",
             "type": "Number",
             "optional": false,
+            "field": "title",
+            "description": "<p>汽车标题</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
             "field": "vedio_url",
             "description": "<p>汽车视频地址</p>"
           },
@@ -4768,6 +4790,13 @@ define({ "api": [
             "optional": false,
             "field": "shape_id",
             "description": "<p>汽车车型编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车标题</p>"
           },
           {
             "group": "basic params",
@@ -6434,6 +6463,13 @@ define({ "api": [
             "group": "basic params",
             "type": "Number",
             "optional": false,
+            "field": "title",
+            "description": "<p>汽车标题</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
             "field": "vedio_url",
             "description": "<p>汽车视频地址</p>"
           },
@@ -6580,6 +6616,13 @@ define({ "api": [
             "group": "basic params",
             "type": "Number",
             "optional": false,
+            "field": "title",
+            "description": "<p>汽车标题</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
             "field": "vedio_url",
             "description": "<p>汽车视频地址</p>"
           },
@@ -6667,6 +6710,13 @@ define({ "api": [
             "optional": false,
             "field": "shape_id",
             "description": "<p>汽车车型编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车标题</p>"
           },
           {
             "group": "basic params",

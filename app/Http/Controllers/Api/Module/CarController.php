@@ -71,6 +71,7 @@ class CarController extends BaseController
    * @apiSuccess (basic params) {Number} source_id 汽车来源编号
    * @apiSuccess (basic params) {Number} brand_id 汽车车型编号
    * @apiSuccess (basic params) {Number} shape_id 汽车车型编号
+   * @apiSuccess (basic params) {Number} title 汽车标题
    * @apiSuccess (basic params) {Number} vedio_url 汽车视频地址
    * @apiSuccess (basic params) {string} sell_money 销售价格
    * @apiSuccess (basic params) {string} other_money 其他费用
@@ -129,6 +130,7 @@ class CarController extends BaseController
    * @apiSuccess (basic params) {Number} source_id 汽车来源编号
    * @apiSuccess (basic params) {Number} brand_id 汽车车型编号
    * @apiSuccess (basic params) {Number} shape_id 汽车车型编号
+   * @apiSuccess (basic params) {Number} title 汽车标题
    * @apiSuccess (basic params) {Number} vedio_url 汽车视频地址
    * @apiSuccess (basic params) {string} sell_money 销售价格
    * @apiSuccess (basic params) {string} other_money 其他费用
@@ -176,6 +178,7 @@ class CarController extends BaseController
    * @apiSuccess (basic params) {Number} source_id 汽车来源编号
    * @apiSuccess (basic params) {Number} brand_id 汽车车型编号
    * @apiSuccess (basic params) {Number} shape_id 汽车车型编号
+   * @apiSuccess (basic params) {Number} title 汽车标题
    * @apiSuccess (basic params) {Number} vedio_url 汽车视频地址
    * @apiSuccess (basic params) {string} sell_money 销售价格
    * @apiSuccess (basic params) {string} other_money 其他费用
