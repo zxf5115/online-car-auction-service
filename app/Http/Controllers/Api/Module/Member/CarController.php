@@ -255,7 +255,7 @@ class CarController extends BaseController
    * @apiParam {string} source_id 汽车来源编号
    * @apiParam {string} brand_id 汽车品牌编号
    * @apiParam {string} shape_id 汽车车型编号
-   * @apiParam (string) title 汽车标题
+   * @apiParam {string} title 汽车标题
    * @apiParam {string} sell_money 销售价格
    * @apiParam {string} [other_money] 其他费用
    * @apiParam {string} [vedio_url] 汽车视频地址
