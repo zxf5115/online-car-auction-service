@@ -17,7 +17,7 @@ class FileController extends BaseController
 {
   /**
    * @api {post} /api/file/file 01. 上传文件
-   * @apiDescription 通过base64的内容进行文件上传
+   * @apiDescription 上传文件
    * @apiGroup 03. 上传模块
    * @apiPermission jwt
    * @apiHeader {String} Authorization 身份令牌
@@ -62,7 +62,7 @@ class FileController extends BaseController
 
   /**
    * @api {post} /api/file/picture 02. 上传图片
-   * @apiDescription 通过base64的内容进行图片上传
+   * @apiDescription 上传图片
    * @apiGroup 03. 上传模块
    * @apiPermission jwt
    * @apiHeader {String} Authorization 身份令牌
@@ -85,7 +85,7 @@ class FileController extends BaseController
     {
       $category = $request->category ?? 'picture';
 
-      $response = File::picture_base64($request->file, $category);
+      $response = File::file('file', $category);
 
       // 如果返回错误代码
       if(false === strpos($response, 'http'))
