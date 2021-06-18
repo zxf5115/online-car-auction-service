@@ -320,7 +320,7 @@ class CarController extends BaseController
           $model->resource()->createMany($data);
         }
 
-        $config = json_decode($request->config);
+        $config = json_decode($request->config, true);
 
         if(!empty($config))
         {
