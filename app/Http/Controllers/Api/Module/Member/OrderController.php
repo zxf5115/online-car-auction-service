@@ -21,7 +21,11 @@ class OrderController extends BaseController
 
   protected $_where = [];
 
-  protected $_params = [];
+  protected $_addition = [
+    'car' => [
+      'title'
+    ]
+  ];
 
   protected $_order = [
     ['key' => 'create_time', 'value' => 'desc'],
@@ -32,7 +36,8 @@ class OrderController extends BaseController
       'source',
       'brand',
       'shape',
-      'member'
+      'car',
+      'member',
     ],
     'select' => [
       'source',
@@ -64,6 +69,7 @@ class OrderController extends BaseController
    *
    * @apiParam {int} page 当前页数
    * @apiParam {int} limit 每页数量
+   * @apiParam {string} car_title 汽车标题
    *
    * @apiSuccess (basic params) {Number} id 订单编号
    * @apiSuccess (basic params) {String} order_no 订单号
