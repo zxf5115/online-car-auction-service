@@ -560,7 +560,7 @@
     "type": "post",
     "url": "/api/file/file",
     "title": "01. 上传文件",
-    "description": "<p>通过base64的内容进行文件上传</p>",
+    "description": "<p>上传文件</p>",
     "group": "03._上传模块",
     "permission": [
       {
@@ -634,7 +634,7 @@
     "type": "post",
     "url": "/api/file/picture",
     "title": "02. 上传图片",
-    "description": "<p>通过base64的内容进行图片上传</p>",
+    "description": "<p>上传图片</p>",
     "group": "03._上传模块",
     "permission": [
       {
@@ -4249,130 +4249,6 @@
   },
   {
     "type": "get",
-    "url": "/api/member/car/handle",
-    "title": "04. 编辑汽车信息",
-    "description": "<p>当前会员新增或者编辑汽车信息</p>",
-    "group": "30._会员汽车模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "id",
-            "description": "<p>存在为编辑，否则新增</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "source_id",
-            "description": "<p>汽车来源编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "brand_id",
-            "description": "<p>汽车品牌编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "shape_id",
-            "description": "<p>汽车车型编号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "title",
-            "description": "<p>汽车标题</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "sell_money",
-            "description": "<p>销售价格</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": true,
-            "field": "other_money",
-            "description": "<p>其他费用</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": true,
-            "field": "vedio_url",
-            "description": "<p>汽车视频地址</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "array",
-            "optional": true,
-            "field": "url",
-            "description": "<p>汽车图片地址</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "array",
-            "optional": true,
-            "field": "config",
-            "description": "<p>汽车配置</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "请求示例",
-          "content": "{\n        \"source_id\":\"51\",\"brand_id\":\"51\",\"shape_id\":\"1\",\"title\":\"踩踩踩\",\"sell_money\":\"88\",\"other_money\":\"2\",\"vedio_url\":\"http:www.baidu.com\",\"url\":[\"http://www.baidu.com\",\"http://www.baidu.com\",\"http://www.baidu.com\"],\"config\":[{\"title\":\"车辆颜色\",\"value\":\"白色\"},{\"title\":\"车辆场地\",\"value\":\"德国\"},{\"title\":\"具体型号\",\"value\":\"X360\"},{\"title\":\"公里数\",\"value\":\"18万\"}]\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/car/handle"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/CarController.php",
-    "groupTitle": "30._会员汽车模块",
-    "name": "GetApiMemberCarHandle"
-  },
-  {
-    "type": "get",
     "url": "/api/member/car/list?page={page}",
     "title": "01. 当前会员汽车列表",
     "description": "<p>获取当前会员汽车分页列表</p>",
@@ -4907,6 +4783,130 @@
     "name": "GetApiMemberCarViewId"
   },
   {
+    "type": "post",
+    "url": "/api/member/car/handle",
+    "title": "04. 编辑汽车信息",
+    "description": "<p>当前会员新增或者编辑汽车信息</p>",
+    "group": "30._会员汽车模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>存在为编辑，否则新增</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "source_id",
+            "description": "<p>汽车来源编号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "brand_id",
+            "description": "<p>汽车品牌编号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "shape_id",
+            "description": "<p>汽车车型编号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车标题</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "sell_money",
+            "description": "<p>销售价格</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": true,
+            "field": "other_money",
+            "description": "<p>其他费用</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": true,
+            "field": "vedio_url",
+            "description": "<p>汽车视频地址</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "array",
+            "optional": true,
+            "field": "url",
+            "description": "<p>汽车图片地址</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "array",
+            "optional": true,
+            "field": "config",
+            "description": "<p>汽车配置</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "请求示例",
+          "content": "{\n        \"source_id\":\"51\",\"brand_id\":\"51\",\"shape_id\":\"1\",\"title\":\"踩踩踩\",\"sell_money\":\"88\",\"other_money\":\"2\",\"vedio_url\":\"http:www.baidu.com\",\"url\":[\"http://www.baidu.com\",\"http://www.baidu.com\",\"http://www.baidu.com\"],\"config\":[{\"title\":\"车辆颜色\",\"value\":\"白色\"},{\"title\":\"车辆场地\",\"value\":\"德国\"},{\"title\":\"具体型号\",\"value\":\"X360\"},{\"title\":\"公里数\",\"value\":\"18万\"}]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/car/handle"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/CarController.php",
+    "groupTitle": "30._会员汽车模块",
+    "name": "PostApiMemberCarHandle"
+  },
+  {
     "type": "get",
     "url": "/api/member/order/list?page={page}",
     "title": "01. 当前会员订单列表",
@@ -4953,6 +4953,13 @@
             "optional": false,
             "field": "limit",
             "description": "<p>每页数量</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "car_title",
+            "description": "<p>汽车标题</p>"
           }
         ]
       }
