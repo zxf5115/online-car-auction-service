@@ -83,9 +83,13 @@ class LoginController extends BaseController
         $response = Member::getRow($where, ['certification']);
 
         // 用户不存在
-        if(is_null($response))
+        if(is_null($response) && !empty($data['openid']))
         {
-          return self::error(Code::USER_EMPTY);
+          $model = Member::firstOrNew(['open_id' => $data['openid']]);
+          $model->open_id = $data['openid'];
+          $model->save();
+
+          $response = $model;
         }
 
         // 用户已禁用
