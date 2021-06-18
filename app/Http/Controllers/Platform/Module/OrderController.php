@@ -134,4 +134,60 @@ class OrderController extends BaseController
       return self::error(Code::HANDLE_FAILURE);
     }
   }
+
+
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2020-12-12
+   * ------------------------------------------
+   * 操作信息
+   * ------------------------------------------
+   *
+   * 操作信息
+   *
+   * @param Request $request [请求参数]
+   * @return [type]
+   */
+  public function handle(Request $request)
+  {
+    $messages = [
+      'id.required'                => '请您输入订单编号',
+      'delivery_quantity.required' => '请您输入交付数量',
+      'delivery_date.required'     => '请您输入提货日期',
+    ];
+
+    $rule = [
+      'id'                => 'required',
+      'delivery_quantity' => 'required',
+      'delivery_date'     => 'required',
+    ];
+
+    // 验证用户数据内容是否正确
+    $validation = self::validation($request, $messages, $rule);
+
+    if(!$validation['status'])
+    {
+      return $validation['message'];
+    }
+    else
+    {
+      try
+      {
+        $model = $this->_model::getRow(['id' => $request->id]);
+
+        $model->delivery_quantity = $request->delivery_quantity;
+        $model->delivery_date     = strtotime($request->delivery_date);
+        $model->save();
+
+        return self::success(Code::message(Code::HANDLE_SUCCESS));
+      }
+      catch(\Exception $e)
+      {
+        // 记录异常信息
+        self::record($e);
+
+        return self::error(Code::HANDLE_FAILURE);
+      }
+    }
+  }
 }

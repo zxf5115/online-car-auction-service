@@ -320,6 +320,7 @@ $api->version('v1', [
         $api->get('select', 'OrderController@select');
         $api->get('view/{id}', 'OrderController@view');
         $api->post('status', 'OrderController@status');
+        $api->post('handle', 'OrderController@handle');
         $api->post('cancel', 'OrderController@cancel');
 
         // 课程订单物流路由

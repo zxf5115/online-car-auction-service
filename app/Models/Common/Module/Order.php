@@ -27,6 +27,18 @@ class Order extends Base
   protected $fillable = ['id'];
 
 
+
+  /**
+   * 转换属性类型
+   */
+  protected $casts = [
+    'status' => 'array',
+    'delivery_date' => 'datetime:Y-m-d',
+    'create_time' => 'datetime:Y-m-d H:i:s',
+    'update_time' => 'datetime:Y-m-d H:i:s',
+  ];
+
+
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
    * @dateTime 2021-05-24
