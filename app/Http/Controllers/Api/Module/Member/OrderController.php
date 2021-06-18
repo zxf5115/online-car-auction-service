@@ -79,6 +79,8 @@ class OrderController extends BaseController
    * @apiSuccess (basic params) {Number} shape_id 汽车车型编号
    * @apiSuccess (basic params) {Number} member_id 会员编号
    * @apiSuccess (basic params) {Number} address_id 会员地址编号
+   * @apiSuccess (basic params) {Number} delivery_quantity 提货数量
+   * @apiSuccess (basic params) {Number} delivery_date 提货时间
    * @apiSuccess (basic params) {Number} pay_money 支付金额
    * @apiSuccess (basic params) {Number} order_status 订单状态 0 待付款 1 待提货 2 已完成 3 已取消
    * @apiSuccess (basic params) {Number} create_time 支付时间
@@ -156,6 +158,8 @@ class OrderController extends BaseController
    * @apiSuccess (basic params) {Number} shape_id 汽车车型编号
    * @apiSuccess (basic params) {Number} member_id 会员编号
    * @apiSuccess (basic params) {Number} address_id 会员地址编号
+   * @apiSuccess (basic params) {Number} delivery_quantity 提货数量
+   * @apiSuccess (basic params) {Number} delivery_date 提货时间
    * @apiSuccess (basic params) {Number} pay_money 支付金额
    * @apiSuccess (basic params) {Number} order_status 订单状态 0 待付款 1 待提货 2 已完成 3 已取消
    * @apiSuccess (basic params) {Number} create_time 支付时间
@@ -233,6 +237,8 @@ class OrderController extends BaseController
    * @apiSuccess (basic params) {Number} shape_id 汽车车型编号
    * @apiSuccess (basic params) {Number} member_id 会员编号
    * @apiSuccess (basic params) {Number} address_id 会员地址编号
+   * @apiSuccess (basic params) {Number} delivery_quantity 提货数量
+   * @apiSuccess (basic params) {Number} delivery_date 提货时间
    * @apiSuccess (basic params) {Number} pay_money 支付金额
    * @apiSuccess (basic params) {Number} order_status 订单状态 0 待付款 1 待提货 2 已完成 3 已取消
    * @apiSuccess (basic params) {Number} create_time 支付时间

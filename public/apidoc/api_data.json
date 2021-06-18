@@ -5027,6 +5027,20 @@
             "group": "basic params",
             "type": "Number",
             "optional": false,
+            "field": "delivery_quantity",
+            "description": "<p>提货数量</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "delivery_date",
+            "description": "<p>提货时间</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
             "field": "pay_money",
             "description": "<p>支付金额</p>"
           },
@@ -5270,6 +5284,20 @@
             "optional": false,
             "field": "address_id",
             "description": "<p>会员地址编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "delivery_quantity",
+            "description": "<p>提货数量</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "delivery_date",
+            "description": "<p>提货时间</p>"
           },
           {
             "group": "basic params",
@@ -5531,6 +5559,20 @@
             "optional": false,
             "field": "address_id",
             "description": "<p>会员地址编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "delivery_quantity",
+            "description": "<p>提货数量</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "delivery_date",
+            "description": "<p>提货时间</p>"
           },
           {
             "group": "basic params",
