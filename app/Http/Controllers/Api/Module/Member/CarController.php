@@ -241,7 +241,7 @@ class CarController extends BaseController
 
 
   /**
-   * @api {get} /api/member/car/handle 04. 编辑汽车信息
+   * @api {post} /api/member/car/handle 04. 编辑汽车信息
    * @apiDescription 当前会员新增或者编辑汽车信息
    * @apiGroup 30. 会员汽车模块
    * @apiPermission jwt
@@ -312,7 +312,7 @@ class CarController extends BaseController
         $model->vedio_url   = $request->vedio_url ?? '';
         $model->save();
 
-        $data = self::packRelevanceData($request, 'url');
+        $data = self::packRelevanceData($request, 'url', true);
 
         if(!empty($data))
         {
@@ -320,7 +320,7 @@ class CarController extends BaseController
           $model->resource()->createMany($data);
         }
 
-        $config = $request->config;
+        $config = json_decode($request->config);
 
         if(!empty($config))
         {
