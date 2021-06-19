@@ -306,6 +306,17 @@ $api->version('v1', [
               $api->post('handle', 'ConfigController@handle');
             });
           });
+
+
+          // 汽车门店路由
+          $api->group(['prefix'  => 'store'], function ($api) {
+            $api->any('list', 'StoreController@list');
+            $api->get('select', 'StoreController@select');
+            $api->get('view/{id}', 'StoreController@view');
+            $api->post('handle', 'StoreController@handle');
+            $api->post('enable', 'StoreController@enable');
+            $api->post('delete', 'StoreController@delete');
+          });
         });
       });
 
