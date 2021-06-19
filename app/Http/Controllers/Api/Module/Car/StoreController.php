@@ -47,6 +47,8 @@ class StoreController extends BaseController
    * @apiSuccess (basic params) {Number} title 汽车门店名称
    * @apiSuccess (basic params) {Number} mobile 汽车门店电话
    * @apiSuccess (basic params) {Number} address 汽车门店地址
+   * @apiSuccess (basic params) {Number} longitude 门店经度
+   * @apiSuccess (basic params) {Number} latitude 门店纬度
    *
    * @apiSampleRequest /api/car/store/list
    * @apiVersion 1.0.0
@@ -90,6 +92,8 @@ class StoreController extends BaseController
    * @apiSuccess (basic params) {Number} title 汽车门店名称
    * @apiSuccess (basic params) {Number} mobile 汽车门店电话
    * @apiSuccess (basic params) {Number} address 汽车门店地址
+   * @apiSuccess (basic params) {Number} longitude 门店经度
+   * @apiSuccess (basic params) {Number} latitude 门店纬度
    *
    * @apiSampleRequest /api/car/store/select
    * @apiVersion 1.0.0
@@ -131,6 +135,8 @@ class StoreController extends BaseController
    * @apiSuccess (basic params) {Number} title 汽车门店名称
    * @apiSuccess (basic params) {Number} mobile 汽车门店电话
    * @apiSuccess (basic params) {Number} address 汽车门店地址
+   * @apiSuccess (basic params) {Number} longitude 门店经度
+   * @apiSuccess (basic params) {Number} latitude 门店纬度
    *
    * @apiSampleRequest /api/car/store/view/{id}
    * @apiVersion 1.0.0

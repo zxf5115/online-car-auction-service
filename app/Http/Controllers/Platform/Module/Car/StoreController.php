@@ -77,6 +77,8 @@ class StoreController extends BaseController
         $model->title           = $request->title;
         $model->mobile          = $request->mobile;
         $model->address         = $request->address;
+        $model->longitude       = $request->longitude;
+        $model->latitude        = $request->latitude;
         $model->sort            = $request->sort;
         $model->save();
 

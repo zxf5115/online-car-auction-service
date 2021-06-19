@@ -5197,6 +5197,20 @@
             "optional": false,
             "field": "address",
             "description": "<p>汽车门店地址</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "longitude",
+            "description": "<p>门店经度</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "latitude",
+            "description": "<p>门店纬度</p>"
           }
         ]
       }
@@ -5247,6 +5261,20 @@
             "optional": false,
             "field": "address",
             "description": "<p>汽车门店地址</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "longitude",
+            "description": "<p>门店经度</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "latitude",
+            "description": "<p>门店纬度</p>"
           }
         ]
       }
@@ -5297,6 +5325,20 @@
             "optional": false,
             "field": "address",
             "description": "<p>汽车门店地址</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "longitude",
+            "description": "<p>门店经度</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "latitude",
+            "description": "<p>门店纬度</p>"
           }
         ]
       }
