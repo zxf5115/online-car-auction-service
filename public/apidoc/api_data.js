@@ -2771,7 +2771,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "delivery_switch",
-            "description": "<p>开关</p>"
+            "description": "<p>交付开关 1 送车服务 2 门店自提</p>"
           }
         ]
       }
