@@ -5143,6 +5143,176 @@
   },
   {
     "type": "get",
+    "url": "/api/car/store/list?page={page}",
+    "title": "01. 汽车门店列表",
+    "description": "<p>获取汽车门店分页列表</p>",
+    "group": "39._汽车门店模块",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "page",
+            "description": "<p>当前页数</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "limit",
+            "description": "<p>每页数量</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>汽车门店编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车门店名称</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>汽车门店电话</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "address",
+            "description": "<p>汽车门店地址</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/car/store/list"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Car/StoreController.php",
+    "groupTitle": "39._汽车门店模块",
+    "name": "GetApiCarStoreListPagePage"
+  },
+  {
+    "type": "get",
+    "url": "/api/car/store/select",
+    "title": "02. 汽车门店数据",
+    "description": "<p>获取汽车门店不分页列表数据</p>",
+    "group": "39._汽车门店模块",
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>汽车门店编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车门店名称</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>汽车门店电话</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "address",
+            "description": "<p>汽车门店地址</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/car/store/select"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Car/StoreController.php",
+    "groupTitle": "39._汽车门店模块",
+    "name": "GetApiCarStoreSelect"
+  },
+  {
+    "type": "get",
+    "url": "/api/car/store/view/{id}",
+    "title": "03. 汽车门店详情",
+    "description": "<p>获取汽车门店详情</p>",
+    "group": "39._汽车门店模块",
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>汽车门店编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车门店名称</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>汽车门店电话</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "address",
+            "description": "<p>汽车门店地址</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/car/store/view/{id}"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Car/StoreController.php",
+    "groupTitle": "39._汽车门店模块",
+    "name": "GetApiCarStoreViewId"
+  },
+  {
+    "type": "get",
     "url": "/api/car/source/select",
     "title": "01. 汽车来源数据",
     "description": "<p>获取汽车来源不分页列表数据</p>",
