@@ -3267,6 +3267,114 @@
   },
   {
     "type": "get",
+    "url": "/api/member/setting/data",
+    "title": "01. 我的设置",
+    "description": "<p>获取我的设置详情</p>",
+    "group": "24._会员设置模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "字段说明": [
+          {
+            "group": "字段说明",
+            "type": "String",
+            "optional": false,
+            "field": "delivery_switch",
+            "description": "<p>开关</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/setting/data"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/SettingController.php",
+    "groupTitle": "24._会员设置模块",
+    "name": "GetApiMemberSettingData"
+  },
+  {
+    "type": "post",
+    "url": "/api/member/setting/handle",
+    "title": "02. 交付设置",
+    "description": "<p>当前会员设置推送开关</p>",
+    "group": "24._会员设置模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "delivery_switch",
+            "description": "<p>交付开关 1 送车服务 2 门店自提</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/setting/handle"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/SettingController.php",
+    "groupTitle": "24._会员设置模块",
+    "name": "PostApiMemberSettingHandle"
+  },
+  {
+    "type": "get",
     "url": "/api/member/approval/list?page={page}",
     "title": "01. 当前会员点赞列表",
     "description": "<p>获取当前会员点赞分页列表</p>",
