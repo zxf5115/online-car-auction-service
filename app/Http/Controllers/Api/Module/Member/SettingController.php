@@ -30,7 +30,7 @@ class SettingController extends BaseController
    *   "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO"
    * }
    *
-   * @apiSuccess (字段说明) {String} delivery_switch 开关
+   * @apiSuccess (字段说明) {String} delivery_switch 交付开关 1 送车服务 2 门店自提
    *
    * @apiSampleRequest /api/member/setting/data
    * @apiVersion 1.0.0
