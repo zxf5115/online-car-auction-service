@@ -73,7 +73,7 @@ class Address extends Base
    */
   public function getProvinceIdAttribute($value)
   {
-    return AreaEnum::getArea($value);
+    // return AreaEnum::getArea($value);
   }
 
   /**
@@ -90,7 +90,7 @@ class Address extends Base
    */
   public function getCityIdAttribute($value)
   {
-    return AreaEnum::getArea($value);
+    // return AreaEnum::getArea($value);
   }
 
   /**
@@ -107,7 +107,7 @@ class Address extends Base
    */
   public function getRegionIdAttribute($value)
   {
-    return AreaEnum::getArea($value);
+    // return AreaEnum::getArea($value);
   }
 
 
