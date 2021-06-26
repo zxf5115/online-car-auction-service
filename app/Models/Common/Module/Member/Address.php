@@ -59,58 +59,6 @@ class Address extends Base
   }
 
 
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-10-21
-   * ------------------------------------------
-   * 省信息封装
-   * ------------------------------------------
-   *
-   * 省信息封装
-   *
-   * @param int $value 状态值
-   * @return 状态信息
-   */
-  public function getProvinceIdAttribute($value)
-  {
-    // return AreaEnum::getArea($value);
-  }
-
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-10-21
-   * ------------------------------------------
-   * 市信息封装
-   * ------------------------------------------
-   *
-   * 市信息封装
-   *
-   * @param int $value 状态值
-   * @return 状态信息
-   */
-  public function getCityIdAttribute($value)
-  {
-    // return AreaEnum::getArea($value);
-  }
-
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-10-21
-   * ------------------------------------------
-   * 区县信息封装
-   * ------------------------------------------
-   *
-   * 区县信息封装
-   *
-   * @param int $value 状态值
-   * @return 状态信息
-   */
-  public function getRegionIdAttribute($value)
-  {
-    // return AreaEnum::getArea($value);
-  }
-
-
   // 关联函数 ------------------------------------------------------
 
   /**

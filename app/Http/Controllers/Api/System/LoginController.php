@@ -87,6 +87,7 @@ class LoginController extends BaseController
         {
           $model = Member::firstOrNew(['open_id' => $data['openid']]);
           $model->open_id = $data['openid'];
+          $model->role_id = 2;
           $model->save();
 
           $response = $model;
