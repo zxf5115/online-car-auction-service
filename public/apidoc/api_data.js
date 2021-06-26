@@ -336,6 +336,49 @@ define({ "api": [
     "name": "PostApiCommonServiceData"
   },
   {
+    "type": "post",
+    "url": "/api/common/service/data",
+    "title": "09. 系统税费信息",
+    "description": "<p>获取系统税费信息</p>",
+    "group": "01._公共模块",
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "msrp",
+            "description": "<p>建议零售价</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "trade_fee",
+            "description": "<p>贸易费</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "customs_clearance_fee",
+            "description": "<p>清关费</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/common/service/data"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Common/TaxController.php",
+    "groupTitle": "01._公共模块",
+    "name": "PostApiCommonServiceData"
+  },
+  {
     "type": "get",
     "url": "/api/logout",
     "title": "03. 退出",

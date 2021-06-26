@@ -65,6 +65,11 @@ $api->version('v1', [
           $api->post('data', 'LogisticsController@data');
         });
 
+        // 税费信息路由
+        $api->group(['prefix' => 'tax'], function ($api) {
+          $api->post('data', 'TaxController@data');
+        });
+
         // 常见问题路由
         $api->group(['prefix'  => 'problem'], function ($api) {
           $api->get('list', 'ProblemController@list');
