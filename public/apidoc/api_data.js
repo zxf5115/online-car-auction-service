@@ -5123,6 +5123,13 @@ define({ "api": [
           },
           {
             "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "address_id",
+            "description": "<p>会员地址编号</p>"
+          },
+          {
+            "group": "Parameter",
             "type": "String",
             "optional": false,
             "field": "pay_money",
@@ -5946,6 +5953,13 @@ define({ "api": [
             "optional": false,
             "field": "shape_id",
             "description": "<p>汽车车型编号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车标题</p>"
           },
           {
             "group": "Parameter",
