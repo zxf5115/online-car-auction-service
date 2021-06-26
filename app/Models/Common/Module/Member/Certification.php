@@ -90,4 +90,23 @@ class Certification extends Base
   {
     return CertificationEnum::getCertificateType($value);
   }
+
+  // 关联函数 ------------------------------------------------------
+
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2020-10-20
+   * ------------------------------------------
+   * 会员档案与会员关联表
+   * ------------------------------------------
+   *
+   * 会员档案与会员关联表
+   *
+   * @return [关联对象]
+   */
+  public function member()
+  {
+      return $this->belongsTo('App\Models\Common\Module\Member', 'member_id', 'id')
+                  ->where(['status'=>1]);
+  }
 }

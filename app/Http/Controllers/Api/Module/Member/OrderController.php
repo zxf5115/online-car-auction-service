@@ -317,6 +317,7 @@ class OrderController extends BaseController
    * @apiParam {Number} source_id 汽车来源编号
    * @apiParam {Number} brand_id 汽车品牌编号
    * @apiParam {Number} shape_id 汽车型号编号
+   * @apiParam {Number} address_id 会员地址编号
    * @apiParam {String} pay_money 支付金额
    *
    * @apiSampleRequest /api/member/order/handle
@@ -325,19 +326,21 @@ class OrderController extends BaseController
   public function handle(Request $request)
   {
     $messages = [
-      'car_id.required'    => '请您输入汽车编号',
-      'source_id.required' => '请您输入汽车来源编号',
-      'brand_id.required'  => '请您输入汽车品牌编号',
-      'shape_id.required'  => '请您输入汽车型号编号',
-      'pay_money.required' => '请您输入支付金额',
+      'car_id.required'     => '请您输入汽车编号',
+      'source_id.required'  => '请您输入汽车来源编号',
+      'brand_id.required'   => '请您输入汽车品牌编号',
+      'shape_id.required'   => '请您输入汽车型号编号',
+      'address_id.required' => '请您输入会员地址编号',
+      'pay_money.required'  => '请您输入支付金额',
     ];
 
     $rule = [
-      'car_id'    => 'required',
-      'source_id' => 'required',
-      'brand_id'  => 'required',
-      'shape_id'  => 'required',
-      'pay_money' => 'required',
+      'car_id'     => 'required',
+      'source_id'  => 'required',
+      'brand_id'   => 'required',
+      'shape_id'   => 'required',
+      'address_id' => 'required',
+      'pay_money'  => 'required',
     ];
 
     // 验证用户数据内容是否正确
