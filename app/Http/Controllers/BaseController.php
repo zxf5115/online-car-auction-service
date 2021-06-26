@@ -479,7 +479,7 @@ class BaseController extends Controller
 
     if($is_json)
     {
-      $result = json_decode($request->field);
+      $result = json_decode($request->$field, true);
     }
 
     if(empty($result))
