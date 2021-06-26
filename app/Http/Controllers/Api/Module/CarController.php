@@ -19,14 +19,13 @@ class CarController extends BaseController
    */
   protected $_model = 'App\Models\Api\Module\Car';
 
-  protected $_where = [
-    'audit_status' => 1
-  ];
+  protected $_where = [];
 
   protected $_params = [
     'source_id',
     'brand_id',
     'shape_id',
+    'title',
   ];
 
   protected $_addition = [];
@@ -64,6 +63,7 @@ class CarController extends BaseController
    * @apiParam {int} page 当前页数
    * @apiParam {int} limit 每页数量
    * @apiParam {int} shape_id 汽车车型编号
+   * @apiParam {int} title 汽车标题
    * @apiParam {int} pay_money 1 5以前 2 5-8 3 8-12 4 12-20 5 20-30 6 30以上
    *
    * @apiSuccess (basic params) {Number} id 汽车编号

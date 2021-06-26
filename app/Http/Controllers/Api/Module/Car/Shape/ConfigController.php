@@ -19,6 +19,12 @@ class ConfigController extends BaseController
    */
   protected $_model = 'App\Models\Api\Module\Car\Shape\Config';
 
+  // 查询条件
+  protected $_params = [
+    'shape_id'
+  ];
+
+
   /**
    * 排序条件
    */

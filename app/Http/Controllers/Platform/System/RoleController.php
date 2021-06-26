@@ -71,17 +71,15 @@ class RoleController extends BaseController
         $organization_id = self::getOrganizationId();
 
         $model->organization_id = $organization_id;
-        $model->title       = $request->title;
-        $model->content     = $request->content;
+        $model->title           = $request->title;
+        $model->content         = $request->content;
+        $model->save();
 
         $data = $this->_model::getMenuId($request->menu_id, $organization_id);
 
-        $response = $model->save();
-
-        $model->permission()->delete();
-
         if(!empty($data))
         {
+          $model->permission()->delete();
         	$model->permission()->createMany($data);
         }
 
