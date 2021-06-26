@@ -337,7 +337,7 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/api/common/service/data",
+    "url": "/api/common/tax/data",
     "title": "09. 系统税费信息",
     "description": "<p>获取系统税费信息</p>",
     "group": "01._公共模块",
@@ -370,13 +370,13 @@ define({ "api": [
     },
     "sampleRequest": [
       {
-        "url": "/api/common/service/data"
+        "url": "/api/common/tax/data"
       }
     ],
     "version": "1.0.0",
     "filename": "app/Http/Controllers/Api/Module/Common/TaxController.php",
     "groupTitle": "01._公共模块",
-    "name": "PostApiCommonServiceData"
+    "name": "PostApiCommonTaxData"
   },
   {
     "type": "get",

@@ -34,7 +34,7 @@ class TaxController extends BaseController
 
 
   /**
-   * @api {post} /api/common/service/data 09. 系统税费信息
+   * @api {post} /api/common/tax/data 09. 系统税费信息
    * @apiDescription 获取系统税费信息
    * @apiGroup 01. 公共模块
    *
@@ -42,7 +42,7 @@ class TaxController extends BaseController
    * @apiSuccess (basic params) {String} trade_fee 贸易费
    * @apiSuccess (basic params) {Number} customs_clearance_fee 清关费
    *
-   * @apiSampleRequest /api/common/service/data
+   * @apiSampleRequest /api/common/tax/data
    * @apiVersion 1.0.0
    */
   public function data(Request $request)
