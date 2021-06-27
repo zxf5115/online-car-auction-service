@@ -1,8 +1,8 @@
 <?php
 namespace App\Models\Api\Module;
 
+use App\Models\Api\Module\Car\Config;
 use App\Models\Common\Module\Car as Common;
-
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
@@ -47,20 +47,20 @@ class Car extends Common
     {
       $response = [
         ['sell_money', '>=', '5'],
-        ['sell_money', '<', '8']
+        ['sell_money', '<', '10']
       ];
     }
     else if(3 == $type)
     {
       $response = [
-        ['sell_money', '>=', '8'],
-        ['sell_money', '<', '12']
+        ['sell_money', '>=', '10'],
+        ['sell_money', '<', '15']
       ];
     }
     else if(4 == $type)
     {
       $response = [
-        ['sell_money', '>=', '12'],
+        ['sell_money', '>=', '15'],
         ['sell_money', '<', '20']
       ];
     }
@@ -74,12 +74,146 @@ class Car extends Common
     else if(6 == $type)
     {
       $response = [
-        ['sell_money', '>=', '30']
+        ['sell_money', '>=', '30'],
+        ['sell_money', '<', '40']
+      ];
+    }
+    else if(7 == $type)
+    {
+      $response = [
+        ['sell_money', '>=', '40']
       ];
     }
 
     return $response;
   }
+
+
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2021-05-24
+   * ------------------------------------------
+   * 获取汽车排量查询条件
+   * ------------------------------------------
+   *
+   * 获取汽车排量查询条件
+   *
+   * @param [type] $type 汽车排量类型
+   * @return [type]
+   */
+  public static function getCarDisplacementWhere($type)
+  {
+    try
+    {
+      $response = [];
+
+      if(1 == $type)
+      {
+        $where = [
+          ['value', '<', '1.0L']
+        ];
+      }
+      else if(2 == $type)
+      {
+        $where = [
+          ['value', '>=', '1.1L'],
+          ['value', '<', '1.6L']
+        ];
+      }
+      else if(3 == $type)
+      {
+        $where = [
+          ['value', '>=', '1.7L'],
+          ['value', '<', '2.0L']
+        ];
+      }
+      else if(4 == $type)
+      {
+        $where = [
+          ['value', '>=', '2.1L'],
+          ['value', '<', '2.5L']
+        ];
+      }
+      else if(5 == $type)
+      {
+        $where = [
+          ['value', '>=', '2.6L'],
+          ['value', '<', '3.0L']
+        ];
+      }
+      else if(6 == $type)
+      {
+        $where = [
+          ['value', '>=', '3.1L'],
+          ['value', '<', '4.0L']
+        ];
+      }
+      else if(7 == $type)
+      {
+        $where = [
+          ['value', '>=', '4.1L']
+        ];
+      }
+
+      $result = Config::getPluck('car_id', $where, false, false, true);
+
+      $response = [[
+        'id',
+        $result
+      ]];
+
+      return $response;
+    }
+    catch(\Exception $e)
+    {
+      record($e);
+
+      return false;
+    }
+  }
+
+
+
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2021-05-24
+   * ------------------------------------------
+   * 获取车辆配置查询条件
+   * ------------------------------------------
+   *
+   * 获取车辆配置查询条件
+   *
+   * @param [string] $value 车辆所属国家
+   * @return [type]
+   */
+  public static function getCarConfigWhere($value)
+  {
+    try
+    {
+      $response = [];
+
+      $where = [
+        'status' => 1,
+        'value' => $value
+      ];
+
+      $result = Config::getPluck('car_id', $where, false, false, true);
+
+      $response = [[
+        'id',
+        $result
+      ]];
+
+      return $response;
+    }
+    catch(\Exception $e)
+    {
+      record($e);
+
+      return false;
+    }
+  }
+
 
 
   // 关联函数 ------------------------------------------------------

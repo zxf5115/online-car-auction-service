@@ -6009,7 +6009,49 @@
             "type": "int",
             "optional": false,
             "field": "pay_money",
-            "description": "<p>1 5以前 2 5-8 3 8-12 4 12-20 5 20-30 6 30以上</p>"
+            "description": "<p>销售价格 (空:不限制, 1:5w以下, 2:5w-10w, 3:10w-15w, 4:15w-20w, 5:20w-30w, 6:30w-40w, 7:40w以上)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "car_operation",
+            "description": "<p>操作方式 (空:不限制, 手动、自动)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "car_type",
+            "description": "<p>汽车类型 (空:不限制, 代步车、SUV、中型车、商务车)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "car_displacement",
+            "description": "<p>汽车排量 (空:不限制, 1:1.0L以下, 2:1.1L-1.6L, 3:1.7L-2.0L, 4:2.1L-2.5L, 5:2.6L-3.0L, 6:3.1L-4.0L, 7:4.0L以上)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "car_seat",
+            "description": "<p>座位数 (空:不限制, 2座、3座、4座)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "car_country",
+            "description": "<p>汽车产地 (空:不限制, 中国、美国、日本)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "sort",
+            "description": "<p>排序方式 (空:默认排序, asc: 价格从小到大，desc: 价格从大到小)</p>"
           }
         ]
       }

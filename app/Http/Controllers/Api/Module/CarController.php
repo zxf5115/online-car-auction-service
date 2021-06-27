@@ -41,7 +41,7 @@ class CarController extends BaseController
     'list' => [
       'source',
       'brand',
-      'shape'
+      'shape',
     ],
     'select' => false,
     'view' => [
@@ -64,7 +64,13 @@ class CarController extends BaseController
    * @apiParam {int} limit 每页数量
    * @apiParam {int} shape_id 汽车车型编号
    * @apiParam {int} title 汽车标题
-   * @apiParam {int} pay_money 1 5以前 2 5-8 3 8-12 4 12-20 5 20-30 6 30以上
+   * @apiParam {int} pay_money 销售价格 (空:不限制, 1:5w以下, 2:5w-10w, 3:10w-15w, 4:15w-20w, 5:20w-30w, 6:30w-40w, 7:40w以上)
+   * @apiParam {int} car_operation 操作方式 (空:不限制, 手动、自动)
+   * @apiParam {int} car_type 汽车类型 (空:不限制, 代步车、SUV、中型车、商务车)
+   * @apiParam {int} car_displacement 汽车排量 (空:不限制, 1:1.0L以下, 2:1.1L-1.6L, 3:1.7L-2.0L, 4:2.1L-2.5L, 5:2.6L-3.0L, 6:3.1L-4.0L, 7:4.0L以上)
+   * @apiParam {int} car_seat 座位数 (空:不限制, 2座、3座、4座)
+   * @apiParam {int} car_country 汽车产地 (空:不限制, 中国、美国、日本)
+   * @apiParam {int} sort 排序方式 (空:默认排序, asc: 价格从小到大，desc: 价格从大到小)
    *
    * @apiSuccess (basic params) {Number} id 汽车编号
    * @apiSuccess (basic params) {Number} member_id 车商编号
@@ -89,7 +95,57 @@ class CarController extends BaseController
   {
     try
     {
-      $pay_where = $this->_model::getPayMoneyWhere($request->pay_money);
+      $pay_where = [];
+      $operation_where = [];
+      $type_where = [];
+      $country_where = [];
+      $seat_where = [];
+      $displacement_where = [];
+
+      // 如果存在价格搜索条件
+      if(0 < $request->pay_money)
+      {
+        $pay_where = $this->_model::getPayMoneyWhere($request->pay_money);
+      }
+
+      // 如果存在车操作类型搜索条件
+      if(!empty($request->car_operation))
+      {
+        $operation_where = $this->_model::getCarConfigWhere($request->car_operation);
+      }
+
+      // 如果存在车类型搜索条件
+      if(!empty($request->car_type))
+      {
+        $type_where = $this->_model::getCarConfigWhere($request->car_type);
+      }
+
+      // 如果存在所属国家搜索条件
+      if(!empty($request->car_country))
+      {
+        $country_where = $this->_model::getCarConfigWhere($request->car_country);
+      }
+
+      // 如果存在汽车座位数搜索条件
+      if(!empty($request->car_seat))
+      {
+        $seat_where = $this->_model::getCarConfigWhere($request->car_seat);
+      }
+
+      // 如果存在汽车排量数搜索条件
+      if(!empty($request->car_displacement))
+      {
+        $displacement_where = $this->_model::getCarDisplacementWhere($request->car_displacement);
+      }
+
+      // 如果存在排序条件
+      if(!empty($request->sort))
+      {
+        $this->_order = [
+          ['key' => 'sell_money', 'value' => $request->sort],
+        ];
+      }
+
 
       $condition = self::getSimpleWhereData();
 
@@ -98,7 +154,7 @@ class CarController extends BaseController
       // 对用户请求进行过滤
       $filter = $this->filter($request->all());
 
-      $condition = array_merge($condition, $this->_where, $filter, $pay_where);
+      $condition = array_merge($condition, $this->_where, $filter, $operation_where, $pay_where, $type_where, $country_where, $seat_where, $displacement_where);
 
       // 获取关联对象
       $relevance = self::getRelevanceData($this->_relevance, 'list');
