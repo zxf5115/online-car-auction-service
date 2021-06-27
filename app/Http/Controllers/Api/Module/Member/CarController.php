@@ -330,7 +330,7 @@ class CarController extends BaseController
 
         DB::commit();
 
-        return self::success(Code::message(Code::HANDLE_SUCCESS));
+        return self::success($model);
       }
       catch(\Exception $e)
       {

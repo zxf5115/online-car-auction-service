@@ -70,6 +70,8 @@ class CarController extends BaseController
    * @apiParam {int} car_displacement 汽车排量 (空:不限制, 1:1.0L以下, 2:1.1L-1.6L, 3:1.7L-2.0L, 4:2.1L-2.5L, 5:2.6L-3.0L, 6:3.1L-4.0L, 7:4.0L以上)
    * @apiParam {int} car_seat 座位数 (空:不限制, 2座、3座、4座)
    * @apiParam {int} car_country 汽车产地 (空:不限制, 中国、美国、日本)
+   * @apiParam {int} car_drive 汽车驱动 (空:不限制, 前驱、后驱、四驱)
+   * @apiParam {int} car_power 汽车动力 (空:不限制, 汽油、柴油、纯电动)
    * @apiParam {int} sort 排序方式 (空:默认排序, asc: 价格从小到大，desc: 价格从大到小)
    *
    * @apiSuccess (basic params) {Number} id 汽车编号
@@ -95,12 +97,15 @@ class CarController extends BaseController
   {
     try
     {
+      $response = [];
       $pay_where = [];
       $operation_where = [];
       $type_where = [];
       $country_where = [];
       $seat_where = [];
       $displacement_where = [];
+      $drive_where = [];
+      $power_where = [];
 
       // 如果存在价格搜索条件
       if(0 < $request->pay_money)
@@ -138,6 +143,18 @@ class CarController extends BaseController
         $displacement_where = $this->_model::getCarDisplacementWhere($request->car_displacement);
       }
 
+      // 如果存在汽车驱动搜索条件
+      if(!empty($request->car_drive))
+      {
+        $drive_where = $this->_model::getCarConfigWhere($request->car_drive);
+      }
+
+      // 如果存在汽车动力搜索条件
+      if(!empty($request->car_power))
+      {
+        $power_where = $this->_model::getCarConfigWhere($request->car_power);
+      }
+
       // 如果存在排序条件
       if(!empty($request->sort))
       {
@@ -154,7 +171,48 @@ class CarController extends BaseController
       // 对用户请求进行过滤
       $filter = $this->filter($request->all());
 
-      $condition = array_merge($condition, $this->_where, $filter, $operation_where, $pay_where, $type_where, $country_where, $seat_where, $displacement_where);
+      if(!empty($operation_where) && empty($operation_where[0][1]))
+      {
+        return self::success($response);
+      }
+
+      if(!empty($pay_where) && empty($pay_where[0][1]))
+      {
+        return self::success($response);
+      }
+
+      if(!empty($type_where) && empty($type_where[0][1]))
+      {
+        return self::success($response);
+      }
+
+      if(!empty($country_where) && empty($country_where[0][1]))
+      {
+        return self::success($response);
+      }
+
+      if(!empty($seat_where) && empty($seat_where[0][1]))
+      {
+        return self::success($response);
+      }
+
+      if(!empty($displacement_where) && empty($displacement_where[0][1]))
+      {
+        return self::success($response);
+      }
+
+      if(!empty($drive_where) && empty($drive_where[0][1]))
+      {
+        return self::success($response);
+      }
+
+      if(!empty($power_where) && empty($power_where[0][1]))
+      {
+        return self::success($response);
+      }
+
+
+      $condition = array_merge($condition, $this->_where, $filter, $operation_where, $pay_where, $type_where, $country_where, $seat_where, $displacement_where, $drive_where, $power_where);
 
       // 获取关联对象
       $relevance = self::getRelevanceData($this->_relevance, 'list');

@@ -310,7 +310,7 @@ class AddressController extends BaseController
         $model = $this->_model::firstOrNew(['id' => $request->id]);
 
         // 如果当前设置为默认地址
-        if(1 == $request->is_default && empty($model) && 1 != $model->is_default['value'])
+        if((1 == $request->is_default && empty($model->id)) || (1 == $request->is_default && !empty($model->id) && 1 != $model->is_default['value']))
         {
           $where = [
             'organization_id' => self::getOrganizationId(),
