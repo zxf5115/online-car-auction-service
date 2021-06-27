@@ -62,6 +62,8 @@ class CarController extends BaseController
    *
    * @apiParam {int} page 当前页数
    * @apiParam {int} limit 每页数量
+   * @apiParam {int} source_id 汽车来源编号
+   * @apiParam {int} brand_id 汽车品牌编号
    * @apiParam {int} shape_id 汽车车型编号
    * @apiParam {int} title 汽车标题
    * @apiParam {int} pay_money 销售价格 (空:不限制, 1:5w以下, 2:5w-10w, 3:10w-15w, 4:15w-20w, 5:20w-30w, 6:30w-40w, 7:40w以上)
