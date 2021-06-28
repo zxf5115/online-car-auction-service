@@ -36,6 +36,7 @@ class OrderController extends BaseController
       'source',
       'brand',
       'shape',
+      'car',
       'car.resource',
       'member',
     ],
