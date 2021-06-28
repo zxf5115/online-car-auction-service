@@ -42,6 +42,7 @@ class CarController extends BaseController
       'source',
       'brand',
       'shape',
+      'resource'
     ],
     'select' => false,
     'view' => [
