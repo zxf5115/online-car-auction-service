@@ -62,4 +62,25 @@ class Logistics extends Common
       'id'
     );
   }
+
+
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2021-05-24
+   * ------------------------------------------
+   * 物流与物流分类关联函数
+   * ------------------------------------------
+   *
+   * 物流与物流分类关联函数
+   *
+   * @return [关联对象]
+   */
+  public function category()
+  {
+    return $this->belongsTo(
+      'App\Models\Api\Module\Common\Logistics',
+      'type',
+      'id'
+    );
+  }
 }

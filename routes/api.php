@@ -194,9 +194,7 @@ $api->version('v1', [
 
             // 会员订单物流路由
             $api->group(['namespace' => 'Order', 'prefix' => 'logistics'], function ($api) {
-              $api->get('list', 'LogisticsController@list');
               $api->get('select', 'LogisticsController@select');
-              $api->get('view/{id}', 'LogisticsController@view');
             });
           });
         });
