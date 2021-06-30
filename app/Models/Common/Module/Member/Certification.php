@@ -26,9 +26,12 @@ class Certification extends Base
     'certificate_type',
     'certificate_no',
     'bank_card_no',
+    'cerificate_front_picture',
+    'cerificate_behind_picture',
     'audit_status',
     'audit_content',
   ];
+
 
   // 隐藏的属性
   public $hidden = [
