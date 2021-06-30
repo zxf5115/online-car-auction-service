@@ -148,6 +148,8 @@ $api->version('v1', [
       // 公共路由
       $api->group(['namespace' => 'Common', 'prefix'  =>  'common'], function ($api) {
 
+        $api->get('area/list', 'AreaController@list'); // 地区路由
+
         // 常见问题路由
         $api->group(['prefix' => 'problem'], function ($api) {
           $api->any('list', 'ProblemController@list');

@@ -15,7 +15,7 @@ class CertificationEnum
 
   const PEOPLE  = 1; // 个人认证
   const CARD    = 2; // 银行卡认证
-  const COMPNAY = 3; // 企业认证
+  const COMPNAY = 3; // 车商认证
 
   // 审核状态封装
   public static $audit = [
@@ -50,7 +50,7 @@ class CertificationEnum
 
     self::COMPNAY => [
       'value' => self::COMPNAY,
-      'text' => '企业认证'
+      'text' => '车商认证'
     ]
   ];
 

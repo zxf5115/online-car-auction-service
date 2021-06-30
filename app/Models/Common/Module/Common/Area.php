@@ -33,6 +33,35 @@ class Area extends Base
   protected $fillable = ['id'];
 
 
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2021-06-30
+   * ------------------------------------------
+   * 根据id查询地址内容
+   * ------------------------------------------
+   *
+   * 根据id查询地址内容
+   *
+   * @param [type] $id 地址id
+   * @return [type]
+   */
+  public static function getAreaValue($id)
+  {
+    try
+    {
+      $response  = self::getRow(['id' => $id]);
+
+      return $response->title ?? '';
+    }
+    catch(\Exception $e)
+    {
+      record($e);
+
+      return false;
+    }
+  }
+
+
 
   // 关联函数 ------------------------------------------------------
 

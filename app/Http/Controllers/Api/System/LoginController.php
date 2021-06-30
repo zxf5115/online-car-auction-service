@@ -85,7 +85,7 @@ class LoginController extends BaseController
         // 用户不存在
         if(is_null($response) && !empty($data['openid']))
         {
-          $model = Member::firstOrNew(['open_id' => $data['openid']]);
+          $model = Member::firstOrNew($where);
           $model->open_id = $data['openid'];
           $model->role_id = 2;
           $model->save();

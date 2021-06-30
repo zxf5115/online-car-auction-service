@@ -61,11 +61,13 @@ class AdvertisingController extends BaseController
     $messages = [
       'position_id.required' => '请您输入广告位标题',
       'title.required'       => '请您输入广告标题',
+      'picture.required'     => '请您输入广告图片',
     ];
 
     $rule = [
       'position_id' => 'required',
       'title'       => 'required',
+      'picture'     => 'required',
     ];
 
     // 验证用户数据内容是否正确
