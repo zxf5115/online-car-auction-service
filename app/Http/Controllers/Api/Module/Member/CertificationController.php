@@ -384,6 +384,23 @@ class CertificationController extends BaseController
    *   "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO"
    * }
    *
+   * @apiSuccess (basic params) {String} type 认证类型
+   * @apiSuccess (basic params) {String} audit_status 审核状态
+   * @apiSuccess (basic params) {String} audit_content 审核意见
+   * @apiSuccess (basic params) {String} create_time 审核时间
+   * @apiSuccess (personal params) {String} realname 姓名
+   * @apiSuccess (personal params) {String} mobile 手机号
+   * @apiSuccess (personal params) {String} certificate_no 证件号
+   * @apiSuccess (company params) {String} realname 法人姓名
+   * @apiSuccess (company params) {String} mobile 手机号
+   * @apiSuccess (company params) {String} certificate_no 注册号
+   * @apiSuccess (company params) {String} cerificate_front_picture 证件正面图片
+   * @apiSuccess (company params) {String} cerificate_behind_picture 证件反面图片
+   * @apiSuccess (bankcard params) {String} realname 银行卡户名
+   * @apiSuccess (bankcard params) {String} certificate_no 身份证号
+   * @apiSuccess (bankcard params) {String} bank_card_no 银行卡号
+   * @apiSuccess (bankcard params) {String} mobile 银行卡预留手机号
+
    * @apiSampleRequest /api/member/certification/data
    * @apiVersion 1.0.0
    */

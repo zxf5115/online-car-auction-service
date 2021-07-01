@@ -2914,6 +2914,130 @@ define({ "api": [
         }
       ]
     },
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>认证类型</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "audit_status",
+            "description": "<p>审核状态</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "audit_content",
+            "description": "<p>审核意见</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "create_time",
+            "description": "<p>审核时间</p>"
+          }
+        ],
+        "personal params": [
+          {
+            "group": "personal params",
+            "type": "String",
+            "optional": false,
+            "field": "realname",
+            "description": "<p>姓名</p>"
+          },
+          {
+            "group": "personal params",
+            "type": "String",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>手机号</p>"
+          },
+          {
+            "group": "personal params",
+            "type": "String",
+            "optional": false,
+            "field": "certificate_no",
+            "description": "<p>证件号</p>"
+          }
+        ],
+        "company params": [
+          {
+            "group": "company params",
+            "type": "String",
+            "optional": false,
+            "field": "realname",
+            "description": "<p>法人姓名</p>"
+          },
+          {
+            "group": "company params",
+            "type": "String",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>手机号</p>"
+          },
+          {
+            "group": "company params",
+            "type": "String",
+            "optional": false,
+            "field": "certificate_no",
+            "description": "<p>注册号</p>"
+          },
+          {
+            "group": "company params",
+            "type": "String",
+            "optional": false,
+            "field": "cerificate_front_picture",
+            "description": "<p>证件正面图片</p>"
+          },
+          {
+            "group": "company params",
+            "type": "String",
+            "optional": false,
+            "field": "cerificate_behind_picture",
+            "description": "<p>证件反面图片</p>"
+          }
+        ],
+        "bankcard params": [
+          {
+            "group": "bankcard params",
+            "type": "String",
+            "optional": false,
+            "field": "realname",
+            "description": "<p>银行卡户名</p>"
+          },
+          {
+            "group": "bankcard params",
+            "type": "String",
+            "optional": false,
+            "field": "certificate_no",
+            "description": "<p>身份证号</p>"
+          },
+          {
+            "group": "bankcard params",
+            "type": "String",
+            "optional": false,
+            "field": "bank_card_no",
+            "description": "<p>银行卡号</p>"
+          },
+          {
+            "group": "bankcard params",
+            "type": "String",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>银行卡预留手机号</p>"
+          }
+        ]
+      }
+    },
     "sampleRequest": [
       {
         "url": "/api/member/certification/data"
