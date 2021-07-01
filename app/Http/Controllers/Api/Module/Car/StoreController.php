@@ -42,6 +42,8 @@ class StoreController extends BaseController
    *
    * @apiParam {int} page 当前页数
    * @apiParam {int} limit 每页数量
+   * @apiParam {int} longitude 当前经度
+   * @apiParam {int} latitude 当前纬度
    *
    * @apiSuccess (basic params) {Number} id 汽车门店编号
    * @apiSuccess (basic params) {Number} title 汽车门店名称
@@ -71,6 +73,18 @@ class StoreController extends BaseController
 
       $response = $this->_model::getPaging($condition, $relevance, $this->_order, false, $page);
 
+      if(!empty($request->latitude) && !empty($request->longitude))
+      {
+        foreach($response as &$item)
+        {
+          $item['distance'] = $this->_model::getDistanceData($request->longitude, $request->latitude, $item);
+        }
+
+        $distance = array_column($response, 'distance');
+
+        array_multisort($response, SORT_ASC, $distance);
+      }
+
       return self::success($response);
     }
     catch(\Exception $e)
@@ -87,6 +101,9 @@ class StoreController extends BaseController
    * @api {get} /api/car/store/select 02. 汽车门店数据
    * @apiDescription 获取汽车门店不分页列表数据
    * @apiGroup 39. 汽车门店模块
+   *
+   * @apiParam {int} longitude 当前经度
+   * @apiParam {int} latitude 当前纬度
    *
    * @apiSuccess (basic params) {Number} id 汽车门店编号
    * @apiSuccess (basic params) {Number} title 汽车门店名称
@@ -112,7 +129,19 @@ class StoreController extends BaseController
       // 获取关联对象
       $relevance = self::getRelevanceData($this->_relevance, 'select');
 
-      $response = $this->_model::getList($condition, $relevance, $this->_order);
+      $response = $this->_model::getList($condition, $relevance, $this->_order, true);
+
+      if(!empty($request->latitude) && !empty($request->longitude))
+      {
+        foreach($response as &$item)
+        {
+          $item['distance'] = $this->_model::getDistanceData($request->longitude, $request->latitude, $item);
+        }
+
+        $distance = array_column($response, 'distance');
+
+        array_multisort($response, SORT_ASC, $distance);
+      }
 
       return self::success($response);
     }

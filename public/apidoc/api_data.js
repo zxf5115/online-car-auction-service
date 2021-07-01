@@ -5329,6 +5329,20 @@ define({ "api": [
             "optional": false,
             "field": "limit",
             "description": "<p>每页数量</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "longitude",
+            "description": "<p>当前经度</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "latitude",
+            "description": "<p>当前纬度</p>"
           }
         ]
       }
@@ -5397,6 +5411,26 @@ define({ "api": [
     "title": "02. 汽车门店数据",
     "description": "<p>获取汽车门店不分页列表数据</p>",
     "group": "39._汽车门店模块",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "longitude",
+            "description": "<p>当前经度</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "latitude",
+            "description": "<p>当前纬度</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "basic params": [
@@ -6605,5 +6639,300 @@ define({ "api": [
     "filename": "app/Http/Controllers/Api/Module/CarController.php",
     "groupTitle": "45._汽车模块",
     "name": "GetApiCarViewId"
+  },
+  {
+    "type": "get",
+    "url": "/api/member/car/collection/list?page={page}",
+    "title": "01. 我的收藏列表",
+    "description": "<p>获取当前会员汽车收藏分页列表</p>",
+    "group": "46._汽车收藏模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "page",
+            "description": "<p>当前页数</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "car_id",
+            "description": "<p>汽车编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "create_time",
+            "description": "<p>收藏时间</p>"
+          }
+        ],
+        "car params": [
+          {
+            "group": "car params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>汽车编号</p>"
+          },
+          {
+            "group": "car params",
+            "type": "Number",
+            "optional": false,
+            "field": "member_id",
+            "description": "<p>车商编号</p>"
+          },
+          {
+            "group": "car params",
+            "type": "Number",
+            "optional": false,
+            "field": "source_id",
+            "description": "<p>汽车来源编号</p>"
+          },
+          {
+            "group": "car params",
+            "type": "Number",
+            "optional": false,
+            "field": "brand_id",
+            "description": "<p>汽车车型编号</p>"
+          },
+          {
+            "group": "car params",
+            "type": "Number",
+            "optional": false,
+            "field": "shape_id",
+            "description": "<p>汽车车型编号</p>"
+          },
+          {
+            "group": "car params",
+            "type": "Number",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车标题</p>"
+          },
+          {
+            "group": "car params",
+            "type": "Number",
+            "optional": false,
+            "field": "vedio_url",
+            "description": "<p>汽车视频地址</p>"
+          },
+          {
+            "group": "car params",
+            "type": "string",
+            "optional": false,
+            "field": "sell_money",
+            "description": "<p>销售价格</p>"
+          },
+          {
+            "group": "car params",
+            "type": "string",
+            "optional": false,
+            "field": "other_money",
+            "description": "<p>其他费用</p>"
+          },
+          {
+            "group": "car params",
+            "type": "string",
+            "optional": false,
+            "field": "sell_status",
+            "description": "<p>售卖状态 0 待出售 1 已出售</p>"
+          },
+          {
+            "group": "car params",
+            "type": "string",
+            "optional": false,
+            "field": "create_time",
+            "description": "<p>发布时间</p>"
+          }
+        ],
+        "source params": [
+          {
+            "group": "source params",
+            "type": "string",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车来源名称</p>"
+          }
+        ],
+        "brand params": [
+          {
+            "group": "brand params",
+            "type": "string",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车品牌名称</p>"
+          },
+          {
+            "group": "brand params",
+            "type": "string",
+            "optional": false,
+            "field": "picture",
+            "description": "<p>汽车品牌图片</p>"
+          }
+        ],
+        "shape params": [
+          {
+            "group": "shape params",
+            "type": "string",
+            "optional": false,
+            "field": "picture",
+            "description": "<p>汽车车型名称</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/car/collection/list"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/Car/CollectionController.php",
+    "groupTitle": "46._汽车收藏模块",
+    "name": "GetApiMemberCarCollectionListPagePage"
+  },
+  {
+    "type": "post",
+    "url": "/api/member/car/collection/handle",
+    "title": "03. 收藏操作",
+    "description": "<p>当前会员执行汽车收藏操作, 已经收藏过，再次点击取消收藏</p>",
+    "group": "46._汽车收藏模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "car_id",
+            "description": "<p>汽车编号</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/car/collection/handle"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/Car/CollectionController.php",
+    "groupTitle": "46._汽车收藏模块",
+    "name": "PostApiMemberCarCollectionHandle"
+  },
+  {
+    "type": "post",
+    "url": "/api/member/car/collection/status",
+    "title": "02. 资讯是否收藏",
+    "description": "<p>获取当前会员资讯收藏的详情</p>",
+    "group": "46._汽车收藏模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "字段说明": [
+          {
+            "group": "字段说明",
+            "type": "Number",
+            "optional": false,
+            "field": "car_id",
+            "description": "<p>汽车编号</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/car/collection/status"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/Car/CollectionController.php",
+    "groupTitle": "46._汽车收藏模块",
+    "name": "PostApiMemberCarCollectionStatus"
   }
 ] });

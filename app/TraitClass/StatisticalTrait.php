@@ -79,7 +79,7 @@ trait StatisticalTrait
     else if(6 == $type)
     {
       // 一年前
-      $today = strtotime('-6 year');
+      $today = strtotime('-1 year');
 
       $response = [
         'status' => 1,

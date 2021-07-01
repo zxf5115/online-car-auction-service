@@ -177,6 +177,13 @@ $api->version('v1', [
             $api->get('select', 'CarController@select');
             $api->get('view/{id}', 'CarController@view');
             $api->post('handle', 'CarController@handle');
+
+            // 会员汽车收藏路由
+            $api->group(['namespace' => 'Car', 'prefix'  => 'collection'], function ($api) {
+              $api->get('list', 'CollectionController@list');
+              $api->post('status', 'CollectionController@status');
+              $api->post('handle', 'CollectionController@handle');
+            });
           });
 
 
