@@ -160,6 +160,8 @@ class Code
 
   // 金额不足
   const INSUFFICIENT_FUND = 10003;
+  // 当前汽车已售出
+  const CAR_PAY = 10004;
 
   public static $message = [
     self::SUCCESS          => '成功',
@@ -265,6 +267,8 @@ class Code
     self::PAY_ERROR => '支付失败',
 
     self::INSUFFICIENT_FUND => '账户金额不足',
+
+    self::CAR_PAY => '当前汽车已售出',
   ];
 
 

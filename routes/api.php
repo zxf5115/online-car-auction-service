@@ -103,6 +103,7 @@ $api->version('v1', [
             $api->post('company', 'CertificationController@company');
             $api->post('bankcard', 'CertificationController@bankcard');
             $api->post('sms_code', 'CertificationController@sms_code');
+            $api->get('data', 'CertificationController@data');
           });
 
 

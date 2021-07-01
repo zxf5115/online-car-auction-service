@@ -372,4 +372,37 @@ class CertificationController extends BaseController
       }
     }
   }
+
+  /**
+   * @api {get} /api/member/certification/data 06. 会员认证信息
+   * @apiDescription 当前会员是否认证
+   * @apiGroup 28. 会员认证模块
+   * @apiPermission jwt
+   * @apiHeader {String} Authorization 身份令牌
+   * @apiHeaderExample {json} Header-Example:
+   * {
+   *   "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO"
+   * }
+   *
+   * @apiSampleRequest /api/member/certification/data
+   * @apiVersion 1.0.0
+   */
+  public function data(Request $request)
+  {
+    try
+    {
+      $condition = self::getCurrentWhereData();
+
+      $response = $this->_model::getRow($condition);
+
+      return self::success($response);
+    }
+    catch(\Exception $e)
+    {
+      // 记录异常信息
+      self::record($e);
+
+      return self::error(Code::ERROR);
+    }
+  }
 }

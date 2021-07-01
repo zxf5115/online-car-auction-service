@@ -2884,6 +2884,47 @@ define({ "api": [
     "name": "PostApiMemberSettingHandle"
   },
   {
+    "type": "get",
+    "url": "/api/member/certification/data",
+    "title": "06. 会员认证信息",
+    "description": "<p>当前会员是否认证</p>",
+    "group": "28._会员认证模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/certification/data"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/CertificationController.php",
+    "groupTitle": "28._会员认证模块",
+    "name": "GetApiMemberCertificationData"
+  },
+  {
     "type": "post",
     "url": "/api/member/certification/bankcard",
     "title": "04. 银行卡认证",

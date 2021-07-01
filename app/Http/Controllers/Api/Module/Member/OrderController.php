@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\Http\Constant\Code;
+use App\Models\Api\Module\Car;
 use App\Models\Api\Module\Member\Address;
 use App\Http\Controllers\Api\BaseController;
 
@@ -357,6 +358,14 @@ class OrderController extends BaseController
 
       try
       {
+        $car = Car::getRow(['id' => $request->car_id]);
+
+        if(1 == $car->sell_status['value'])
+        {
+          return self::error(Code::CAR_PAY);
+        }
+
+
         $model = $this->_model::firstOrNew(['id' => $request->id]);
 
         if(empty($request->id))
