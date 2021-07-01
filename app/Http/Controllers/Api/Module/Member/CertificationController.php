@@ -84,6 +84,7 @@ class CertificationController extends BaseController
    *   "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO"
    * }
    *
+   * @apiParam {string} [id] 认证编号
    * @apiParam {string} realname 姓名
    * @apiParam {string} mobile 手机号
    * @apiParam {string} certificate_no 证件号
@@ -126,7 +127,8 @@ class CertificationController extends BaseController
         $model->certificate_type = 1;
         $model->realname         = $request->realname;
         $model->mobile           = $request->mobile;
-        $model->certificate_no   = $request->certificate_no;
+        $model->audit_status     = 0;
+        $model->audit_content    = '';
         $model->save();
 
         return self::success(Code::message(Code::HANDLE_SUCCESS));
@@ -153,6 +155,7 @@ class CertificationController extends BaseController
    *   "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO"
    * }
    *
+   * @apiParam {string} [id] 认证编号
    * @apiParam {string} realname 法人姓名
    * @apiParam {string} mobile 手机号
    * @apiParam {string} certificate_no 注册号
@@ -204,6 +207,8 @@ class CertificationController extends BaseController
         $model->certificate_no   = $request->certificate_no;
         $model->cerificate_front_picture = $request->cerificate_front_picture;
         $model->cerificate_behind_picture = $request->cerificate_behind_picture;
+        $model->audit_status     = 0;
+        $model->audit_content    = '';
         $model->save();
 
         $member = $model->member;
@@ -234,6 +239,7 @@ class CertificationController extends BaseController
    *   "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO"
    * }
    *
+   * @apiParam {string} [id] 认证编号
    * @apiParam {string} realname 银行卡户名
    * @apiParam {string} certificate_no 身份证号
    * @apiParam {string} bank_card_no 银行卡号
@@ -296,6 +302,8 @@ class CertificationController extends BaseController
         $model->mobile           = $request->mobile;
         $model->certificate_no   = $request->certificate_no;
         $model->bank_card_no     = $request->bank_card_no;
+        $model->audit_status     = 0;
+        $model->audit_content    = '';
         $model->save();
 
         return self::success(Code::message(Code::HANDLE_SUCCESS));

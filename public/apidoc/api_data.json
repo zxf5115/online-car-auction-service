@@ -3085,6 +3085,13 @@
           {
             "group": "Parameter",
             "type": "string",
+            "optional": true,
+            "field": "id",
+            "description": "<p>认证编号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
             "optional": false,
             "field": "realname",
             "description": "<p>银行卡户名</p>"
@@ -3167,6 +3174,13 @@
           {
             "group": "Parameter",
             "type": "string",
+            "optional": true,
+            "field": "id",
+            "description": "<p>认证编号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
             "optional": false,
             "field": "realname",
             "description": "<p>法人姓名</p>"
@@ -3246,6 +3260,13 @@
     "parameter": {
       "fields": {
         "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": true,
+            "field": "id",
+            "description": "<p>认证编号</p>"
+          },
           {
             "group": "Parameter",
             "type": "string",
