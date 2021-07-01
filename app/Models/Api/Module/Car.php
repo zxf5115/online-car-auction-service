@@ -16,7 +16,6 @@ class Car extends Common
   public $hidden = [
     'organization_id',
     'audit_content',
-    'audit_status',
     'status',
     'update_time',
   ];
