@@ -91,8 +91,8 @@ class CollectionController extends BaseController
 
 
   /**
-   * @api {post} /api/member/car/collection/status 02. 资讯是否收藏
-   * @apiDescription 获取当前会员资讯收藏的详情
+   * @api {post} /api/member/car/collection/status 02. 汽车是否收藏
+   * @apiDescription 获取当前会员汽车收藏的详情
    * @apiGroup 46. 汽车收藏模块
    * @apiPermission jwt
    * @apiHeader {String} Authorization 身份令牌
