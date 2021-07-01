@@ -96,8 +96,15 @@ class Merchant extends Common
 
     if(!empty($result))
     {
-      $response[] = $result['cerificate_front_picture'];
-      $response[] = $result['cerificate_behind_picture'];
+      if(!empty($result['cerificate_front_picture']))
+      {
+        $response[] = $result['cerificate_front_picture'];
+      }
+
+      if(!empty($result['cerificate_behind_picture']))
+      {
+        $response[] = $result['cerificate_behind_picture'];
+      }
     }
 
     return $response;
@@ -125,8 +132,15 @@ class Merchant extends Common
 
     if(!empty($result))
     {
-      $response[]['url'] = $result['cerificate_behind_picture'];
-      $response[]['url'] = $result['cerificate_behind_picture'];
+      if(!empty($result['cerificate_front_picture']))
+      {
+        $response[]['url'] = $result['cerificate_front_picture'];
+      }
+
+      if(!empty($result['cerificate_behind_picture']))
+      {
+        $response[]['url'] = $result['cerificate_behind_picture'];
+      }
     }
 
     return $response;
