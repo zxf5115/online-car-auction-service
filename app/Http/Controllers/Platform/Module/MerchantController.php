@@ -27,7 +27,7 @@ class MerchantController extends BaseController
 
   // 客户端搜索字段
   protected $_params = [
-    'username'
+    'nickname'
   ];
 
   // 客户端关联查询字段

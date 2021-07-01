@@ -2996,14 +2996,14 @@
             "type": "String",
             "optional": false,
             "field": "cerificate_front_picture",
-            "description": "<p>证件正面图片</p>"
+            "description": "<p>法人照片</p>"
           },
           {
             "group": "company params",
             "type": "String",
             "optional": false,
             "field": "cerificate_behind_picture",
-            "description": "<p>证件反面图片</p>"
+            "description": "<p>营业执照</p>"
           }
         ],
         "bankcard params": [
@@ -3190,14 +3190,14 @@
             "type": "string",
             "optional": false,
             "field": "cerificate_front_picture",
-            "description": "<p>证件正面图片</p>"
+            "description": "<p>法人照片</p>"
           },
           {
             "group": "Parameter",
             "type": "string",
             "optional": false,
             "field": "cerificate_behind_picture",
-            "description": "<p>证件反面图片</p>"
+            "description": "<p>营业执照</p>"
           }
         ]
       }

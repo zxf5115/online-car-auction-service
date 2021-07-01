@@ -156,8 +156,8 @@ class CertificationController extends BaseController
    * @apiParam {string} realname 法人姓名
    * @apiParam {string} mobile 手机号
    * @apiParam {string} certificate_no 注册号
-   * @apiParam {string} cerificate_front_picture 证件正面图片
-   * @apiParam {string} cerificate_behind_picture 证件反面图片
+   * @apiParam {string} cerificate_front_picture 法人照片
+   * @apiParam {string} cerificate_behind_picture 营业执照
    *
    * @apiSampleRequest /api/member/certification/company
    * @apiVersion 1.0.0
@@ -169,7 +169,8 @@ class CertificationController extends BaseController
       'mobile.required'         => '请您输入手机号',
       'mobile.regex'            => '手机号不合法',
       'certificate_no.required' => '请您输入证件号',
-      'cerificate_front_picture.required' => '请您上传营业执照',
+      'cerificate_front_picture.required' => '请您上传法人照片',
+      'cerificate_behind_picture.required' => '请您上传营业执照',
     ];
 
     $rule = [
@@ -178,6 +179,7 @@ class CertificationController extends BaseController
       'mobile'         => 'regex:/^1[3456789][0-9]{9}$/',     //正则验证
       'certificate_no' => 'required',
       'cerificate_front_picture' => 'required',
+      'cerificate_behind_picture' => 'required',
     ];
 
     // 验证用户数据内容是否正确
@@ -201,6 +203,7 @@ class CertificationController extends BaseController
         $model->mobile           = $request->mobile;
         $model->certificate_no   = $request->certificate_no;
         $model->cerificate_front_picture = $request->cerificate_front_picture;
+        $model->cerificate_behind_picture = $request->cerificate_behind_picture;
         $model->save();
 
         $member = $model->member;
@@ -394,8 +397,8 @@ class CertificationController extends BaseController
    * @apiSuccess (company params) {String} realname 法人姓名
    * @apiSuccess (company params) {String} mobile 手机号
    * @apiSuccess (company params) {String} certificate_no 注册号
-   * @apiSuccess (company params) {String} cerificate_front_picture 证件正面图片
-   * @apiSuccess (company params) {String} cerificate_behind_picture 证件反面图片
+   * @apiSuccess (company params) {String} cerificate_front_picture 法人照片
+   * @apiSuccess (company params) {String} cerificate_behind_picture 营业执照
    * @apiSuccess (bankcard params) {String} realname 银行卡户名
    * @apiSuccess (bankcard params) {String} certificate_no 身份证号
    * @apiSuccess (bankcard params) {String} bank_card_no 银行卡号
