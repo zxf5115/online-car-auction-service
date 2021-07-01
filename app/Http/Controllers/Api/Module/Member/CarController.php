@@ -21,7 +21,7 @@ class CarController extends BaseController
   protected $_model = 'App\Models\Api\Module\Car';
 
   protected $_where = [
-    'audit_status' => 1
+    // 'audit_status' => 1
   ];
 
   protected $_params = [
