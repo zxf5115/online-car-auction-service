@@ -13,7 +13,7 @@ class Certification extends Common
 {
   // 隐藏的属性
   public $hidden = [
-    'id',
+    // 'id',
     'organization_id',
     'member_id',
     // 'realname',
