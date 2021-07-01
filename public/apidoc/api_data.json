@@ -5391,6 +5391,13 @@
             "optional": false,
             "field": "latitude",
             "description": "<p>门店纬度</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "distance",
+            "description": "<p>距离</p>"
           }
         ]
       }
@@ -5475,6 +5482,13 @@
             "optional": false,
             "field": "latitude",
             "description": "<p>门店纬度</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "distance",
+            "description": "<p>距离</p>"
           }
         ]
       }

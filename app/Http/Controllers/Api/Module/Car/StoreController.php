@@ -51,6 +51,7 @@ class StoreController extends BaseController
    * @apiSuccess (basic params) {Number} address 汽车门店地址
    * @apiSuccess (basic params) {Number} longitude 门店经度
    * @apiSuccess (basic params) {Number} latitude 门店纬度
+   * @apiSuccess (basic params) {Number} distance 距离
    *
    * @apiSampleRequest /api/car/store/list
    * @apiVersion 1.0.0
@@ -111,6 +112,7 @@ class StoreController extends BaseController
    * @apiSuccess (basic params) {Number} address 汽车门店地址
    * @apiSuccess (basic params) {Number} longitude 门店经度
    * @apiSuccess (basic params) {Number} latitude 门店纬度
+   * @apiSuccess (basic params) {Number} distance 距离
    *
    * @apiSampleRequest /api/car/store/select
    * @apiVersion 1.0.0
