@@ -6563,6 +6563,125 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/api/car/recommend",
+    "title": "04. 推荐汽车",
+    "description": "<p>获取推荐汽车不分页列表数据</p>",
+    "group": "45._汽车模块",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "shape_id",
+            "description": "<p>汽车车型编号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "total",
+            "description": "<p>显示数量 默认显示8个</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>汽车编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "member_id",
+            "description": "<p>车商编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "source_id",
+            "description": "<p>汽车来源编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "brand_id",
+            "description": "<p>汽车车型编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "shape_id",
+            "description": "<p>汽车车型编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车标题</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "vedio_url",
+            "description": "<p>汽车视频地址</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "string",
+            "optional": false,
+            "field": "sell_money",
+            "description": "<p>销售价格</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "string",
+            "optional": false,
+            "field": "other_money",
+            "description": "<p>其他费用</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "string",
+            "optional": false,
+            "field": "sell_status",
+            "description": "<p>售卖状态 0 待出售 1 已出售</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "string",
+            "optional": false,
+            "field": "create_time",
+            "description": "<p>发布时间</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/car/recommend"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/CarController.php",
+    "groupTitle": "45._汽车模块",
+    "name": "GetApiCarRecommend"
+  },
+  {
+    "type": "get",
     "url": "/api/car/select",
     "title": "02. 汽车数据",
     "description": "<p>获取汽车不分页列表数据</p>",

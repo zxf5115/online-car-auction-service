@@ -267,6 +267,7 @@ $api->version('v1', [
         $api->get('view/{id}', 'CarController@view');
         $api->post('handle', 'CarController@handle');
         $api->post('enable', 'CarController@enable');
+        $api->post('recommend', 'CarController@recommend');
         $api->post('delete', 'CarController@delete');
 
 

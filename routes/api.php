@@ -242,6 +242,7 @@ $api->version('v1', [
       $api->group(['prefix' => 'car'], function ($api) {
         $api->get('list', 'CarController@list');
         $api->get('select', 'CarController@select');
+        $api->get('recommend', 'CarController@recommend');
         $api->get('view/{id}', 'CarController@view');
         $api->post('handle', 'CarController@handle');
 

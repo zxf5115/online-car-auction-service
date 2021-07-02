@@ -336,4 +336,57 @@ class CarController extends BaseController
       return self::error(Code::ERROR);
     }
   }
+
+
+  /**
+   * @api {get} /api/car/recommend 04. 推荐汽车
+   * @apiDescription 获取推荐汽车不分页列表数据
+   * @apiGroup 45. 汽车模块
+   *
+   * @apiParam {int} shape_id 汽车车型编号
+   * @apiParam {int} total 显示数量 默认显示8个
+   *
+   * @apiSuccess (basic params) {Number} id 汽车编号
+   * @apiSuccess (basic params) {Number} member_id 车商编号
+   * @apiSuccess (basic params) {Number} source_id 汽车来源编号
+   * @apiSuccess (basic params) {Number} brand_id 汽车车型编号
+   * @apiSuccess (basic params) {Number} shape_id 汽车车型编号
+   * @apiSuccess (basic params) {Number} title 汽车标题
+   * @apiSuccess (basic params) {Number} vedio_url 汽车视频地址
+   * @apiSuccess (basic params) {string} sell_money 销售价格
+   * @apiSuccess (basic params) {string} other_money 其他费用
+   * @apiSuccess (basic params) {string} sell_status 售卖状态 0 待出售 1 已出售
+   * @apiSuccess (basic params) {string} create_time 发布时间
+   *
+   * @apiSampleRequest /api/car/recommend
+   * @apiVersion 1.0.0
+   */
+  public function recommend(Request $request)
+  {
+    try
+    {
+      $condition = self::getSimpleWhereData('1', 'is_recommend');
+
+      // 对用户请求进行过滤
+      $filter = $this->filter($request->all());
+
+      $condition = array_merge($condition, $this->_where, $filter);
+
+      // 获取关联对象
+      $relevance = self::getRelevanceData($this->_relevance, 'select');
+
+      $total = $request->total ?? 8;
+
+      $response = $this->_model::getList($condition, $relevance, $this->_order, false, $total);
+
+      return self::success($response);
+    }
+    catch(\Exception $e)
+    {
+      // 记录异常信息
+      self::record($e);
+
+      return self::error(Code::ERROR);
+    }
+  }
 }
