@@ -21,7 +21,9 @@ class ShapeController extends BaseController
 
   protected $_where = [];
 
-  protected $_params = [];
+  protected $_params = [
+    'brand_id'
+  ];
 
   protected $_addition = [];
 
