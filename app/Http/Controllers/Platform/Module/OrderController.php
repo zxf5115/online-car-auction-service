@@ -30,7 +30,7 @@ class OrderController extends BaseController
   // 附加关联查询条件
   protected $_addition = [
     'member' => [
-      'username',
+      'nickname',
     ]
   ];
 

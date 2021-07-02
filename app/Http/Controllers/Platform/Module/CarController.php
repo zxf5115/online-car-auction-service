@@ -29,7 +29,7 @@ class CarController extends BaseController
   // 客户端关联查询字段
   protected $_addition = [
     'member' => [
-      'username'
+      'nickname'
     ]
   ];
 
