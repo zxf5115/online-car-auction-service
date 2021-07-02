@@ -36,7 +36,7 @@ class CarController extends BaseController
    * 排序条件
    */
   protected $_order = [
-    ['key' => 'create_time', 'value' => 'desc'],
+    ['key' => 'sell_money', 'value' => 'desc'],
   ];
 
   protected $_relevance = [
