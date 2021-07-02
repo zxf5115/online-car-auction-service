@@ -21,7 +21,8 @@ class CarController extends BaseController
   protected $_model = 'App\Models\Api\Module\Car';
 
   protected $_where = [
-    'audit_status' => 1
+    'audit_status' => 1,
+    'sell_status' => 0
   ];
 
   protected $_params = [
@@ -103,64 +104,6 @@ class CarController extends BaseController
   {
     try
     {
-      $response = [];
-      $pay_where = [];
-      $operation_where = [];
-      $type_where = [];
-      $country_where = [];
-      $seat_where = [];
-      $displacement_where = [];
-      $drive_where = [];
-      $power_where = [];
-
-      // 如果存在价格搜索条件
-      if(0 < $request->pay_money)
-      {
-        $pay_where = $this->_model::getPayMoneyWhere($request->pay_money);
-      }
-
-      // 如果存在车操作类型搜索条件
-      if(!empty($request->car_operation))
-      {
-        $operation_where = $this->_model::getCarConfigWhere($request->car_operation);
-      }
-
-      // 如果存在车类型搜索条件
-      if(!empty($request->car_type))
-      {
-        $type_where = $this->_model::getCarConfigWhere($request->car_type);
-      }
-
-      // 如果存在所属国家搜索条件
-      if(!empty($request->car_country))
-      {
-        $country_where = $this->_model::getCarConfigWhere($request->car_country);
-      }
-
-      // 如果存在汽车座位数搜索条件
-      if(!empty($request->car_seat))
-      {
-        $seat_where = $this->_model::getCarConfigWhere($request->car_seat);
-      }
-
-      // 如果存在汽车排量数搜索条件
-      if(!empty($request->car_displacement))
-      {
-        $displacement_where = $this->_model::getCarDisplacementWhere($request->car_displacement);
-      }
-
-      // 如果存在汽车驱动搜索条件
-      if(!empty($request->car_drive))
-      {
-        $drive_where = $this->_model::getCarConfigWhere($request->car_drive);
-      }
-
-      // 如果存在汽车动力搜索条件
-      if(!empty($request->car_power))
-      {
-        $power_where = $this->_model::getCarConfigWhere($request->car_power);
-      }
-
       // 如果存在排序条件
       if(!empty($request->sort))
       {
@@ -169,7 +112,6 @@ class CarController extends BaseController
         ];
       }
 
-
       $condition = self::getSimpleWhereData();
 
       $page = $request->limit ?? 10;
@@ -177,48 +119,21 @@ class CarController extends BaseController
       // 对用户请求进行过滤
       $filter = $this->filter($request->all());
 
-      if(!empty($operation_where) && empty($operation_where[0][1]))
+      // 获取组合查询条件
+      list($flag, $data) = $this->_model::getCombinationWhere($request);
+
+      if($flag && empty($data))
       {
-        return self::success($response);
+        $where = [['id', '<', '-1']];
+      }
+      else
+      {
+        $where = [
+          ['id', $data]
+        ];
       }
 
-      if(!empty($pay_where) && empty($pay_where[0][1]))
-      {
-        return self::success($response);
-      }
-
-      if(!empty($type_where) && empty($type_where[0][1]))
-      {
-        return self::success($response);
-      }
-
-      if(!empty($country_where) && empty($country_where[0][1]))
-      {
-        return self::success($response);
-      }
-
-      if(!empty($seat_where) && empty($seat_where[0][1]))
-      {
-        return self::success($response);
-      }
-
-      if(!empty($displacement_where) && empty($displacement_where[0][1]))
-      {
-        return self::success($response);
-      }
-
-      if(!empty($drive_where) && empty($drive_where[0][1]))
-      {
-        return self::success($response);
-      }
-
-      if(!empty($power_where) && empty($power_where[0][1]))
-      {
-        return self::success($response);
-      }
-
-
-      $condition = array_merge($condition, $this->_where, $filter, $operation_where, $pay_where, $type_where, $country_where, $seat_where, $displacement_where, $drive_where, $power_where);
+      $condition = array_merge($condition, $this->_where, $filter, $where);
 
       // 获取关联对象
       $relevance = self::getRelevanceData($this->_relevance, 'list');
