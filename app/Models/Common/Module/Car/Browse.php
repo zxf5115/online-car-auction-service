@@ -17,7 +17,8 @@ class Browse extends Base
 
   // 可以批量修改的字段
   public $fillable = [
-    'id'
+    'id',
+    'car_id'
   ];
 
   // 隐藏的属性

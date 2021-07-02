@@ -162,6 +162,7 @@ class Code
   const INSUFFICIENT_FUND = 10003;
   // 当前汽车已售出
   const CAR_PAY = 10004;
+  const NO_DELETE = 10005;
 
   public static $message = [
     self::SUCCESS          => '成功',
@@ -269,6 +270,7 @@ class Code
     self::INSUFFICIENT_FUND => '账户金额不足',
 
     self::CAR_PAY => '当前汽车已售出',
+    self::NO_DELETE => '当前数据不可删除',
   ];
 
 

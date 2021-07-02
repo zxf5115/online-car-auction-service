@@ -5290,6 +5290,60 @@ define({ "api": [
   },
   {
     "type": "post",
+    "url": "/api/member/order/delete",
+    "title": "05. 当前会员订单删除",
+    "description": "<p>删除当前会员的订单信息</p>",
+    "group": "31._会员订单模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>订单编号</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/order/delete"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/OrderController.php",
+    "groupTitle": "31._会员订单模块",
+    "name": "PostApiMemberOrderDelete"
+  },
+  {
+    "type": "post",
     "url": "/api/member/order/handle",
     "title": "04. 创建订单",
     "description": "<p>当前会员创建订单</p>",

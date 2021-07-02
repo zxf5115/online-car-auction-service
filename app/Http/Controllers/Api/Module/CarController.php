@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Module;
 use Illuminate\Http\Request;
 
 use App\Http\Constant\Code;
+use App\Models\Api\Module\Car\Browse;
 use App\Http\Controllers\Api\BaseController;
 
 /**
@@ -320,6 +321,10 @@ class CarController extends BaseController
     try
     {
       $condition = self::getSimpleWhereData($id);
+
+      $browse = Browse::firstOrNew(['id' => '']);
+      $browse->car_id = $id;
+      $browse->save();
 
       // 获取关联对象
       $relevance = self::getRelevanceData($this->_relevance, 'view');

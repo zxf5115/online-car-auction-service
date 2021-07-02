@@ -39,4 +39,18 @@ class Config extends Common
   {
     return ConfigEnum::getTypeStatus($value);
   }
+
+
+
+  // public function getParamsAttribute($value)
+  // {
+  //   $data = explode(',', $value);
+
+  //   foreach($data as &$item)
+  //   {
+  //     $item = trim($item);
+  //   }
+
+  //   return $data;
+  // }
 }

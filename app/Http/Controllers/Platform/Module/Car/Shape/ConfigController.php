@@ -122,7 +122,7 @@ class ConfigController extends BaseController
           $model->type            = $item['type'];
           $model->title           = $item['title'];
           $model->params          = $item['params'];
-          $model->is_must         = $item['is_must'];
+          $model->is_must         = $item['is_must'] ?? 1;
           $model->save();
         }
 

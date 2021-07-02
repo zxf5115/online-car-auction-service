@@ -124,6 +124,14 @@ class OrderController extends BaseController
       $model->order_status = $request->status;
       $model->save();
 
+      if(0 == $request->status)
+      {
+        $car = $model->car;
+        $car->sell_status = 0;
+        $car->save();
+      }
+
+
       return self::success(Code::message(Code::HANDLE_SUCCESS));
     }
     catch(\Exception $e)

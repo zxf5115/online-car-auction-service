@@ -402,4 +402,45 @@ class OrderController extends BaseController
       }
     }
   }
+
+
+  /**
+   * @api {post} /api/member/order/delete 05. 当前会员订单删除
+   * @apiDescription 删除当前会员的订单信息
+   * @apiGroup 31. 会员订单模块
+   * @apiPermission jwt
+   * @apiHeader {String} Authorization 身份令牌
+   * @apiHeaderExample {json} Header-Example:
+   * {
+   *   "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO"
+   * }
+   *
+   * @apiParam {string} id 订单编号
+   *
+   * @apiSampleRequest /api/member/order/delete
+   * @apiVersion 1.0.0
+   */
+  public function delete(Request $request)
+  {
+    try
+    {
+      $response =$this->_model::getRow(['id' => $request->id]);
+
+      if(!empty($response) && $response->order_status['value'] > 0)
+      {
+        return self::error(Code::NO_DELETE);
+      }
+
+      $response = $this->_model::remove($request->id);
+
+      return self::success($response);
+    }
+    catch(\Exception $e)
+    {
+      // 记录异常信息
+      self::record($e);
+
+      return self::error(Code::ERROR);
+    }
+  }
 }
