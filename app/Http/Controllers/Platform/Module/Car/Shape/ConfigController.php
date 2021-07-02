@@ -111,6 +111,8 @@ class ConfigController extends BaseController
 
       try
       {
+        $this->_model::where(['shape_id' => $request->shape_id])->delete();
+
         foreach($request->data as $item)
         {
           $id = $item['id'] ?? 0;
