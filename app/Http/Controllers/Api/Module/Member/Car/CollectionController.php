@@ -24,6 +24,7 @@ class CollectionController extends BaseController
       'car.source',
       'car.brand',
       'car.shape',
+      'car.resource',
     ]
   ];
 
