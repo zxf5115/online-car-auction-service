@@ -115,6 +115,21 @@ class ConfigController extends BaseController
 
         foreach($request->data as $item)
         {
+          if(empty($item['title']))
+          {
+            return self::message('配置名称不能为空');
+          }
+
+          if(empty($item['type']))
+          {
+            return self::message('配置类型不能为空');
+          }
+
+          if(empty($item['params']))
+          {
+            return self::message('配置参数不能为空');
+          }
+
           $id = $item['id'] ?? 0;
 
           $model = $this->_model::firstOrNew(['id' => $id]);

@@ -187,6 +187,11 @@ class OrderController extends BaseController
         $model->delivery_date     = strtotime($request->delivery_date);
         $model->save();
 
+        $car = $model->car;
+        $car->sell_money = $request->sell_money;
+        $car->other_money = $request->other_money;
+        $car->save();
+
         return self::success(Code::message(Code::HANDLE_SUCCESS));
       }
       catch(\Exception $e)
