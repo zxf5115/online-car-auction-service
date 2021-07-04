@@ -23,7 +23,7 @@ class LogisticsController extends BaseController
   ];
 
   protected $_order = [
-    ['key' => 'create_time', 'value' => 'asc'],
+    ['key' => 'create_time', 'value' => 'desc'],
   ];
 
 
