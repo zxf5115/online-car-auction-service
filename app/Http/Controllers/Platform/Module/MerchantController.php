@@ -82,9 +82,9 @@ class MerchantController extends BaseController
 
         $organization_id = self::getOrganizationId();
 
-        if(1 != $request->audit_status)
+        if(1 == $request->audit_status)
         {
-          $model->role_id = 2;
+          $model->role_id = 1;
         }
 
         $model->organization_id = $organization_id;

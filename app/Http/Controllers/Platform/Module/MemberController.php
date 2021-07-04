@@ -44,6 +44,7 @@ class MemberController extends BaseController
     'list' => [
       'archive',
       'address',
+      'certification',
     ],
     'select' => false,
     'view' => [

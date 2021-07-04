@@ -211,10 +211,6 @@ class CertificationController extends BaseController
         $model->audit_content    = '';
         $model->save();
 
-        $member = $model->member;
-        $member->role_id = 1;
-        $member->save();
-
         return self::success(Code::message(Code::HANDLE_SUCCESS));
       }
       catch(\Exception $e)
