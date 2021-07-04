@@ -38,6 +38,7 @@ class Car extends Common
     try
     {
       $flag  = false;
+      $data = [];
       $where = [];
 
       // 如果存在价格搜索条件
