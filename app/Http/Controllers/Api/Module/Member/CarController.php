@@ -345,4 +345,38 @@ class CarController extends BaseController
       }
     }
   }
+
+
+  /**
+   * @api {post} /api/member/car/delete 05. 汽车删除
+   * @apiDescription 删除当前会员的汽车信息
+   * @apiGroup 22. 会员地址模块
+   * @apiPermission jwt
+   * @apiHeader {String} Authorization 身份令牌
+   * @apiHeaderExample {json} Header-Example:
+   * {
+   *   "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO"
+   * }
+   *
+   * @apiParam {string} id 汽车编号
+   *
+   * @apiSampleRequest /api/member/car/delete
+   * @apiVersion 1.0.0
+   */
+  public function delete(Request $request)
+  {
+    try
+    {
+      $response = $this->_model::remove($request->id);
+
+      return self::success($response);
+    }
+    catch(\Exception $e)
+    {
+      // 记录异常信息
+      self::record($e);
+
+      return self::error(Code::ERROR);
+    }
+  }
 }
