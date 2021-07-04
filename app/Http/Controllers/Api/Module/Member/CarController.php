@@ -350,7 +350,7 @@ class CarController extends BaseController
   /**
    * @api {post} /api/member/car/delete 05. 汽车删除
    * @apiDescription 删除当前会员的汽车信息
-   * @apiGroup 22. 会员地址模块
+   * @apiGroup 30. 会员汽车模块
    * @apiPermission jwt
    * @apiHeader {String} Authorization 身份令牌
    * @apiHeaderExample {json} Header-Example:

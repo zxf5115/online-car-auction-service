@@ -2776,60 +2776,6 @@
     "name": "PostApiMemberAddressHandle"
   },
   {
-    "type": "post",
-    "url": "/api/member/car/delete",
-    "title": "05. 汽车删除",
-    "description": "<p>删除当前会员的汽车信息</p>",
-    "group": "22._会员地址模块",
-    "permission": [
-      {
-        "name": "jwt"
-      }
-    ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "description": "<p>身份令牌</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Header-Example:",
-          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "id",
-            "description": "<p>汽车编号</p>"
-          }
-        ]
-      }
-    },
-    "sampleRequest": [
-      {
-        "url": "/api/member/car/delete"
-      }
-    ],
-    "version": "1.0.0",
-    "filename": "app/Http/Controllers/Api/Module/Member/CarController.php",
-    "groupTitle": "22._会员地址模块",
-    "name": "PostApiMemberCarDelete"
-  },
-  {
     "type": "get",
     "url": "/api/member/setting/data",
     "title": "01. 我的设置",
@@ -4340,6 +4286,60 @@
     "filename": "app/Http/Controllers/Api/Module/Member/CarController.php",
     "groupTitle": "30._会员汽车模块",
     "name": "GetApiMemberCarViewId"
+  },
+  {
+    "type": "post",
+    "url": "/api/member/car/delete",
+    "title": "05. 汽车删除",
+    "description": "<p>删除当前会员的汽车信息</p>",
+    "group": "30._会员汽车模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>汽车编号</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/car/delete"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/CarController.php",
+    "groupTitle": "30._会员汽车模块",
+    "name": "PostApiMemberCarDelete"
   },
   {
     "type": "post",
