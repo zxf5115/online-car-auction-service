@@ -82,6 +82,11 @@ class MerchantController extends BaseController
 
         $organization_id = self::getOrganizationId();
 
+        if(1 != $request->audit_status)
+        {
+          $model->role_id = 2;
+        }
+
         $model->organization_id = $organization_id;
         $model->save();
 
@@ -109,7 +114,6 @@ class MerchantController extends BaseController
         if(!empty($data))
         {
           $model->certification()->delete();
-
           $model->certification()->create($data);
         }
 
