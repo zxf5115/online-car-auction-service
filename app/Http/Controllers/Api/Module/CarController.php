@@ -123,7 +123,7 @@ class CarController extends BaseController
       // 获取组合查询条件
       list($flag, $data) = $this->_model::getCombinationWhere($request);
 
-      if($flag && empty($data))
+      if($flag || empty($data))
       {
         $where = [['id', '<', '-1']];
       }
