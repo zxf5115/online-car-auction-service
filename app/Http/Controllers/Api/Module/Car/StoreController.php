@@ -72,18 +72,18 @@ class StoreController extends BaseController
       // 获取关联对象
       $relevance = self::getRelevanceData($this->_relevance, 'list');
 
-      $response = $this->_model::getPaging($condition, $relevance, $this->_order, false, $page);
+      $response = $this->_model::getPaging($condition, $relevance, $this->_order, true, $page);
 
-      if(!empty($request->latitude) && !empty($request->longitude))
+      if(!empty($response['data']) && !empty($request->latitude) && !empty($request->longitude))
       {
-        foreach($response as &$item)
+        foreach($response['data'] as &$item)
         {
           $item['distance'] = $this->_model::getDistanceData($request->longitude, $request->latitude, $item);
         }
 
-        $distance = array_column($response, 'distance');
+        $distance = array_column($response['data'], 'distance');
 
-        array_multisort($response, SORT_ASC, $distance);
+        array_multisort($response['data'], SORT_ASC, $distance);
       }
 
       return self::success($response);

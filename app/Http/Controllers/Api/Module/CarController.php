@@ -79,6 +79,7 @@ class CarController extends BaseController
    * @apiParam {int} car_country 汽车产地 (空:不限制, 中国、美国、日本)
    * @apiParam {int} car_drive 汽车驱动 (空:不限制, 前驱、后驱、四驱)
    * @apiParam {int} car_power 汽车动力 (空:不限制, 汽油、柴油、纯电动)
+   * @apiParam {int} car_structure 汽车结构 (空:不限制, 两厢、三厢、掀背)
    * @apiParam {int} sort 排序方式 (空:默认排序, asc: 价格从小到大，desc: 价格从大到小)
    *
    * @apiSuccess (basic params) {Number} id 汽车编号

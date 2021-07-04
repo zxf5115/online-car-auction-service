@@ -6482,6 +6482,13 @@ define({ "api": [
             "group": "Parameter",
             "type": "int",
             "optional": false,
+            "field": "car_structure",
+            "description": "<p>汽车结构 (空:不限制, 两厢、三厢、掀背)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
             "field": "sort",
             "description": "<p>排序方式 (空:默认排序, asc: 价格从小到大，desc: 价格从大到小)</p>"
           }

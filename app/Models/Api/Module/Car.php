@@ -88,6 +88,12 @@ class Car extends Common
         $where[] = self::getCarConfigWhere($request->car_power);
       }
 
+      // 如果存在汽车结构搜索条件
+      if(!empty($request->car_structure))
+      {
+        $where[] = self::getCarConfigWhere($request->car_structure);
+      }
+
       if(!empty($where))
       {
         $flag = true;
