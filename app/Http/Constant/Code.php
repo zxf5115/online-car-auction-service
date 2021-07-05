@@ -163,6 +163,8 @@ class Code
   // 当前汽车已售出
   const CAR_PAY = 10004;
   const NO_DELETE = 10005;
+  const CAR_TOTAL = 10006;
+  const CAR_EMPTY = 10007;
 
   public static $message = [
     self::SUCCESS          => '成功',
@@ -271,6 +273,8 @@ class Code
 
     self::CAR_PAY => '当前汽车已售出',
     self::NO_DELETE => '当前数据不可删除',
+    self::CAR_TOTAL => '当前库存不足',
+    self::CAR_EMPTY => '当前汽车不存在',
   ];
 
 

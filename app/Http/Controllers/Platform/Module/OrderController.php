@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Platform\Module;
 use Illuminate\Http\Request;
 
 use App\Http\Constant\Code;
+use App\Events\Api\Car\InventoryEvent;
 use App\Http\Controllers\Platform\BaseController;
 
 /**
@@ -121,16 +122,18 @@ class OrderController extends BaseController
     {
       $model = $this->_model::find($request->id);
 
-      $model->order_status = $request->status;
-      $model->save();
-
-      if(0 == $request->status)
+      if(-1 == $request->status)
       {
-        $car = $model->car;
-        $car->sell_status = 0;
-        $car->save();
-      }
+        // 库存回滚
+        event(new InventoryEvent($model->car_id, $model->delivery_quantity, 1));
 
+        $model->delete();
+      }
+      else
+      {
+        $model->order_status = $request->status;
+        $model->save();
+      }
 
       return self::success(Code::message(Code::HANDLE_SUCCESS));
     }

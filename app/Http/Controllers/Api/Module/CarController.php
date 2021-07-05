@@ -22,7 +22,6 @@ class CarController extends BaseController
 
   protected $_where = [
     'audit_status' => 1,
-    'sell_status' => 0
   ];
 
   protected $_params = [

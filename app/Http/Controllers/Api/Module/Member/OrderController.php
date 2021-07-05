@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Http\Constant\Code;
 use App\Models\Api\Module\Car;
+use App\Events\Api\Car\InventoryEvent;
 use App\Models\Api\Module\Member\Address;
 use App\Http\Controllers\Api\BaseController;
 
@@ -321,6 +322,7 @@ class OrderController extends BaseController
    * @apiParam {Number} shape_id 汽车型号编号
    * @apiParam {Number} address_id 会员地址编号
    * @apiParam {String} pay_money 支付金额
+   * @apiParam {String} delivery_quantity 购买数量
    *
    * @apiSampleRequest /api/member/order/handle
    * @apiVersion 1.0.0
@@ -328,21 +330,23 @@ class OrderController extends BaseController
   public function handle(Request $request)
   {
     $messages = [
-      'car_id.required'     => '请您输入汽车编号',
-      'source_id.required'  => '请您输入汽车来源编号',
-      'brand_id.required'   => '请您输入汽车品牌编号',
-      'shape_id.required'   => '请您输入汽车型号编号',
-      'address_id.required' => '请您输入会员地址编号',
-      'pay_money.required'  => '请您输入支付金额',
+      'car_id.required'            => '请您输入汽车编号',
+      'source_id.required'         => '请您输入汽车来源编号',
+      'brand_id.required'          => '请您输入汽车品牌编号',
+      'shape_id.required'          => '请您输入汽车型号编号',
+      'address_id.required'        => '请您输入会员地址编号',
+      'pay_money.required'         => '请您输入支付金额',
+      'delivery_quantity.required' => '请您输入购买数量',
     ];
 
     $rule = [
-      'car_id'     => 'required',
-      'source_id'  => 'required',
-      'brand_id'   => 'required',
-      'shape_id'   => 'required',
-      'address_id' => 'required',
-      'pay_money'  => 'required',
+      'car_id'            => 'required',
+      'source_id'         => 'required',
+      'brand_id'          => 'required',
+      'shape_id'          => 'required',
+      'address_id'        => 'required',
+      'pay_money'         => 'required',
+      'delivery_quantity' => 'required',
     ];
 
     // 验证用户数据内容是否正确
@@ -360,11 +364,15 @@ class OrderController extends BaseController
       {
         $car = Car::getRow(['id' => $request->car_id]);
 
-        if(1 == $car->sell_status['value'])
+        if(empty($car))
         {
-          return self::error(Code::CAR_PAY);
+          return self::error(Code::CAR_EMPTY);
         }
 
+        if($request->delivery_quantity > $car->inventory_total)
+        {
+          return self::error(Code::CAR_TOTAL);
+        }
 
         $model = $this->_model::firstOrNew(['id' => $request->id]);
 
@@ -375,17 +383,18 @@ class OrderController extends BaseController
           $model->order_no = date('YmdHis') . $rand;
         }
 
-        $model->car_id     = $request->car_id;
-        $model->source_id  = $request->source_id;
-        $model->brand_id   = $request->brand_id;
-        $model->shape_id   = $request->shape_id;
-        $model->member_id  = self::getCurrentId();
-        $model->address_id = $request->address_id ?? '';
-        $model->pay_money  = $request->pay_money;
-
+        $model->car_id            = $request->car_id;
+        $model->source_id         = $request->source_id;
+        $model->brand_id          = $request->brand_id;
+        $model->shape_id          = $request->shape_id;
+        $model->member_id         = self::getCurrentId();
+        $model->address_id        = $request->address_id ?? '';
+        $model->pay_money         = $request->pay_money;
+        $model->delivery_quantity = $request->delivery_quantity;
         $model->save();
 
-        $model->car()->update(['sell_status' => 1]);
+        // 库存扣减
+        event(new InventoryEvent($request->car_id, $request->delivery_quantity, 2));
 
         DB::commit();
 
