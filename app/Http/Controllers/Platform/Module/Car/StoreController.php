@@ -29,6 +29,7 @@ class StoreController extends BaseController
    */
   protected $_order = [
     ['key' => 'sort', 'value' => 'desc'],
+    ['key' => 'create_time', 'value' => 'desc'],
   ];
 
   protected $_relevance = [];
