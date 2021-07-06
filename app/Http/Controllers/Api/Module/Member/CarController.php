@@ -319,6 +319,8 @@ class CarController extends BaseController
         $model->sell_money      = $request->sell_money;
         $model->other_money     = $request->other_money ?? '';
         $model->vedio_url       = $request->vedio_url ?? '';
+        $model->audit_status    = 0;
+        $model->audit_content   = '';
         $model->save();
 
         $data = self::packRelevanceData($request, 'url', true);

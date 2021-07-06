@@ -5622,6 +5622,13 @@ define({ "api": [
             "optional": false,
             "field": "content",
             "description": "<p>详情</p>"
+          },
+          {
+            "group": "logistics params",
+            "type": "Number",
+            "optional": false,
+            "field": "operator",
+            "description": "<p>经办人</p>"
           }
         ]
       }

@@ -48,6 +48,7 @@ class LogisticsController extends BaseController
    * @apiSuccess (logistics params) {Number} logistics_time 变更时间
    * @apiSuccess (logistics params) {Number} address 物流地址
    * @apiSuccess (logistics params) {Number} content 详情
+   * @apiSuccess (logistics params) {Number} operator 经办人
    *
    * @apiSampleRequest /api/member/order/logistics/select
    * @apiVersion 1.0.0

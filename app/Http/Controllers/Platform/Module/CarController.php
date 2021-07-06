@@ -23,7 +23,8 @@ class CarController extends BaseController
 
   // 客户端搜索字段
   protected $_params = [
-    'source_id'
+    'source_id',
+    'title',
   ];
 
   // 客户端关联查询字段

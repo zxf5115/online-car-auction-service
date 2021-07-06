@@ -95,6 +95,7 @@ class LogisticsController extends BaseController
         $model->logistics_time   = strtotime($request->logistics_time);
         $model->address          = $request->address;
         $model->content          = $request->content;
+        $model->operator         = $request->operator;
 
         $model->save();
 
