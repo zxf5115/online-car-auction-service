@@ -40,7 +40,8 @@ class ComplainController extends BaseController
     'select' => false,
     'view' => [
       'member',
-      'category'
+      'category',
+      'resource'
     ]
   ];
 
@@ -245,7 +246,7 @@ class ComplainController extends BaseController
         $model->content     = $request->content;
         $model->save();
 
-        $data = self::packRelevanceData($request, 'picture');
+        $data = self::packRelevanceData($request, 'picture', true);
 
         if(!empty($data))
         {

@@ -36,11 +36,9 @@ class ComplainController extends BaseController
     'list' => [
       'category'
     ],
-    'select' => [
-      'category'
-    ],
     'view' => [
-      'category'
+      'category',
+      'resource',
     ]
   ];
 

@@ -39,7 +39,8 @@ class ComplainController extends BaseController
     'select' => false,
     'view' => [
       'member',
-      'category'
+      'category',
+      'resource'
     ]
   ];
 
