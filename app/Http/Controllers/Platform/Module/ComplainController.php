@@ -38,6 +38,7 @@ class ComplainController extends BaseController
       'category'
     ],
     'view' => [
+      'member',
       'category',
       'resource',
     ]
