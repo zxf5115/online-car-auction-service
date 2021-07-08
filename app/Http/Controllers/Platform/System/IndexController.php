@@ -35,6 +35,8 @@ class IndexController extends BaseController
   {
     try
     {
+      $_where = ['status' => 1];
+
       $today_member_total = 0;
       $member_total       = 0;
       $merchant_total     = 0;
@@ -42,15 +44,15 @@ class IndexController extends BaseController
       // 统计时间区间
       $where = self::getWhereCondition($request->type);
 
-      $condition = array_merge($where, ['role_id' => 2]);
+      $condition = array_merge($_where, $where, ['role_id' => 2]);
 
       // 今日会员
       $today_member_total = Member::getCount($condition);
 
       // 全部会员
-      $member_total = Member::getCount(['role_id' => 2]);
+      $member_total = Member::getCount(['status' => 1, 'role_id' => 2]);
 
-      $condition = array_merge($where, ['role_id' => 1]);
+      $condition = array_merge($_where, $where, ['role_id' => 1]);
 
       // 今日车商
       $merchant_total = Member::getCount($condition);
@@ -88,6 +90,8 @@ class IndexController extends BaseController
   {
     try
     {
+      $_where = ['status' => 1];
+
       $car_out_total = 0;
       $car_in_total  = 0;
       $car_old_total = 0;
@@ -96,17 +100,17 @@ class IndexController extends BaseController
       // 统计时间区间
       $where = self::getWhereCondition($request->type);
 
-      $condition = array_merge($where, ['source_id' => 52]);
+      $condition = array_merge($_where, $where, ['source_id' => 52]);
 
       // 海外车源
       $car_out_total = Car::getCount($condition);
 
-      $condition = array_merge($where, ['source_id' => 51]);
+      $condition = array_merge($_where, $where, ['source_id' => 51]);
 
       // 国内车源
       $car_in_total = Car::getCount($condition);
 
-      $condition = array_merge($where, ['source_id' => 53]);
+      $condition = array_merge($_where, $where, ['source_id' => 53]);
 
       // 今日车商
       $car_old_total = Car::getCount($condition);
@@ -115,7 +119,9 @@ class IndexController extends BaseController
       $response['car_in_total']  = $car_in_total;
       $response['car_old_total'] = $car_old_total;
 
-      $car = Car::getList($where);
+      $condition = array_merge($_where, $where);
+
+      $car = Car::getList($condition);
 
       $carDate = [];
 
@@ -168,6 +174,8 @@ class IndexController extends BaseController
   {
     try
     {
+      $_where = ['status' => 1];
+
       $wait_order_total = 0;
       $finish_order_total  = 0;
       $wait_take_order_total = 0;
@@ -176,7 +184,7 @@ class IndexController extends BaseController
       // 统计时间区间
       $where = self::getWhereCondition($request->type);
 
-      $condition = array_merge($where, ['order_status' => 0]);
+      $condition = array_merge($_where, $where, ['order_status' => 0]);
 
       // 待支付
       $wait_order_total = Order::getCount($condition);
@@ -203,7 +211,7 @@ class IndexController extends BaseController
       $date = array_keys($waitDate);
 
 
-      $condition = array_merge($where, ['order_status' => 2]);
+      $condition = array_merge($_where, $where, ['order_status' => 2]);
 
       // 已完成
       $finish_order_total = Order::getCount($condition);
@@ -236,7 +244,7 @@ class IndexController extends BaseController
         }
       }
 
-      $condition = array_merge($where, ['order_status' => 1]);
+      $condition = array_merge($_where, $where, ['order_status' => 1]);
 
       // 待提货
       $wait_take_order_total = Order::getCount($condition);
@@ -305,6 +313,8 @@ class IndexController extends BaseController
   {
     try
     {
+      $_where = ['status' => 1];
+
       $money_out_total = 0;
       $money_in_total  = 0;
       $money_old_total = 0;
@@ -313,7 +323,7 @@ class IndexController extends BaseController
       // 统计时间区间
       $where = self::getWhereCondition($request->type);
 
-      $condition = array_merge($where, ['source_id' => 52]);
+      $condition = array_merge($_where, $where, ['source_id' => 52]);
 
       // 国外车源
       $order = Order::getList($condition);
@@ -346,7 +356,7 @@ class IndexController extends BaseController
 
       $date = array_keys($outDate);
 
-      $condition = array_merge($where, ['source_id' => 51]);
+      $condition = array_merge($_where, $where, ['source_id' => 51]);
 
       // 国内车源
       $order = Order::getList($condition);
@@ -386,7 +396,7 @@ class IndexController extends BaseController
         }
       }
 
-      $condition = array_merge($where, ['source_id' => 53]);
+      $condition = array_merge($_where, $where, ['source_id' => 53]);
 
       // 二手车源
       $order = Order::getList($condition);
