@@ -34,6 +34,7 @@ class ComplainController extends BaseController
 
   protected $_relevance = [
     'list' => [
+      'member',
       'category'
     ],
     'view' => [
