@@ -41,11 +41,11 @@ class Store extends Common
    */
   public static function getDistanceData($longitude, $latitude, $data)
   {
-    $radLat1 = deg2rad($latitude);
-    $radLat2 = deg2rad($data['latitude']);
+    $radLat1 = deg2rad(floatval($latitude));
+    $radLat2 = deg2rad(floatval($data['latitude']));
 
-    $radLng1 = deg2rad($longitude);
-    $radLng2 = deg2rad($data['longitude']);
+    $radLng1 = deg2rad(floatval($longitude));
+    $radLng2 = deg2rad(floatval($data['longitude']));
 
     $a = $radLat1 - $radLat2;
 

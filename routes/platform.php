@@ -254,6 +254,7 @@ $api->version('v1', [
         $api->group(['namespace' => 'Complain', 'prefix' => 'category'], function ($api) {
           $api->any('list', 'CategoryController@list');
           $api->get('select', 'CategoryController@select');
+          $api->get('view/{id}', 'CategoryController@view');
           $api->post('status', 'CategoryController@status');
           $api->post('handle', 'CategoryController@handle');
           $api->post('delete/{id?}', 'CategoryController@delete');
