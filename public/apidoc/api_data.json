@@ -601,6 +601,80 @@
   },
   {
     "type": "post",
+    "url": "/api/file/batchPicture",
+    "title": "03. 批量上传图片",
+    "description": "<p>上传图片</p>",
+    "group": "03._上传模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "file",
+            "description": "<p>图片数据</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "category",
+            "description": "<p>图片分类 picture avatar ...</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "响应": [
+          {
+            "group": "响应",
+            "type": "string",
+            "optional": false,
+            "field": "data",
+            "description": "<p>图片地址</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/file/batchPicture"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/System/FileController.php",
+    "groupTitle": "03._上传模块",
+    "name": "PostApiFileBatchpicture"
+  },
+  {
+    "type": "post",
     "url": "/api/file/file",
     "title": "01. 上传文件",
     "description": "<p>上传文件</p>",
