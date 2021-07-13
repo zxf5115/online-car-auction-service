@@ -338,6 +338,7 @@ $api->version('v1', [
         $api->post('status', 'OrderController@status');
         $api->post('handle', 'OrderController@handle');
         $api->post('cancel', 'OrderController@cancel');
+        $api->post('delete', 'OrderController@delete');
 
         // 课程订单物流路由
         $api->group(['namespace' => 'Order', 'prefix'  => 'logistics'], function ($api) {
