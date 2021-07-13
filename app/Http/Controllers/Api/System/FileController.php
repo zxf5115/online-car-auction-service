@@ -133,7 +133,7 @@ class FileController extends BaseController
       $response = File::batchRichTextFile('file', $category);
 
       // 如果返回错误代码
-      if(false === strpos($response, 'http'))
+      if(!is_array($response))
       {
         return self::message($response);
       }
@@ -143,7 +143,7 @@ class FileController extends BaseController
     catch(\Exception $e)
     {
       // 记录异常信息
-      record($e);
+      self::record($e);
 
       return self::error(FileCode::FILE_UPLOAD_ERROR);
     }
