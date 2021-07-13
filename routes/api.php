@@ -29,6 +29,7 @@ $api->version('v1', [
         $api->post('file', 'FileController@file');
         // 上传图片
         $api->post('picture', 'FileController@picture');
+        $api->post('batchPicture', 'FileController@batchPicture');
       });
     });
 
