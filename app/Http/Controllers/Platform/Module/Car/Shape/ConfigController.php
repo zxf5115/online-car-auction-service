@@ -128,7 +128,7 @@ class ConfigController extends BaseController
 
           if(empty($item['params']))
           {
-            return self::message('配置参数不能为空');
+            // return self::message('配置参数不能为空');
           }
 
           $id = $item['id'] ?? 0;
