@@ -26,6 +26,13 @@ class Archive extends Base
     'organization_id',
     'member_id',
     'sex',
+    'account',
+    'bank_card_no',
+    'id_card_no',
+    'mobile',
+    'realname',
+    'certificate_no',
+    'phone',
   ];
 
   // 隐藏的属性

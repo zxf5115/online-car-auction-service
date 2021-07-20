@@ -11,7 +11,7 @@ use App\Http\Controllers\Api\BaseController;
  * @author zhangxiaofei [<1326336909@qq.com>]
  * @dateTime 2021-06-11
  *
- * 会员收藏控制器类
+ * 汽车收藏控制器类
  */
 class CollectionController extends BaseController
 {

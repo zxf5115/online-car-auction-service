@@ -145,48 +145,35 @@ class Car extends Common
       if(1 == $type)
       {
         $where = [
-          ['sell_money', '<', '5']
+          ['sell_money', '>=', '0'],
+          ['sell_money', '<', '50']
         ];
       }
       else if(2 == $type)
       {
         $where = [
-          ['sell_money', '>=', '5'],
-          ['sell_money', '<', '10']
+          ['sell_money', '>=', '50'],
+          ['sell_money', '<', '100']
         ];
       }
       else if(3 == $type)
       {
         $where = [
-          ['sell_money', '>=', '10'],
-          ['sell_money', '<', '15']
+          ['sell_money', '>=', '100'],
+          ['sell_money', '<', '150']
         ];
       }
       else if(4 == $type)
       {
         $where = [
-          ['sell_money', '>=', '15'],
-          ['sell_money', '<', '20']
+          ['sell_money', '>=', '150'],
+          ['sell_money', '<', '200']
         ];
       }
       else if(5 == $type)
       {
         $where = [
-          ['sell_money', '>=', '20'],
-          ['sell_money', '<', '30']
-        ];
-      }
-      else if(6 == $type)
-      {
-        $where = [
-          ['sell_money', '>=', '30'],
-          ['sell_money', '<', '40']
-        ];
-      }
-      else if(7 == $type)
-      {
-        $where = [
-          ['sell_money', '>=', '40']
+          ['sell_money', '>=', '200']
         ];
       }
       else
@@ -228,48 +215,41 @@ class Car extends Common
       if(1 == $type)
       {
         $where = [
-          ['value', '<', '1.0L']
+          ['value', '>=', '1.5L'],
+          ['value', '<', '2.0L']
         ];
       }
       else if(2 == $type)
       {
         $where = [
-          ['value', '>=', '1.1L'],
-          ['value', '<', '1.6L']
+          ['value', '>=', '2.0L'],
+          ['value', '<', '2.5L']
         ];
       }
       else if(3 == $type)
       {
         $where = [
-          ['value', '>=', '1.7L'],
-          ['value', '<', '2.0L']
+          ['value', '>=', '2.5L'],
+          ['value', '<', '3.0L']
         ];
       }
       else if(4 == $type)
       {
         $where = [
-          ['value', '>=', '2.1L'],
-          ['value', '<', '2.5L']
+          ['value', '>=', '3.0L'],
+          ['value', '<', '4.0L']
         ];
       }
       else if(5 == $type)
       {
         $where = [
-          ['value', '>=', '2.6L'],
-          ['value', '<', '3.0L']
+          ['value', '>=', '4.0L']
         ];
       }
       else if(6 == $type)
       {
         $where = [
-          ['value', '>=', '3.1L'],
-          ['value', '<', '4.0L']
-        ];
-      }
-      else if(7 == $type)
-      {
-        $where = [
-          ['value', '>=', '4.1L']
+          ['value', '<', '1.5L']
         ];
       }
       else

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Http\Constant\Code;
 use App\Http\Controllers\Platform\BaseController;
+use App\Models\Platform\Module\Member\MemberMessage;
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
@@ -87,6 +88,8 @@ class CarController extends BaseController
     }
     else
     {
+      DB::beginTransaction();
+
       try
       {
         $model = $this->_model::firstOrNew(['id' => $request->id]);
@@ -98,10 +101,19 @@ class CarController extends BaseController
         $model->audit_content   = $request->audit_content;
         $model->save();
 
+        $message = MemberMessage::firstOrNew(['id' => '']);
+        $message->member_id  = $model->member_id;
+        $message->message_id = $request->audit_status == 1 ? 1 : 2;
+        $message->save();
+
+        DB::commit();
+
         return self::success(Code::message(Code::HANDLE_SUCCESS));
       }
       catch(\Exception $e)
       {
+        DB::rollback();
+
         // 记录异常信息
         self::record($e);
 

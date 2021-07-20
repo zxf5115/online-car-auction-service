@@ -35,6 +35,7 @@ class LoginController extends BaseController
    * @apiSuccess (user_info params) {Number} id 会员编号
    * @apiSuccess (user_info params) {Number} role_id 角色编号 1 车商 2 消费者
    * @apiSuccess (user_info params) {Number} open_id 第三方登录编号
+   * @apiSuccess (user_info params) {Number} inviter_id 邀请人
    * @apiSuccess (user_info params) {Number} member_no 会员号
    * @apiSuccess (user_info params) {String} avatar 会员头像
    * @apiSuccess (user_info params) {String} username 登录账户
@@ -86,11 +87,20 @@ class LoginController extends BaseController
         if(is_null($response) && !empty($data['openid']))
         {
           $model = Member::firstOrNew($where);
-          $model->open_id = $data['openid'];
-          $model->role_id = 2;
+
+          $model->open_id    = $data['openid'];
+          $model->role_id    = 2;
+          $model->inviter_id = $request->inviter_id ?? 0;
           $model->save();
 
           $response = $model;
+        }
+
+        // 绑定邀请人
+        if(empty($response->inviter_id) && !empty($request->inviter_id))
+        {
+          $response->inviter_id = $request->inviter_id;
+          $response->save();
         }
 
         // 用户已禁用

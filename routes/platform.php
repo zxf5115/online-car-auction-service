@@ -220,6 +220,20 @@ $api->version('v1', [
         $api->post('delete', 'MerchantController@delete');
       });
 
+      // 邀请人路由
+      $api->group(['prefix'  => 'inviter'], function ($api) {
+        $api->any('list', 'InviterController@list');
+      });
+
+
+      // 消息路由
+      $api->group(['prefix'  =>  'message'], function ($api) {
+        $api->any('list', 'MessageController@list');
+        $api->get('select', 'MessageController@select');
+        $api->get('view/{id}', 'MessageController@view');
+        $api->post('handle', 'MessageController@handle');
+        $api->post('delete', 'MessageController@delete');
+      });
 
       // 广告路由
       $api->group(['prefix' => 'advertising'], function ($api) {

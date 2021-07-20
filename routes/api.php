@@ -91,6 +91,8 @@ $api->version('v1', [
         $api->get('archive', 'MemberController@archive');
         $api->get('data/{id}', 'MemberController@data');
         $api->post('handle', 'MemberController@handle');
+        $api->post('personal', 'MemberController@personal');
+        $api->post('bank', 'MemberController@bank');
         $api->post('teacher', 'MemberController@teacher');
         $api->get('status', 'MemberController@status');
 
@@ -129,9 +131,15 @@ $api->version('v1', [
           // 会员关注路由
           $api->group(['prefix'  => 'attention'], function ($api) {
             $api->get('list', 'AttentionController@list');
-            $api->get('select', 'AttentionController@select');
             $api->post('status', 'AttentionController@status');
             $api->post('handle', 'AttentionController@handle');
+          });
+
+          // 会员消息路由
+          $api->group(['prefix'  => 'message'], function ($api) {
+            $api->get('list', 'MessageController@list');
+            $api->get('view/{id}', 'MessageController@view');
+            $api->post('read', 'MessageController@read');
           });
 
 
@@ -182,10 +190,22 @@ $api->version('v1', [
             $api->post('delete', 'CarController@delete');
 
             // 会员汽车收藏路由
-            $api->group(['namespace' => 'Car', 'prefix'  => 'collection'], function ($api) {
-              $api->get('list', 'CollectionController@list');
-              $api->post('status', 'CollectionController@status');
-              $api->post('handle', 'CollectionController@handle');
+            $api->group(['namespace' => 'Car'], function ($api) {
+
+              // 车型关注路由
+              $api->group(['namespace' => 'Shape', 'prefix'  => 'shape'], function ($api) {
+                $api->group(['prefix'  => 'attention'], function ($api) {
+                  $api->get('list', 'AttentionController@list');
+                  $api->post('status', 'AttentionController@status');
+                  $api->post('handle', 'AttentionController@handle');
+                });
+              });
+
+              $api->group(['prefix'  => 'collection'], function ($api) {
+                $api->get('list', 'CollectionController@list');
+                $api->post('status', 'CollectionController@status');
+                $api->post('handle', 'CollectionController@handle');
+              });
             });
           });
 

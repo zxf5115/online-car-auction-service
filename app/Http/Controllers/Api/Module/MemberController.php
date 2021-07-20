@@ -201,15 +201,9 @@ class MemberController extends BaseController
 
         $model->save();
 
-        $data = [
-          'sex' => $request->sex
-        ];
-
-        if(!empty($data))
-        {
-          $model->archive()->delete();
-          $model->archive()->create($data);
-        }
+        $archive = Archive::firstOrNew(['member_id' => $member_id]);
+        $archive->sex = $request->sex;
+        $archive->save();
 
         DB::commit();
 
@@ -219,6 +213,145 @@ class MemberController extends BaseController
       {
         DB::rollback();
 
+        // 记录异常信息
+        self::record($e);
+
+        return self::error(Code::HANDLE_FAILURE);
+      }
+    }
+  }
+
+
+  /**
+   * @api {post} /api/member/personal 04. 编辑个人信息
+   * @apiDescription 编辑会员个人信息
+   * @apiGroup 20. 会员模块
+   * @apiPermission jwt
+   * @apiHeader {String} Authorization 身份令牌
+   * @apiHeaderExample {json} Header-Example:
+   * {
+   *   "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO"
+   * }
+   *
+   * @apiParam {string} realname 姓名
+   * @apiParam {string} certificate_no 证件号
+   * @apiParam {string} phone 手机号
+   *
+   * @apiSampleRequest /api/member/personal
+   * @apiVersion 1.0.0
+   */
+  public function personal(Request $request)
+  {
+    $messages = [
+      'realname.required'       => '请您输入姓名',
+      'certificate_no.required' => '请您输入证件号',
+      'phone.required'          => '请您输入手机号',
+    ];
+
+    $rule = [
+      'realname'       => 'required',
+      'certificate_no' => 'required',
+      'phone'          => 'required',
+    ];
+
+    // 验证用户数据内容是否正确
+    $validation = self::validation($request, $messages, $rule);
+
+    if(!$validation['status'])
+    {
+      return $validation['message'];
+    }
+    else
+    {
+      try
+      {
+        // 获取当前会员编号
+        $member_id = self::getCurrentId();
+
+        $model = Archive::firstOrNew(['member_id' => $member_id]);
+
+        $model->realname       = $request->realname;
+        $model->certificate_no = $request->certificate_no;
+        $model->phone          = $request->phone;
+        $model->save();
+
+        return self::success(Code::message(Code::HANDLE_SUCCESS));
+      }
+      catch(\Exception $e)
+      {
+        // 记录异常信息
+        self::record($e);
+
+        return self::error(Code::HANDLE_FAILURE);
+      }
+    }
+  }
+
+
+
+
+
+  /**
+   * @api {post} /api/member/bank 05. 编辑会员银行卡
+   * @apiDescription 编辑会员银行卡信息
+   * @apiGroup 20. 会员模块
+   * @apiPermission jwt
+   * @apiHeader {String} Authorization 身份令牌
+   * @apiHeaderExample {json} Header-Example:
+   * {
+   *   "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO"
+   * }
+   *
+   * @apiParam {string} account 银行卡户名
+   * @apiParam {string} bank_card_no 银行卡号
+   * @apiParam {string} id_card_no 持卡人身份证号
+   * @apiParam {string} mobile 银行预留手机号
+   *
+   * @apiSampleRequest /api/member/bank
+   * @apiVersion 1.0.0
+   */
+  public function bank(Request $request)
+  {
+    $messages = [
+      'account.required'      => '请您输入银行卡户名',
+      'bank_card_no.required' => '请您输入银行卡号',
+      'id_card_no.required'   => '请您输入持卡人身份证号',
+      'mobile.required'       => '请您输入银行预留手机号',
+    ];
+
+    $rule = [
+      'account'      => 'required',
+      'bank_card_no' => 'required',
+      'id_card_no'   => 'required',
+      'mobile'       => 'required',
+    ];
+
+    // 验证用户数据内容是否正确
+    $validation = self::validation($request, $messages, $rule);
+
+    if(!$validation['status'])
+    {
+      return $validation['message'];
+    }
+    else
+    {
+      try
+      {
+        // 获取当前会员编号
+        $member_id = self::getCurrentId();
+
+        $model = Archive::firstOrNew(['member_id' => $member_id]);
+
+        $model->account      = $request->account;
+        $model->bank_card_no = $request->bank_card_no;
+        $model->id_card_no   = $request->id_card_no;
+        $model->mobile       = $request->mobile;
+        $model->save();
+
+        return self::success(Code::message(Code::HANDLE_SUCCESS));
+      }
+      catch(\Exception $e)
+      {
         // 记录异常信息
         self::record($e);
 

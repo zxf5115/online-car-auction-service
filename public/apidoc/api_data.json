@@ -539,6 +539,13 @@
             "group": "user_info params",
             "type": "Number",
             "optional": false,
+            "field": "inviter_id",
+            "description": "<p>邀请人</p>"
+          },
+          {
+            "group": "user_info params",
+            "type": "Number",
+            "optional": false,
             "field": "member_no",
             "description": "<p>会员号</p>"
           },
@@ -2042,6 +2049,81 @@
   },
   {
     "type": "post",
+    "url": "/api/member/bank",
+    "title": "05. 编辑会员银行卡",
+    "description": "<p>编辑会员银行卡信息</p>",
+    "group": "20._会员模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "account",
+            "description": "<p>银行卡户名</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "bank_card_no",
+            "description": "<p>银行卡号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id_card_no",
+            "description": "<p>持卡人身份证号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>银行预留手机号</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/bank"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/MemberController.php",
+    "groupTitle": "20._会员模块",
+    "name": "PostApiMemberBank"
+  },
+  {
+    "type": "post",
     "url": "/api/member/handle",
     "title": "03. 编辑会员信息",
     "description": "<p>编辑会员信息</p>",
@@ -2107,6 +2189,74 @@
     "filename": "app/Http/Controllers/Api/Module/MemberController.php",
     "groupTitle": "20._会员模块",
     "name": "PostApiMemberHandle"
+  },
+  {
+    "type": "post",
+    "url": "/api/member/personal",
+    "title": "04. 编辑个人信息",
+    "description": "<p>编辑会员个人信息</p>",
+    "group": "20._会员模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "realname",
+            "description": "<p>姓名</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "certificate_no",
+            "description": "<p>证件号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "phone",
+            "description": "<p>手机号</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/personal"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/MemberController.php",
+    "groupTitle": "20._会员模块",
+    "name": "PostApiMemberPersonal"
   },
   {
     "type": "post",
@@ -2956,6 +3106,205 @@
     "filename": "app/Http/Controllers/Api/Module/Member/SettingController.php",
     "groupTitle": "24._会员设置模块",
     "name": "PostApiMemberSettingHandle"
+  },
+  {
+    "type": "get",
+    "url": "/api/member/message/list?page={page}",
+    "title": "01. 我的消息列表",
+    "description": "<p>获取当前会员消息分页列表</p>",
+    "group": "25._会员消息模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "page",
+            "description": "<p>当前页数</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "message params": [
+          {
+            "group": "message params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>会员消息编号</p>"
+          },
+          {
+            "group": "message params",
+            "type": "Number",
+            "optional": false,
+            "field": "type",
+            "description": "<p>消息类型 1 系统消息 2 普通消息</p>"
+          },
+          {
+            "group": "message params",
+            "type": "Number",
+            "optional": false,
+            "field": "title",
+            "description": "<p>消息标题</p>"
+          },
+          {
+            "group": "message params",
+            "type": "Number",
+            "optional": false,
+            "field": "content",
+            "description": "<p>消息内容</p>"
+          }
+        ],
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "read_status",
+            "description": "<p>阅读状态</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "create_time",
+            "description": "<p>创建时间</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/message/list"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/MessageController.php",
+    "groupTitle": "25._会员消息模块",
+    "name": "GetApiMemberMessageListPagePage"
+  },
+  {
+    "type": "post",
+    "url": "/api/member/message/read",
+    "title": "03. 消息已读",
+    "description": "<p>当前会员执行消息已读</p>",
+    "group": "25._会员消息模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id",
+            "description": "<p>会员消息编号</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/message/read"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/MessageController.php",
+    "groupTitle": "25._会员消息模块",
+    "name": "PostApiMemberMessageRead"
+  },
+  {
+    "type": "post",
+    "url": "/api/member/message/view/{id}",
+    "title": "02. 会员消息详情",
+    "description": "<p>获取当前会员消息详情</p>",
+    "group": "25._会员消息模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/message/view"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/MessageController.php",
+    "groupTitle": "25._会员消息模块",
+    "name": "PostApiMemberMessageViewId"
   },
   {
     "type": "get",
@@ -5719,6 +6068,243 @@
   },
   {
     "type": "get",
+    "url": "/api/member/attention/list?page={page}",
+    "title": "01. 我的关注列表",
+    "description": "<p>获取当前会员关注车商分页列表</p>",
+    "group": "34._车商关注模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "page",
+            "description": "<p>当前页数</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>会员编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "role_id",
+            "description": "<p>角色编号 1 车商 2 消费者</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "open_id",
+            "description": "<p>第三方登录编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "member_no",
+            "description": "<p>会员号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "avatar",
+            "description": "<p>会员头像</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>登录账户</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "String",
+            "optional": false,
+            "field": "nickname",
+            "description": "<p>会员姓名</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "create_time",
+            "description": "<p>注册时间</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/attention/list"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/AttentionController.php",
+    "groupTitle": "34._车商关注模块",
+    "name": "GetApiMemberAttentionListPagePage"
+  },
+  {
+    "type": "post",
+    "url": "/api/member/attention/handle",
+    "title": "03. 关注操作",
+    "description": "<p>当前会员执行关注操作, 已经关注过，再次点击取消关注</p>",
+    "group": "34._车商关注模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "attention_member_id",
+            "description": "<p>车商编号</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/attention/handle"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/AttentionController.php",
+    "groupTitle": "34._车商关注模块",
+    "name": "PostApiMemberAttentionHandle"
+  },
+  {
+    "type": "post",
+    "url": "/api/member/attention/status",
+    "title": "02. 是否关注车商",
+    "description": "<p>获取当前会员是否关注指定车商</p>",
+    "group": "34._车商关注模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "attention_member_id",
+            "description": "<p>车商编号</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "字段说明": [
+          {
+            "group": "字段说明",
+            "type": "Boolean",
+            "optional": false,
+            "field": "status",
+            "description": "<p>是否关注</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/attention/status"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/AttentionController.php",
+    "groupTitle": "34._车商关注模块",
+    "name": "PostApiMemberAttentionStatus"
+  },
+  {
+    "type": "get",
     "url": "/api/car/store/list?page={page}",
     "title": "01. 汽车门店列表",
     "description": "<p>获取汽车门店分页列表</p>",
@@ -6597,7 +7183,7 @@
             "type": "int",
             "optional": false,
             "field": "pay_money",
-            "description": "<p>销售价格 (空:不限制, 1:5w以下, 2:5w-10w, 3:10w-15w, 4:15w-20w, 5:20w-30w, 6:30w-40w, 7:40w以上)</p>"
+            "description": "<p>销售价格 (空:不限制, 1:0-50w以下, 2:50w-100w, 3:100w-150w, 4:150w-200w, 5:200w以上)</p>"
           },
           {
             "group": "Parameter",
@@ -6618,7 +7204,7 @@
             "type": "int",
             "optional": false,
             "field": "car_displacement",
-            "description": "<p>汽车排量 (空:不限制, 1:1.0L以下, 2:1.1L-1.6L, 3:1.7L-2.0L, 4:2.1L-2.5L, 5:2.6L-3.0L, 6:3.1L-4.0L, 7:4.0L以上)</p>"
+            "description": "<p>汽车排量 (空:不限制, 1:1.5L-2.0L, 2:2.0L-2.5L, 3:2.5L-3.0L, 4:3.0L-4.0L, 5:4.0L以上, 6:其他)</p>"
           },
           {
             "group": "Parameter",
@@ -6632,7 +7218,7 @@
             "type": "int",
             "optional": false,
             "field": "car_country",
-            "description": "<p>汽车产地 (空:不限制, 中国、美国、日本)</p>"
+            "description": "<p>汽车产地 (空:不限制, 美版、加版、欧版、中东版)</p>"
           },
           {
             "group": "Parameter",
@@ -7484,5 +8070,207 @@
     "filename": "app/Http/Controllers/Api/Module/Member/Car/CollectionController.php",
     "groupTitle": "46._汽车收藏模块",
     "name": "PostApiMemberCarCollectionStatus"
+  },
+  {
+    "type": "get",
+    "url": "/api/member/car/shape/attention/list?page={page}",
+    "title": "01. 我的关注列表",
+    "description": "<p>获取当前会员关注车型分页列表</p>",
+    "group": "47._车型关注模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
+            "field": "page",
+            "description": "<p>当前页数</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "basic params": [
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>汽车车型编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "brand_id",
+            "description": "<p>汽车品牌编号</p>"
+          },
+          {
+            "group": "basic params",
+            "type": "Number",
+            "optional": false,
+            "field": "title",
+            "description": "<p>汽车车型名称</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/car/shape/attention/list"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/Car/Shape/AttentionController.php",
+    "groupTitle": "47._车型关注模块",
+    "name": "GetApiMemberCarShapeAttentionListPagePage"
+  },
+  {
+    "type": "post",
+    "url": "/api/member/car/shape/attention/handle",
+    "title": "03. 关注操作",
+    "description": "<p>当前会员执行关注操作, 已经关注过，再次点击取消关注</p>",
+    "group": "47._车型关注模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "shape_id",
+            "description": "<p>车型编号</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/car/shape/attention/handle"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/Car/Shape/AttentionController.php",
+    "groupTitle": "47._车型关注模块",
+    "name": "PostApiMemberCarShapeAttentionHandle"
+  },
+  {
+    "type": "post",
+    "url": "/api/member/car/shape/attention/status",
+    "title": "02. 是否关注车型",
+    "description": "<p>获取当前会员是否关注指定车型</p>",
+    "group": "47._车型关注模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "shape_id",
+            "description": "<p>车型编号</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "字段说明": [
+          {
+            "group": "字段说明",
+            "type": "Boolean",
+            "optional": false,
+            "field": "status",
+            "description": "<p>是否关注</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/car/shape/attention/status"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/Car/Shape/AttentionController.php",
+    "groupTitle": "47._车型关注模块",
+    "name": "PostApiMemberCarShapeAttentionStatus"
   }
 ]

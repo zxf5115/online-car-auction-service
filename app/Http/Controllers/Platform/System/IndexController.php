@@ -57,9 +57,15 @@ class IndexController extends BaseController
       // 今日车商
       $merchant_total = Member::getCount($condition);
 
+      // 自行注册用户
+      $condition = array_merge($_where, $where, ['inviter_id' => 0]);
+
+      $un_inviter_total = Member::getCount($condition);
+
       $response['today_member_total'] = $today_member_total;
       $response['member_total']       = $member_total;
       $response['merchant_total']     = $merchant_total;
+      $response['un_inviter_total']   = $un_inviter_total;
 
       return self::success($response);
     }

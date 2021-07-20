@@ -1,5 +1,5 @@
 <?php
-namespace App\Models\Common\Module\Message;
+namespace App\Models\Common\Module;
 
 use App\Models\Base;
 use App\Enum\Module\Message\MessageEnum;
@@ -7,17 +7,19 @@ use App\Enum\Module\Message\MessageEnum;
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
- * @dateTime 2020-07-17
+ * @dateTime 2021-07-20
  *
- * 系统消息模型类
+ * 消息模型类
  */
 class Message extends Base
 {
   // 表名
-  public $table = 'module_message';
+  public $table = "module_message";
 
   // 可以批量修改的字段
-  public $fillable = ['title', 'content'];
+  public $fillable = [
+    'id'
+  ];
 
   // 隐藏的属性
   public $hidden = [
@@ -27,15 +29,15 @@ class Message extends Base
 
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-10-20
+   * @dateTime 2021-07-20
    * ------------------------------------------
    * 消息类型封装
    * ------------------------------------------
    *
    * 消息类型封装
    *
-   * @param [type] $value [description]
-   * @return [type]
+   * @param int $value [数据库存在的值]
+   * @return 状态值
    */
   public function getTypeAttribute($value)
   {
@@ -48,60 +50,43 @@ class Message extends Base
 
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-07-19
+   * @dateTime 2021-07-20
    * ------------------------------------------
-   * 关联到用户表
+   * 消息与会员关联函数
    * ------------------------------------------
    *
-   * 关联到用户色表
+   * 消息与会员关联函数
    *
    * @return [关联对象]
    */
-  public function user()
+  public function member()
   {
     return $this->belongsToMany(
-      'App\Models\Common\System\User',
-      'system_user_message_relevance',
+      'App\Models\Common\Module\Member',
+      'module_member_message',
       'message_id',
-      'user_id'
-    )->wherePivot('status', 1);
+      'member_id',
+    );
   }
 
 
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-09-20
+   * @dateTime 2021-07-20
    * ------------------------------------------
-   * 消息与用户消息关联函数
+   * 消息与会员消息关联函数
    * ------------------------------------------
    *
-   * 消息与用户消息关联函数
+   * 消息与会员消息关联函数
    *
    * @return [type]
    */
   public function relevance()
   {
-    return $this->hasMany('App\Models\Common\Module\Member\Relevance\Message', 'message_id', 'id');
-  }
-
-
-  /**
-   * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-03-07
-   * ------------------------------------------
-   * 注册关联删除
-   * ------------------------------------------
-   *
-   * 注册关联删除
-   *
-   * @return [type]
-   */
-  public static function boot()
-  {
-    parent::boot();
-
-    static::deleted(function($model) {
-      $model->relevance()->delete();
-    });
+    return $this->hasMany(
+      'App\Models\Common\Module\Member\MemberMessage',
+      'message_id',
+      'id'
+    );
   }
 }

@@ -5,59 +5,31 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\Http\Constant\Code;
-use App\TraitClass\ToolTrait;
-use App\Http\Constant\Parameter;
+use App\Models\Platform\Module\Member;
 use App\Http\Controllers\Platform\BaseController;
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
- * @dateTime 2021-05-19
+ * @dateTime 2021-07-20
  *
- * 用户控制器类
+ * 前台消息控制器类
  */
-class MemberController extends BaseController
+class MessageController extends BaseController
 {
-  // 模型名称
-  protected $_model = 'App\Models\Platform\Module\Member';
+  /**
+   * 模型
+   */
+  protected $_model = 'App\Models\Platform\Module\Message';
 
-  // 默认查询条件
-  protected $_where = [
-    // 'role_id' => 2
-  ];
-
-  // 客户端搜索字段
-  protected $_params = [
-    'username',
-    'nickname'
-  ];
-
-  // 客户端关联查询字段
-  protected $_addition = [
-    'address' => [
-      'address',
+  protected $_relevance = [
+    'list' => [
+      'member'
     ]
   ];
 
-
-  // 关联对象
-  protected $_relevance = [
-    'list' => [
-      'archive',
-      'address',
-      'certification',
-    ],
-    'select' => false,
-    'view' => [
-      'archive',
-      'address',
-      'asset',
-    ],
-  ];
-
-
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-12-12
+   * @dateTime 2021-07-20
    * ------------------------------------------
    * 操作信息
    * ------------------------------------------
@@ -70,11 +42,13 @@ class MemberController extends BaseController
   public function handle(Request $request)
   {
     $messages = [
-      'nickname.required' => '请您输入用户昵称',
+      'title.required'   => '请您输入前台消息标题',
+      'content.required' => '请您输入前台消息内容',
     ];
 
     $rule = [
-      'nickname' => 'required',
+      'title'   => 'required',
+      'content' => 'required',
     ];
 
     // 验证用户数据内容是否正确
@@ -92,29 +66,41 @@ class MemberController extends BaseController
       {
         $model = $this->_model::firstOrNew(['id' => $request->id]);
 
-        $organization_id = self::getOrganizationId();
-
-        $model->organization_id = $organization_id;
-        $model->nickname        = $request->nickname;
-        $model->avatar          = $request->avatar ?: '';
+        $model->organization_id = self::getOrganizationId();
+        $model->type            = 2;
+        $model->title           = $request->title;
+        $model->content         = $request->content;
         $model->save();
 
-        $data = [
-          'member_id'   => $model->id,
-          'name'        => $request->name ?? '',
-          'mobile'      => $request->mobile ?? '',
-          'postcode'    => $request->postcode ?? '',
-          'province_id' => $request->province_id ?? '',
-          'city_id'     => $request->city_id ?? '',
-          'region_id'   => $request->region_id ?? '',
-          'address'     => $request->address ?? '',
-        ];
+        $where = [];
 
-        if(!empty($data))
+        $condition = self::getSimpleWhereData();
+
+        $role_id = $request->role_id ?? 0;
+
+        if(!empty($role_id))
         {
-          $model->address()->delete();
+          $where = [
+            'role_id' => $role_id,
+          ];
+        }
 
-          $model->address()->create($data);
+        $condition = array_merge($condition, $where);
+
+
+        $result = Member::getPluck('id', $condition, false, false, true);
+
+        if(!empty($result))
+        {
+          $data = [];
+
+          foreach($result as $item)
+          {
+            $data[]['member_id'] = $item;
+          }
+
+          $model->relevance()->delete();
+          $model->relevance()->createMany($data);
         }
 
         DB::commit();
@@ -133,15 +119,14 @@ class MemberController extends BaseController
     }
   }
 
-
-  /**
+    /**
    * @author zhangxiaofei [<1326336909@qq.com>]
-   * @dateTime 2020-02-25
+   * @dateTime 2021-05-13
    * ------------------------------------------
-   * 禁用（解禁）学员账户
+   * 禁用（解禁）前台消息信息
    * ------------------------------------------
    *
-   * 禁用（解禁）学员账户
+   * 禁用（解禁）前台消息信息
    *
    * @param Request $request [description]
    * @return [type]

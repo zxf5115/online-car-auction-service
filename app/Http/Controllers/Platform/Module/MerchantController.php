@@ -8,6 +8,7 @@ use App\Http\Constant\Code;
 use App\TraitClass\ToolTrait;
 use App\Http\Constant\Parameter;
 use App\Http\Controllers\Platform\BaseController;
+use App\Models\Platform\Module\Member\MemberMessage;
 
 /**
  * @author zhangxiaofei [<1326336909@qq.com>]
@@ -116,6 +117,11 @@ class MerchantController extends BaseController
           $model->certification()->delete();
           $model->certification()->create($data);
         }
+
+        $message = MemberMessage::firstOrNew(['id' => '']);
+        $message->member_id  = $model->id;
+        $message->message_id = $request->audit_status == 1 ? 3 : 4;
+        $message->save();
 
         DB::commit();
 

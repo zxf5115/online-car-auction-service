@@ -70,12 +70,12 @@ class CarController extends BaseController
    * @apiParam {int} brand_id 汽车品牌编号
    * @apiParam {int} shape_id 汽车车型编号
    * @apiParam {int} title 汽车标题
-   * @apiParam {int} pay_money 销售价格 (空:不限制, 1:5w以下, 2:5w-10w, 3:10w-15w, 4:15w-20w, 5:20w-30w, 6:30w-40w, 7:40w以上)
+   * @apiParam {int} pay_money 销售价格 (空:不限制, 1:0-50w以下, 2:50w-100w, 3:100w-150w, 4:150w-200w, 5:200w以上)
    * @apiParam {int} car_operation 操作方式 (空:不限制, 手动、自动)
    * @apiParam {int} car_type 汽车类型 (空:不限制, 代步车、SUV、中型车、商务车)
-   * @apiParam {int} car_displacement 汽车排量 (空:不限制, 1:1.0L以下, 2:1.1L-1.6L, 3:1.7L-2.0L, 4:2.1L-2.5L, 5:2.6L-3.0L, 6:3.1L-4.0L, 7:4.0L以上)
+   * @apiParam {int} car_displacement 汽车排量 (空:不限制, 1:1.5L-2.0L, 2:2.0L-2.5L, 3:2.5L-3.0L, 4:3.0L-4.0L, 5:4.0L以上, 6:其他)
    * @apiParam {int} car_seat 座位数 (空:不限制, 2座、3座、4座)
-   * @apiParam {int} car_country 汽车产地 (空:不限制, 中国、美国、日本)
+   * @apiParam {int} car_country 汽车产地 (空:不限制, 美版、加版、欧版、中东版)
    * @apiParam {int} car_drive 汽车驱动 (空:不限制, 前驱、后驱、四驱)
    * @apiParam {int} car_power 汽车动力 (空:不限制, 汽油、柴油、纯电动)
    * @apiParam {int} car_structure 汽车结构 (空:不限制, 两厢、三厢、掀背)
