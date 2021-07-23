@@ -160,6 +160,14 @@ class MemberController extends BaseController
    * @apiParam {string} avatar 会员头像（不可为空）
    * @apiParam {string} nickname 会员姓名（不可为空）
    * @apiParam {string} sex 会员性别（0未知 1男 2女 3保密）（不可为空）
+   * @apiParam {string} realname 姓名
+   * @apiParam {string} certificate_no 证件号
+   * @apiParam {string} phone 手机号
+   * @apiParam {string} account 银行卡户名
+   * @apiParam {string} bank_card_no 银行卡号
+   * @apiParam {string} id_card_no 持卡人身份证号
+   * @apiParam {string} mobile 银行预留手机号
+   *
    *
    * @apiSampleRequest /api/member/handle
    * @apiVersion 1.0.0
@@ -202,7 +210,14 @@ class MemberController extends BaseController
         $model->save();
 
         $archive = Archive::firstOrNew(['member_id' => $member_id]);
-        $archive->sex = $request->sex;
+        $archive->sex            = $request->sex;
+        $archive->realname       = $request->realname ?? '';
+        $archive->certificate_no = $request->certificate_no ?? '';
+        $archive->phone          = $request->phone ?? '';
+        $archive->account        = $request->account ?? '';
+        $archive->bank_card_no   = $request->bank_card_no ?? '';
+        $archive->id_card_no     = $request->id_card_no ?? '';
+        $archive->mobile         = $request->mobile ?? '';
         $archive->save();
 
         DB::commit();

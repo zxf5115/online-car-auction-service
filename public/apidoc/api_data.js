@@ -2176,6 +2176,55 @@ define({ "api": [
             "optional": false,
             "field": "sex",
             "description": "<p>会员性别（0未知 1男 2女 3保密）（不可为空）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "realname",
+            "description": "<p>姓名</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "certificate_no",
+            "description": "<p>证件号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "phone",
+            "description": "<p>手机号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "account",
+            "description": "<p>银行卡户名</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "bank_card_no",
+            "description": "<p>银行卡号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id_card_no",
+            "description": "<p>持卡人身份证号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>银行预留手机号</p>"
           }
         ]
       }
