@@ -37,7 +37,7 @@ class FailureRequest
       {
         $headers = ['content-type' => 'application/json'];
 
-        $response = \Response::json(['status' => -102, 'message' => '请从新登录']);
+        $response = \Response::json(['status' => -102, 'message' => '请重新登录']);
         return $response->withHeaders($headers);
       }
 
