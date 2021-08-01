@@ -213,5 +213,4 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class, // Excel
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class, // 二维码
     ],
-
 ];
