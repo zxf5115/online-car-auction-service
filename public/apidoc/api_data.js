@@ -7203,6 +7203,13 @@ define({ "api": [
             "group": "Parameter",
             "type": "int",
             "optional": false,
+            "field": "member_id",
+            "description": "<p>车商编号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "int",
+            "optional": false,
             "field": "source_id",
             "description": "<p>汽车来源编号</p>"
           },

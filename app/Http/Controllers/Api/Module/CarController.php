@@ -25,6 +25,7 @@ class CarController extends BaseController
   ];
 
   protected $_params = [
+    'member_id',
     'source_id',
     'brand_id',
     'shape_id',
@@ -66,6 +67,7 @@ class CarController extends BaseController
    *
    * @apiParam {int} page 当前页数
    * @apiParam {int} limit 每页数量
+   * @apiParam {int} member_id 车商编号
    * @apiParam {int} source_id 汽车来源编号
    * @apiParam {int} brand_id 汽车品牌编号
    * @apiParam {int} shape_id 汽车车型编号
