@@ -20,6 +20,10 @@ class AttentionController extends BaseController
   protected $_model = 'App\Models\Api\Module\Car\Shape\Attention';
 
 
+  protected $_relevance = [
+    'brand'
+  ];
+
   /**
    * @api {get} /api/member/car/shape/attention/list?page={page} 01. 我的关注列表
    * @apiDescription 获取当前会员关注车型分页列表
