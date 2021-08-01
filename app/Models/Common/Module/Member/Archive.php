@@ -31,6 +31,7 @@ class Archive extends Base
     'id_card_no',
     'mobile',
     'realname',
+    'certificate_type',
     'certificate_no',
     'phone',
   ];
@@ -115,21 +116,24 @@ class Archive extends Base
   }
 
 
+
+
+
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
    * @dateTime 2020-10-21
    * ------------------------------------------
-   * 技能水平封装
+   * 证件类型封装
    * ------------------------------------------
    *
-   * 技能水平封装
+   * 证件类型封装
    *
    * @param int $value 状态值
    * @return 状态信息
    */
-  public function getSkillLevelAttribute($value)
+  public function getCertificateTypeAttribute($value)
   {
-    return ArchiveEnum::getSkillLevelStatus($value);
+    return ArchiveEnum::getCertificateType($value);
   }
 
 

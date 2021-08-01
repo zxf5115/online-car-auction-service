@@ -498,6 +498,13 @@
             "optional": false,
             "field": "code",
             "description": "<p>微信code</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "inviter_id",
+            "description": "<p>邀请人</p>"
           }
         ]
       }
@@ -2124,6 +2131,116 @@
   },
   {
     "type": "post",
+    "url": "/api/member/datum",
+    "title": "06. 编辑会员资料",
+    "description": "<p>编辑会员资料信息</p>",
+    "group": "20._会员模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "realname",
+            "description": "<p>姓名</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "sex",
+            "description": "<p>会员性别（0未知 1男 2女 3保密）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "certificate_type",
+            "description": "<p>证件类型（1 身份证 2 护照 3 其他）</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "certificate_no",
+            "description": "<p>证件号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "phone",
+            "description": "<p>手机号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "account",
+            "description": "<p>银行卡户名</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "bank_card_no",
+            "description": "<p>银行卡号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "id_card_no",
+            "description": "<p>持卡人身份证号</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "mobile",
+            "description": "<p>银行预留手机号</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/datum"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/MemberController.php",
+    "groupTitle": "20._会员模块",
+    "name": "PostApiMemberDatum"
+  },
+  {
+    "type": "post",
     "url": "/api/member/handle",
     "title": "03. 编辑会员信息",
     "description": "<p>编辑会员信息</p>",
@@ -2176,55 +2293,6 @@
             "optional": false,
             "field": "sex",
             "description": "<p>会员性别（0未知 1男 2女 3保密）（不可为空）</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "realname",
-            "description": "<p>姓名</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "certificate_no",
-            "description": "<p>证件号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "phone",
-            "description": "<p>手机号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "account",
-            "description": "<p>银行卡户名</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "bank_card_no",
-            "description": "<p>银行卡号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "id_card_no",
-            "description": "<p>持卡人身份证号</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "string",
-            "optional": false,
-            "field": "mobile",
-            "description": "<p>银行预留手机号</p>"
           }
         ]
       }
@@ -3047,6 +3115,60 @@
     "filename": "app/Http/Controllers/Api/Module/Member/AddressController.php",
     "groupTitle": "22._会员地址模块",
     "name": "PostApiMemberAddressHandle"
+  },
+  {
+    "type": "post",
+    "url": "/api/member/invitation/data",
+    "title": "01. 邀请人数据",
+    "description": "<p>获取当前用户邀请数据</p>",
+    "group": "23._会员邀请模块",
+    "permission": [
+      {
+        "name": "jwt"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>身份令牌</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Header-Example:",
+          "content": "{\n  \"Authorization\": \"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "字段说明": [
+          {
+            "group": "字段说明",
+            "type": "String",
+            "optional": false,
+            "field": "qrcode",
+            "description": "<p>二维码图片</p>"
+          }
+        ]
+      }
+    },
+    "sampleRequest": [
+      {
+        "url": "/api/member/invitation/data"
+      }
+    ],
+    "version": "1.0.0",
+    "filename": "app/Http/Controllers/Api/Module/Member/InvitationController.php",
+    "groupTitle": "23._会员邀请模块",
+    "name": "PostApiMemberInvitationData"
   },
   {
     "type": "get",

@@ -160,13 +160,6 @@ class MemberController extends BaseController
    * @apiParam {string} avatar 会员头像（不可为空）
    * @apiParam {string} nickname 会员姓名（不可为空）
    * @apiParam {string} sex 会员性别（0未知 1男 2女 3保密）（不可为空）
-   * @apiParam {string} realname 姓名
-   * @apiParam {string} certificate_no 证件号
-   * @apiParam {string} phone 手机号
-   * @apiParam {string} account 银行卡户名
-   * @apiParam {string} bank_card_no 银行卡号
-   * @apiParam {string} id_card_no 持卡人身份证号
-   * @apiParam {string} mobile 银行预留手机号
    *
    *
    * @apiSampleRequest /api/member/handle
@@ -210,14 +203,7 @@ class MemberController extends BaseController
         $model->save();
 
         $archive = Archive::firstOrNew(['member_id' => $member_id]);
-        $archive->sex            = $request->sex;
-        $archive->realname       = $request->realname ?? '';
-        $archive->certificate_no = $request->certificate_no ?? '';
-        $archive->phone          = $request->phone ?? '';
-        $archive->account        = $request->account ?? '';
-        $archive->bank_card_no   = $request->bank_card_no ?? '';
-        $archive->id_card_no     = $request->id_card_no ?? '';
-        $archive->mobile         = $request->mobile ?? '';
+        $archive->sex = $request->sex;
         $archive->save();
 
         DB::commit();
@@ -362,6 +348,97 @@ class MemberController extends BaseController
         $model->id_card_no   = $request->id_card_no;
         $model->mobile       = $request->mobile;
         $model->save();
+
+        return self::success(Code::message(Code::HANDLE_SUCCESS));
+      }
+      catch(\Exception $e)
+      {
+        // 记录异常信息
+        self::record($e);
+
+        return self::error(Code::HANDLE_FAILURE);
+      }
+    }
+  }
+
+
+
+
+
+  /**
+   * @api {post} /api/member/datum 06. 编辑会员资料
+   * @apiDescription 编辑会员资料信息
+   * @apiGroup 20. 会员模块
+   * @apiPermission jwt
+   * @apiHeader {String} Authorization 身份令牌
+   * @apiHeaderExample {json} Header-Example:
+   * {
+   *   "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiO"
+   * }
+   *
+   * @apiParam {string} realname 姓名
+   * @apiParam {string} sex 会员性别（0未知 1男 2女 3保密）
+   * @apiParam {string} certificate_type 证件类型（1 身份证 2 护照 3 其他）
+   * @apiParam {string} certificate_no 证件号
+   * @apiParam {string} phone 手机号
+   * @apiParam {string} account 银行卡户名
+   * @apiParam {string} bank_card_no 银行卡号
+   * @apiParam {string} id_card_no 持卡人身份证号
+   * @apiParam {string} mobile 银行预留手机号
+   *
+   *
+   * @apiSampleRequest /api/member/datum
+   * @apiVersion 1.0.0
+   */
+  public function datum(Request $request)
+  {
+    $messages = [
+      'realname.required'         => '请您输入姓名',
+      'certificate_type.required' => '请您输入证类型',
+      'certificate_no.required'   => '请您输入证件号',
+      'phone.required'            => '请您输入手机号',
+      'account.required'          => '请您输入银行卡户名',
+      'bank_card_no.required'     => '请您输入银行卡号',
+      'id_card_no.required'       => '请您输入持卡人身份证号',
+      'mobile.required'           => '请您输入银行预留手机号',
+    ];
+
+    $rule = [
+      'realname'         => 'required',
+      'certificate_type' => 'required',
+      'certificate_no'   => 'required',
+      'phone'            => 'required',
+      'account'          => 'required',
+      'bank_card_no'     => 'required',
+      'id_card_no'       => 'required',
+      'mobile'           => 'required',
+    ];
+
+    // 验证用户数据内容是否正确
+    $validation = self::validation($request, $messages, $rule);
+
+    if(!$validation['status'])
+    {
+      return $validation['message'];
+    }
+    else
+    {
+      try
+      {
+        // 获取当前会员编号
+        $member_id = self::getCurrentId();
+
+        $archive = Archive::firstOrNew(['member_id' => $member_id]);
+        $archive->sex              = $request->sex ?? 1;
+        $archive->realname         = $request->realname ?? '';
+        $archive->certificate_type = $request->certificate_type ?? 1;
+        $archive->certificate_no   = $request->certificate_no ?? '';
+        $archive->phone            = $request->phone ?? '';
+        $archive->account          = $request->account ?? '';
+        $archive->bank_card_no     = $request->bank_card_no ?? '';
+        $archive->id_card_no       = $request->id_card_no ?? '';
+        $archive->mobile           = $request->mobile ?? '';
+        $archive->save();
 
         return self::success(Code::message(Code::HANDLE_SUCCESS));
       }

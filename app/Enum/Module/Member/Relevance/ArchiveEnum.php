@@ -12,25 +12,25 @@ use App\Enum\BaseEnum;
 class ArchiveEnum extends BaseEnum
 {
   // 技能水平状态
-  const NONE     = 0; // 无基础
-  const ONE_DOWN = 1; // 一年以下
-  const ONE_ON   = 2; // 一年以上
+  const ID       = 1; // 身份证
+  const PASSPORT = 2; // 护照
+  const OTHER    = 3; // 其他
 
   // 技能水平状态封装
-  public static $level = [
-    self::NONE => [
-      'value' => self::NONE,
-      'text' => '无基础'
+  public static $type = [
+    self::ID => [
+      'value' => self::ID,
+      'text' => '身份证'
     ],
 
-    self::ONE_DOWN => [
-      'value' => self::ONE_DOWN,
-      'text' => '一年以下'
+    self::PASSPORT => [
+      'value' => self::PASSPORT,
+      'text' => '护照'
     ],
 
-    self::ONE_ON => [
-      'value' => self::ONE_ON,
-      'text' => '一年以上'
+    self::OTHER => [
+      'value' => self::OTHER,
+      'text' => '其他'
     ]
   ];
 
@@ -47,8 +47,8 @@ class ArchiveEnum extends BaseEnum
    * @param int $code 状态代码
    * @return 状态信息
    */
-  public static function getSkillLevelStatus($code)
+  public static function getCertificateType($code)
   {
-    return self::$level[$code] ?: self::$level[self::NONE];
+    return self::$type[$code] ?: self::$type[self::ID];
   }
 }

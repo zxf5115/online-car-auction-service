@@ -30,6 +30,7 @@ class LoginController extends BaseController
    * @apiDescription 通过微信进行登录
    * @apiGroup 02. 登录模块
    * @apiParam {string} code 微信code
+   * @apiParam {string} inviter_id 邀请人
    *
    * @apiSuccess (basic params) {String} token 身份令牌
    * @apiSuccess (user_info params) {Number} id 会员编号

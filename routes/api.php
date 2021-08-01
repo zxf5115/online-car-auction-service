@@ -94,6 +94,7 @@ $api->version('v1', [
         $api->post('personal', 'MemberController@personal');
         $api->post('bank', 'MemberController@bank');
         $api->post('teacher', 'MemberController@teacher');
+        $api->post('datum', 'MemberController@datum');
         $api->get('status', 'MemberController@status');
 
         // 会员关联内容路由
@@ -107,6 +108,11 @@ $api->version('v1', [
             $api->post('bankcard', 'CertificationController@bankcard');
             $api->post('sms_code', 'CertificationController@sms_code');
             $api->get('data', 'CertificationController@data');
+          });
+
+          // 会员邀请路由
+          $api->group(['prefix'  => 'invitation'], function ($api) {
+            $api->get('data', 'InvitationController@data');
           });
 
 
