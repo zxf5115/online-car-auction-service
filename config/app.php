@@ -167,6 +167,7 @@ return [
         Jenssegers\Agent\AgentServiceProvider::class, // 客户端识别扩展包
         Maatwebsite\Excel\ExcelServiceProvider::class, // Excel
         Goodgay\HuaweiOBS\HWOBSServiceProvider::class,
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class, // 二维码
     ],
 
     /*
@@ -210,6 +211,7 @@ return [
 
         'Agent' => Jenssegers\Agent\Facades\Agent::class, // 客户端识别扩展包
         'Excel' => Maatwebsite\Excel\Facades\Excel::class, // Excel
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class, // 二维码
     ],
 
 ];
