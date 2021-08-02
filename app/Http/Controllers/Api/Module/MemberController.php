@@ -393,25 +393,25 @@ class MemberController extends BaseController
   public function datum(Request $request)
   {
     $messages = [
-      'realname.required'         => '请您输入姓名',
-      'certificate_type.required' => '请您输入证类型',
-      'certificate_no.required'   => '请您输入证件号',
-      'phone.required'            => '请您输入手机号',
-      'account.required'          => '请您输入银行卡户名',
-      'bank_card_no.required'     => '请您输入银行卡号',
-      'id_card_no.required'       => '请您输入持卡人身份证号',
-      'mobile.required'           => '请您输入银行预留手机号',
+      // 'realname.required'         => '请您输入姓名',
+      // 'certificate_type.required' => '请您输入证类型',
+      // 'certificate_no.required'   => '请您输入证件号',
+      // 'phone.required'            => '请您输入手机号',
+      // 'account.required'          => '请您输入银行卡户名',
+      // 'bank_card_no.required'     => '请您输入银行卡号',
+      // 'id_card_no.required'       => '请您输入持卡人身份证号',
+      // 'mobile.required'           => '请您输入银行预留手机号',
     ];
 
     $rule = [
-      'realname'         => 'required',
-      'certificate_type' => 'required',
-      'certificate_no'   => 'required',
-      'phone'            => 'required',
-      'account'          => 'required',
-      'bank_card_no'     => 'required',
-      'id_card_no'       => 'required',
-      'mobile'           => 'required',
+      // 'realname'         => 'required',
+      // 'certificate_type' => 'required',
+      // 'certificate_no'   => 'required',
+      // 'phone'            => 'required',
+      // 'account'          => 'required',
+      // 'bank_card_no'     => 'required',
+      // 'id_card_no'       => 'required',
+      // 'mobile'           => 'required',
     ];
 
     // 验证用户数据内容是否正确
