@@ -2,11 +2,11 @@
 namespace App\Http\Controllers\Api\Module\Member;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
+use zxf5115\Upload\File;
 use App\Http\Constant\Code;
-use App\Models\Api\System\Config;
+use App\Models\Api\Module\Member;
+use App\Models\Common\System\Config;
 use App\Http\Controllers\Api\BaseController;
 
 
@@ -40,6 +40,20 @@ class InvitationController extends BaseController
     {
       $member_id = self::getCurrentId();
 
+
+      // 获取微信token信息
+      $result = Member::getWeixinToken();
+
+      if(empty($result['access_token']))
+      {
+        return self::error(Code::ERROR);
+      }
+
+      $token = $result['access_token'];
+
+      // 获取微信二维码数据
+      $result = Member::getQrCode($token, $member_id);
+
       $filename = md5(time() . rand(1, 9999999)). '.png';
 
       $uri = storage_path('app/public/qrcode/' . $filename);
@@ -48,10 +62,7 @@ class InvitationController extends BaseController
 
       $url = $web_url . '/storage/qrcode/' . $filename;
 
-      $params = $member_id;
-
-      // 生成带有邀请人信息的二维码
-      QrCode::format('png')->size(300)->encoding('UTF-8')->generate($params, $uri);
+      file_put_contents($uri, $result);
 
       $response['qrcode'] = $url;
 
