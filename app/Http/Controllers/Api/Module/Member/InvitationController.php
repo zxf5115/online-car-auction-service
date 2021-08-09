@@ -19,7 +19,7 @@ use App\Http\Controllers\Api\BaseController;
 class InvitationController extends BaseController
 {
   /**
-   * @api {post} /api/member/invitation/data 01. 邀请人数据
+   * @api {get} /api/member/invitation/data 01. 邀请人数据
    * @apiDescription 获取当前用户邀请数据
    * @apiGroup 23. 会员邀请模块
    * @apiPermission jwt

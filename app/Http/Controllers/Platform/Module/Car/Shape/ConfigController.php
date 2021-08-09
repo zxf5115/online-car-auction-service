@@ -139,7 +139,7 @@ class ConfigController extends BaseController
           $model->shape_id        = $request->shape_id;
           $model->type            = $item['type'];
           $model->title           = $item['title'];
-          $model->params          = $item['params'];
+          $model->params          = $item['params'] ?? '';
           $model->is_must         = $item['is_must'] ?? 1;
           $model->save();
         }
