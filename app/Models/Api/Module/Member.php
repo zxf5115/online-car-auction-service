@@ -163,7 +163,7 @@ class Member extends Common
 
     $res = $client->request('POST', $url, [
       'json' => [
-        'path' => 'page/index/index?member_id='.$member_id
+        'path' => 'pages/home/index/index?member_id='.$member_id
       ]
     ]);
 
