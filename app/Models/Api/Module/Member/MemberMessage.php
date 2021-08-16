@@ -61,6 +61,6 @@ class MemberMessage extends Common
       'App\Models\Api\Module\Message',
       'message_id',
       'id'
-    );
+    )->where(['status' => 1]);
   }
 }
