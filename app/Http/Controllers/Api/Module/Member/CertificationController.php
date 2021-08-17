@@ -172,8 +172,8 @@ class CertificationController extends BaseController
       'mobile.required'         => '请您输入手机号',
       'mobile.regex'            => '手机号不合法',
       'certificate_no.required' => '请您输入证件号',
-      'cerificate_front_picture.required' => '请您上传法人照片',
-      'cerificate_behind_picture.required' => '请您上传营业执照',
+      // 'cerificate_front_picture.required' => '请您上传法人照片',
+      // 'cerificate_behind_picture.required' => '请您上传营业执照',
     ];
 
     $rule = [
@@ -181,8 +181,8 @@ class CertificationController extends BaseController
       'mobile'         => 'required',
       'mobile'         => 'regex:/^1[3456789][0-9]{9}$/',     //正则验证
       'certificate_no' => 'required',
-      'cerificate_front_picture' => 'required',
-      'cerificate_behind_picture' => 'required',
+      // 'cerificate_front_picture' => 'required',
+      // 'cerificate_behind_picture' => 'required',
     ];
 
     // 验证用户数据内容是否正确
@@ -205,8 +205,8 @@ class CertificationController extends BaseController
         $model->realname         = $request->realname;
         $model->mobile           = $request->mobile;
         $model->certificate_no   = $request->certificate_no;
-        $model->cerificate_front_picture = $request->cerificate_front_picture;
-        $model->cerificate_behind_picture = $request->cerificate_behind_picture;
+        // $model->cerificate_front_picture = $request->cerificate_front_picture;
+        // $model->cerificate_behind_picture = $request->cerificate_behind_picture;
         $model->audit_status     = 0;
         $model->audit_content    = '';
         $model->save();

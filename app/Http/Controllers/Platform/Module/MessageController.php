@@ -87,9 +87,8 @@ class MessageController extends BaseController
 
         $condition = array_merge($condition, $where);
 
-
         $result = Member::getPluck('id', $condition, false, false, true);
-
+dd($result);
         if(!empty($result))
         {
           $data = [];
