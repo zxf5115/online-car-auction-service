@@ -211,11 +211,22 @@ class Base extends Model
     {
       if(is_array($id))
       {
-        return self::whereIn('id', $id)->update(['status' => -1]);
+        foreach($id as $item)
+        {
+          $model = self::find($item);
+          $model->status = -1;
+          $model->save();
+        }
+
+        // return self::whereIn('id', $id)->update(['status' => -1]);
       }
       else
       {
-        return self::where(['id' => $id])->update(['status' => -1]);
+        $model = self::find($id);
+        $model->status = -1;
+        $model->save();
+
+        // return self::where(['id' => $id])->update(['status' => -1]);
       }
     }
     catch(\Exception $e)

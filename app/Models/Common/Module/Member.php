@@ -245,6 +245,22 @@ class Member extends Base
     );
   }
 
+  /**
+   * @author zhangxiaofei [<1326336909@qq.com>]
+   * @dateTime 2020-10-20
+   * ------------------------------------------
+   * 会员与会员资产关联表
+   * ------------------------------------------
+   *
+   * 会员与会员资产关联表
+   *
+   * @return [关联对象]
+   */
+  public function car()
+  {
+      return $this->hasMany('App\Models\Common\Module\Car', 'member_id', 'id');
+  }
+
 
   /**
    * @author zhangxiaofei [<1326336909@qq.com>]
@@ -282,10 +298,11 @@ class Member extends Base
   {
     parent::boot();
 
-    static::deleted(function($model) {
-      $model->archive()->delete();
-      $model->asset()->delete();
-      $model->address()->delete();
+    static::updating(function($model) {
+      $model->archive()->update(['status' => -1]);
+      $model->asset()->update(['status' => -1]);
+      $model->address()->update(['status' => -1]);
+      $model->car()->update(['status' => -1]);
     });
   }
 }
