@@ -67,6 +67,7 @@ class MessageController extends BaseController
         $model = $this->_model::firstOrNew(['id' => $request->id]);
 
         $model->organization_id = self::getOrganizationId();
+        $model->role_id         = $request->role_id ?? 0;
         $model->type            = 2;
         $model->title           = $request->title;
         $model->content         = $request->content;

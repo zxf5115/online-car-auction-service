@@ -267,6 +267,15 @@ $api->version('v1', [
       });
 
 
+      // 会员路由
+      $api->group(['prefix'  => 'message', 'middleware' => ['auth:api', 'refresh.token', 'failure']], function ($api) {
+        $api->get('list', 'MessageController@list');
+        $api->get('view/{id}', 'MessageController@view');
+      });
+
+
+
+
       // 汽车路由
       $api->group(['prefix' => 'car'], function ($api) {
         $api->get('list', 'CarController@list');

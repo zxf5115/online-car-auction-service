@@ -292,18 +292,7 @@ class BaseController extends Common
   {
     try
     {
-      $response = 0;
-
-      $member_id = auth('api')->user()->id;
-
-      $role = Role::getRow(['member_id' => $member_id]);
-
-      if(!empty($role))
-      {
-        $response = $role->role_id;
-      }
-
-      return $response;
+      return auth('api')->user()->role_id;
     }
     catch(\Exception $e)
     {
