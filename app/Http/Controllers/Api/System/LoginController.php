@@ -73,12 +73,13 @@ class LoginController extends BaseController
 
         if(empty($data) || empty($data['openid']))
         {
-          // return self::error(Code::WX_REQUIRE_ERROR);
+          return self::error(Code::WX_REQUIRE_ERROR);
         }
 
         $condition = self::getSimpleWhereData();
 
-        $where = ['open_id' => 'oOn4f41roEZZfTejl_I1362kRhjY'];
+        // $where = ['open_id' => 'oOn4f41roEZZfTejl_I1362kRhjY'];
+        $where = ['open_id' => $data['openid']];
 
         $where = array_merge($condition, $where);
 
