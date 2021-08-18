@@ -185,9 +185,18 @@ class AttentionController extends BaseController
     {
       try
       {
+        $member_id = self::getCurrentId();
+        $attention_member_id = $request->attention_member_id;
+
+        if($member_id == $attention_member_id)
+        {
+          return self::error(Code::NO_ATTENTION);
+        }
+
+
         $response = $this->_model::createOrDelete([
-          'member_id'   => self::getCurrentId(),
-          'attention_member_id' => $request->attention_member_id
+          'member_id'   => $member_id,
+          'attention_member_id' => $attention_member_id
         ]);
 
         return self::success(Code::message(Code::HANDLE_SUCCESS));

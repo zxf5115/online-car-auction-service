@@ -369,6 +369,14 @@ class OrderController extends BaseController
           return self::error(Code::CAR_EMPTY);
         }
 
+        $member_id = self::getCurrentId();
+
+        if($car->member_id == $member_id)
+        {
+          return self::error(Code::NO_PAY);
+        }
+
+
         if($request->delivery_quantity > $car->inventory_total)
         {
           return self::error(Code::CAR_TOTAL);

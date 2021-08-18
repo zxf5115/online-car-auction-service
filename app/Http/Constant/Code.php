@@ -165,6 +165,9 @@ class Code
   const NO_DELETE = 10005;
   const CAR_TOTAL = 10006;
   const CAR_EMPTY = 10007;
+  const NO_PAY = 10008;
+  const NO_ATTENTION = 10009;
+  const NO_COLLECTION = 10010;
 
   public static $message = [
     self::SUCCESS          => '成功',
@@ -275,6 +278,9 @@ class Code
     self::NO_DELETE => '当前数据不可删除',
     self::CAR_TOTAL => '当前库存不足',
     self::CAR_EMPTY => '当前汽车不存在',
+    self::NO_PAY => '不能购买自己发布的汽车',
+    self::NO_ATTENTION  => '不能关注自己',
+    self::NO_COLLECTION => '不能收藏自己发布的车辆',
   ];
 
 

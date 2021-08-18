@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Module\Member\Car;
 use Illuminate\Http\Request;
 
 use App\Http\Constant\Code;
+use App\Models\Api\Module\Car;
 use App\Http\Controllers\Api\BaseController;
 
 
@@ -193,8 +194,17 @@ class CollectionController extends BaseController
     {
       try
       {
+        $member_id = self::getCurrentId();
+
+        $car = Car::getRow(['id' => $request->car_id]);
+
+        if($member_id == $car->member_id)
+        {
+          return self::error(Code::NO_COLLECTION);
+        }
+
         $this->_model::createOrDelete([
-          'member_id' => self::getCurrentId(),
+          'member_id' => $member_id,
           'car_id' => $request->car_id
         ]);
 
