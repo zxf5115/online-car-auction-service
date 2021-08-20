@@ -330,7 +330,7 @@ class CertificationController extends BaseController
     {
       $messages = [
         'mobile.required' => '请输入用户名称',
-        'mobile.regex'    => '手机号码不合法',
+        'mobile.regex'    => '仅可以使用中国大陆11位手机号',
       ];
 
       $rule = [
