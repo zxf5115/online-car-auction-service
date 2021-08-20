@@ -393,6 +393,7 @@ class MemberController extends BaseController
   public function datum(Request $request)
   {
     $messages = [
+      'phone.regex'    => '仅可以使用中国大陆11位手机号',
       // 'realname.required'         => '请您输入姓名',
       // 'certificate_type.required' => '请您输入证类型',
       // 'certificate_no.required'   => '请您输入证件号',
@@ -404,6 +405,7 @@ class MemberController extends BaseController
     ];
 
     $rule = [
+      'phone' => 'regex:/^1[3456789][0-9]{9}$/',     //正则验证
       // 'realname'         => 'required',
       // 'certificate_type' => 'required',
       // 'certificate_no'   => 'required',

@@ -97,7 +97,7 @@ class CertificationController extends BaseController
     $messages = [
       'realname.required'       => '请您输入姓名',
       'mobile.required'         => '请您输入手机号',
-      'mobile.regex'            => '手机号不合法',
+      'mobile.regex'            => '仅可以使用中国大陆11位手机号',
       'certificate_no.required' => '请您证件号',
     ];
 
@@ -170,7 +170,7 @@ class CertificationController extends BaseController
     $messages = [
       'realname.required'       => '请您输入姓名',
       'mobile.required'         => '请您输入手机号',
-      'mobile.regex'            => '手机号不合法',
+      'mobile.regex'            => '仅可以使用中国大陆11位手机号',
       'certificate_no.required' => '请您输入证件号',
       // 'cerificate_front_picture.required' => '请您上传法人照片',
       // 'cerificate_behind_picture.required' => '请您上传营业执照',
@@ -250,7 +250,7 @@ class CertificationController extends BaseController
     $messages = [
       'realname.required'       => '请您输入姓名',
       'mobile.required'         => '请您输入手机号',
-      'mobile.regex'            => '手机号不合法',
+      'mobile.regex'            => '仅可以使用中国大陆11位手机号',
       'sms_code.required'       => '请您输入验证码',
       'certificate_no.required' => '请您输入证件号',
       'bank_card_no.required'   => '请您输入银行卡号',
