@@ -39,6 +39,6 @@ class Category extends Common
       'App\Models\Api\Module\Common\Problem',
       'category_id',
       'id'
-    );
+    )->where(['status' => 1]);
   }
 }
