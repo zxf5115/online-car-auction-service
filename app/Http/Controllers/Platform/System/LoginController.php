@@ -106,7 +106,7 @@ class LoginController extends BaseController
             'code' => 200,
             'token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth('platform')->factory()->getTTL() * 60,
+            'expires_in' => 1,
             'user_info' => auth('platform')->user()
           ]);
         }

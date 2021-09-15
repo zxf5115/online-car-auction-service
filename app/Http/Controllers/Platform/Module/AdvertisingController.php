@@ -90,7 +90,7 @@ class AdvertisingController extends BaseController
         $model->position_id     = $request->position_id;
         $model->title           = $request->title;
         $model->content         = $request->content;
-        $model->sort            = $request->sort;
+        $model->sort            = $request->sort ?? 0;
         $model->save();
 
         $data = self::packRelevanceData($request, 'picture');
